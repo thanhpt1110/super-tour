@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Super_Tour.Model
+namespace Super_Tour.ViewModel.LoginViewModel
 {
-    internal class PACKAGE_TYPE
+    internal class ChangePasswordViewModel
     {
     }
 }

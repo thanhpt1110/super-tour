@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Super_Tour.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,17 @@ namespace Super_Tour
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
+            SUPER_TOUR db = new SUPER_TOUR();
+            List < TYPE_PACKAGE>  PACKAGEs= db.TYPE_PACKAGEs.ToList();
+            foreach(TYPE_PACKAGE typePackage in PACKAGEs)
+            {
+                Console.WriteLine("ID: {0} Name: {1}", typePackage.Id_Type_Package.ToString(), typePackage.Name_Type);
+            }    
         }
     }
 }
