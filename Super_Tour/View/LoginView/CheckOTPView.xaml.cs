@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Super_Tour.ViewModel.LoginViewModel;
 
 namespace Super_Tour.View.LoginView
 {
@@ -22,6 +23,7 @@ namespace Super_Tour.View.LoginView
         public CheckOTPView()
         {
             InitializeComponent();
+            DataContext = new CheckOTPViewModel();
         }
     }
 }

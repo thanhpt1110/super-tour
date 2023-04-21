@@ -131,9 +131,9 @@
     <Compile Include="Ultis\Constant.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
-    <Compile Include="ViewModel\BookingViewModel\BookingViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CreateCustomerViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\MainCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\DetailCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\UpdateCustomerViewModel.cs" />
     <Compile Include="ViewModel\DashBoardViewModel\DashBoardViewModel.cs" />
@@ -145,9 +145,9 @@
     <Compile Include="ViewModel\PackageViewModel\CreatePackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\DetailPackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\CreatePackageTypeViewModel.cs" />
-    <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\PackageTypeViewModel.cs" />
-    <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\UpdatePackageType.cs" />
-    <Compile Include="ViewModel\PackageViewModel\PackageViewModel.cs" />
+    <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\MainPackageTypeViewModel.cs" />
+    <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\UpdatePackageTypeViewModel.cs" />
+    <Compile Include="ViewModel\PackageViewModel\MainPackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\UpdatePackageViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\CustomerStatisticViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\RevenueStatisticViewModel.cs" />
@@ -156,27 +156,30 @@
     <Compile Include="ViewModel\TicketViewModel\PrintTicketViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\TicketViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\CreateTourViewModel.cs" />
-    <Compile Include="ViewModel\TourViewModel\DetailTourView.cs" />
-    <Compile Include="ViewModel\TourViewModel\TourViewModel.cs" />
+    <Compile Include="ViewModel\TourViewModel\DetailTourViewModel.cs" />
+    <Compile Include="ViewModel\TourViewModel\MainTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\UpdateTourViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\CreateTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\DetailTravelViewModel.cs" />
-    <Compile Include="ViewModel\TravelViewModel\TravelViewModel.cs" />
+    <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
-    <Compile Include="View\BookingView\BookingView.xaml.cs">
-      <DependentUpon>BookingView.xaml</DependentUpon>
+    <Compile Include="View\BookingView\MainBookingView.xaml.cs">
+      <DependentUpon>MainBookingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\CreateCustomerView.xaml.cs">
       <DependentUpon>CreateCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomerView\CustomerVIew.xaml.cs">
-      <DependentUpon>CustomerVIew.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CustomerView\DetailCustomerView.xaml.cs">
       <DependentUpon>DetailCustomerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomerView\MainCustomerView.xaml.cs">
+      <DependentUpon>MainCustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView\UpdateCustomerVIew.xaml.cs">
       <DependentUpon>UpdateCustomerVIew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashBoardView\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
@@ -196,17 +199,17 @@
     <Compile Include="View\PackageView\DetailPackageView.xaml.cs">
       <DependentUpon>DetailPackageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PackageView\MainPackageView.xaml.cs">
+      <DependentUpon>MainPackageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PackageView\PackageTypeView\CreatePackageTypeView.xaml.cs">
       <DependentUpon>CreatePackageTypeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageView\PackageTypeView\PackageTypeView.xaml.cs">
-      <DependentUpon>PackageTypeView.xaml</DependentUpon>
+    <Compile Include="View\PackageView\PackageTypeView\MainPackageTypeViewModel.xaml.cs">
+      <DependentUpon>MainPackageTypeViewModel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageView\PackageTypeView\UpdatePackageType.xaml.cs">
-      <DependentUpon>UpdatePackageType.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PackageView\PackageView.xaml.cs">
-      <DependentUpon>PackageView.xaml</DependentUpon>
+    <Compile Include="View\PackageView\PackageTypeView\UpdatePackageTypeView.xaml.cs">
+      <DependentUpon>UpdatePackageTypeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PackageView\UpdatePackageView.xaml.cs">
       <DependentUpon>UpdatePackageView.xaml</DependentUpon>
@@ -235,8 +238,8 @@
     <Compile Include="View\TourView\DetailTourView.xaml.cs">
       <DependentUpon>DetailTourView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TourView\TourView.xaml.cs">
-      <DependentUpon>TourView.xaml</DependentUpon>
+    <Compile Include="View\TourView\MainTourView.xaml.cs">
+      <DependentUpon>MainTourView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TourView\UpdateTourView.xaml.cs">
       <DependentUpon>UpdateTourView.xaml</DependentUpon>
@@ -247,13 +250,13 @@
     <Compile Include="View\TravelView\DetailTravelView.xaml.cs">
       <DependentUpon>DetailTravelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TravelView\TravelView.xaml.cs">
-      <DependentUpon>TravelView.xaml</DependentUpon>
+    <Compile Include="View\TravelView\MainTravelView.xaml.cs">
+      <DependentUpon>MainTravelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TravelView\UpdateTravelView.xaml.cs">
       <DependentUpon>UpdateTravelView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\BookingView\BookingView.xaml">
+    <Page Include="View\BookingView\MainBookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,11 +264,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomerView\CustomerVIew.xaml">
+    <Page Include="View\CustomerView\DetailCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomerView\DetailCustomerView.xaml">
+    <Page Include="View\CustomerView\MainCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,7 +276,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DashBoardView\DashBoardView.xaml">
+    <Page Include="View\DashBoardView\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,9 +304,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\DashBoardView\DashBoardView.xaml.cs">
-      <DependentUpon>DashBoardView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -316,19 +316,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PackageView\MainPackageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PackageView\PackageTypeView\CreatePackageTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageView\PackageTypeView\PackageTypeView.xaml">
+    <Page Include="View\PackageView\PackageTypeView\MainPackageTypeViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageView\PackageTypeView\UpdatePackageType.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PackageView\PackageView.xaml">
+    <Page Include="View\PackageView\PackageTypeView\UpdatePackageTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,7 +368,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TourView\TourView.xaml">
+    <Page Include="View\TourView\MainTourView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -384,7 +384,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TravelView\TravelView.xaml">
+    <Page Include="View\TravelView\MainTravelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

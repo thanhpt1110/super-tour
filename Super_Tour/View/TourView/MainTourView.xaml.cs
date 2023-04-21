@@ -11,17 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-namespace Super_Tour.View
+using Super_Tour.ViewModel.TourViewModel;
+namespace Super_Tour.View.TourView
 {
     /// <summary>
-    /// Interaction logic for TravelView.xaml
+    /// Interaction logic for MainTourView.xaml
     /// </summary>
-    public partial class TravelView : Window
+    public partial class MainTourView : Window
     {
-        public TravelView()
+        public MainTourView()
         {
             InitializeComponent();
+            DataContext = new MainTourViewModel();
         }
     }
 }

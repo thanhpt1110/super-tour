@@ -11,17 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-namespace Super_Tour.View.Package.PackageType
+using Super_Tour.ViewModel.CustomerViewModel;
+namespace Super_Tour.View.CustomerView
 {
     /// <summary>
-    /// Interaction logic for UpdatePackageType.xaml
+    /// Interaction logic for MainCustomerView.xaml
     /// </summary>
-    public partial class UpdatePackageType : Window
+    public partial class MainCustomerView : Window
     {
-        public UpdatePackageType()
+        public MainCustomerView()
         {
             InitializeComponent();
+            DataContext = new MainCustomerViewModel();
         }
     }
 }

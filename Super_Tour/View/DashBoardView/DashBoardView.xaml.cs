@@ -11,17 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-namespace Super_Tour.View
+using Super_Tour.ViewModel.DashBoardViewModel;
+namespace Super_Tour.View.DashBoardView
 {
     /// <summary>
-    /// Interaction logic for DashBoardView.xaml
+    /// Interaction logic for DashboardView.xaml
     /// </summary>
-    public partial class DashBoardView : Window
+    public partial class DashboardView : Window
     {
-        public DashBoardView()
+        public DashboardView()
         {
             InitializeComponent();
+            DataContext = new DashBoardViewModel();
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Super_Tour.ViewModel.StatisticViewModel;
 
 namespace Super_Tour.View.StatisticView
 {
@@ -22,6 +23,7 @@ namespace Super_Tour.View.StatisticView
         public RevenueStatisticView()
         {
             InitializeComponent();
+            DataContext = new RevenueStatisticViewModel();
         }
     }
 }

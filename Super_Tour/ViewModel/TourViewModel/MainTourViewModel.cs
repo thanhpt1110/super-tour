@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Super_Tour.ViewModel.CustomerViewModel
+namespace Super_Tour.ViewModel.TourViewModel
 {
-    internal class CustomerViewModel
+    internal class MainTourViewModel
     {
     }
 }

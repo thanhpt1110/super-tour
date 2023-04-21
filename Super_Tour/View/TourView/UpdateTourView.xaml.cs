@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using Super_Tour.ViewModel.TourViewModel;
 namespace Super_Tour.View.Tour
 {
     /// <summary>
@@ -22,6 +22,7 @@ namespace Super_Tour.View.Tour
         public UpdateTourView()
         {
             InitializeComponent();
+            DataContext = new UpdateTourView();
         }
     }
 }

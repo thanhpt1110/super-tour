@@ -23,13 +23,7 @@ namespace Super_Tour.View.LoginView
         public LoginView()
         {
             InitializeComponent();
-            //DataContext = new LoginViewModel();
-            LoginViewModel loginViewModel = new LoginViewModel();
-            Console.WriteLine("Nhap ten dang nhap: ");
-            loginViewModel.username_text = "admin";
-            //Console.WriteLine("Nhap password: ");
-            loginViewModel.password_text = "1234";
-            loginViewModel.Login(null);
+            DataContext = new LoginViewModel();
         }
 
     }

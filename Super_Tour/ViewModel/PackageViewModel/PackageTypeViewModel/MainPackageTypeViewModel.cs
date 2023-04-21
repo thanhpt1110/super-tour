@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Super_Tour.ViewModel.TravelViewModel
+namespace Super_Tour.ViewModel.PackageViewModel.PackageTypeViewModel
 {
-    internal class TravelViewModel
+    internal class MainPackageTypeViewModel
     {
     }
 }
