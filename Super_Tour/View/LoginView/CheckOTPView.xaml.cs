@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Super_Tour.View.LoginView
@@ -18,7 +17,7 @@ namespace Super_Tour.View.LoginView
     /// <summary>
     /// Interaction logic for CheckOTPView.xaml
     /// </summary>
-    public partial class CheckOTPView : UserControl
+    public partial class CheckOTPView : Window
     {
         public CheckOTPView()
         {

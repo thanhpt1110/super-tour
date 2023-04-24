@@ -186,20 +186,20 @@
     <Compile Include="View\CustomerView\MainCustomerView.xaml.cs">
       <DependentUpon>MainCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomerView\UpdateCustomerVIew.xaml.cs">
-      <DependentUpon>UpdateCustomerVIew.xaml</DependentUpon>
+    <Compile Include="View\CustomerView\UpdateCustomerView.xaml.cs">
+      <DependentUpon>UpdateCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DashBoardView\DashboardView.xaml.cs">
-      <DependentUpon>DashboardView.xaml</DependentUpon>
+    <Compile Include="View\DashBoardView\DashBoardView.xaml.cs">
+      <DependentUpon>DashBoardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LoginView\ChangePasswordView.xaml.cs">
-      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
+    <Compile Include="View\LoginView\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView\CheckOTPView.xaml.cs">
       <DependentUpon>CheckOTPView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LoginView\ForgotPass_EmailView.xaml.cs">
-      <DependentUpon>ForgotPass_EmailView.xaml</DependentUpon>
+    <Compile Include="View\LoginView\ForgotPass_Email.xaml.cs">
+      <DependentUpon>ForgotPass_Email.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -216,8 +216,8 @@
     <Compile Include="View\PackageView\PackageTypeView\CreatePackageTypeView.xaml.cs">
       <DependentUpon>CreatePackageTypeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageView\PackageTypeView\MainPackageTypeViewModel.xaml.cs">
-      <DependentUpon>MainPackageTypeViewModel.xaml</DependentUpon>
+    <Compile Include="View\PackageView\PackageTypeView\MainPackageTypeView.xaml.cs">
+      <DependentUpon>MainPackageTypeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PackageView\PackageTypeView\UpdatePackageTypeView.xaml.cs">
       <DependentUpon>UpdatePackageTypeView.xaml</DependentUpon>
@@ -234,14 +234,14 @@
     <Compile Include="View\StatisticView\TravelStatisticView.xaml.cs">
       <DependentUpon>TravelStatisticView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TechnicalHelpView\TechnicalHelpView.xaml.cs">
+    <Compile Include="View\TechnicalHelpView.xaml.cs">
       <DependentUpon>TechnicalHelpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TicketView\PrintTicketView.xaml.cs">
-      <DependentUpon>PrintTicketView.xaml</DependentUpon>
+    <Compile Include="View\TicketView\ExportedTicketView.xaml.cs">
+      <DependentUpon>ExportedTicketView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TicketView\TicketView.xaml.cs">
-      <DependentUpon>TicketView.xaml</DependentUpon>
+    <Compile Include="View\TicketView\MainTicketView.xaml.cs">
+      <DependentUpon>MainTicketView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TourView\CreateTourView.xaml.cs">
       <DependentUpon>CreateTourView.xaml</DependentUpon>
@@ -299,15 +299,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomerView\UpdateCustomerVIew.xaml">
+    <Page Include="View\CustomerView\UpdateCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DashBoardView\DashboardView.xaml">
+    <Page Include="View\DashBoardView\DashBoardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LoginView\ChangePasswordView.xaml">
+    <Page Include="View\LoginView\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,7 +315,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LoginView\ForgotPass_EmailView.xaml">
+    <Page Include="View\LoginView\ForgotPass_Email.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,7 +351,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageView\PackageTypeView\MainPackageTypeViewModel.xaml">
+    <Page Include="View\PackageView\PackageTypeView\MainPackageTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -375,15 +375,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TechnicalHelpView\TechnicalHelpView.xaml">
+    <Page Include="View\TechnicalHelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TicketView\PrintTicketView.xaml">
+    <Page Include="View\TicketView\ExportedTicketView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TicketView\TicketView.xaml">
+    <Page Include="View\TicketView\MainTicketView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

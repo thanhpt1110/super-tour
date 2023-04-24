@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Super_Tour.View.LoginView
 {
     /// <summary>
-    /// Interaction logic for ForgotPass_EmailView.xaml
+    /// Interaction logic for ChangePassword.xaml
     /// </summary>
-    public partial class ForgotPass_EmailView : UserControl
+    public partial class ChangePassword : Window
     {
-        public ForgotPass_EmailView()
+        public ChangePassword()
         {
             InitializeComponent();
         }
