@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Super_Tour.ViewModel;
 
 namespace Super_Tour.View.PackageView.PackageTypeView
 {
     /// <summary>
     /// Interaction logic for UpdatePackageTypeView.xaml
     /// </summary>
-    public partial class UpdatePackageTypeView : Window
+    public partial class UpdatePackageTypeView : UserControl
     {
         public UpdatePackageTypeView()
         {
             InitializeComponent();
-            DataContext = new UpdatePackageTypeViewModel();
         }
     }
 }

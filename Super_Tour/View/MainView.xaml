@@ -26,7 +26,8 @@
                 <!--Navigation Menu-->
                 <ColumnDefinition Width="250"/>
                 <!--Content Section-->
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="79*"/>
+                <ColumnDefinition Width="29*"/>
             </Grid.ColumnDefinitions>
 
             <!--Navigation Menu-->
@@ -142,7 +143,7 @@
             </StackPanel>
             <!--Main Sectino-->
             <Border CornerRadius="0,10,10,0"
-                    Grid.Column="1">
+                    Grid.Column="1" Grid.ColumnSpan="2">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
                         <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
