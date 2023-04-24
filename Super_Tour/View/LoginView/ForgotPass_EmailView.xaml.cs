@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Super_Tour.View.LoginView
 {
     /// <summary>
-    /// Interaction logic for ForgotPass_Email.xaml
+    /// Interaction logic for ForgotPass_EmailView.xaml
     /// </summary>
-    public partial class ForgotPass_Email : Window
+    public partial class ForgotPass_EmailView : Window
     {
-        public ForgotPass_Email()
+        public ForgotPass_EmailView()
         {
             InitializeComponent();
         }
