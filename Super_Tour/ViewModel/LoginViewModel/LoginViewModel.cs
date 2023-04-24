@@ -39,11 +39,6 @@ namespace Super_Tour.ViewModel.LoginViewModel
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
 
-        private bool CanLogin(object obj)
-        {
-            if()
-        }
-
         public void MoveToForgotPass(object a)
         {
             ForgotPass_EmailView view = new ForgotPass_EmailView();
