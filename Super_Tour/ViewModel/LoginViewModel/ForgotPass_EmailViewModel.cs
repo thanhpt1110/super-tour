@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Super_Tour.ViewModel.LoginViewModel
+namespace Super_Tour.ViewModel
 {
     internal class ForgotPass_EmailViewModel
     {

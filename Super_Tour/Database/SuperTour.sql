@@ -78,12 +78,13 @@ CREATE TABLE TICKET(
  -- FOREIGN KEY
  ALTER TABLE PACKAGE ADD FOREIGN KEY (Id_Type_Package) REFERENCES TYPE_PACKAGE(Id_Type_Package);
  ALTER TABLE TOUR_DETAILS ADD FOREIGN KEY(Id_Tour) references TOUR(Id_Tour);
- ALTER TABLE tour_details add foreign key(Id_Package) references package(Id_Package);
- ALTER TABLE travel add foreign key(Id_Tour) references tour(Id_Tour);
- ALTER TABLE booking add foreign key(Id_Customer_Booking) references customer(Id_Customer);
- ALTER TABLE booking add foreign key(Id_Travel) references travel(Id_Travel);
- ALTER TABLE booking_details add foreign key(Id_Booking) references booking(Id_booking);
- ALTER TABLE BOOKING_DETAILS add foreign key(Id_Customer) references customer(Id_Customer);
- ALTER TABLE ticket add foreign key(Id_Booking_Details) references booking_details(Id_Booking_Details);
+ ALTER TABLE TOUR_DETAILS add foreign key(Id_Package) references PACKAGE(Id_Package);
+ ALTER TABLE TRAVEL add foreign key(Id_Tour) references TOUR(Id_Tour);
+ ALTER TABLE BOOKING add foreign key(Id_Customer_Booking) references CUSTOMER(Id_Customer);
+ ALTER TABLE BOOKING add foreign key(Id_Travel) references TRAVEL(Id_Travel);
+ ALTER TABLE BOOKING_DETAILS add foreign key(Id_Booking) references BOOKING(Id_booking);
+ ALTER TABLE BOOKING_DETAILS add foreign key(Id_Customer) references CUSTOMER(Id_Customer);
+ ALTER TABLE TICKET add foreign key(Id_Booking_Details) references BOOKING_DETAILS(Id_Booking_Details);
 
-
+-- ADD DEFAULT ACCOUNT
+INSERT INTO ACCOUNT VALUES ('admin', '1234', 'Trùm cuối', 'Admin', '1', 'trumcuoi@gmail.com');

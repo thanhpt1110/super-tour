@@ -12,7 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Super_Tour.ViewModel.LoginViewModel;
+using Super_Tour.ViewModel;
+
 namespace Super_Tour.View.LoginView
 {
     /// <summary>
@@ -23,7 +24,7 @@ namespace Super_Tour.View.LoginView
         public LoginView()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            DataContext = new MainLoginViewModel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

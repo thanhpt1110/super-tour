@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using WpfApp1.Models;
 
-namespace Super_Tour.ViewModel.LoginViewModel
+namespace Super_Tour.ViewModel
 {
-    internal class LoginViewModel: ObservableObject
+    internal class MainLoginViewModel: ObservableObject
     {
         private bool _isViewVisible = true;
         public string Username { get; set; }
@@ -33,11 +33,13 @@ namespace Super_Tour.ViewModel.LoginViewModel
             }
         }
 
-        public LoginViewModel()
+        public MainLoginViewModel()
         {
+            
             LoginCommand = new RelayCommand(Login);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
+
         public void MoveToForgotPass(object a)
         {
             ForgotPass_EmailView view = new ForgotPass_EmailView();
@@ -54,6 +56,7 @@ namespace Super_Tour.ViewModel.LoginViewModel
             if (checkLogin())
             {
                 MessageBox.Show("Login successful");
+                IsViewVisible = false;
             }
             else
             {
