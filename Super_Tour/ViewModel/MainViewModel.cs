@@ -66,6 +66,7 @@ namespace Super_Tour.ViewModel
             ShowTourViewCommand = new RelayCommand(ExecuteShowTourViewCommand);
             ShowPackageViewCommand = new RelayCommand(ExecuteShowPackageViewCommand);
             ShowStatisticViewCommand = new RelayCommand(ExecuteShowStatisticViewCommand);
+            CurrentChildView = new DashBoardViewModel();
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }

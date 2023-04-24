@@ -10,6 +10,7 @@
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
+        MouseDown="Window_MouseDown"
         Title="MainWindow" Height="900" Width="1440">
     <Border CornerRadius="10"
             BorderThickness="1">
@@ -111,6 +112,14 @@
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}"
+                    Tag="{StaticResource color8}"
+                             Command="{Binding ShowStatisticViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"

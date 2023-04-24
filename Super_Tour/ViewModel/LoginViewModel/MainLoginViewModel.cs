@@ -16,8 +16,32 @@ namespace Super_Tour.ViewModel
     internal class MainLoginViewModel: ObservableObject
     {
         private bool _isViewVisible = true;
-        public string Username { get; set; }
-        public string Password { get; set; }
+        private string _username;
+        private string _password;
+        public string Username 
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                _username = value;
+                OnPropertyChanged(nameof(Username));
+            }
+        }
+        public string Password 
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
         private string converted_password;
         public RelayCommand LoginCommand { get;private set; }
         public RelayCommand CommandForgotPassword { get;private set; }
