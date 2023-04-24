@@ -52,8 +52,15 @@ namespace Super_Tour.ViewModel.LoginViewModel
         }
         private bool checkLogin()
         {
-            ConvertPassToMD5();
-            return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password== converted_password).SingleOrDefault()!=null;
+            try
+            {
+                ConvertPassToMD5();
+                return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password == converted_password).SingleOrDefault() != null;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
         private void ConvertPassToMD5()
         {
