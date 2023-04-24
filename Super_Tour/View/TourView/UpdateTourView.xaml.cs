@@ -10,18 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-namespace Super_Tour.View.Tour
+
+namespace Super_Tour.View.TourView
 {
     /// <summary>
     /// Interaction logic for UpdateTourView.xaml
     /// </summary>
-    public partial class UpdateTourView : Window
+    public partial class UpdateTourView : UserControl
     {
         public UpdateTourView()
         {
             InitializeComponent();
-            DataContext = new UpdateTourView();
         }
     }
 }

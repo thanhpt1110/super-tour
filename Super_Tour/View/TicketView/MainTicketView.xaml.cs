@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Super_Tour.ViewModel;
 
 namespace Super_Tour.View.TicketView
 {
     /// <summary>
-    /// Interaction logic for PrintTicketView.xaml
+    /// Interaction logic for MainTicketView.xaml
     /// </summary>
-    public partial class PrintTicketView : Window
+    public partial class MainTicketView : UserControl
     {
-        public PrintTicketView()
+        public MainTicketView()
         {
             InitializeComponent();
-            DataContext = new PrintTicketViewModel();
         }
     }
 }

@@ -10,14 +10,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Super_Tour.View.Travel
+namespace Super_Tour.View.TravelView
 {
     /// <summary>
     /// Interaction logic for UpdateTravelView.xaml
     /// </summary>
-    public partial class UpdateTravelView : Window
+    public partial class UpdateTravelView : UserControl
     {
         public UpdateTravelView()
         {
