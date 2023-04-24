@@ -55,7 +55,8 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTourViewCommand { get; }
         public RelayCommand ShowPackageViewCommand { get; }
         public RelayCommand ShowStatisticViewCommand { get; }
-
+        public RelayCommand ShowAccountViewCommand { get; }
+        public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public MainViewModel()
         {
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
@@ -66,9 +67,18 @@ namespace Super_Tour.ViewModel
             ShowTourViewCommand = new RelayCommand(ExecuteShowTourViewCommand);
             ShowPackageViewCommand = new RelayCommand(ExecuteShowPackageViewCommand);
             ShowStatisticViewCommand = new RelayCommand(ExecuteShowStatisticViewCommand);
+            ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
+            ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             CurrentChildView = new DashBoardViewModel();
             Caption = "Dashboard";
             Icon = IconChar.Home;
+        }
+
+        private void ExecuteShowTechnicalHelpViewCommand(object obj)
+        {
+            CurrentChildView = new TechnicalHelpViewModel();
+            Caption = "Technical Help";
+            Icon = IconChar.QuestionCircle;
         }
 
         private void ExecuteShowDashboardViewCommand(object obj)
@@ -117,6 +127,12 @@ namespace Super_Tour.ViewModel
         {
             Caption = "Statistic";
             Icon = IconChar.Database;
+        }
+        private void ExecuteShowAccountViewCommand(object obj)
+        {
+            CurrentChildView = new MainAccountViewModel();
+            Caption = "Manage Account";
+            Icon = IconChar.AddressCard;
         }
     }
 }

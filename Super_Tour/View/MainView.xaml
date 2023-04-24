@@ -124,10 +124,19 @@
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color9}"
-                             Command="{Binding ShowStatisticViewCommand}">
+                             Command="{Binding ShowAccountViewCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
+                        <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+                <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource panelOverColor}" Margin="0,0,0,10"/>
+                <RadioButton Style="{StaticResource menuButton}"
+                    Tag="{StaticResource color10}"
+                             Command="{Binding ShowTechnicalHelpViewCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
             </StackPanel>

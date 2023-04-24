@@ -149,6 +149,7 @@
     <Compile Include="ViewModel\LoginViewModel\ForgotPass_EmailViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel\MainLoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\AccountViewModel\MainAccountViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\CreatePackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\DetailPackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\CreatePackageTypeViewModel.cs" />
@@ -159,7 +160,7 @@
     <Compile Include="ViewModel\StatisticViewModel\CustomerStatisticViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\RevenueStatisticViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\TravelStatisticViewModel.cs" />
-    <Compile Include="ViewModel\TechnicalHelpViewModel\TechnicalHelpViewModel.cs" />
+    <Compile Include="ViewModel\TechnicalHelpViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\PrintTicketViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\MainTicketViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\CreateTourViewModel.cs" />
@@ -170,6 +171,9 @@
     <Compile Include="ViewModel\TravelViewModel\DetailTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
+    <Compile Include="View\AccountView\MainAccountView.xaml.cs">
+      <DependentUpon>MainAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
     </Compile>
@@ -272,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\UIColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AccountView\MainAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
