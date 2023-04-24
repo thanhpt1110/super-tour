@@ -7,7 +7,8 @@ CREATE TABLE ACCOUNT
     Password varchar(1000),
 	Account_Name nvarchar(255),
     Service nvarchar(255),
-    Priority INT
+    Priority INT,
+    Email varchar(255) unique
 ) auto_increment = 1000;
 CREATE TABLE TYPE_PACKAGE(
 	Id_Type_Package int auto_increment primary key,

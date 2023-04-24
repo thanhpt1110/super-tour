@@ -28,16 +28,16 @@ namespace Super_Tour.Model
         public DbSet<TYPE_PACKAGE> TYPE_PACKAGEs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ACCOUNT>().ToTable("account");
-            modelBuilder.Entity<BOOKING>().ToTable("booking");
-            modelBuilder.Entity<BOOKING_DETAILS>().ToTable("booking_details");
-            modelBuilder.Entity<CUSTOMER>().ToTable("customer");
-            modelBuilder.Entity<PACKAGE>().ToTable("package");
-            modelBuilder.Entity<TICKET>().ToTable("ticket");
-            modelBuilder.Entity<TOUR>().ToTable("tour");
-            modelBuilder.Entity<TOUR_DETAILS>().ToTable("tour_details");
-            modelBuilder.Entity<TRAVEL>().ToTable("travel");
-            modelBuilder.Entity<TYPE_PACKAGE>().ToTable("type_package");
+            modelBuilder.Entity<ACCOUNT>().ToTable("ACCOUNT");
+            modelBuilder.Entity<BOOKING>().ToTable("BOOKING");
+            modelBuilder.Entity<BOOKING_DETAILS>().ToTable("BOOKING_DETAILS");
+            modelBuilder.Entity<CUSTOMER>().ToTable("CUSTOMER");
+            modelBuilder.Entity<PACKAGE>().ToTable("PACKAGE");
+            modelBuilder.Entity<TICKET>().ToTable("TICKET");
+            modelBuilder.Entity<TOUR>().ToTable("TOUR");
+            modelBuilder.Entity<TOUR_DETAILS>().ToTable("TOUR_DETAILS");
+            modelBuilder.Entity<TRAVEL>().ToTable("TRAVEL");
+            modelBuilder.Entity<TYPE_PACKAGE>().ToTable("TYPE_PACKAGE");
             base.OnModelCreating(modelBuilder);
         }
     }

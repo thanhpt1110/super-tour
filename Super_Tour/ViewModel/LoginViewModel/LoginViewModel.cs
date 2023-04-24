@@ -16,11 +16,11 @@ namespace Super_Tour.ViewModel.LoginViewModel
     internal class LoginViewModel: ObservableObject
     {
         private bool _isViewVisible = true;
-        public string username_text;
-        public string password_text;
+        public string Username { get; set; }
+        public string Password { get; set; }
         private string converted_password;
-        public RelayCommand CommandLogin;
-        public RelayCommand CommandForgotPassword;
+        public RelayCommand LoginCommand { get;private set; }
+        public RelayCommand CommandForgotPassword { get;private set; }
         private SUPER_TOUR db = new SUPER_TOUR();
 
         public bool IsViewVisible
@@ -35,7 +35,7 @@ namespace Super_Tour.ViewModel.LoginViewModel
 
         public LoginViewModel()
         {
-            CommandLogin = new RelayCommand(Login,CanLogin);
+            LoginCommand = new RelayCommand(Login);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
 
@@ -52,16 +52,14 @@ namespace Super_Tour.ViewModel.LoginViewModel
         }
         public void Login(Object a)
         {
-            if (string.IsNullOrEmpty(username_text) || string.IsNullOrEmpty(password_text))
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
                 MessageBox.Show("Please enter your username or password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
             if (checkLogin())
             {
-                MainView view = new MainView();
-                Application.Current.MainWindow.Hide();
-                view.Show();
+                MessageBox.Show("Login successful");
             }
             else
             {
@@ -70,12 +68,22 @@ namespace Super_Tour.ViewModel.LoginViewModel
         }
         private bool checkLogin()
         {
-            ConvertPassToMD5();
-            return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password == converted_password).SingleOrDefault() != null;
+/*            try
+            {*/
+                ConvertPassToMD5();
+                ACCOUNT a = db.ACCOUNTs.Where(p => p.Username == Username && p.Password == converted_password).SingleOrDefault();
+                if (a != null)
+                    return true;
+/*            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }*/
+            return false;
         }
         private void ConvertPassToMD5()
         {
-            converted_password = Constant.convertPassToMD5(password_text);
+            converted_password = Constant.convertPassToMD5(Password);
         }
 
     }
