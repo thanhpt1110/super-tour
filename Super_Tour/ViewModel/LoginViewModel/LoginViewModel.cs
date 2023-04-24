@@ -13,17 +13,29 @@ using WpfApp1.Models;
 
 namespace Super_Tour.ViewModel.LoginViewModel
 {
-    internal class LoginViewModel
+    internal class LoginViewModel: ObservableObject
     {
-        public string username_text;
-        public string password_text;
+        private bool _isViewVisible = true;
+        public string Username { get; set; }
+        public string Password { get; set; }
         private string converted_password;
-        public RelayCommand CommandLogin;
-        public RelayCommand CommandForgotPassword;
+        public RelayCommand LoginCommand { get;private set; }
+        public RelayCommand CommandForgotPassword { get;private set; }
         private SUPER_TOUR db = new SUPER_TOUR();
+
+        public bool IsViewVisible
+        {
+            get => _isViewVisible;
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
+
         public LoginViewModel()
         {
-            CommandLogin = new RelayCommand(Login);
+            LoginCommand = new RelayCommand(Login);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
         public void MoveToForgotPass(object a)
@@ -31,19 +43,17 @@ namespace Super_Tour.ViewModel.LoginViewModel
             ForgotPass_EmailView view = new ForgotPass_EmailView();
             view.Show();
             Application.Current.MainWindow.Hide();
-        }    
+        }
         public void Login(Object a)
         {
-            if(string.IsNullOrEmpty(username_text) || string.IsNullOrEmpty(password_text))
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Please enter your username or password","ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Please enter your username or password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
-            if(checkLogin())
+            if (checkLogin())
             {
-                MainView view = new MainView();
-                Application.Current.MainWindow.Hide();
-                view.Show();    
+                MessageBox.Show("Login successful");
             }
             else
             {
@@ -52,20 +62,23 @@ namespace Super_Tour.ViewModel.LoginViewModel
         }
         private bool checkLogin()
         {
-            try
-            {
+/*            try
+            {*/
                 ConvertPassToMD5();
-                return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password == converted_password).SingleOrDefault() != null;
-            }
+                ACCOUNT a = db.ACCOUNTs.Where(p => p.Username == Username && p.Password == converted_password).SingleOrDefault();
+                if (a != null)
+                    return true;
+/*            }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            }*/
+            return false;
         }
         private void ConvertPassToMD5()
         {
-            converted_password = Constant.convertPassToMD5(password_text);
+            converted_password = Constant.convertPassToMD5(Password);
         }
-        
+
     }
 }

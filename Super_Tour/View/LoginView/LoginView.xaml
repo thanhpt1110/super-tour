@@ -4,9 +4,204 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Super_Tour.View.LoginView"
+        xmlns:customControls="clr-namespace:Super_Tour.CustomControls"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="LoginView" Height="450" Width="800">
+        Title="LoginView" Height="490" Width="800"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
     <Grid>
-        
+        <Border CornerRadius="10"
+                BorderThickness="1">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/background_login.png"/>
+            </Border.Background>
+            <Border CornerRadius="10"
+                    BorderThickness="1"
+                    Opacity="0.9"
+                    >
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                        <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                        <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                        <GradientStop Color="{StaticResource BackgroundColor1}" Offset="0"></GradientStop>
+                        <GradientStop Color="{StaticResource BackgroundColor2}" Offset="0.75"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30">
+                        </RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="5"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="LOG IN"
+                                   Foreground="DarkGray"
+                                   FontSize="10"
+                                   FontFamily="Segoe UI"
+                                   Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"
+                            />
+
+                        <Button x:Name="btnMinimize"
+                                Grid.Column="1"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Width="25"
+                                Height="25"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Width="10" Icon="WindowMinimize"  Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnClose"
+                                Grid.Column="3"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Width="25"
+                                Height="25"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMaximize"
+                                Grid.Column="2"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color9}"
+                                Width="25"
+                                Height="25"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </Border>
+        </Border>
+        <StackPanel
+                        Width="250"
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        Margin="0,35,0,35"
+                        >
+            <Image
+                            Source="/Images/logo.png" Height="134" Width="176"/>
+            <TextBlock Text="LOG IN"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   FontFamily="Segoe UI"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Center"/>
+            <TextBlock Text="Username"
+                       Foreground="DarkGray"
+                       FontSize="15"
+                       FontWeight="Medium"
+                       FontFamily="Segoe UI"
+                       Margin="0,5,0,0"/>
+            <TextBox x:Name="txtUser"
+                     Text="{Binding Username}"
+                     FontSize="16"
+                     FontWeight="Medium"
+                     FontFamily="Segoe UI"
+                     Foreground="White"
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,1"
+                     Height="30"
+                     VerticalAlignment="Center"
+                     Margin="0,5,0,0"
+                     Padding="20,0,0,10"
+                     >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Images/username_resize.png"
+                                AlignmentX="Left"
+                                Stretch="None"
+                                ></ImageBrush>
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock Text="Passsword"
+                       Foreground="DarkGray"
+                       FontSize="15"
+                       FontWeight="Medium"
+                       FontFamily="Segoe UI"
+                       Margin="0,5,0,0"/>
+            <customControls:BindablePasswordBox
+                Height="30"
+                Margin="0,5,0,0"
+                Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                
+                >
+
+            </customControls:BindablePasswordBox>
+
+            <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,15,0,0">
+                <TextBlock Text="Forgot Password?"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"/>
+                <TextBlock Text="Reset"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               Cursor="Hand"
+                               Margin="8,0,0,0"/>
+            </StackPanel>
+            <Button x:Name="btnLogin"
+                    BorderThickness="0"
+                    Content="LOG IN"
+                    Foreground="White"
+                    FontSize="15"
+                    FontFamily="Segoe UI"
+                    FontWeight="Medium"
+                    Cursor="Hand"
+                    Margin="0,20,0,0"
+                    Command="{Binding LoginCommand}"
+                    IsDefault="True"
+                    >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#3EB7FF"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#336BAA"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
