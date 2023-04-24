@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Super_Tour.ViewModel.CustomerViewModel;
+using Super_Tour.ViewModel;
 namespace Super_Tour.View.CustomerView
 {
     /// <summary>

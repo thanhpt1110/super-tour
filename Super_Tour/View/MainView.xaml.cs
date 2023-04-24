@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Super_Tour.ViewModel;
 
 namespace Super_Tour
 {
@@ -24,6 +25,7 @@ namespace Super_Tour
         public MainView()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
             /*SUPER_TOUR db = new SUPER_TOUR();
             List < TYPE_PACKAGE>  PACKAGEs= db.TYPE_PACKAGEs.ToList();
             foreach(TYPE_PACKAGE typePackage in PACKAGEs)

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Models;
 
-namespace Super_Tour.ViewModel.BookingViewModel
+namespace Super_Tour.ViewModel
 {
-    internal class MainBookingViewModel
+    internal class MainBookingViewModel: ObservableObject
     {
     }
 }

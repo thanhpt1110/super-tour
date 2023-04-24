@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Models;
 
-namespace Super_Tour.ViewModel.TourViewModel
+namespace Super_Tour.ViewModel
 {
-    internal class MainTourViewModel
+    internal class MainTourViewModel: ObservableObject
     {
     }
 }

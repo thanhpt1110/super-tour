@@ -7,6 +7,8 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
         WindowStyle="None"
         Title="MainWindow" Height="900" Width="1440">
     <Border CornerRadius="10"
@@ -56,7 +58,8 @@
                 <!--Menu Buttons-->
                 <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color1}"
-                             Command="{Binding ShowDashboardViewCommand}">
+                             Command="{Binding ShowDashboardViewCommand}"
+                             IsChecked="True">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
@@ -71,42 +74,48 @@
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color3}">
+                             Tag="{StaticResource color3}"
+                             Command="{Binding ShowBookingViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color4}">
+                            Tag="{StaticResource color4}"
+                             Command="{Binding ShowCustomerViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color5}">
+                    Tag="{StaticResource color5}"
+                             Command="{Binding ShowTicketViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Ticket" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Ticket" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color6}">
+                    Tag="{StaticResource color6}"
+                             Command="{Binding ShowTourViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Tour" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color7}">
+                    Tag="{StaticResource color7}"
+                             Command="{Binding ShowPackageViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color8}">
+                    Tag="{StaticResource color8}"
+                             Command="{Binding ShowStatisticViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>

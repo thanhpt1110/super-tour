@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Super_Tour.ViewModel.PackageViewModel
+namespace Super_Tour.ViewModel
 {
     internal class DetailPackageViewModel
     {

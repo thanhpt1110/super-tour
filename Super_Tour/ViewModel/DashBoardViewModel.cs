@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.Models;
 
-namespace Super_Tour.ViewModel.TicketViewModel
+namespace Super_Tour.ViewModel
 {
-    internal class TicketViewModel
+    internal class DashBoardViewModel: ObservableObject
     {
     }
 }
