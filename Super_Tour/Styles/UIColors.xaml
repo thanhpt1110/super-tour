@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Background Login Colors-->
+    <Color x:Key="BackgroundColor1">#2D4E5E</Color>
+    <Color x:Key="BackgroundColor2">#12262E</Color>
+    <Color x:Key="BackgroundColor3">#2B4B5A</Color>
+
+    <!--Background Main-->
+    <Color x:Key="BackgroundMain1">#24465A</Color>
+    <Color x:Key="BackgroundMain2">#173342</Color>
+    <!--Window Border Colors-->
+    <Color x:Key="BorderColor1">#5291AF</Color>
+    <Color x:Key="BorderColor2">#9AD7D7</Color>
+    <Color x:Key="BorderColor3">#ABCC37</Color>
+
+    <!--Navigation Bar Colors-->
+    <Color x:Key="NavBar">#283342</Color>
+    <Color x:Key="NavBarTop">#1D242E</Color>
+
+    <!--Content Colors-->
+    <Color x:Key="ContentMain">#F7FAFD</Color>
+    <Color x:Key="ContentControlBar">#EDF1F5</Color>
+
+
+    <!--Color Palette-->
+    <SolidColorBrush x:Key="color1" Color="#E285DE"/>
+    <SolidColorBrush x:Key="color2" Color="#784DFD"/>
+    <SolidColorBrush x:Key="color3" Color="#4ADAEC"/>
+    <SolidColorBrush x:Key="color4" Color="#FB539B"/>
+    <SolidColorBrush x:Key="color5" Color="#7E82FC"/>
+    <SolidColorBrush x:Key="color6" Color="#FFC047"/>
+    <SolidColorBrush x:Key="color7" Color="#EF6C96"/>
+    <SolidColorBrush x:Key="color8" Color="#78A3FC"/>
+    <SolidColorBrush x:Key="color9" Color="#07F3C0"/>
+    <SolidColorBrush x:Key="color10" Color="#FBA1AA"/>
+
+    <!--Font Colors-->
+    <SolidColorBrush x:Key="titleColor1" Color="#E0E1F1"/>
+    <SolidColorBrush x:Key="titleColor2" Color="#D5CFF5"/>
+    <SolidColorBrush x:Key="titleColor3" Color="#BCBEE0"/>
+    <SolidColorBrush x:Key="plainTextColor1" Color="#F7FAFD"/>
+    <SolidColorBrush x:Key="plainTextColor2" Color="#F7FAFD"/>
+    <SolidColorBrush x:Key="plainTextColor3" Color="#F7FAFD"/>
+
+    <!--Panel Colors-->
+    <SolidColorBrush x:Key="panelColor" Color="#173342"/>
+    <SolidColorBrush x:Key="panelOverColor" Color="#234E65"/>
+    <SolidColorBrush x:Key="panelActiveColor" Color="#1D4052"/>
+</ResourceDictionary>

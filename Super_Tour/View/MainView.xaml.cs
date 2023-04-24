@@ -24,12 +24,12 @@ namespace Super_Tour
         public MainView()
         {
             InitializeComponent();
-            SUPER_TOUR db = new SUPER_TOUR();
+            /*SUPER_TOUR db = new SUPER_TOUR();
             List < TYPE_PACKAGE>  PACKAGEs= db.TYPE_PACKAGEs.ToList();
             foreach(TYPE_PACKAGE typePackage in PACKAGEs)
             {
                 Console.WriteLine("ID: {0} Name: {1}", typePackage.Id_Type_Package.ToString(), typePackage.Name_Type);
-            }    
+            }    */
         }
     }
 }

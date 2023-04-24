@@ -13,14 +13,26 @@ using WpfApp1.Models;
 
 namespace Super_Tour.ViewModel.LoginViewModel
 {
-    internal class LoginViewModel
+    internal class LoginViewModel: ObservableObject
     {
+        private bool _isViewVisible = true;
         public string username_text;
         public string password_text;
         private string converted_password;
         public RelayCommand CommandLogin;
         public RelayCommand CommandForgotPassword;
         private SUPER_TOUR db = new SUPER_TOUR();
+
+        public bool IsViewVisible
+        {
+            get => _isViewVisible;
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
+
         public LoginViewModel()
         {
             CommandLogin = new RelayCommand(Login);
@@ -31,19 +43,19 @@ namespace Super_Tour.ViewModel.LoginViewModel
             ForgotPass_EmailView view = new ForgotPass_EmailView();
             view.Show();
             Application.Current.MainWindow.Hide();
-        }    
+        }
         public void Login(Object a)
         {
-            if(string.IsNullOrEmpty(username_text) || string.IsNullOrEmpty(password_text))
+            if (string.IsNullOrEmpty(username_text) || string.IsNullOrEmpty(password_text))
             {
-                MessageBox.Show("Please enter your username or password","ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Please enter your username or password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
-            if(checkLogin())
+            if (checkLogin())
             {
                 MainView view = new MainView();
                 Application.Current.MainWindow.Hide();
-                view.Show();    
+                view.Show();
             }
             else
             {
@@ -53,12 +65,12 @@ namespace Super_Tour.ViewModel.LoginViewModel
         private bool checkLogin()
         {
             ConvertPassToMD5();
-            return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password== converted_password).SingleOrDefault()!=null;
+            return db.ACCOUNTs.Where(p => p.Username == username_text && p.Password == converted_password).SingleOrDefault() != null;
         }
         private void ConvertPassToMD5()
         {
             converted_password = Constant.convertPassToMD5(password_text);
         }
-        
+
     }
 }
