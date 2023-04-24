@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Super_Tour.View.PackageView
+namespace Super_Tour.View
 {
     /// <summary>
     /// Interaction logic for DetailPackageView.xaml

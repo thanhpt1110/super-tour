@@ -1,7 +1,7 @@
 ﻿using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
-using Super_Tour.View.LoginView;
+using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

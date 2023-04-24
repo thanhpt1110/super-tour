@@ -1,4 +1,4 @@
-﻿using Super_Tour.View.LoginView;
+﻿using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

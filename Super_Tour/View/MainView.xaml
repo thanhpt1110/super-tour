@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Super_Tour"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        xmlns:viewModel="clr-namespace:Super_Tour.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -12,6 +13,38 @@
         WindowStyle="None"
         MouseDown="Window_MouseDown"
         Title="MainWindow" Height="900" Width="1440">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:DashBoardViewModel}">
+            <local:DashBoardView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainTravelViewModel}">
+            <local:MainTravelView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainBookingViewModel}">
+            <local:MainBookingView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainCustomerViewModel}">
+            <local:MainCustomerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainTicketViewModel}">
+            <local:MainTicketView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainTourViewModel}">
+            <local:MainTourView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainPackageTypeViewModel}">
+            <local:MainPackageTypeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CustomerStatisticViewModel}">
+            <local:CustomerStatisticView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainAccountViewModel}">
+            <local:MainAccountView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TechnicalHelpViewModel}">
+            <local:TechnicalHelpView/>
+        </DataTemplate>
+    </Window.Resources>
     <Border CornerRadius="10"
             BorderThickness="1">
         <Border.BorderBrush>
@@ -109,7 +142,7 @@
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
-                             Command="{Binding ShowPackageViewCommand}">
+                             Command="{Binding ShowMainPackageTypeViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
@@ -117,7 +150,7 @@
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color8}"
-                             Command="{Binding ShowStatisticViewCommand}">
+                             Command="{Binding ShowCustomerStatisticViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>

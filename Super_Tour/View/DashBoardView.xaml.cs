@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Super_Tour.View.DashBoardView
+namespace Super_Tour.View
 {
     /// <summary>
     /// Interaction logic for DashBoardView.xaml

@@ -189,7 +189,7 @@
     <Compile Include="View\CustomerView\UpdateCustomerView.xaml.cs">
       <DependentUpon>UpdateCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DashBoardView\DashBoardView.xaml.cs">
+    <Compile Include="View\DashBoardView.xaml.cs">
       <DependentUpon>DashBoardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView\ChangePasswordView.xaml.cs">
@@ -303,7 +303,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DashBoardView\DashBoardView.xaml">
+    <Page Include="View\DashBoardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

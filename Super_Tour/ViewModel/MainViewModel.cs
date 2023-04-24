@@ -54,7 +54,14 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTicketViewCommand { get; }
         public RelayCommand ShowTourViewCommand { get; }
         public RelayCommand ShowPackageViewCommand { get; }
+        public RelayCommand ShowPackageTypeViewCommand { get; }
+
         public RelayCommand ShowStatisticViewCommand { get; }
+        public RelayCommand ShowCustomerStatisticViewCommand { get; }
+        public RelayCommand ShowRevenueStatisticViewCommand { get; }
+        public RelayCommand ShowTravelStatisticViewCommand { get; }
+
+
         public RelayCommand ShowAccountViewCommand { get; }
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public MainViewModel()
@@ -66,7 +73,10 @@ namespace Super_Tour.ViewModel
             ShowTicketViewCommand = new RelayCommand(ExecuteShowTicketViewCommand);
             ShowTourViewCommand = new RelayCommand(ExecuteShowTourViewCommand);
             ShowPackageViewCommand = new RelayCommand(ExecuteShowPackageViewCommand);
-            ShowStatisticViewCommand = new RelayCommand(ExecuteShowStatisticViewCommand);
+            ShowPackageTypeViewCommand = new RelayCommand(ExecuteShowPackageTypeViewCommand);
+            ShowCustomerStatisticViewCommand = new RelayCommand(ExecuteShowCustomerStatisticViewCommand);
+            ShowRevenueStatisticViewCommand = new RelayCommand(ExecuteShowRevenueStatisticViewCommand);
+            ShowTravelStatisticViewCommand = new RelayCommand(ExecuteShowTravelStatisticViewCommand);
             ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             CurrentChildView = new DashBoardViewModel();
@@ -123,9 +133,25 @@ namespace Super_Tour.ViewModel
             Caption = "Package";
             Icon = IconChar.BagShopping;
         }
-        private void ExecuteShowStatisticViewCommand(object obj)
+        private void ExecuteShowPackageTypeViewCommand(object obj)
         {
-            Caption = "Statistic";
+            CurrentChildView = new MainPackageTypeViewModel();
+            Caption = "Package Type";
+            Icon = IconChar.BagShopping;
+        }
+        private void ExecuteShowCustomerStatisticViewCommand(object obj)
+        {
+            Caption = "Customer Statistic";
+            Icon = IconChar.Database;
+        }
+        private void ExecuteShowRevenueStatisticViewCommand(object obj)
+        {
+            Caption = "Revenue Statistic";
+            Icon = IconChar.Database;
+        }
+        private void ExecuteShowTravelStatisticViewCommand(object obj)
+        {
+            Caption = "Travel Statistic";
             Icon = IconChar.Database;
         }
         private void ExecuteShowAccountViewCommand(object obj)

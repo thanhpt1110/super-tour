@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Super_Tour.ViewModel;
 
-namespace Super_Tour.View.LoginView
+namespace Super_Tour.View
 {
     /// <summary>
     /// Interaction logic for LoginView.xaml
