@@ -4,9 +4,110 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="788" d:DesignWidth="1138">
     <Grid>
-            
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
+                    <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Search" Height="20" Foreground="{StaticResource searchColor}"/>
+                            <TextBox x:Name="txtBoxSearchType" 
+                                 Height="40"
+                                 Style="{StaticResource searchTextBox}"/>
+
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        HorizontalContentAlignment="Center"
+                        Height="40"
+                        FontSize="16"
+                        FontFamily="Segoe UI"
+                        Cursor="Hand"
+                        Foreground="White"
+                        Content="+ Adding New Type"
+                        >
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#27A339"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#1F7E2E"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="200" Height="40"
+                                        CornerRadius="5"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1"
+                  Margin="0,20,0,0">
+                    <DataGrid ItemsSource="{Binding PackageTypeTests}"
+                        RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Package Type ID"
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="*"
+                                                Binding="{Binding PackageTypeID}"/>
+
+                            <DataGridTextColumn Header="Package Type Name" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="2*"
+                                                Binding="{Binding PackageTypeName}"/>
+                            <DataGridTextColumn Header="Description" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="2*"
+                                                Binding="{Binding Description}"/>
+                            <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Style="{StaticResource iconButton}">
+                                                <fa:IconImage Icon="Edit" Foreground="#32C948"/>
+                                            </Button>
+                                            <Button Margin="15 0 0 0" Style="{StaticResource iconButton}">
+                                                <fa:IconImage Icon="DeleteLeft" Foreground="#FF4A4F"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

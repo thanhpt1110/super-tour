@@ -46,4 +46,7 @@
     <SolidColorBrush x:Key="panelColor" Color="#173342"/>
     <SolidColorBrush x:Key="panelOverColor" Color="#234E65"/>
     <SolidColorBrush x:Key="panelActiveColor" Color="#1D4052"/>
+
+    <!--Child Content-->
+    <SolidColorBrush x:Key="searchColor" Color="#D3D3D3"></SolidColorBrush>
 </ResourceDictionary>
