@@ -4,12 +4,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Ultis;
+using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
+        //Test DataGrid
         public class PackageTypeTest{
             private string _packageTypeID;
             private string _packageTypeName;
@@ -38,12 +42,20 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(PackageTypeTests));
             } 
         }
-
+        // End Test
+        public ICommand OpenCreatePackageTypeViewCommand { get; }
         public MainPackageTypeViewModel() {
             PackageTypeTests = new ObservableCollection<PackageTypeTest>();
             PackageTypeTests.Add(new PackageTypeTest("1", "Ăn uống", "Nội dung của gồm tên quán ăn, địa điểm"));
             PackageTypeTests.Add(new PackageTypeTest("2", "Tắm biển", "Nội dung của gồm tên bãi, thời gian"));
             PackageTypeTests.Add(new PackageTypeTest("3", "Tham quan", "Nội dung gồm địa điểm tham quan"));
+            OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
+        }
+
+        private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
+        {
+            CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
+            createPackageTypeView.ShowDialog();
         }
     }
 }
