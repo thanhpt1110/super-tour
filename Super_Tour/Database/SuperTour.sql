@@ -87,4 +87,4 @@ CREATE TABLE TICKET(
  ALTER TABLE TICKET add foreign key(Id_Booking_Details) references BOOKING_DETAILS(Id_Booking_Details);
 
 -- ADD DEFAULT ACCOUNT
-INSERT INTO ACCOUNT VALUES ('admin', '1234', 'Trùm cuối', 'Admin', '1', 'trumcuoi@gmail.com');
+INSERT INTO ACCOUNT VALUES ('admin', '81dc9bdb52d04dc20036dbd8313ed055', 'Trùm cuối', 'Admin', '1', 'trumcuoi@gmail.com');
