@@ -71,8 +71,12 @@
                 </Grid>
                 <Grid Grid.Row="1"
                   Margin="0,20,0,0">
-                    <DataGrid ItemsSource="{Binding PackageTypeTests}"
-                        RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid x:Name="membersDataGrid" 
+                              ItemsSource="{Binding PackageTypeTests}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource DataGridStyle1}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Package Type ID"
                                                 IsReadOnly="True" 
