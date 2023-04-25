@@ -12,6 +12,7 @@ namespace Super_Tour.Model
         [Key]
         public int Id_Type_Package { get; set; }
         public string Name_Type { get; set; }
+        public string Description { get; set; }
         public virtual ICollection<PACKAGE> PACKAGEs
         {
             get; set;

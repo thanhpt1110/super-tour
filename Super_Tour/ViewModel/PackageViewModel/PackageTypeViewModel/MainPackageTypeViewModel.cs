@@ -4,12 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Super_Tour.Model;
 using Super_Tour.Ultis;
 
 namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
+        private SUPER_TOUR db = new SUPER_TOUR();
         public class PackageTypeTest{
             private string _packageTypeID;
             private string _packageTypeName;
@@ -44,6 +46,16 @@ namespace Super_Tour.ViewModel
             PackageTypeTests.Add(new PackageTypeTest("1", "Ăn uống", "Nội dung của gồm tên quán ăn, địa điểm"));
             PackageTypeTests.Add(new PackageTypeTest("2", "Tắm biển", "Nội dung của gồm tên bãi, thời gian"));
             PackageTypeTests.Add(new PackageTypeTest("3", "Tham quan", "Nội dung gồm địa điểm tham quan"));
+            GetAllPackage();
+
+        }
+        private void GetAllPackage()
+        {
+            List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
+            foreach(TYPE_PACKAGE package in ListTypePackage)
+            {
+                PackageTypeTests.Add(new PackageTypeTest(package.Id_Type_Package.ToString(), package.Name_Type, package.Description));
+            }    
         }
     }
 }
