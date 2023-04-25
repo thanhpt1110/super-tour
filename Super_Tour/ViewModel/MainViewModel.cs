@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Models;
+using Super_Tour.Ultis;
 
 namespace Super_Tour.ViewModel
 {
@@ -135,7 +135,7 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteShowPackageTypeViewCommand(object obj)
         {
-            CurrentChildView = new MainPackageTypeViewModel();
+            CurrentChildView =   new MainPackageTypeViewModel();
             Caption = "Package Type";
             Icon = IconChar.BagShopping;
         }

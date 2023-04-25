@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Models
+namespace Super_Tour.Ultis
 {
     internal class ObservableObject :INotifyPropertyChanged
     {
