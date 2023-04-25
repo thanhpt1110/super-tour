@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="788" d:DesignWidth="1138">
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
+                <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
+                <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
+            </LinearGradientBrush>
+        </Border.Background>
+        
+    </Border>
 </UserControl>

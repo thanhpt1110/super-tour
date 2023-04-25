@@ -142,7 +142,7 @@
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
-                             Command="{Binding ShowMainPackageTypeViewCommand}">
+                             Command="{Binding ShowPackageTypeViewCommand}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
