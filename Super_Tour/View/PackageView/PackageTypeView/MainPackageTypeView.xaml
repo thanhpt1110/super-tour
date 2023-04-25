@@ -36,43 +36,27 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="2">
-                        <Button HorizontalAlignment="Right"
-                        Margin="0,0,20,0"
-                        HorizontalContentAlignment="Center"
-                        Height="40"
-                        FontSize="16"
-                        FontFamily="Segoe UI"
-                        Cursor="Hand"
-                        Foreground="White"
-                        Content="+ Adding New Type"
-                        >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#27A339"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#1F7E2E"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="200" Height="40"
-                                        CornerRadius="5"
-                                        Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <Button x:Name="btnAddNewType"
+                                Style="{StaticResource roundedButton}"
+                                Background="{StaticResource btnAdd}"
+                                Width="200"
+                                Margin="0,0,10,0"
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Content="+ Adding New Type"
+                                FontSize="16"
+                                FontWeight="Medium"
+                                FontFamily="Segoe UI"
+                                Foreground="{StaticResource plainTextColor1}"
+                                Height="40"
+                                Command="{Binding OpenCreatePackageTypeViewCommand}"/>
+                        
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1"
                   Margin="0,20,0,0">
                     <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding PackageTypeTests}"
+                              ItemsSource="{Binding ListTypePackages}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -82,13 +66,13 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding PackageTypeID}"/>
+                                                Binding="{Binding Id_Type_Package}"/>
 
                             <DataGridTextColumn Header="Package Type Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="2*"
-                                                Binding="{Binding PackageTypeName}"/>
+                                                Binding="{Binding Name_Type}"/>
                             <DataGridTextColumn Header="Description" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 

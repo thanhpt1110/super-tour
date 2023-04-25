@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="./Styles/UIColors.xaml"/>
                 <ResourceDictionary Source="./Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/SearchTextBox.xaml"/>
+                <ResourceDictionary Source="./Styles/PlaceHolderTextBox.xaml"/>
+                <ResourceDictionary Source="./Styles/RoundedButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             

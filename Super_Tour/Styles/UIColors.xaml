@@ -13,6 +13,12 @@
     <Color x:Key="BackgroundContent1">#357191</Color>
     <Color x:Key="BackgroundContent2">#3881A7</Color>
     
+    <!--TextBox Border Colors-->
+    <SolidColorBrush x:Key="BorderText1" Color="#3881A7"/>
+    <SolidColorBrush x:Key="BorderText2" Color="#7EB4EA"/>
+    <SolidColorBrush x:Key="BorderText3" Color="#204053"/>
+
+
     <!--Window Border Colors-->
     <Color x:Key="BorderColor1">#5291AF</Color>
     <Color x:Key="BorderColor2">#9AD7D7</Color>
@@ -54,4 +60,5 @@
 
     <!--Child Content-->
     <SolidColorBrush x:Key="searchColor" Color="#D3D3D3"></SolidColorBrush>
+    <SolidColorBrush x:Key="btnAdd" Color="#27A339"></SolidColorBrush>
 </ResourceDictionary>

@@ -4,8 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Super_Tour.Model;
+using System.Windows.Input;
+using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Ultis;
+using Super_Tour.View;
+using Super_Tour.Model;
+using System.Windows;
 
 namespace Super_Tour.ViewModel
 {
@@ -29,33 +33,39 @@ namespace Super_Tour.ViewModel
                 this.Description = description;
             }
         }
-        private ObservableCollection<PackageTypeTest> _packageTypeTests;
+        private ObservableCollection<TYPE_PACKAGE> _listTypePackages;
 
-        public ObservableCollection<PackageTypeTest> PackageTypeTests 
-        { 
-            get => _packageTypeTests;
+        public ObservableCollection<TYPE_PACKAGE> ListTypePackages
+        {
+            get { return _listTypePackages; }
             set
             {
-                _packageTypeTests = value;
-                OnPropertyChanged(nameof(PackageTypeTests));
+                _listTypePackages = value;
+                OnPropertyChanged(nameof(ListTypePackages));
             } 
         }
-
+        // End Test
+        public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public MainPackageTypeViewModel() {
-            PackageTypeTests = new ObservableCollection<PackageTypeTest>();
-            PackageTypeTests.Add(new PackageTypeTest("1", "Ăn uống", "Nội dung của gồm tên quán ăn, địa điểm"));
-            PackageTypeTests.Add(new PackageTypeTest("2", "Tắm biển", "Nội dung của gồm tên bãi, thời gian"));
-            PackageTypeTests.Add(new PackageTypeTest("3", "Tham quan", "Nội dung gồm địa điểm tham quan"));
+            _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
+            OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             GetAllPackage();
-
         }
         private void GetAllPackage()
         {
+            _listTypePackages.Clear();
             List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-            foreach(TYPE_PACKAGE package in ListTypePackage)
+            foreach(TYPE_PACKAGE typePackage in ListTypePackage)
             {
-                PackageTypeTests.Add(new PackageTypeTest(package.Id_Type_Package.ToString(), package.Name_Type, package.Description));
+                _listTypePackages.Add(typePackage);
             }    
+        }
+
+        private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
+        {
+            CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
+            createPackageTypeView.ShowDialog();
+            GetAllPackage();
         }
     }
 }

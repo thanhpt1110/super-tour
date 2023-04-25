@@ -1,12 +1,135 @@
-﻿<UserControl x:Class="Super_Tour.View.CreatePackageTypeView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Super_Tour.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
-</UserControl>
+﻿<Window x:Class="Super_Tour.View.CreatePackageTypeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        mc:Ignorable="d"
+        Title="CreatePackageTypeView" Height="400" Width="700"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        ShowInTaskbar="False"
+        >
+    <Border CornerRadius="10"
+            BorderThickness="1">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border CornerRadius="10,10,10,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
+                    <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                    <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color9}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel Orientation="Horizontal"
+                                    FlowDirection="LeftToRight"
+                                    HorizontalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0" Icon="BagShopping" Foreground="White" Height="20"/>
+                            <TextBlock Text="Add new package type"
+                                       FontFamily="Segoe UI"
+                                       FontWeight="Medium"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="25">
+
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="50,0,50,0" Grid.Row="1">
+                        <Border CornerRadius="5" Background="#2E607A" Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <fa:IconImage Icon="IdCard" Foreground="{StaticResource plainTextColor1}" Width="30"/>
+                                    <TextBox
+                                        Margin="20,0,0,0"
+                                        Style="{DynamicResource placeHolderTextBox}"
+                                         FontSize="17"
+                                         Tag="Enter new package type name"
+                                         TextWrapping="NoWrap"
+                                         Text="{Binding PackageTypeName}"
+                                         ></TextBox>
+                                </StackPanel>
+                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource plainTextColor1}" Width="30"/>
+                                    <TextBox
+                                        Margin="20,0,0,0"
+                                        Style="{DynamicResource placeHolderTextBox}"
+                                         FontSize="17"
+                                         Tag="Description"
+                                        BorderThickness="2"
+                                        TextWrapping="Wrap"
+                                        Height="140"
+                                        VerticalContentAlignment="Top"
+                                        Text="{Binding Description}"
+                                         ></TextBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button Style="{StaticResource roundedButton}"
+                            Width="120"
+                            Height="37"
+                            Background="{StaticResource btnAdd}"
+                            Content="SAVE"
+                            FontFamily="Segoe UI"
+                            FontSize="17"
+                            FontWeight="Medium"
+                            Foreground="{StaticResource plainTextColor1}"
+                            Command="{Binding CreateNewPackageCommand}"></Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

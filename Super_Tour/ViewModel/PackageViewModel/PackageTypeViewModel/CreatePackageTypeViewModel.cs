@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Model;
+using Super_Tour.View;
+using System;
+using System.Windows;
+
 namespace Super_Tour.ViewModel
 {
     internal class CreatePackageTypeViewModel
@@ -13,21 +13,43 @@ namespace Super_Tour.ViewModel
         private string _description;
         public string PackageTypeName { get => _packageTypeName; set => _packageTypeName = value; }
         public string Description { get => _description; set => _description = value; }
-        
+        public RelayCommand CreateNewPackageCommand { get; }
         public CreatePackageTypeViewModel()
         {
-            _packageTypeName = "Hello";
-            _description = "tôi là Phúc Bình";
-            execute_CreateNewType_Package(null);
+            CreateNewPackageCommand = new RelayCommand(execute_CreateNewType_Package);
         }
         public void execute_CreateNewType_Package(object obj)
         {
+            if (string.IsNullOrEmpty(_packageTypeName) || string.IsNullOrEmpty(_description))
+            {
+                MessageBox.Show("Please fill all information", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
             TYPE_PACKAGE type_package = new TYPE_PACKAGE();
-            type_package.Id_Type_Package = 0;
-            type_package.Name_Type= _packageTypeName;
-            type_package.Description = _description;
-            db.TYPE_PACKAGEs.Add(type_package);
-            db.SaveChangesAsync();
+            try
+            {
+                type_package.Id_Type_Package = 1;
+                type_package.Name_Type = _packageTypeName;
+                type_package.Description = _description;
+                db.TYPE_PACKAGEs.Add(type_package);
+                db.SaveChangesAsync();
+                CreatePackageTypeView createPackageTypeView = null;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    Console.WriteLine(window.ToString());
+                    if (window is CreatePackageTypeView)
+                    {
+                        createPackageTypeView = window as CreatePackageTypeView;
+                        break;
+                    }
+                }
+                createPackageTypeView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                db.TYPE_PACKAGEs.Remove(type_package);
+            }
         }
     }
 }

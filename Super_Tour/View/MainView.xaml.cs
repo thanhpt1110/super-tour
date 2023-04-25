@@ -67,10 +67,5 @@ namespace Super_Tour
                 this.WindowState = WindowState.Normal;
             }
         }
-
-        private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
-        {
-
-        }
     }
 }
