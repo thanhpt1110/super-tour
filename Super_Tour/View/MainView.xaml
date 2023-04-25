@@ -59,8 +59,7 @@
                 <!--Navigation Menu-->
                 <ColumnDefinition Width="250"/>
                 <!--Content Section-->
-                <ColumnDefinition Width="79*"/>
-                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!--Navigation Menu-->
