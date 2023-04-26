@@ -55,7 +55,6 @@
     <!--Menu Button Text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="15.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
