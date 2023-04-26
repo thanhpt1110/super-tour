@@ -43,27 +43,40 @@ namespace Super_Tour.ViewModel
             timer.Tick += Timer_Tick;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
-
-            List<TYPE_PACKAGE> myEntities = db.TYPE_PACKAGEs.ToList();
-            // Kiểm tra dữ liệu có được cập nhật chưa
-            if (!myEntities.SequenceEqual(ListTypePackage))
-            {
-                // Dữ liệu đã được cập nhật
-                // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ListTypePackage = myEntities;
-                    _listTypePackages.Clear();
-                    foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                    {
-                        ListTypePackages.Add(typePackage);
-                    }
-                });
-            }
+            await CheckOriginalData();
         }
-
+        private async Task CheckOriginalData()
+        {
+            await CheckOriginalDataAsync();
+        }
+        private async Task CheckOriginalDataAsync()
+        {
+            await Task.Run(async () =>
+            {
+                using (var db = new SUPER_TOUR())
+                {
+                    var myEntities = await  db.TYPE_PACKAGEs.ToListAsync();
+                    // Kiểm tra dữ liệu có được cập nhật chưa
+                    if (!myEntities.SequenceEqual(ListTypePackage))
+                    {
+                        // Dữ liệu đã được cập nhật
+                        // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            ListTypePackage = myEntities;
+                            _listTypePackages.Clear();
+                            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                            {
+                                ListTypePackages.Add(typePackage);
+                            }
+                        });
+                    }
+                }
+            });
+            
+        }
         private async Task LoadAllPackage()
         {
             await LoadDataAsync();
@@ -93,19 +106,30 @@ namespace Super_Tour.ViewModel
                 _listTypePackages.Add(typePackage);
             }
         }    
-        private void ExecuteDeletePackageCommand(object obj)
+        private async void ExecuteDeletePackageCommand(object obj)
         {
             try
             {
                 TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
-                db.TYPE_PACKAGEs.Remove(type_package);
-                db.SaveChangesAsync();
-                _listTypePackages.Remove(type_package);
-                MessageBox.Show("Delete Package Type successful", "Success", MessageBoxButton.OK);
+                timer.Stop();
+                TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
+                if (type_packageFind != null)
+                {
+                    db.TYPE_PACKAGEs.Remove(type_packageFind);
+                    await db.SaveChangesAsync();
+                    //await db.SaveChangesAsync();
+                    MessageBox.Show("Delete Package Type successful", "Success", MessageBoxButton.OK);
+                    timer.Start();
+                    //_listTypePackages.Remove(type_package);
+                }
+                else
+                {
+                    MessageBox.Show("The package type could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"ERROR",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
