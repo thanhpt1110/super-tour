@@ -16,25 +16,7 @@ namespace Super_Tour.ViewModel
     internal class MainPackageTypeViewModel : ObservableObject
     {
         private SUPER_TOUR db = new SUPER_TOUR();
-        public class PackageTypeTest{
-            private string _packageTypeID;
-            private string _packageTypeName;
-            private string _description;
-
-            public string PackageTypeID { get => _packageTypeID; set => _packageTypeID = value; }
-            public string PackageTypeName { get => _packageTypeName; set => _packageTypeName = value; }
-            public string Description { get => _description; set => _description = value; }
-            public PackageTypeTest() { 
-            }
-            public PackageTypeTest(string packageTypeID, string packageTypeName, string description)
-            {
-                this.PackageTypeID = packageTypeID;
-                this.PackageTypeName = packageTypeName;
-                this.Description = description;
-            }
-        }
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages;
-
         public ObservableCollection<TYPE_PACKAGE> ListTypePackages
         {
             get { return _listTypePackages; }
@@ -46,9 +28,11 @@ namespace Super_Tour.ViewModel
         }
         // End Test
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
+        public ICommand DeletePackageInDataGridView { get;private set; }
         public MainPackageTypeViewModel() {
             _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
+            DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             GetAllPackage();
         }
         private void GetAllPackage()
@@ -60,7 +44,21 @@ namespace Super_Tour.ViewModel
                 _listTypePackages.Add(typePackage);
             }    
         }
-
+        private void ExecuteDeletePackageCommand(object obj)
+        {
+            try
+            {
+                TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
+                db.TYPE_PACKAGEs.Remove(type_package);
+                db.SaveChangesAsync();
+                _listTypePackages.Remove(type_package);
+                MessageBox.Show("Delete Package Type successful", "Success", MessageBoxButton.OK);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"ERROR",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+            }
+        }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
         {
             CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
