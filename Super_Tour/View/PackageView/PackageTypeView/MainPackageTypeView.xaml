@@ -5,13 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="788" d:DesignWidth="1138">
     <Border Background="{StaticResource BackgroundChildContent}">
         <Grid>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Grid.ColumnSpan="2">
@@ -21,12 +29,17 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Search" Height="20" Foreground="{StaticResource TitleText}"/>
+                            <fa:IconImage Margin="20,0,0,0" Icon="Search" Height="25" Foreground="{StaticResource TitleText}"/>
                             <TextBox x:Name="txtBoxSearchType" 
-                                 Height="40"
-                                 FontSize="18"
-                                 Tag="Search..."
-                                 Style="{StaticResource placeHolderTextBox}"/>
+                                     Width="200"
+                                     Margin="10,10,0,0"
+                                    FontSize="15"
+                                     materialDesign:HintAssist.Foreground="Black"
+                                    BorderBrush="Black"
+                                    materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
+                                     CaretBrush="Black"
+                                     materialDesign:HintAssist.Hint="Enter Type Name"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
                         </StackPanel>
                     </Grid>

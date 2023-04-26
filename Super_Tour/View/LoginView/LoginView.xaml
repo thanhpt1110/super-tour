@@ -31,9 +31,9 @@
                     >
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
-                        <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
-                        <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                        <GradientStop Color="{StaticResource LoginBorderColor1}" Offset="0"></GradientStop>
+                        <GradientStop Color="{StaticResource LoginBorderColor2}" Offset="0.75"></GradientStop>
+                        <GradientStop Color="{StaticResource LoginBorderColor3}" Offset="1"></GradientStop>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
 
@@ -67,7 +67,7 @@
 
                         <Button x:Name="btnMinimize"
                                 Grid.Column="1"
-                                Style="{StaticResource controlButton}"
+                                Style="{StaticResource controlLoginButton}"
                                 Tag="{StaticResource color6}"
                                 Width="25"
                                 Height="25"
@@ -76,7 +76,7 @@
                         </Button>
                         <Button x:Name="btnClose"
                                 Grid.Column="3"
-                                Style="{StaticResource controlButton}"
+                                Style="{StaticResource controlLoginButton}"
                                 Tag="{StaticResource color4}"
                                 Width="25"
                                 Height="25"
@@ -85,7 +85,7 @@
                         </Button>
                         <Button x:Name="btnMaximize"
                                 Grid.Column="2"
-                                Style="{StaticResource controlButton}"
+                                Style="{StaticResource controlLoginButton}"
                                 Tag="{StaticResource color9}"
                                 Width="25"
                                 Height="25"

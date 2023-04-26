@@ -51,7 +51,7 @@
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter Property="BorderBrush"
-                                    Value="{DynamicResource BorderText2}" />
+                                    Value="{DynamicResource BorderText3}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

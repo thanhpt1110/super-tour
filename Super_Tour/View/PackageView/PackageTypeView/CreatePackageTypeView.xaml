@@ -5,11 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:Super_Tour.View"
+        xmlns:effects="clr-namespace:System.Windows.Media.Effects;assembly=PresentationCore"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="CreatePackageTypeView" Height="400" Width="700"
-        WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
         ShowInTaskbar="False"
@@ -23,13 +31,8 @@
                 <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
             </LinearGradientBrush>
         </Border.BorderBrush>
-        <Border CornerRadius="10,10,10,10">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
-                    <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
-                    <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
-                </LinearGradientBrush>
-            </Border.Background>
+        <Border CornerRadius="10,10,10,10"
+                Background="{StaticResource BackgroundMainContent}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -46,19 +49,19 @@
                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
                         <Button x:Name="btnClose"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color4}"
+                                Tag="Red"
                                 Click="btnClose_Click">
                             <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color9}"
+                                Tag="Green"
                                 Click="btnMaximize_Click">
                             <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                         <Button x:Name="btnMinimize"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color6}"
+                                Tag="Orange"
                                 Click="btnMinimize_Click">
                             <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
@@ -75,12 +78,12 @@
                                     HorizontalAlignment="Center">
                             <fa:IconImage Margin="0,0,10,0" 
                                           Icon="BagShopping" 
-                                          Foreground="White" 
+                                          Foreground="{StaticResource TitleText}" 
                                           Height="20"/>
                             <TextBlock Text="Add new package type"
                                        FontFamily="Segoe UI"
                                        FontWeight="Medium"
-                                       Foreground="White"
+                                       Foreground="{StaticResource TitleText}"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        FontSize="25">
@@ -89,31 +92,44 @@
                         </StackPanel>
                     </Grid>
                     <Grid Margin="50,0,50,0" Grid.Row="1">
-                        <Border CornerRadius="5" Background="{StaticResource backgroundAddContentColor}" Height="273">
+                        <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="273">
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <fa:IconImage Icon="IdCard" Foreground="{StaticResource plainTextColor1}" Width="30"/>
+                                    <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
                                     <TextBox
                                         Margin="20,0,0,0"
-                                        Style="{DynamicResource placeHolderTextBox}"
-                                         FontSize="17"
-                                         Tag="Enter new package type name"
-                                         TextWrapping="NoWrap"
-                                         Text="{Binding PackageTypeName}"
+                                        Width="300"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                        BorderBrush="Black"
+                                        materialDesign:HintAssist.Hint="Enter new type name"
+                                        Background="{StaticResource BackgroundDataGridRowHover}"
+                                        FontSize="17"
+                                        Foreground="Black"                                             
+                                        TextWrapping="NoWrap"
+                                        Text="{Binding PackageTypeName}"
+                                        CaretBrush="Black"
+                                        materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
+                                        materialDesign:HintAssist.Foreground="Black"
+
                                          ></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource plainTextColor1}" Width="30"/>
+                                    <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
                                     <TextBox
                                         Margin="20,0,0,0"
-                                        Style="{DynamicResource placeHolderTextBox}"
-                                         FontSize="17"
-                                         Tag="Description"
-                                        BorderThickness="2"
-                                        TextWrapping="Wrap"
+                                        Width="300"
                                         Height="140"
+                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                        BorderBrush="Black"
+                                        Foreground="Black"
+                                        FontSize="17"
+                                        materialDesign:HintAssist.Hint="Enter description"
+                                        TextWrapping="Wrap"
                                         VerticalContentAlignment="Top"
                                         Text="{Binding Description}"
+                                        CaretBrush="Black"
+                                        materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
+                                        materialDesign:HintAssist.Foreground="Black"
                                          ></TextBox>
                                 </StackPanel>
                             </StackPanel>
