@@ -5,8 +5,10 @@ using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -17,6 +19,7 @@ namespace Super_Tour.ViewModel
         private bool _isViewVisible = true;
         private string _username;
         private string _password;
+        private bool executeButton = true;
         public string Username 
         {
             get
@@ -59,7 +62,7 @@ namespace Super_Tour.ViewModel
         public MainLoginViewModel()
         {
             
-            LoginCommand = new RelayCommand(Login);
+            LoginCommand = new RelayCommand(Login, canExecute);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
 
@@ -69,21 +72,40 @@ namespace Super_Tour.ViewModel
             view.Show();
             Application.Current.MainWindow.Hide();
         }
-        public void Login(Object a)
+        public bool canExecute(object a)
         {
-            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+            return executeButton;
+        }
+        public async void Login(object a)
+        {
+            // Thực hiện đăng nhập và kiểm tra thông tin người dùng
+            // Sử dụng Entity Framework để truy vấn cơ sở dữ liệu
+            // Nếu thông tin đăng nhập hợp lệ, chuyển đến trang chính
+            // Nếu không, hiển thị thông báo lỗi
+            executeButton = false;
+            try
             {
-                MessageBox.Show("Please enter your username or password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
+                // Thực hiện truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng
+                ConvertPassToMD5();
+                var user = await Task.Run(() =>
+                    db.ACCOUNTs.FirstOrDefault(u => u.Username == Username && u.Password == converted_password));
+
+                // Nếu thông tin đăng nhập hợp lệ
+                if (user != null)
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        IsViewVisible = false;
+                    });
+                }
+                else
+                {
+                    MessageBox.Show("Username or password is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
             }
-            if (checkLogin())
+            catch (Exception ex)
             {
-                MessageBox.Show("Login successful");
-                IsViewVisible = false;
-            }
-            else
-            {
-                MessageBox.Show("Username or password is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show(ex.Message);
             }
         }
         private bool checkLogin()
