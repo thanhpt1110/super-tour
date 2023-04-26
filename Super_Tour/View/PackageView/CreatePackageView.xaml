@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
         Title="CreatePackageView" Height="450" Width="800">
