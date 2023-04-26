@@ -36,7 +36,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid Grid.Row="0">
                     <StackPanel x:Name="pnlControlBar" 
                                 Grid.Row="0"
                                 Orientation="Horizontal"
@@ -64,7 +64,7 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
@@ -73,7 +73,10 @@
                         <StackPanel Orientation="Horizontal"
                                     FlowDirection="LeftToRight"
                                     HorizontalAlignment="Center">
-                            <fa:IconImage Margin="0,0,10,0" Icon="BagShopping" Foreground="White" Height="20"/>
+                            <fa:IconImage Margin="0,0,10,0" 
+                                          Icon="BagShopping" 
+                                          Foreground="White" 
+                                          Height="20"/>
                             <TextBlock Text="Add new package type"
                                        FontFamily="Segoe UI"
                                        FontWeight="Medium"
@@ -86,7 +89,7 @@
                         </StackPanel>
                     </Grid>
                     <Grid Margin="50,0,50,0" Grid.Row="1">
-                        <Border CornerRadius="5" Background="#2E607A" Grid.ColumnSpan="2">
+                        <Border CornerRadius="5" Background="{StaticResource backgroundAddContentColor}" Height="273">
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                                     <fa:IconImage Icon="IdCard" Foreground="{StaticResource plainTextColor1}" Width="30"/>

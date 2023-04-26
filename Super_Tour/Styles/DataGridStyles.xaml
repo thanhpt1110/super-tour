@@ -103,7 +103,7 @@
 
     <Style x:Key="DataGridRowStyle1" TargetType="{x:Type DataGridRow}">
         <Setter Property="Margin" Value="0 0 0 0" />
-        <Setter Property="Background" Value="#357191"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundDataGridRow}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
@@ -152,19 +152,19 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#2F6380"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundDataGridRowHover}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColorDataGridRow}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#2E607A"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundDataGridRowClick}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColorDataGridRow}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{StaticResource TextColorDataGridRow}"/>
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Margin" Value="15 0" />
@@ -197,8 +197,8 @@
 
     <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#2F6380" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource BackgroundDataGridHeader}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorDataGridRow}" />
         <Setter Property="Margin" Value="0 0 0 0" />
         <Setter Property="Padding" Value="12 0 0 0"/>
         <Setter Property="Template">
@@ -227,7 +227,7 @@
                             <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
                             <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>
                             <TextBlock Text="  "/>
-                            <fa:IconImage Icon="Sort" Height="10" Foreground="White"/>
+                            <fa:IconImage Icon="Sort" Height="10" Foreground="{StaticResource TitleText}"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>

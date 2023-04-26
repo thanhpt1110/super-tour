@@ -11,7 +11,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Title="CreatePackageView" Height="450" Width="800">
+        Title="CreatePackageView" Height="600" Width="800">
     <Grid>
         <Border CornerRadius="10"
             BorderThickness="1">
@@ -32,9 +32,11 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                    <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
                                 Grid.Row="0"
                                 Orientation="Horizontal"
@@ -62,7 +64,35 @@
                             </Button>
                         </StackPanel>
                     </Grid>
-                    
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0"
+                                          Icon="BagShopping" 
+                                          Height="20"
+                                          Foreground="{StaticResource plainTextColor1}"/>
+                            <TextBlock Text="Add new package"
+                                       FontSize="25"
+                                       FontWeight="Medium"
+                                       FontFamily="Segoe UI"
+                                       Foreground="{StaticResource plainTextColor1}"
+                                       />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <StackPanel>
+                            <Border Margin="50,0,50,0"
+                                CornerRadius="10"
+                                    Background="{StaticResource backgroundAddContentColor}"
+                                    Height="470">
+                                
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        
+                    </Grid>
                 </Grid>
             </Border>
         </Border>
