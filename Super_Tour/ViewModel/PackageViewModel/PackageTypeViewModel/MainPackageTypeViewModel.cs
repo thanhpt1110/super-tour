@@ -10,13 +10,14 @@ using Super_Tour.Ultis;
 using Super_Tour.View;
 using Super_Tour.Model;
 using System.Windows;
+using System.Threading;
 
 namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
         private SUPER_TOUR db = new SUPER_TOUR();
-        private ObservableCollection<TYPE_PACKAGE> _listTypePackages;
+        private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
         public ObservableCollection<TYPE_PACKAGE> ListTypePackages
         {
             get { return _listTypePackages; }
@@ -29,20 +30,33 @@ namespace Super_Tour.ViewModel
         // End Test
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
-        public MainPackageTypeViewModel() {
-            _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
+        public  MainPackageTypeViewModel() {
+
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
-            GetAllPackage();
+            /*       Thread thread = new Thread(GetAllPackage);
+                   thread.Start();*/
+            LoadAllPackage();
+
         }
-        private void GetAllPackage()
+        private async Task LoadAllPackage()
         {
-            _listTypePackages.Clear();
-            List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-            foreach(TYPE_PACKAGE typePackage in ListTypePackage)
+            await LoadDataAsync();
+        }
+        private async Task LoadDataAsync()
+        {
+            await Task.Run(() =>
             {
-                _listTypePackages.Add(typePackage);
-            }    
+                List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _listTypePackages.Clear();
+                    foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                    {
+                        _listTypePackages.Add(typePackage);
+                    }
+                });
+            });
         }
         private void ExecuteDeletePackageCommand(object obj)
         {
@@ -63,7 +77,7 @@ namespace Super_Tour.ViewModel
         {
             CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
             createPackageTypeView.ShowDialog();
-            GetAllPackage();
+            LoadAllPackage();
         }
     }
 }
