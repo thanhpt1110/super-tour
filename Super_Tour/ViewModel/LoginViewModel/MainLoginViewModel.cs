@@ -82,7 +82,7 @@ namespace Super_Tour.ViewModel
             // Sử dụng Entity Framework để truy vấn cơ sở dữ liệu
             // Nếu thông tin đăng nhập hợp lệ, chuyển đến trang chính
             // Nếu không, hiển thị thông báo lỗi
-            executeButton = false;
+            executeButton = true;
             try
             {
                 // Thực hiện truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng

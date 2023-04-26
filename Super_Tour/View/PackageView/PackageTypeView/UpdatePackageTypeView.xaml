@@ -6,6 +6,13 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="UpdatePackageTypeView" Height="450" Width="800"
         Background="Transparent"
         AllowsTransparency="True"
@@ -89,26 +96,32 @@
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
                                         <TextBox
-                                        Margin="20,0,0,0"
-                                        Style="{DynamicResource placeHolderTextBox}"
-                                         FontSize="17"
-                                         Tag="Enter new package type name"
-                                         TextWrapping="NoWrap"
-                                         Text="{Binding PackageTypeName}"
+                                            Margin="20,0,0,0"
+                                            Width="300"
+                                            Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                            BorderBrush="Black"
+                                            materialDesign:HintAssist.Hint="Enter new type name"
+                                            Background="{StaticResource BackgroundDataGridRowHover}"
+                                            FontSize="17"
+                                            Foreground="Black"                                             
+                                            TextWrapping="NoWrap"
+                                            Text="{Binding PackageTypeName}"
                                          ></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                                         <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
                                         <TextBox
-                                        Margin="20,0,0,0"
-                                        Style="{DynamicResource placeHolderTextBox}"
-                                         FontSize="17"
-                                         Tag="Description"
-                                        BorderThickness="2"
-                                        TextWrapping="Wrap"
-                                        Height="140"
-                                        VerticalContentAlignment="Top"
-                                        Text="{Binding Description}"
+                                            Margin="20,0,0,0"
+                                            Width="300"
+                                            Height="140"
+                                            Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                            BorderBrush="Black"
+                                            Foreground="Black"
+                                            FontSize="17"
+                                            materialDesign:HintAssist.Hint="Enter description"
+                                            TextWrapping="Wrap"
+                                            VerticalContentAlignment="Top"
+                                            Text="{Binding Description}"
                                          ></TextBox>
                                     </StackPanel>
                                 </StackPanel>
