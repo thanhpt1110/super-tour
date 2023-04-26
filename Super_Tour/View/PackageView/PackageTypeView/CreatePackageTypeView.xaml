@@ -95,7 +95,8 @@
                                         Style="{DynamicResource placeHolderTextBox}"
                                          FontSize="17"
                                          Tag="Enter new package type name"
-                                        TextWrapping="NoWrap"
+                                         TextWrapping="NoWrap"
+                                         Text="{Binding PackageTypeName}"
                                          ></TextBox>
                                 </StackPanel>
                                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -109,6 +110,7 @@
                                         TextWrapping="Wrap"
                                         Height="140"
                                         VerticalContentAlignment="Top"
+                                        Text="{Binding Description}"
                                          ></TextBox>
                                 </StackPanel>
                             </StackPanel>
@@ -125,7 +127,7 @@
                             FontSize="17"
                             FontWeight="Medium"
                             Foreground="{StaticResource plainTextColor1}"
-                            Command="{Binding }"></Button>
+                            Command="{Binding CreateNewPackageCommand}"></Button>
                 </Grid>
             </Grid>
         </Border>
