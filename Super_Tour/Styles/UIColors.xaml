@@ -14,8 +14,10 @@
     <SolidColorBrush x:Key="BackgroundDataGridRowHover" Color="#CCD8E3"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDataGridRowClick" Color="#AFC2D3"></SolidColorBrush>
     <SolidColorBrush x:Key="TextColorDataGridRow" Color="#1D242E"></SolidColorBrush>
+    
     <!--ControlBar Button-->
     <SolidColorBrush x:Key="BackgroundControlBarButtonHover" Color="#CFCFCF"></SolidColorBrush>
+    
     <!--Background Nav Menu-->
     <SolidColorBrush x:Key="BackgroundNavMenuButton" Color="#283342"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundTopNavMenu" Color="#1D242E"></SolidColorBrush>
@@ -34,6 +36,10 @@
     <SolidColorBrush x:Key="BorderText2" Color="#2E9700"/>
     <SolidColorBrush x:Key="BorderText3" Color="#237500"/>
 
+    <!--Login Border Colors-->
+    <Color x:Key="LoginBorderColor1">#5291AF</Color>
+    <Color x:Key="LoginBorderColor2">#9AD7D7</Color>
+    <Color x:Key="LoginBorderColor3">#ABCC37</Color>
 
     <!--Window Border Colors-->
     <Color x:Key="BorderColor1">#5291AF</Color>
