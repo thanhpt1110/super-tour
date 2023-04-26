@@ -7,8 +7,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="788" d:DesignWidth="1138">
-    <Grid>
-        <Border>
+    <Border>
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
                     <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
@@ -31,7 +30,9 @@
                             <fa:IconImage Icon="Search" Height="20" Foreground="{StaticResource searchColor}"/>
                             <TextBox x:Name="txtBoxSearchType" 
                                  Height="40"
-                                 Style="{StaticResource searchTextBox}"/>
+                                 FontSize="18"
+                                 Tag="Search..."
+                                 Style="{StaticResource placeHolderTextBox}"/>
 
                         </StackPanel>
                     </Grid>
@@ -50,7 +51,7 @@
                                 Foreground="{StaticResource plainTextColor1}"
                                 Height="40"
                                 Command="{Binding OpenCreatePackageTypeViewCommand}"/>
-                        
+
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1"
@@ -97,5 +98,4 @@
                 </Grid>
             </Grid>
         </Border>
-    </Grid>
 </UserControl>

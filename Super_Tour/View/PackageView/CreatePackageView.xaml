@@ -1,12 +1,69 @@
-﻿<UserControl x:Class="Super_Tour.View.CreatePackageView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Super_Tour.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<Window x:Class="Super_Tour.View.CreatePackageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="CreatePackageView" Height="450" Width="800">
     <Grid>
-            
+        <Border CornerRadius="10"
+            BorderThickness="1">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border CornerRadius="10,10,10,10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
+                        <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
+                        <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                        <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                            <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color9}"
+                                Click="btnMaximize_Click">
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Click="btnMinimize_Click">
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    
+                </Grid>
+            </Border>
+        </Border>
     </Grid>
-</UserControl>
+</Window>

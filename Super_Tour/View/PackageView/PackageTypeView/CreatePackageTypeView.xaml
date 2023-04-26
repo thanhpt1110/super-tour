@@ -124,7 +124,8 @@
                             FontFamily="Segoe UI"
                             FontSize="17"
                             FontWeight="Medium"
-                            Foreground="{StaticResource plainTextColor1}"></Button>
+                            Foreground="{StaticResource plainTextColor1}"
+                            Command="{Binding }"></Button>
                 </Grid>
             </Grid>
         </Border>
