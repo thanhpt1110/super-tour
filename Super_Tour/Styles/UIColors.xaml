@@ -31,14 +31,14 @@
     
     <!--TextBox Border Colors-->
     <SolidColorBrush x:Key="BorderText1" Color="#3881A7"/>
-    <SolidColorBrush x:Key="BorderText2" Color="#7EB4EA"/>
-    <SolidColorBrush x:Key="BorderText3" Color="#204053"/>
+    <SolidColorBrush x:Key="BorderText2" Color="#2E9700"/>
+    <SolidColorBrush x:Key="BorderText3" Color="#237500"/>
 
 
     <!--Window Border Colors-->
     <Color x:Key="BorderColor1">#5291AF</Color>
-    <Color x:Key="BorderColor2">#9AD7D7</Color>
-    <Color x:Key="BorderColor3">#ABCC37</Color>
+    <Color x:Key="BorderColor2">#1D242E</Color>
+    <Color x:Key="BorderColor3">#1D242E</Color>
 
     <!--Navigation Bar Colors-->
     <Color x:Key="NavBar">#283342</Color>
