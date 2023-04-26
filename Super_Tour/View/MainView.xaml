@@ -66,20 +66,16 @@
             <Border CornerRadius="10,0,0,10"
                     Grid.Column="0"
                     BorderThickness="0,0,1,0"
+                    Background="{StaticResource BackgroundTopNavMenu}"
                     BorderBrush="{StaticResource panelOverColor}">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.2">
-                        <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
-                        <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
-                    </LinearGradientBrush>
-                </Border.Background>
             </Border>
 
             <StackPanel>
                 <!--Logo-->
                 <StackPanel Orientation="Horizontal"
-                            Height="35"
-                            Margin="5,25,0,40">
+                            Height="60"
+                            Margin="5,0,0,0"
+                            Background="{StaticResource BackgroundTopNavMenu}">
                     <Image Source="/Images/logo.png" Height="30" Margin="20,0,0,0"/>
                     <TextBlock Text="SUPER TOUR"
                                Foreground="#ffffff"
@@ -90,98 +86,110 @@
                                Margin="25,0,0,0"/>
                 </StackPanel>
                 <!--Menu Buttons-->
-                <RadioButton Style="{StaticResource menuButton}"
+                <StackPanel Background="{StaticResource BackgroundNavMenuButton}">
+                    <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color1}"
                              Command="{Binding ShowDashboardViewCommand}"
                              IsChecked="True">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color2}"
                              Command="{Binding ShowTravelViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Travel" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Travel" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color3}"
                              Command="{Binding ShowBookingViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                             Tag="{StaticResource color4}"
                              Command="{Binding ShowCustomerViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color5}"
                              Command="{Binding ShowTicketViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Ticket" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Ticket" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Ticket" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Ticket" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color6}"
                              Command="{Binding ShowTourViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Tour" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Tour" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
                              Command="{Binding ShowPackageTypeViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color8}"
                              Command="{Binding ShowCustomerStatisticViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color9}"
                              Command="{Binding ShowAccountViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
-                <Border BorderThickness="0,1,0,0" BorderBrush="{StaticResource panelOverColor}" Margin="0,0,0,10"/>
-                <RadioButton Style="{StaticResource menuButton}"
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <Grid Margin="0 10" Background="{StaticResource BackgroundNavMenuButton}">
+                        <Border BorderBrush="White" BorderThickness="0,1,0,0"></Border>
+                    </Grid>
+                    <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color10}"
                              Command="{Binding ShowTechnicalHelpViewCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>
-                    </StackPanel>
-                </RadioButton>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
             </StackPanel>
-            <!--Main Sectino-->
+                <StackPanel>
+                        <StackPanel Height="185" Background="{StaticResource BackgroundNavMenuButton}"></StackPanel>
+                    
+                    </StackPanel>
+                <TextBlock Text="Power by SuperTeam 2023" 
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           Padding="0,5,0,0"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource plainTextColor3}"
+                               Height="28"
+                               FontSize="14"/>
+                </StackPanel>
+            <!--Main Section-->
             <Border CornerRadius="0,10,10,0"
-                    Grid.Column="1" Grid.ColumnSpan="2">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="1,0.2" EndPoint="0,0.7">
-                        <GradientStop Color="{StaticResource BackgroundMain1}" Offset="0"></GradientStop>
-                        <GradientStop Color="{StaticResource BackgroundMain2}" Offset="0.75"></GradientStop>
-                    </LinearGradientBrush>
-                </Border.Background>
+                    Grid.Column="1"
+                    Background="{StaticResource BackgroundMainContent}"
+                    >
                 <Grid>
                     <Grid.RowDefinitions>
                         <!--Control Bar-->
@@ -200,24 +208,25 @@
                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
                         <Button x:Name="btnClose"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color4}"
+                                Tag="Red"
                                 Click="btnClose_Click">
                             <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color9}"
+                                Tag="Green"
                                 Click="btnMaximize_Click">
                             <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                         <Button x:Name="btnMinimize"
                                 Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color6}"
+                                Tag="Orange"
                                 Click="btnMinimize_Click">
                             <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                     </StackPanel>
                     <Grid Grid.Row="1">
+                            
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -228,11 +237,11 @@
                             <fa:IconImage Icon="{Binding Icon}"
                                           Height="20"
                                           Width="20"
-                                          Foreground="{StaticResource titleColor2}"
+                                          Foreground="{StaticResource TitleText}"
                                           Margin="35,0,10,0"
                                           />
                             <TextBlock Text="{Binding Caption}"
-                                       Foreground="{StaticResource titleColor2}"
+                                       Foreground="{StaticResource TitleText}"
                                        FontSize="20"
                                        FontFamily="Segoe UI"
                                        FontWeight="Medium"
@@ -245,11 +254,11 @@
                                         VerticalAlignment="Center"
                                         Margin="0,0,10,0">
                             <Button Style="{StaticResource iconButton}"
-                                        Tag="{StaticResource color1}">
+                                        Tag="{StaticResource TitleText}">
                                 <fa:IconImage Icon="AngleDown" Style="{StaticResource iconButtonIcon}"/>
                             </Button>
                             <TextBlock Text="Current Account"
-                                            Foreground="{StaticResource titleColor3}"
+                                            Foreground="{StaticResource TitleText}"
                                             FontFamily="Segoe UI"
                                             FontSize="15"
                                             VerticalAlignment="Center"
@@ -257,12 +266,16 @@
                                     />
                             <Ellipse Height="35"
                                      Width="35"
-                                     Stroke="{StaticResource color3}"
+                                     Stroke="{StaticResource TitleText}"
                                      StrokeThickness="2"
                                      Margin="10,0,10,0">
 
                             </Ellipse>
                         </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Border Background="{StaticResource BackgroundChildContent}">
+                        </Border>
                     </Grid>
                     <ContentControl Content="{Binding CurrentChildView}"
                                     Grid.Row="2"

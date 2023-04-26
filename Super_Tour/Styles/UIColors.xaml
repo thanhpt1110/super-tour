@@ -4,7 +4,23 @@
     <Color x:Key="BackgroundColor1">#2D4E5E</Color>
     <Color x:Key="BackgroundColor2">#12262E</Color>
     <Color x:Key="BackgroundColor3">#2B4B5A</Color>
-
+    
+    <!--Background Main Content-->
+    <SolidColorBrush x:Key="BackgroundMainContent" Color="#F7FAFD"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundChildContent" Color="#EDF1F5"></SolidColorBrush>
+    <SolidColorBrush x:Key="TitleText" Color="#1D242E"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundDataGridHeader" Color="#97AFC6"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundDataGridRow" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundDataGridRowHover" Color="#CCD8E3"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundDataGridRowClick" Color="#AFC2D3"></SolidColorBrush>
+    <SolidColorBrush x:Key="TextColorDataGridRow" Color="#1D242E"></SolidColorBrush>
+    <!--ControlBar Button-->
+    <SolidColorBrush x:Key="BackgroundControlBarButtonHover" Color="#CFCFCF"></SolidColorBrush>
+    <!--Background Nav Menu-->
+    <SolidColorBrush x:Key="BackgroundNavMenuButton" Color="#283342"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundTopNavMenu" Color="#1D242E"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundNavMenuButtonClick" Color="#00656A"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundNavMenuButtonHover" Color="#234E65"></SolidColorBrush>
     <!--Background Main-->
     <Color x:Key="BackgroundMain1">#24465A</Color>
     <Color x:Key="BackgroundMain2">#173342</Color>
@@ -57,8 +73,9 @@
     <SolidColorBrush x:Key="panelColor" Color="#173342"/>
     <SolidColorBrush x:Key="panelOverColor" Color="#234E65"/>
     <SolidColorBrush x:Key="panelActiveColor" Color="#1D4052"/>
+    <SolidColorBrush x:Key="backgroundAddContentColor" Color="#2E607A"/>
 
     <!--Child Content-->
     <SolidColorBrush x:Key="searchColor" Color="#D3D3D3"></SolidColorBrush>
-    <SolidColorBrush x:Key="btnAdd" Color="#27A339"></SolidColorBrush>
+    <SolidColorBrush x:Key="btnAdd" Color="#2FC445"></SolidColorBrush>
 </ResourceDictionary>

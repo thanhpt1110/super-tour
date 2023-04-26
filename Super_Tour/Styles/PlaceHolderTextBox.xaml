@@ -3,11 +3,11 @@
     <Style x:Key="placeHolderTextBox" TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderText3}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TitleText}"/>
         <Setter Property="Padding" Value="6,3"/>
         <Setter Property="Cursor" Value="IBeam"/>
-        <Setter Property="Foreground" Value="{DynamicResource plainTextColor1}"/>
-        <Setter Property="CaretBrush" Value="{StaticResource plainTextColor1}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TitleText}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource TitleText}"/>
         <Setter Property="Width" Value="300"/>
         <Setter Property="AllowDrop" Value="True"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
@@ -18,7 +18,6 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border x:Name="txtBoxBorder"
                             Background="{TemplateBinding Background}"
-                            CornerRadius="2"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             SnapsToDevicePixels="True">
@@ -33,7 +32,7 @@
                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                    Visibility="Collapsed"
-                                   Foreground="DarkGray"
+                                   Foreground="Gray"
                                    Padding="{TemplateBinding Padding}"/> 
                         </Grid>
                     </Border>
