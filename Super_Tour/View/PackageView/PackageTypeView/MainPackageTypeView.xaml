@@ -21,7 +21,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Search" Height="20" Foreground="{StaticResource TitleText}"/>
+                            <fa:IconImage Margin="20,0,0,0" Icon="Search" Height="20" Foreground="{StaticResource TitleText}"/>
                             <TextBox x:Name="txtBoxSearchType" 
                                  Height="40"
                                  FontSize="18"
