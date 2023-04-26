@@ -35,6 +35,9 @@
         <DataTemplate DataType="{x:Type viewModel:MainPackageTypeViewModel}">
             <local:MainPackageTypeView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MainPackageViewModel}">
+            <local:MainPackageView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:CustomerStatisticViewModel}">
             <local:CustomerStatisticView/>
         </DataTemplate>
@@ -138,7 +141,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
-                             Command="{Binding ShowPackageTypeViewCommand}">
+                             Command="{Binding ShowPackageViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>

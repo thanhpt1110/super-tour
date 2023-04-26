@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -13,7 +13,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="UpdatePackageTypeView" Height="450" Width="800"
+        Title="UpdatePackageTypeView" Height="410" Width="700"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
@@ -22,7 +22,7 @@
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
-            BorderThickness="1">
+            BorderThickness="2">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
@@ -91,7 +91,7 @@
                             </StackPanel>
                         </Grid>
                         <Grid Margin="50,0,50,0" Grid.Row="1">
-                            <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="273">
+                            <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="auto">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
                                         <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
@@ -100,10 +100,15 @@
                                             Width="300"
                                             Style="{DynamicResource MaterialDesignOutlinedTextBox}"
                                             BorderBrush="Black"
+                                            BorderThickness="0"
+                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
+                                            Background="{StaticResource TextBoxColor}"
                                             materialDesign:HintAssist.Hint="Enter new type name"
-                                            Background="{StaticResource BackgroundDataGridRowHover}"
+                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Foreground="Black"
                                             FontSize="17"
-                                            Foreground="Black"                                             
+                                            Foreground="Black"      
+                                            CaretBrush="Black"
                                             TextWrapping="NoWrap"
                                             Text="{Binding PackageTypeName}"
                                          ></TextBox>
@@ -116,9 +121,15 @@
                                             Height="140"
                                             Style="{DynamicResource MaterialDesignOutlinedTextBox}"
                                             BorderBrush="Black"
+                                            BorderThickness="0"
                                             Foreground="Black"
+                                            CaretBrush="Black"
+                                            Background="{StaticResource TextBoxColor}"
+                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
                                             FontSize="17"
                                             materialDesign:HintAssist.Hint="Enter description"
+                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Foreground="Black"
                                             TextWrapping="Wrap"
                                             VerticalContentAlignment="Top"
                                             Text="{Binding Description}"
@@ -133,6 +144,7 @@
                             Width="120"
                             Height="37"
                             Background="{StaticResource btnAdd}"
+                                Effect="{StaticResource MaterialDesignElevationShadow4}"
                             Content="SAVE"
                             FontFamily="Segoe UI"
                             FontSize="17"
