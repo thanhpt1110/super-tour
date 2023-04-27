@@ -34,8 +34,8 @@ namespace Super_Tour.ViewModel
         // End Test
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
-        public  MainPackageTypeViewModel() {
-
+        public  MainPackageTypeViewModel() 
+        {
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             LoadAllPackage();

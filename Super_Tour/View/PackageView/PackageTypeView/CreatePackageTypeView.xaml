@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:Super_Tour.View"
-        xmlns:effects="clr-namespace:System.Windows.Media.Effects;assembly=PresentationCore"
         mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -14,7 +13,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="CreatePackageTypeView" Height="400" Width="700"
+        Title="UpdatePackageTypeView" Height="410" Width="700"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
@@ -22,65 +21,66 @@
         MouseDown="Window_MouseDown"
         ShowInTaskbar="False"
         >
-    <Border CornerRadius="10"
-            BorderThickness="1">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
-                <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
-                <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-        <Border CornerRadius="10,10,10,10"
+    <Grid>
+        <Border CornerRadius="10"
+            BorderThickness="2">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border CornerRadius="10,10,10,10"
                 Background="{StaticResource BackgroundMainContent}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <StackPanel x:Name="pnlControlBar" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel x:Name="pnlControlBar" 
                                 Grid.Row="0"
                                 Orientation="Horizontal"
                                 FlowDirection="RightToLeft"
                                 Background="Transparent"
                                 Margin="0,0,5,0"
                                 MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
-                        <Button x:Name="btnClose"
+                            <Button x:Name="btnClose"
                                 Style="{StaticResource controlButton}"
                                 Tag="Red"
                                 Click="btnClose_Click">
-                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
-                        </Button>
-                        <Button x:Name="btnMaximize"
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
                                 Tag="Green"
                                 Click="btnMaximize_Click">
-                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
-                        </Button>
-                        <Button x:Name="btnMinimize"
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
                                 Style="{StaticResource controlButton}"
                                 Tag="Orange"
                                 Click="btnMinimize_Click">
-                            <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <StackPanel Orientation="Horizontal"
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal"
                                     FlowDirection="LeftToRight"
                                     HorizontalAlignment="Center">
-                            <fa:IconImage Margin="0,0,10,0" 
+                                <fa:IconImage Margin="0,0,10,0" 
                                           Icon="BagShopping" 
                                           Foreground="{StaticResource TitleText}" 
                                           Height="20"/>
-                            <TextBlock Text="Add new package type"
+                                <TextBlock Text="Add new package type"
                                        FontFamily="Segoe UI"
                                        FontWeight="Medium"
                                        Foreground="{StaticResource TitleText}"
@@ -88,67 +88,73 @@
                                        VerticalAlignment="Center"
                                        FontSize="25">
 
-                            </TextBlock>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Margin="50,0,50,0" Grid.Row="1">
-                        <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="273">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
-                                    <TextBox
-                                        Margin="20,0,0,0"
-                                        Width="300"
-                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
-                                        BorderBrush="Black"
-                                        materialDesign:HintAssist.Hint="Enter new type name"
-                                        Background="{StaticResource BackgroundDataGridRowHover}"
-                                        FontSize="17"
-                                        Foreground="Black"                                             
-                                        TextWrapping="NoWrap"
-                                        Text="{Binding PackageTypeName}"
-                                        CaretBrush="Black"
-                                        materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
-                                        materialDesign:HintAssist.Foreground="Black"
-
-                                         ></TextBox>
-                                </StackPanel>
-                                <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                    <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
-                                    <TextBox
-                                        Margin="20,0,0,0"
-                                        Width="300"
-                                        Height="140"
-                                        Style="{DynamicResource MaterialDesignOutlinedTextBox}"
-                                        BorderBrush="Black"
-                                        Foreground="Black"
-                                        FontSize="17"
-                                        materialDesign:HintAssist.Hint="Enter description"
-                                        TextWrapping="Wrap"
-                                        VerticalContentAlignment="Top"
-                                        Text="{Binding Description}"
-                                        CaretBrush="Black"
-                                        materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                         ></TextBox>
-                                </StackPanel>
+                                </TextBlock>
                             </StackPanel>
-                        </Border>
+                        </Grid>
+                        <Grid Margin="50,0,50,0" Grid.Row="1">
+                            <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="auto">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
+                                        <TextBox
+                                            Margin="20,0,0,0"
+                                            Width="300"
+                                            Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                            BorderBrush="Black"
+                                            BorderThickness="0"
+                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
+                                            Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Hint="Enter new type name"
+                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            FontSize="17"
+                                            Foreground="Black"   
+                                            CaretBrush="Black"
+                                            TextWrapping="NoWrap"
+                                            Text="{Binding PackageTypeName}"
+                                         ></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
+                                        <TextBox
+                                            Margin="20,0,0,0"
+                                            Width="300"
+                                            Height="140"
+                                            Style="{DynamicResource MaterialDesignOutlinedTextBox}"
+                                            BorderBrush="Black"
+                                            BorderThickness="0"
+                                            Foreground="Black"
+                                            CaretBrush="Black"
+                                            Background="{StaticResource TextBoxColor}"
+                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
+                                            FontSize="17"
+                                            materialDesign:HintAssist.Hint="Enter description"
+                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            TextWrapping="Wrap"
+                                            VerticalContentAlignment="Top"
+                                            Text="{Binding Description}"
+                                         ></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Button Style="{StaticResource roundedButton}"
+                    <Grid Grid.Row="2">
+                        <Button Style="{StaticResource roundedButton}"
                             Width="120"
                             Height="37"
                             Background="{StaticResource btnAdd}"
+                                Effect="{StaticResource MaterialDesignElevationShadow4}"
                             Content="SAVE"
                             FontFamily="Segoe UI"
                             FontSize="17"
                             FontWeight="Medium"
                             Foreground="{StaticResource plainTextColor1}"
                             Command="{Binding CreateNewPackageCommand}"></Button>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Border>
         </Border>
-    </Border>
+    </Grid>
 </Window>

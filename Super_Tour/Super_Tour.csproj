@@ -161,7 +161,6 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\MainAccountViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\CreatePackageViewModel.cs" />
-    <Compile Include="ViewModel\PackageViewModel\DetailPackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\CreatePackageTypeViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\MainPackageTypeViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\UpdatePackageTypeViewModel.cs" />
@@ -216,9 +215,6 @@
     </Compile>
     <Compile Include="View\PackageView\CreatePackageView.xaml.cs">
       <DependentUpon>CreatePackageView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PackageView\DetailPackageView.xaml.cs">
-      <DependentUpon>DetailPackageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PackageView\MainPackageView.xaml.cs">
       <DependentUpon>MainPackageView.xaml</DependentUpon>
@@ -362,10 +358,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PackageView\CreatePackageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PackageView\DetailPackageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

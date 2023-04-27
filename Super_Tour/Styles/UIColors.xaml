@@ -15,6 +15,10 @@
     <SolidColorBrush x:Key="BackgroundDataGridRowClick" Color="#AFC2D3"></SolidColorBrush>
     <SolidColorBrush x:Key="TextColorDataGridRow" Color="#1D242E"></SolidColorBrush>
     
+    <!--TextBox && ComboBox-->
+    <SolidColorBrush x:Key="TextBoxColor" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="ComboBoxColor" Color="White"></SolidColorBrush>
+    
     <!--ControlBar Button-->
     <SolidColorBrush x:Key="BackgroundControlBarButtonHover" Color="#CFCFCF"></SolidColorBrush>
     

@@ -24,7 +24,7 @@ namespace Super_Tour.View
         public MainPackageView()
         {
             InitializeComponent();
-            this.DataContext = new MainPackageTypeViewModel();
+            this.DataContext = new MainPackageViewModel();
         }
     }
 }

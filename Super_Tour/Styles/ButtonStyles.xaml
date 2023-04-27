@@ -30,7 +30,7 @@
             </Trigger>
             <!--Activated Button Style-->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="Background" Value="{StaticResource BackgroundNavMenuButtonClick}"/>
                 <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
                 <Setter Property="BorderBrush" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
@@ -55,7 +55,6 @@
     <!--Menu Button Text-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="15.5"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
