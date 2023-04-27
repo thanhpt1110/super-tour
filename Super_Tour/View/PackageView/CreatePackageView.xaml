@@ -7,18 +7,19 @@
         mc:Ignorable="d"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             TextElement.FontWeight="Regular"
-             TextElement.FontSize="13"
-             TextOptions.TextFormattingMode="Ideal"
-             TextOptions.TextRenderingMode="Auto"
-             FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Title="CreatePackageView" Height="600" Width="800">
+        Title="CreatePackageView" Height="600" Width="800"
+        ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
             BorderThickness="2">

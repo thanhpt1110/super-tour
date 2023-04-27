@@ -1,4 +1,4 @@
-﻿<Window x:Class="Super_Tour.MainView"
+﻿<Window x:Class="Super_Tour.View.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -84,7 +84,7 @@
                 <!--Logo-->
                 <StackPanel Margin="0,10,0,10" 
                     Orientation="Horizontal"
-                            Height=""
+                            Height="40"
                             Background="{StaticResource BackgroundTopNavMenu}">
                     <Image Source="/Images/logo.png" Height="30" Margin="20,0,0,0"/>
                     <TextBlock Text="SUPER TOUR"
@@ -147,7 +147,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
-                             Command="{Binding ShowPackageViewCommand}">
+                             Command="{Binding ShowPackageTypeViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>

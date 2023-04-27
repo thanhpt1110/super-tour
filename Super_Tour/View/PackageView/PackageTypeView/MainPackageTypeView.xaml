@@ -48,8 +48,8 @@
                     </Grid>
                     <Grid Grid.Column="2">
                         <Button x:Name="btnAddNewType"
-                                Style="{StaticResource roundedButton}"
                                 Background="{StaticResource btnAdd}"
+                                BorderThickness="0"
                                 Effect="{StaticResource MaterialDesignElevationShadow5}"
                                 Width="200"
                                 Margin="0,0,10,0"
