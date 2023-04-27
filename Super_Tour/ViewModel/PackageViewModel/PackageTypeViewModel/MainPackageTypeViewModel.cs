@@ -45,35 +45,37 @@ namespace Super_Tour.ViewModel
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            await CheckOriginalData();
+            await CheckDataPerSecondAsync();
         }
-        private async Task CheckOriginalData()
+        private async Task CheckDataPerSecondAsync()
         {
-            await CheckOriginalDataAsync();
-        }
-        private async Task CheckOriginalDataAsync()
-        {
-            await Task.Run(async () =>
+            try
             {
-                    var myEntities = await  db.TYPE_PACKAGEs.ToListAsync();
+                await Task.Run(async () =>
+                {
+                    var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
                     if (!myEntities.SequenceEqual(ListTypePackage))
                     {
                         // Dữ liệu đã được cập nhật
                         // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
                         Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            ListTypePackage = myEntities;
-                            _listTypePackages.Clear();
-                            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                            {
-                                ListTypePackages.Add(typePackage);
-                            }
-                        });
+                    {
+                                ListTypePackage = myEntities;
+                                _listTypePackages.Clear();
+                                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                                {
+                                    ListTypePackages.Add(typePackage);
+                                }
+                            });
                     }
-                
-            });
-            
+
+                });
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
         private async Task LoadAllPackage()
         {
@@ -81,28 +83,43 @@ namespace Super_Tour.ViewModel
         }
         private async Task LoadDataAsync()
         {
-            await Task.Run(() =>
+            try
             {
-                 ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                Application.Current.Dispatcher.Invoke(() =>
+                await Task.Run(() =>
                 {
-                    _listTypePackages.Clear();
-                    foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                    ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _listTypePackages.Add(typePackage);
-                    }
+                        _listTypePackages.Clear();
+                        foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                        {
+                            _listTypePackages.Add(typePackage);
+                        }
 
+                    });
                 });
-            });
-            timer.Start();
+                timer.Start();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
         private void getAllPackage()
         {
-            List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-            _listTypePackages.Clear();
-            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+            try
             {
-                _listTypePackages.Add(typePackage);
+                List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                _listTypePackages.Clear();
+                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                {
+                    _listTypePackages.Add(typePackage);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
             }
         }    
         private async void ExecuteDeletePackageCommand(object obj)
@@ -138,9 +155,16 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
         {
-            CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
-            createPackageTypeView.ShowDialog();
-            getAllPackage();
+            try
+            {
+                CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
+                createPackageTypeView.ShowDialog();
+                getAllPackage();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
     }
 }

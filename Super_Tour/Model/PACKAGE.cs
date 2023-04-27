@@ -18,7 +18,7 @@ namespace Super_Tour.Model
         public string Id_District { get; set; }
         public string Image_Package { get; set; }
         public string Description_Package { get; set; }
-        public float LengthTime_Package { get; set; }
+        public decimal Price { get; set; }
 /*        [ForeignKey("package_ibfk_1")]
         public virtual TYPE_PACKAGE TYPEPACKAGE { get; set; }
         public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs

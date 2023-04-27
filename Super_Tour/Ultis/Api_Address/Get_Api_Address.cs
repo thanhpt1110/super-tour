@@ -12,10 +12,15 @@ namespace Super_Tour.Ultis.Api_Address
     internal class Get_Api_Address
     {
         string link = "city_province.json";
-        public static List<District> getDistrict(string city_name)
+        public static List<District> getDistrict(City city_name)
         {
-            string url = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())), @"/Ultis", "City_province.json");
+                return city_name.districts;            
+        }
+        public static List<City> getCities()
+        {
+            //string url = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())), @"\Ultis", "City_province.json");
             //Console.WriteLine(url);
+            string url = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+@"\\Ultis\\City_province.json";
             //Console.ReadLine();
             WebRequest request = WebRequest.Create(url);
             WebResponse respone = request.GetResponse();
@@ -25,8 +30,7 @@ namespace Super_Tour.Ultis.Api_Address
                 string responeFromServer = reader.ReadToEnd();
                 // Console.WriteLine(responeFromServer);
                 Country country = JsonConvert.DeserializeObject<Country>(responeFromServer);
-                City a = country.city.Where(p => p.codename == city_name).Single();
-                return a.districts;
+                return country.city;
             }
         }
     }
