@@ -114,7 +114,7 @@
                                          ></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                        <fa:IconImage VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
+                                        <fa:IconImage Margin="0,15,0,0" VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
                                         <TextBox
                                             Margin="20,0,0,0"
                                             Width="300"

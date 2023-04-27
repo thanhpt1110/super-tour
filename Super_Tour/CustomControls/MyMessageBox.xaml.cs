@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -81,25 +82,24 @@ namespace Super_Tour.CustomControls
                 ContainButton.Children.Remove(btnNo);
             }
         }
-
-        private BitmapImage MyImage = null;
         private void setIcon(MessageBoxImage img)
         {
             switch (img)
             {
                 case MessageBoxImage.Information:
-                    MyImage = new BitmapImage(new Uri("/images/message.png", UriKind.Relative));
-                    imgIcon.Source = MyImage;
-                    imgIcon.Stretch = Stretch.Fill;
+                    imgIcon.Icon = IconChar.Info;
                     break;
                 case MessageBoxImage.Warning:
-
+                    imgIcon.Icon = IconChar.Warning;
+                    imgIcon.Foreground = new SolidColorBrush(Color.FromRgb(255, 74, 79));
                     break;
                 case MessageBoxImage.Error:
-
+                    imgIcon.Foreground = new SolidColorBrush(Color.FromRgb(255, 74, 79));
+                    imgIcon.Icon = IconChar.CircleXmark;
                     break;
                 case MessageBoxImage.Question:
-
+                    imgIcon.Icon = IconChar.Question;
+                    imgIcon.Foreground = new SolidColorBrush(Color.FromRgb(244, 198, 38));
                     break;
             }
         }
@@ -116,7 +116,40 @@ namespace Super_Tour.CustomControls
                 new MyMessageBox(text, title, button, img).ShowDialog();
             });
         }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
 
+        private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+            }
+        }
         private void btnYes_Click(object sender, RoutedEventArgs e)
         {
             buttonResultClicked = ButtonResult.YES;

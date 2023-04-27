@@ -75,7 +75,7 @@
             <!--Navigation Menu-->
             <Border CornerRadius="10,0,0,10"
                     Grid.Column="0"
-                    BorderThickness="0,0,1,0"
+                    BorderThickness="0,0,0,0"
                     Background="{StaticResource BackgroundTopNavMenu}"
                     BorderBrush="{StaticResource panelOverColor}">
             </Border>

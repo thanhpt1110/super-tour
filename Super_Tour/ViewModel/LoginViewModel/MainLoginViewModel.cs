@@ -86,7 +86,7 @@ namespace Super_Tour.ViewModel
             // Nếu không, hiển thị thông báo lỗi
             if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                MyMessageBox.ShowDialog("Please enter username and password", "ERROR", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
+                MyMessageBox.ShowDialog("Please enter username and password", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 return;
             }
             executeButton = false;
@@ -107,13 +107,13 @@ namespace Super_Tour.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Username or password is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MyMessageBox.ShowDialog("Username or password is wrong", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.Show(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
             finally
             {
