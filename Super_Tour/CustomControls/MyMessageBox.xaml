@@ -67,8 +67,7 @@
                         </Button>
                         <Button x:Name="btnMinimize"
                                 Style="{StaticResource controlLoginButton}"
-                                Tag="Orange"
-                                Click="btnMinimize_Click">
+                                Tag="Orange">
                             <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                     </StackPanel>

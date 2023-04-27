@@ -64,9 +64,32 @@ namespace Super_Tour.ViewModel
             LoadPackageDataAsync();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
+                    if(!listOriginalPackage.SequenceEqual(updatePackage))
+                    {
+                        _listPackagesDataGrid.Clear();
+                        listOriginalPackage = updatePackage;
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            foreach (PACKAGE package in listOriginalPackage)
+                            {
+                                TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
+                                _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
+                            }
+                        });                    }
 
+                });
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
         private async Task LoadPackageDataAsync()
         {
