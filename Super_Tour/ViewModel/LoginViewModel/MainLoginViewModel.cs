@@ -1,4 +1,5 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
@@ -85,7 +86,7 @@ namespace Super_Tour.ViewModel
             // Nếu không, hiển thị thông báo lỗi
             if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                MessageBox.Show("Please enter username and password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog("Please enter username and password", "ERROR", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
                 return;
             }
             executeButton = false;
@@ -107,12 +108,16 @@ namespace Super_Tour.ViewModel
                 else
                 {
                     MessageBox.Show("Username or password is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    executeButton = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            finally
+            {
+                executeButton = true;
             }
         }
         private bool checkLogin()
