@@ -107,12 +107,16 @@ namespace Super_Tour.ViewModel
                 else
                 {
                     MessageBox.Show("Username or password is wrong", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                    executeButton = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            finally
+            {
+                executeButton = true;
             }
         }
         private bool checkLogin()
