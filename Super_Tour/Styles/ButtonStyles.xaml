@@ -30,7 +30,7 @@
             </Trigger>
             <!--Activated Button Style-->
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
                 <Setter Property="Background" Value="{StaticResource BackgroundNavMenuButtonClick}"/>
                 <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
                 <Setter Property="BorderBrush" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
