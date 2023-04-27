@@ -84,7 +84,7 @@
                 <!--Logo-->
                 <StackPanel Margin="0,10,0,10" 
                     Orientation="Horizontal"
-                            Height=""
+                            Height="40"
                             Background="{StaticResource BackgroundTopNavMenu}">
                     <Image Source="/Images/logo.png" Height="30" Margin="20,0,0,0"/>
                     <TextBlock Text="SUPER TOUR"

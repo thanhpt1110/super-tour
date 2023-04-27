@@ -1,4 +1,5 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
@@ -85,7 +86,7 @@ namespace Super_Tour.ViewModel
             // Nếu không, hiển thị thông báo lỗi
             if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
-                MessageBox.Show("Please enter username and password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog("Please enter username and password", "ERROR", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
                 return;
             }
             executeButton = false;
