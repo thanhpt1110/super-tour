@@ -478,7 +478,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\logo.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background_login.png" />
     <Resource Include="Images\logo.png" />
