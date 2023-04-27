@@ -29,8 +29,8 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Effect="{StaticResource MaterialDesignElevationShadow2}" Margin="20,0,0,0" Icon="Search" Height="25" Foreground="{StaticResource TitleText}"/>
-                            <TextBox x:Name="txtBoxSearchType" 
+                        <fa:IconImage Effect="{StaticResource MaterialDesignElevationShadow2}" Margin="20,0,0,0" Icon="Search" Height="25" Foreground="{StaticResource TitleText}"/>
+                        <TextBox x:Name="txtBoxSearchType" 
                                  Width="200"
                                  Height="50"
                                  FontSize="15"
@@ -43,13 +43,14 @@
                                  materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                  materialDesign:HintAssist.Foreground="Black"
                                  materialDesign:HintAssist.Hint="Enter Type Name"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                        </TextBox>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="2">
                         <Button x:Name="btnAddNewType"
-                                Style="{StaticResource roundedButton}"
                                 Background="{StaticResource btnAdd}"
+                                BorderThickness="0"
                                 Effect="{StaticResource MaterialDesignElevationShadow5}"
                                 Width="200"
                                 Margin="0,0,10,0"

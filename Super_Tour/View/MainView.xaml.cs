@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Super_Tour.ViewModel;
 
-namespace Super_Tour
+namespace Super_Tour.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
