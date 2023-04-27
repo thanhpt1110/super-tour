@@ -131,10 +131,10 @@ namespace Super_Tour.CustomControls
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        /* private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
@@ -149,7 +149,8 @@ namespace Super_Tour.CustomControls
             {
                 this.WindowState = WindowState.Normal;
             }
-        }
+        }*/
+        
         private void btnYes_Click(object sender, RoutedEventArgs e)
         {
             buttonResultClicked = ButtonResult.YES;
