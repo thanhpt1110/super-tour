@@ -47,6 +47,7 @@ namespace Super_Tour.ViewModel
         private string converted_password;
         public RelayCommand LoginCommand { get;private set; }
         public RelayCommand CommandForgotPassword { get;private set; }
+
         private SUPER_TOUR db = new SUPER_TOUR();
 
         public bool IsViewVisible
@@ -82,6 +83,11 @@ namespace Super_Tour.ViewModel
             // Sử dụng Entity Framework để truy vấn cơ sở dữ liệu
             // Nếu thông tin đăng nhập hợp lệ, chuyển đến trang chính
             // Nếu không, hiển thị thông báo lỗi
+            if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
+            {
+                MessageBox.Show("Please enter username and password", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
             executeButton = false;
             try
             {

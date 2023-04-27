@@ -39,7 +39,7 @@ namespace Super_Tour.ViewModel
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             LoadAllPackage();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += Timer_Tick;
         }
 
@@ -55,8 +55,6 @@ namespace Super_Tour.ViewModel
         {
             await Task.Run(async () =>
             {
-                using (var db = new SUPER_TOUR())
-                {
                     var myEntities = await  db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
                     if (!myEntities.SequenceEqual(ListTypePackage))
@@ -73,7 +71,7 @@ namespace Super_Tour.ViewModel
                             }
                         });
                     }
-                }
+                
             });
             
         }
@@ -93,9 +91,10 @@ namespace Super_Tour.ViewModel
                     {
                         _listTypePackages.Add(typePackage);
                     }
-                    timer.Start();
+
                 });
             });
+            timer.Start();
         }
         private void getAllPackage()
         {
@@ -117,7 +116,12 @@ namespace Super_Tour.ViewModel
                 {
                     db.TYPE_PACKAGEs.Remove(type_packageFind);
                     await db.SaveChangesAsync();
-                    //await db.SaveChangesAsync();
+                    List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                    _listTypePackages.Clear();
+                    foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                    {
+                        _listTypePackages.Add(typePackage);
+                    }
                     MessageBox.Show("Delete Package Type successful", "Success", MessageBoxButton.OK);
                     timer.Start();
                     //_listTypePackages.Remove(type_package);

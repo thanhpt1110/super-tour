@@ -129,7 +129,7 @@
                      Height="30"
                      VerticalAlignment="Center"
                      Margin="0,5,0,0"
-                     Padding="20,0,0,10"
+                     Padding="20,0,0,10"                     
                      >
                 <TextBox.Background>
                     <ImageBrush ImageSource="/Images/username_resize.png"
