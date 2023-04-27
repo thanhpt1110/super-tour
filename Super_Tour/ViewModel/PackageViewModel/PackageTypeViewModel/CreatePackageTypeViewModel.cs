@@ -1,4 +1,5 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.View;
 using System;
@@ -22,7 +23,7 @@ namespace Super_Tour.ViewModel
         {
             if (string.IsNullOrEmpty(_packageTypeName) || string.IsNullOrEmpty(_description))
             {
-                MessageBox.Show("Please fill all information", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 return;
             }
             TYPE_PACKAGE type_package = new TYPE_PACKAGE();
@@ -47,7 +48,7 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 db.TYPE_PACKAGEs.Remove(type_package);
             }
         }

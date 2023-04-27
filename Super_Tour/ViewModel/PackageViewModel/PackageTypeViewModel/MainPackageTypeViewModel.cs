@@ -13,6 +13,7 @@ using System.Windows;
 using System.Threading;
 using System.Data.Entity;
 using System.Windows.Threading;
+using Super_Tour.CustomControls;
 
 namespace Super_Tour.ViewModel
 {
@@ -74,7 +75,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         private async Task LoadAllPackage()
@@ -102,7 +103,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         private void getAllPackage()
@@ -118,8 +119,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }    
         private async void ExecuteDeletePackageCommand(object obj)
@@ -139,18 +139,18 @@ namespace Super_Tour.ViewModel
                     {
                         _listTypePackages.Add(typePackage);
                     }
-                    MessageBox.Show("Delete Package Type successful", "Success", MessageBoxButton.OK);
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                     timer.Start();
                     //_listTypePackages.Remove(type_package);
                 }
                 else
                 {
-                    MessageBox.Show("The package type could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MyMessageBox.ShowDialog("The package type could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
@@ -163,7 +163,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
     }
