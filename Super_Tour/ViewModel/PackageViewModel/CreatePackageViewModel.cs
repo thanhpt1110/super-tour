@@ -1,29 +1,31 @@
-﻿using Student_wpf_application.ViewModels.Command;
+﻿using Firebase.Storage;
+using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.Ultis.Api_Address;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Super_Tour.Ultis.Api_Address;
-using System.Windows;
-using System.Windows.Media.Imaging;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Super_Tour.ViewModel
 {
     internal class CreatePackageViewModel : ObservableObject
     {
         #region Declare private variable
+        private FirebaseStorage firebaseStorage;
         private SUPER_TOUR db = new SUPER_TOUR();
         private ObservableCollection<City> _listCity;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private ObservableCollection<District> _listDistrict;
         private City _selectedCity;
+        private string _imagePath;
         private District _selectedDistrict;
         private TYPE_PACKAGE _selectedTypePackage; // Danh
         private List<TYPE_PACKAGE> listOriginalTYpePackage; // Danh sách listPackage
@@ -32,7 +34,7 @@ namespace Super_Tour.ViewModel
         private string _namePackage = "Phuc Binh";
         private string _description;
         private string _price;
-
+        private bool _execute = true;
         #endregion
         #region Declare public variable
         public string Price
@@ -170,14 +172,19 @@ namespace Super_Tour.ViewModel
         public CreatePackageViewModel()
         {
             //package = new PACKAGE();
+            firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             _listCity = new ObservableCollection<City>();
-            CreateNewPackageCommand = new RelayCommand(ExecuteCreatePackageCommand);
+            CreateNewPackageCommand = new RelayCommand(ExecuteCreatePackageCommand, CanExecuteCreateNewPackage);
             SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
-             OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
+            OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
             _listDistrict = new ObservableCollection<District>();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>();
             LoadPackageType();
             LoadProvinces();
+        }
+        private bool CanExecuteCreateNewPackage(object obj)
+        {
+            return _execute;
         }
         private void ExecuteOpenImage(object obj)
         {
@@ -186,6 +193,7 @@ namespace Super_Tour.ViewModel
             dialog.Title = "Chọn ảnh";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                _imagePath = dialog.FileName;
                 // Đọc hình ảnh từ tệp được chọn và lưu vào SelectedImage
                 BitmapImage image = new BitmapImage(new Uri(dialog.FileName));
                 SelectedImage = image;
@@ -196,7 +204,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 _listDistrict.Clear();
-                List<District> districts = Get_Api_Address.getDistrict(_selectedCity).OrderBy(p=>p.name).ToList();
+                List<District> districts = Get_Api_Address.getDistrict(_selectedCity).OrderBy(p => p.name).ToList();
                 foreach (District district in districts)
                 {
                     _listDistrict.Add(district);
@@ -230,7 +238,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 List<City> cities = Get_Api_Address.getCities();
-                cities = cities.OrderBy(p=>p.name).ToList();
+                cities = cities.OrderBy(p => p.name).ToList();
                 foreach (City city in cities)
                 {
                     _listCity.Add(city);
@@ -246,26 +254,24 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                if(_selectedCity== null || _selectedDistrict==null || _selectedImage==null || _selectedTypePackage == null || string.IsNullOrEmpty(_namePackage ))
+                if (_selectedCity == null || _selectedDistrict == null || _selectedImage == null || _selectedTypePackage == null || string.IsNullOrEmpty(_namePackage))
                 {
                     MessageBox.Show("Please enter all information", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
                 }
+                _execute = false;
                 SUPER_TOUR db = new SUPER_TOUR();
                 package = new PACKAGE();
-                package.Id_Package = 1;
+                package.Id_Package = db.PACKAGEs.ToList().Count==0 ? 100000: db.PACKAGEs.Max(p=>p.Id_Package)+1;
                 package.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
                 package.Name_Package = _namePackage;
                 package.Id_Province = _selectedCity.codename;
                 package.Id_District = _selectedDistrict.codename;
                 package.Description_Package = _description;
-                package.Price=decimal.Parse(_price);
-                _selectedImage.DecodePixelHeight = (int)(_selectedImage.PixelHeight*0.1);
-                _selectedImage.DecodePixelWidth = (int)(_selectedImage.PixelWidth*0.1);
-                package.Image_Package = convertImageToByteArray(_selectedImage);
-
+                package.Price = decimal.Parse(_price);
+                package.Image_Package = await UploadImg();
                 db.PACKAGEs.Add(package);
-                await  db.SaveChangesAsync();
+                await db.SaveChangesAsync();
                 MessageBox.Show("Success");
             }
             catch (Exception ex)
@@ -275,6 +281,19 @@ namespace Super_Tour.ViewModel
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
             }
-        } 
+            finally
+            {
+                _execute = true;
+            }
+        }
+        private async Task<string> UploadImg()
+        {
+            Stream img = new FileStream(_imagePath, FileMode.Open, FileAccess.Read);
+            firebaseStorage.Child("Hello");
+            var image = await firebaseStorage.Child("Images").Child("Package" + package.Id_Package.ToString()).PutAsync(img);
+            return image;
+
+        }
     }
+
 }

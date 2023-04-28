@@ -129,19 +129,27 @@ namespace Super_Tour.ViewModel
                 TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
                 timer.Stop();
                 TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
+                if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count==0)
+                {
+                    MyMessageBox.ShowDialog("The package type could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return;
+                }
                 if (type_packageFind != null)
                 {
-                    db.TYPE_PACKAGEs.Remove(type_packageFind);
-                    await db.SaveChangesAsync();
-                    List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                    _listTypePackages.Clear();
-                    foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                    MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                     {
-                        _listTypePackages.Add(typePackage);
+                        db.TYPE_PACKAGEs.Remove(type_packageFind);
+                        await db.SaveChangesAsync();
+                        MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                        List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                        _listTypePackages.Clear();
+                        foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                        {
+                            _listTypePackages.Add(typePackage);
+                        }
                     }
-                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    timer.Start();
-                    //_listTypePackages.Remove(type_package);
+                    
                 }
                 else
                 {
@@ -151,6 +159,10 @@ namespace Super_Tour.ViewModel
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+                timer.Start();
             }
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)

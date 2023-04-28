@@ -26,6 +26,8 @@ namespace Super_Tour
                     mainView.Show();
                 }
             };
+            /*var Login = new CreatePackageView();
+            Login.Show();*/
         }
     }
 }
