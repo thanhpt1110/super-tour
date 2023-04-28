@@ -14,12 +14,12 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="UpdatePackageTypeView" Height="410" Width="700"
-        Background="Transparent"
-        AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
         ShowInTaskbar="False"
+        Background="Transparent"
+        AllowsTransparency="True"
         >
     <Grid>
         <Border CornerRadius="10"

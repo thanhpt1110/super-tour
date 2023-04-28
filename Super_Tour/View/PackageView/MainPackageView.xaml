@@ -49,7 +49,6 @@
                     <Button x:Name="btnAddNewPackage"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
-                                Effect="{StaticResource MaterialDesignElevationShadow3}"
                                 Width="200"
                                 Margin="0,0,10,0"
                                 HorizontalAlignment="Right"

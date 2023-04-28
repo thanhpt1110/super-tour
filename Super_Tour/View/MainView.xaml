@@ -18,8 +18,9 @@
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
+        
         MouseDown="Window_MouseDown"
-        Title="MainWindow" Height="900" Width="1440">
+        Title="MainWindow" Height="900" Width="1440" Icon="/Images/logo.ico">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:DashBoardViewModel}">
             <local:DashBoardView/>
@@ -146,8 +147,16 @@
                         </StackPanel>
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color7}"
+                    Tag="{StaticResource color3}"
                              Command="{Binding ShowPackageTypeViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Package Type" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource menuButton}"
+                    Tag="{StaticResource color7}"
+                             Command="{Binding ShowPackageViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                             <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
@@ -182,7 +191,7 @@
                     </RadioButton>
             </StackPanel>
                 <StackPanel>
-                        <StackPanel Height="185" Background="{StaticResource BackgroundNavMenuButton}"></StackPanel>
+                        <StackPanel Height="120" Background="{StaticResource BackgroundNavMenuButton}"></StackPanel>
                     
                     </StackPanel>
                 <TextBlock Text="Power by SuperTeam 2023" 

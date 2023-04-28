@@ -191,10 +191,20 @@
                                         </Grid>
                                         <Grid Grid.Column="1">
                                             <StackPanel Orientation="Vertical">
-                                                <Button Margin="10,10,10,0"
-                                                        BorderThickness="0"
-                                                        Background="{StaticResource btnAdd}">Add detail information</Button>
-                                            <TextBox Margin="5,15,10,5"
+                                                <TextBox Margin="5,10,10,5"
+                                                     Foreground="Black"
+                                                     BorderThickness="0"
+                                                     Background="{StaticResource TextBoxColor}"
+                                                    VerticalContentAlignment="Top"
+                                                     VerticalAlignment="Top"
+                                                    materialDesign:HintAssist.Hint="Package name"
+                                                     materialDesign:HintAssist.Foreground="Black"
+                                                     materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                     Height="50"
+                                                     Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                ></TextBox>
+                                            <TextBox Margin="5,10,10,5"
                                                      Foreground="Black"
                                                      BorderThickness="0"
                                                      Background="{StaticResource TextBoxColor}"
@@ -219,7 +229,7 @@
                                                     materialDesign:HintAssist.Hint="Price"
                                                      materialDesign:HintAssist.Foreground="Black"
                                                      materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                     Height="70"
+                                                     Height="50"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 ></TextBox>
