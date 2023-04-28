@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.Model
 {
-    internal class TOUR_DETAILS
+    public class TOUR_DETAILS
     {
         [Key]
         public int Id_TourDetails { get; set; }

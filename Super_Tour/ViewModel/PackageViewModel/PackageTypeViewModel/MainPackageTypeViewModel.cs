@@ -23,6 +23,19 @@ namespace Super_Tour.ViewModel
         private List<TYPE_PACKAGE> ListTypePackage;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
         private DispatcherTimer timer = new DispatcherTimer();
+        private string _searchType="";
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
+                OnPropertyChanged(nameof(SearchType));
+            }
+        }
         public ObservableCollection<TYPE_PACKAGE> ListTypePackages
         {
             get { return _listTypePackages; }
@@ -35,15 +48,46 @@ namespace Super_Tour.ViewModel
         // End Test
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
+        public ICommand OnSearchTextChangedCommand { get; private set; }
+        public ICommand UpdatePackageCommand { get;private set; }
         public  MainPackageTypeViewModel() 
         {
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
-            LoadAllPackage();
-            timer.Interval = TimeSpan.FromSeconds(5);
+            UpdatePackageCommand = new RelayCommand(UpdatePackage);
+            LoadDataAsync();
+            timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
+            OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
         }
+        private void UpdatePackage(object obj)
+        {
+            timer.Stop();
+            TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
+            UpdatePackageTypeView view = new UpdatePackageTypeView();
+            view.DataContext = new UpdatePackageTypeViewModel(type_package);
+            view.ShowDialog();
+            LoadDataAsync();
 
+
+        }
+        private void SearchCommand(object obj)
+        {
+            if (string.IsNullOrEmpty(_searchType))
+            {
+                _listTypePackages.Clear();
+                foreach (TYPE_PACKAGE type_package in ListTypePackage)
+                {
+                    _listTypePackages.Add(type_package);
+                }
+                return;
+            }
+            _listTypePackages.Clear();
+            foreach(TYPE_PACKAGE type_package in ListTypePackage.Where(p=>p.Name_Type.StartsWith(_searchType)).ToList())
+            {
+                _listTypePackages.Add(type_package);
+            }    
+        }
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await CheckDataPerSecondAsync();
@@ -77,10 +121,6 @@ namespace Super_Tour.ViewModel
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
-        }
-        private async Task LoadAllPackage()
-        {
-            await LoadDataAsync();
         }
         private async Task LoadDataAsync()
         {
@@ -129,7 +169,7 @@ namespace Super_Tour.ViewModel
                 TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
                 timer.Stop();
                 TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
-                if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count==0)
+                if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count>0)
                 {
                     MyMessageBox.ShowDialog("The package type could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                     return;

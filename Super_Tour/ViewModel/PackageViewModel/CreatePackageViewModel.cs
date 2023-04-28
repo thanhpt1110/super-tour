@@ -1,8 +1,10 @@
 ﻿using Firebase.Storage;
 using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.Ultis.Api_Address;
+using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,7 +33,7 @@ namespace Super_Tour.ViewModel
         private List<TYPE_PACKAGE> listOriginalTYpePackage; // Danh sách listPackage
         private BitmapImage _selectedImage = null; // Ảnh mặc định
         private PACKAGE package;
-        private string _namePackage = "Phuc Binh";
+        private string _namePackage;
         private string _description;
         private string _price;
         private bool _execute = true;
@@ -272,13 +274,24 @@ namespace Super_Tour.ViewModel
                 package.Image_Package = await UploadImg();
                 db.PACKAGEs.Add(package);
                 await db.SaveChangesAsync();
-                MessageBox.Show("Success");
+                MyMessageBox.ShowDialog("Add new package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                CreatePackageView createPackageView = null;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    Console.WriteLine(window.ToString());
+                    if (window is CreatePackageView)
+                    {
+                        createPackageView = window as CreatePackageView;
+                        break;
+                    }
+                }
+                createPackageView.Close();
             }
             catch (Exception ex)
             {
                 //db.PACKAGEs.Remove(_package);
                 Console.WriteLine("Lỗi: " + ex.InnerException.Message);
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
 
             }
             finally

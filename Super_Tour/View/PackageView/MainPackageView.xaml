@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -42,7 +43,14 @@
                                  materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                  materialDesign:HintAssist.Foreground="Black"
                                  materialDesign:HintAssist.Hint="Enter Type Name"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Text="{Binding SearchPackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
+                                </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        </TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="2">
@@ -97,10 +105,12 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource iconButton}">
+                                        <Button Style="{StaticResource iconButton}" Command="{Binding DataContext.UpdatePackageViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}">
                                             <fa:IconImage Icon="Edit" Foreground="#32C948"/>
                                         </Button>
-                                        <Button Margin="15 0 0 0" Style="{StaticResource iconButton}">
+                                        <Button Margin="15 0 0 0" Style="{StaticResource iconButton}" Command="{Binding DataContext.DeletePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}">
                                             <fa:IconImage Icon="DeleteLeft" Foreground="#FF4A4F"/>
                                         </Button>
                                     </StackPanel>

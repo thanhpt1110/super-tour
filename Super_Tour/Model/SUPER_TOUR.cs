@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Super_Tour.Model
 {
     [DbConfigurationType(typeof(MySql.Data.EntityFramework.MySqlEFConfiguration))]
-    internal class SUPER_TOUR:DbContext
+    public class SUPER_TOUR:DbContext
     {
        // string conString = ConfigurationManager.ConnectionStrings["SuperTour"].ConnectionString;
         public SUPER_TOUR() : base(ConfigurationManager.ConnectionStrings["SuperTour"].ConnectionString)

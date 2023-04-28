@@ -110,7 +110,7 @@
                                             Foreground="Black"      
                                             CaretBrush="Black"
                                             TextWrapping="NoWrap"
-                                            Text="{Binding PackageTypeName}"
+                                            Text="{Binding TypePackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -132,7 +132,7 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             TextWrapping="Wrap"
                                             VerticalContentAlignment="Top"
-                                            Text="{Binding Description}"
+                                            Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                 </StackPanel>
@@ -150,7 +150,7 @@
                             FontSize="17"
                             FontWeight="Medium"
                             Foreground="{StaticResource plainTextColor1}"
-                            Command="{Binding CreateNewPackageCommand}"></Button>
+                            Command="{Binding UpdatePackageCommand}"></Button>
                     </Grid>
                 </Grid>
             </Border>

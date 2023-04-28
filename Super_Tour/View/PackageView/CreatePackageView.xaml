@@ -191,7 +191,9 @@
                                         </Grid>
                                         <Grid Grid.Column="1">
                                             <StackPanel Orientation="Vertical">
-                                                <TextBox Margin="5,10,10,5"
+                                                <TextBox 
+                                                    Text="{Binding NamePackage}"
+                                                    Margin="5,10,10,5"
                                                      Foreground="Black"
                                                      BorderThickness="0"
                                                      Background="{StaticResource TextBoxColor}"

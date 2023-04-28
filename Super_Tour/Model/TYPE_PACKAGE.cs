@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.Model
 {
-    internal class TYPE_PACKAGE
+    public class TYPE_PACKAGE
     {
         [Key]
         public int Id_Type_Package { get; set; }

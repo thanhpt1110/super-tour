@@ -1,21 +1,21 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Data.Entity.Migrations;
+using System.Windows;
 
 namespace Super_Tour.ViewModel
 {
-    internal class UpdatePackageTypeViewModel: ObservableObject
+    internal class UpdatePackageTypeViewModel : ObservableObject
     {
         private SUPER_TOUR db = new SUPER_TOUR();
+        private bool _execute = true;
         private string _description;
         private string _typePackageName;
-       
+        private TYPE_PACKAGE _typePackage;
         public string Description
         {
             get => _description;
@@ -34,13 +34,61 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(TypePackageName));
             }
         }
-        public RelayCommand UpdatePackageCommand;
-        public UpdatePackageTypeViewModel()
+        public RelayCommand UpdatePackageCommand { get; }
+        public UpdatePackageTypeViewModel(TYPE_PACKAGE typePackage)
         {
-           // UpdatePackageCommand = new RelayCommand();
+            UpdatePackageCommand = new RelayCommand(ExecuteUpdateNewCommand, canExecuteUpdateNew);
+            _typePackage = typePackage;
+            _description = typePackage.Description;
+            _typePackageName = typePackage.Name_Type;
         }
-        private void ExecuteUpdateNewCommand(object obj)
+        private bool canExecuteUpdateNew(object obj)
         {
+            return _execute;
+        }
+        private async void ExecuteUpdateNewCommand(object obj)
+        {
+            if(string.IsNullOrEmpty(_description) || string.IsNullOrEmpty(_typePackageName))
+            {
+                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return;
+            }
+            if (_description != _typePackage.Description || _typePackageName != _typePackage.Name_Type)
+            {
+                try
+                {
+                    _execute = false;
+                    MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                    {
+
+                        _typePackage.Description = _description;
+                        _typePackage.Name_Type = _typePackageName;
+                        db.TYPE_PACKAGEs.AddOrUpdate(_typePackage);
+                        await db.SaveChangesAsync();
+                        MyMessageBox.ShowDialog("Update type package successfull!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                        UpdatePackageTypeView updatePackageTypeView = null;
+                        foreach (Window window in Application.Current.Windows)
+                        {
+                            if (window is UpdatePackageTypeView)
+                            {
+                                updatePackageTypeView = window as UpdatePackageTypeView;
+                                break;
+                            }
+                        }
+                        updatePackageTypeView.Close();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+                finally
+                {
+                    _execute = true;
+                }
+            }
+
 
         }
     }
