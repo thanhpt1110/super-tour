@@ -229,7 +229,8 @@
                             <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
                             <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>
                             <TextBlock Text="  "/>
-                            <fa:IconImage Icon="Sort" Height="10" Foreground="{StaticResource TitleText}"/>
+                            <fa:IconImage Icon="Sort" Height="10" Foreground="{StaticResource TitleText}"
+                                          Cursor="Hand"/>
                         </StackPanel>
                     </Border>
                 </ControlTemplate>

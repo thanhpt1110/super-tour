@@ -37,8 +37,7 @@ namespace Super_Tour.ViewModel
         private int _endIndex;
         private int _totalResult;
 
-
-        // Declare binding
+        #region Declare binding
         public string ResultNumberText
         {
             get { return _resultNumberText; }
@@ -109,6 +108,8 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListTypePackages));
             } 
         }
+        #endregion
+
         // End Test
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
@@ -133,10 +134,9 @@ namespace Super_Tour.ViewModel
 
         private void inititalCustom()
         {
-            EnableButtonNext = true;
-            EnableButtonPrevious = false;
             LoadDataByPage();
             setResultNumber();
+            setButtonAndPage();
         }
 
         private void UpdatePackage(object obj)
@@ -166,10 +166,12 @@ namespace Super_Tour.ViewModel
                 _listTypePackages.Add(type_package);
             }    
         }
+
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await CheckDataPerSecondAsync();
         }
+
         private async Task CheckDataPerSecondAsync()
         {
             try
@@ -182,15 +184,15 @@ namespace Super_Tour.ViewModel
                     {
                         // Dữ liệu đã được cập nhật
                         // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                        Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                                ListTypePackage = myEntities;
-                                _listTypePackages.Clear();
-                                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                                {
-                                    ListTypePackages.Add(typePackage);
-                                }
-                            });
+                            ListTypePackage = myEntities;
+                            _listTypePackages.Clear();
+                            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                            {
+                                ListTypePackages.Add(typePackage);
+                            }
+                        });
                     }
 
                 });
@@ -299,21 +301,36 @@ namespace Super_Tour.ViewModel
 
         private List<TYPE_PACKAGE> GetData(int startIndex, int endIndex)
         {
-            return db.TYPE_PACKAGEs.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex-startIndex).ToList();
+            try
+            {
+                return db.TYPE_PACKAGEs.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex-startIndex).ToList();
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return null;
+            }
         }
 
         private void LoadDataByPage()
         {
-            this._totalResult = db.TYPE_PACKAGEs.Count();
-            this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
-            this._startIndex = (this._currentPage - 1) * 13;
-            this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
-
-            List<TYPE_PACKAGE> ListTypePackage = GetData(this._startIndex, this._endIndex);
-            _listTypePackages.Clear();
-            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+            try
             {
-                _listTypePackages.Add(typePackage);
+                this._totalResult = db.TYPE_PACKAGEs.Count();
+                this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+                this._startIndex = (this._currentPage - 1) * 13;
+                this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+
+                List<TYPE_PACKAGE> ListTypePackage = GetData(this._startIndex, this._endIndex);
+                _listTypePackages.Clear();
+                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                {
+                    _listTypePackages.Add(typePackage);
+                }
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
 
