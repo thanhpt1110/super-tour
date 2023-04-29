@@ -14,6 +14,9 @@ using System.Threading;
 using System.Data.Entity;
 using System.Windows.Threading;
 using Super_Tour.CustomControls;
+using System.Windows.Markup;
+using Org.BouncyCastle.Crypto.Tls;
+using System.IO.Packaging;
 
 namespace Super_Tour.ViewModel
 {
@@ -24,6 +27,67 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
         private DispatcherTimer timer = new DispatcherTimer();
         private string _searchType="";
+        private int _currentPage = 1;
+        private int _totalPage;
+        private string _pageNumberText;
+        private bool _enableButtonNext;
+        private bool _enableButtonPrevious;
+        private string _resultNumberText;
+        private int _startIndex;
+        private int _endIndex;
+        private int _totalResult;
+
+
+        // Declare binding
+        public string ResultNumberText
+        {
+            get { return _resultNumberText; }
+            set 
+            {
+                _resultNumberText = value; 
+                OnPropertyChanged(nameof(ResultNumberText));    
+            }
+        }
+        
+        public string PageNumberText
+        {
+            get 
+            {
+                return _pageNumberText;
+            }
+            set 
+            {
+                _pageNumberText = value;
+                OnPropertyChanged(nameof(PageNumberText));
+            }
+        }
+
+        public bool EnableButtonNext
+        {
+            get
+            {
+                return _enableButtonNext;
+            }
+            set
+            {
+                _enableButtonNext = value;
+                OnPropertyChanged(nameof(EnableButtonNext));
+            }
+        }
+
+        public bool EnableButtonPrevious
+        {
+            get
+            {
+                return _enableButtonPrevious;
+            }
+            set
+            {
+                _enableButtonPrevious = value;
+                OnPropertyChanged(nameof(EnableButtonPrevious));
+            }
+        }
+
         public string SearchType
         {
             get
@@ -50,16 +114,31 @@ namespace Super_Tour.ViewModel
         public ICommand DeletePackageInDataGridView { get;private set; }
         public ICommand OnSearchTextChangedCommand { get; private set; }
         public ICommand UpdatePackageCommand { get;private set; }
+        public ICommand GoToPreviousPageCommand { get; private set; }
+        public ICommand GoToNextPageCommand { get; private set; }
+
         public  MainPackageTypeViewModel() 
         {
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             UpdatePackageCommand = new RelayCommand(UpdatePackage);
-            LoadDataAsync();
+            GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
+            GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
+            OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
+            inititalCustom();
+            //LoadDataAsync();
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
-            OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
         }
+
+        private void inititalCustom()
+        {
+            EnableButtonNext = true;
+            EnableButtonPrevious = false;
+            LoadDataByPage();
+            setResultNumber();
+        }
+
         private void UpdatePackage(object obj)
         {
             timer.Stop();
@@ -68,9 +147,8 @@ namespace Super_Tour.ViewModel
             view.DataContext = new UpdatePackageTypeViewModel(type_package);
             view.ShowDialog();
             LoadDataAsync();
-
-
         }
+
         private void SearchCommand(object obj)
         {
             if (string.IsNullOrEmpty(_searchType))
@@ -217,6 +295,67 @@ namespace Super_Tour.ViewModel
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
+        }
+
+        private List<TYPE_PACKAGE> GetData(int startIndex, int endIndex)
+        {
+            return db.TYPE_PACKAGEs.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex-startIndex).ToList();
+        }
+
+        private void LoadDataByPage()
+        {
+            this._totalResult = db.TYPE_PACKAGEs.Count();
+            this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+            this._startIndex = (this._currentPage - 1) * 13;
+            this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+
+            List<TYPE_PACKAGE> ListTypePackage = GetData(this._startIndex, this._endIndex);
+            _listTypePackages.Clear();
+            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+            {
+                _listTypePackages.Add(typePackage);
+            }
+        }
+
+        private void setResultNumber()
+        {
+            ResultNumberText = $"Showing {this._startIndex + 1} - {this._endIndex} of {this._totalResult} results";
+        }
+
+        private void setButtonAndPage()
+        {
+            if (this._currentPage < this._totalPage)
+            {
+                EnableButtonNext = true;
+                if (this._currentPage == 1)
+                    EnableButtonPrevious = false;
+                else 
+                    EnableButtonPrevious = true;
+            }
+            else
+            {
+                EnableButtonPrevious = true;
+                EnableButtonNext = false;
+            }
+            PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
+        }
+
+        private void ExcecuteGoToPreviousPageCommand(object obj)
+        {
+            if (this._currentPage > 1)
+                --this._currentPage;   
+            setButtonAndPage();
+            LoadDataByPage();
+            setResultNumber();
+        }
+
+        private void ExcecuteGoToNextPageCommand(object obj)
+        {
+            if (this._currentPage < this._totalPage)
+                ++this._currentPage;
+            setButtonAndPage();
+            LoadDataByPage();
+            setResultNumber();
         }
     }
 }
