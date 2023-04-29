@@ -22,7 +22,6 @@ namespace Super_Tour.View.PackageView
         public UpdatePackageView()
         {
             InitializeComponent();
-            this.DataContext = new UpdatePackageView();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

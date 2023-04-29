@@ -23,7 +23,7 @@ namespace Super_Tour.ViewModel
     internal class MainPackageTypeViewModel : ObservableObject
     {
         private SUPER_TOUR db = new SUPER_TOUR();
-        private List<TYPE_PACKAGE> ListTypePackage;
+        private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
         private DispatcherTimer timer = new DispatcherTimer();
         private string _searchType="";
@@ -126,15 +126,15 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            inititalCustom();
-            //LoadDataAsync();
+            //inititalCustom();
+            LoadDataAsync();
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
         }
 
         private void inititalCustom()
         {
-            LoadDataByPage();
+            LoadDataByPage(_listTypePackageOriginal);
             setResultNumber();
             setButtonAndPage();
         }
@@ -153,18 +153,16 @@ namespace Super_Tour.ViewModel
         {
             if (string.IsNullOrEmpty(_searchType))
             {
-                _listTypePackages.Clear();
-                foreach (TYPE_PACKAGE type_package in ListTypePackage)
-                {
-                    _listTypePackages.Add(type_package);
-                }
+                this._currentPage = 1;
+                LoadDataByPage(_listTypePackageOriginal);
+                setButtonAndPage();
+                setResultNumber();
                 return;
             }
-            _listTypePackages.Clear();
-            foreach(TYPE_PACKAGE type_package in ListTypePackage.Where(p=>p.Name_Type.StartsWith(_searchType)).ToList())
-            {
-                _listTypePackages.Add(type_package);
-            }    
+            List<TYPE_PACKAGE> TypePackages = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+            LoadDataByPage(TypePackages);
+            setButtonAndPage();
+            setResultNumber();
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
@@ -180,19 +178,24 @@ namespace Super_Tour.ViewModel
                 {
                     var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
-                    if (!myEntities.SequenceEqual(ListTypePackage))
+                    if (!myEntities.SequenceEqual(_listTypePackageOriginal))
                     {
                         // Dữ liệu đã được cập nhật
                         // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                            ListTypePackage = myEntities;
-                            _listTypePackages.Clear();
-                            foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                            {
-                                ListTypePackages.Add(typePackage);
-                            }
-                        });
+                        _listTypePackageOriginal = myEntities;
+                        if (!string.IsNullOrEmpty(_searchType))
+                        {
+                            SearchCommand(null);
+                        }
+                        else
+                        {
+                            setButtonAndPage();
+                            LoadDataByPage(_listTypePackageOriginal);
+                            setResultNumber();
+                        }
+                    });
                     }
 
                 });
@@ -208,14 +211,12 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(() =>
                 {
-                    ListTypePackage = db.TYPE_PACKAGEs.ToList();
+                    _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _listTypePackages.Clear();
-                        foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                        {
-                            _listTypePackages.Add(typePackage);
-                        }
+                        LoadDataByPage(_listTypePackageOriginal);
+                        setButtonAndPage();
+                        setResultNumber();
 
                     });
                 });
@@ -231,11 +232,9 @@ namespace Super_Tour.ViewModel
             try
             {
                 List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                _listTypePackages.Clear();
-                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                {
-                    _listTypePackages.Add(typePackage);
-                }
+                LoadDataByPage(_listTypePackageOriginal);
+                setButtonAndPage();
+                setResultNumber();
             }
             catch(Exception ex)
             {
@@ -263,11 +262,10 @@ namespace Super_Tour.ViewModel
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                         List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                        _listTypePackages.Clear();
-                        foreach (TYPE_PACKAGE typePackage in ListTypePackage)
-                        {
-                            _listTypePackages.Add(typePackage);
-                        }
+                        LoadDataByPage(ListTypePackage);
+                        setButtonAndPage();
+                        setResultNumber();
+
                     }
                     
                 }
@@ -299,11 +297,11 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        private List<TYPE_PACKAGE> GetData(int startIndex, int endIndex)
+        private List<TYPE_PACKAGE> GetData(List<TYPE_PACKAGE> ListTypePackage,int startIndex, int endIndex)
         {
             try
             {
-                return db.TYPE_PACKAGEs.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex-startIndex).ToList();
+                return ListTypePackage.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex-startIndex).ToList();
             }
             catch(Exception ex)
             {
@@ -312,16 +310,16 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        private void LoadDataByPage()
+        private void LoadDataByPage(List<TYPE_PACKAGE> typePackages)
         {
             try
             {
-                this._totalResult = db.TYPE_PACKAGEs.Count();
+                this._totalResult = typePackages.Count();
                 this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
                 this._startIndex = (this._currentPage - 1) * 13;
                 this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
 
-                List<TYPE_PACKAGE> ListTypePackage = GetData(this._startIndex, this._endIndex);
+                List<TYPE_PACKAGE> ListTypePackage = GetData(typePackages, this._startIndex, this._endIndex);
                 _listTypePackages.Clear();
                 foreach (TYPE_PACKAGE typePackage in ListTypePackage)
                 {
@@ -362,7 +360,7 @@ namespace Super_Tour.ViewModel
             if (this._currentPage > 1)
                 --this._currentPage;   
             setButtonAndPage();
-            LoadDataByPage();
+            LoadDataByPage(_listTypePackageOriginal);
             setResultNumber();
         }
 
@@ -371,7 +369,7 @@ namespace Super_Tour.ViewModel
             if (this._currentPage < this._totalPage)
                 ++this._currentPage;
             setButtonAndPage();
-            LoadDataByPage();
+            LoadDataByPage(_listTypePackageOriginal);
             setResultNumber();
         }
     }

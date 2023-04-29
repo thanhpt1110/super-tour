@@ -99,9 +99,9 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
                                             <ComboBox   
-                                                   ItemsSource="{Binding ListCity}"
+                                                    ItemsSource="{Binding ListCity}"
                                                     DisplayMemberPath="name"
-                                                    SelectedItem="{Binding SelectedCity}"
+                                                    SelectedItem="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                     FontSize="15"
                                                     Width="160"
@@ -113,8 +113,7 @@
                                                     BorderBrush="DarkGray"
                                                     materialDesign:HintAssist.Hint="Select Province"
                                                     materialDesign:HintAssist.Foreground="Black"
-                                                    materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                    >
+                                                    materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="SelectionChanged">
                                                         <i:InvokeCommandAction Command="{Binding SelectedCityCommand}" />
@@ -126,7 +125,7 @@
                                             <ComboBox
                                                     ItemsSource="{Binding ListDistrict}"
                                                     DisplayMemberPath="name"
-                                                    SelectedItem="{Binding SelectedDistrict}"
+                                                    SelectedItem="{Binding SelectedDistrict, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                     FontSize="15"
                                                     Width="160"
@@ -246,7 +245,7 @@
                             BorderThickness="0"
                             Background="{StaticResource btnAdd}"
                             Content="SAVE"
-                            Command="{Binding}">
+                            Command="{Binding UpdatePackageCommand}">
 
                         </Button>
                     </Grid>

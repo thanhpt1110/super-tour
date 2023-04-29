@@ -48,14 +48,7 @@ namespace Super_Tour.ViewModel
             get { return _price; }
             set
             {
-                if (Regex.IsMatch(value, "^[0-9]*$"))
-                {
                     _price = value;
-                }
-                else
-                {
-                    // Hiển thị thông báo lỗi tại đây
-                }
                 OnPropertyChanged(nameof(Price));
             }
         }
@@ -124,10 +117,7 @@ namespace Super_Tour.ViewModel
         }
         public City SelectedCity
         {
-            get
-            {
-                return _selectedCity;
-            }
+            get { return _selectedCity; }
             set
             {
                 _selectedCity = value;
@@ -169,18 +159,21 @@ namespace Super_Tour.ViewModel
         public UpdatePackageViewModel(PACKAGE package)
         {
             this.package = package;
+            _listCity = new ObservableCollection<City>();
+            _listTypePackage = new ObservableCollection<TYPE_PACKAGE>();
+            _listDistrict = new ObservableCollection<District>();
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
-            _description = package.Description_Package;
+            //Description = package.Description_Package;
             LoadProvinces();
-            SelectedCity = FindCity(package.Id_Province);
+            LoadPackageType();
+            LoadDistrict();
             SelectedDistrict = Get_Api_Address.getDistrict(_selectedCity).Where(p => p.codename == package.Id_District).FirstOrDefault();
             SelectedTypePackage = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
             SelectedImage = getInageOnline();
             Description = package.Description_Package;
             NamePackage = package.Name_Package;
             Price = package.Price.ToString();
-            LoadPackageType();
-            LoadDistrict();
+
             SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
             OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
             UpdatePackageCommand = new RelayCommand(ExecuteUpdatePackage, canExecuteUpdate);
@@ -200,9 +193,8 @@ namespace Super_Tour.ViewModel
                     return;
                 }
                 _execute = false;
-                SUPER_TOUR db = new SUPER_TOUR();
-                package.Id_Package = db.PACKAGEs.ToList().Count == 0 ? 100000 : db.PACKAGEs.Max(p => p.Id_Package) + 1;
-                package.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
+                SUPER_TOUR db = new SUPER_TOUR();;
+
                 package.Name_Package = _namePackage;
                 package.Id_Province = _selectedCity.codename;
                 package.Id_District = _selectedDistrict.codename;
@@ -321,12 +313,15 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+
                 List<City> cities = Get_Api_Address.getCities();
                 cities = cities.OrderBy(p => p.name).ToList();
                 foreach (City city in cities)
                 {
                     _listCity.Add(city);
                 }
+                SelectedCity = FindCity(package.Id_Province);
+
             }
             catch (Exception ex)
             {
