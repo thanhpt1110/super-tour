@@ -58,5 +58,6 @@ namespace Super_Tour.View.PackageView
                 this.WindowState = WindowState.Normal;
             }
         }
+
     }
 }

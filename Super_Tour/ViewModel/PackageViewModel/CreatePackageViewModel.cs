@@ -97,18 +97,6 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SelectedTypePackage));
             }
         }
-        private byte[] convertImageToByteArray(BitmapImage image)
-        {
-            byte[] imageBytes;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(stream);
-                imageBytes = stream.ToArray();
-            }
-            return imageBytes;
-        }
         public ObservableCollection<TYPE_PACKAGE> ListTypePackage
         {
             get
@@ -258,7 +246,7 @@ namespace Super_Tour.ViewModel
             {
                 if (_selectedCity == null || _selectedDistrict == null || _selectedImage == null || _selectedTypePackage == null || string.IsNullOrEmpty(_namePackage))
                 {
-                    MessageBox.Show("Please enter all information", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                     return;
                 }
                 _execute = false;
@@ -302,7 +290,6 @@ namespace Super_Tour.ViewModel
         private async Task<string> UploadImg()
         {
             Stream img = new FileStream(_imagePath, FileMode.Open, FileAccess.Read);
-            firebaseStorage.Child("Hello");
             var image = await firebaseStorage.Child("Images").Child("Package" + package.Id_Package.ToString()).PutAsync(img);
             return image;
 

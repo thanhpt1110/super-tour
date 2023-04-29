@@ -15,6 +15,7 @@ using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
+using Super_Tour.View.PackageView;
 
 namespace Super_Tour.ViewModel
 {
@@ -132,7 +133,11 @@ namespace Super_Tour.ViewModel
         }
         private async void ExecuteUpdatePackage(object obj)
         {
-
+            PackageDataGrid packageDataGrid = obj as PackageDataGrid;
+            PACKAGE package = packageDataGrid.Package;
+            UpdatePackageView view = new UpdatePackageView();
+            view.DataContext = new UpdatePackageViewModel(package);
+            view.ShowDialog();
         }
         private void SearchPackage(object obj)
         {
