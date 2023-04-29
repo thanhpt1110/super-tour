@@ -172,18 +172,16 @@
                                                         Width="100"
                                                         FontSize="13"
                                                         Height="30"
-                                                            Margin="0,10,0,0"
+                                                        Margin="0,10,0,0"
                                                         HorizontalAlignment="Center"
                                                         Background="{StaticResource btnAdd}"
                                                         Content="Add Image"
-                                                        Cursor="Hand">
+                                                        Cursor="Hand"
+                                                        Command="{Binding OpenPictureCommand}">
                                                 </Button>
-                                                <Button Margin="10,15" Height="340"
-                                                        Background="{StaticResource BackgroundControlBarButtonHover}"
-                                                        BorderThickness="0"
-                                                        Cursor="Hand">
-                                                    <fa:IconImage Icon="Camera" Height="150"/>
-                                                </Button>
+                                                <Image Height="340" Margin="5,10,5,5">
+
+                                                </Image>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Grid.Column="1">
@@ -203,7 +201,7 @@
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 ></TextBox>
-                                                <TextBox Margin="5,15,10,5"
+                                                <TextBox Margin="5,10,10,5"
                                                      Foreground="Black"
                                                      BorderThickness="0"
                                                      Background="{StaticResource TextBoxColor}"
@@ -217,7 +215,9 @@
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                          Text="{Binding Description}"
                                                 ></TextBox>
-                                                <TextBox Margin="5,10,10,5"
+                                                <TextBox 
+                                                    Text="{Binding Price}"
+                                                     Margin="5,10,10,5"
                                                      Foreground="Black"
                                                      BorderThickness="0"
                                                      Background="{StaticResource TextBoxColor}"
@@ -226,10 +226,9 @@
                                                     materialDesign:HintAssist.Hint="Price"
                                                      materialDesign:HintAssist.Foreground="Black"
                                                      materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                     Height="70"
+                                                     Height="50"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                     Text="{Binding Price}"
                                                 ></TextBox>
                                             </StackPanel>
                                         </Grid>

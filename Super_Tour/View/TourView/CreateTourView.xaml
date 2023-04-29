@@ -170,9 +170,135 @@
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="4">
-                        <StackPanel Margin="10,0" Background="{StaticResource BackgroundDataGridRow}">
-                            
-                        </StackPanel>
+                        <Border Margin="20,5"
+                            CornerRadius="5"
+                            BorderThickness="2"
+                            Background="White"
+                            BorderBrush="{StaticResource BackgroundNavMenuButton}">
+                            <ScrollViewer>
+                                <Grid Margin="5">
+                                    <ItemsControl ItemsSource="{Binding DateActivityList}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical">
+                                                    <TextBlock Margin="5,10,5,5"
+                                                    FontWeight="Medium"
+                                                    FontSize="18" 
+                                                    Text="{Binding DateID}"/>
+                                                    <!--Lịch trình 1 ngày-->
+                                                    <Grid Background="{StaticResource BackgroundChildContent}">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                            <RowDefinition/>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="250"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid Grid.Column="0">
+                                                                <Border BorderBrush="DarkGray"
+                                                                BorderThickness="1,1,1,1">
+                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                                                        <TextBlock FontSize="16"
+                                                                    Margin="0,10,0,0"
+                                                                    Text="Morning Activities"
+                                                                    HorizontalAlignment="Center"/>
+                                                                        <Button Margin="0,10,0,0"
+                                                                        Width="30"
+                                                                        Height="30"
+                                                                        Background="{StaticResource btnAdd}"
+                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                            <fa:IconImage Icon="Add" 
+                                                                            Height="15" 
+                                                                            Foreground="White"/>
+                                                                        </Button>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
+                                                            <Grid Grid.Column="1">
+                                                                <Border BorderBrush="DarkGray"
+                                                                BorderThickness="0,1,1,1">
+                                                                    <ListView ItemsSource="{Binding MorningActivities}">
+                                                                    </ListView>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Grid Grid.Row="1">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="250"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid Grid.Column="0">
+                                                                <Border BorderBrush="DarkGray"
+                                                                BorderThickness="1,0,1,1">
+                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                                                        <TextBlock FontSize="16"
+                                                                        Margin="0,10,0,0"
+                                                                        Text="Afternoon Activities"
+                                                                        HorizontalAlignment="Center"/>
+                                                                        <Button Margin="0,10,0,0"
+                                                                        Width="30"
+                                                                        Height="30"
+                                                                        Background="{StaticResource btnAdd}"
+                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                            <fa:IconImage Icon="Add" 
+                                                                          Height="15" 
+                                                                          Foreground="White"/>
+                                                                        </Button>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
+                                                            <Grid Grid.Column="1">
+                                                                <Border BorderBrush="DarkGray"
+                                                        BorderThickness="0,0,1,1">
+                                                                    <ListView ItemsSource="{Binding MorningActivities}">
+                                                                    </ListView>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <Grid Grid.Row="2">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="250"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid Grid.Column="0">
+                                                                <Border BorderBrush="DarkGray"
+                                                                BorderThickness="1,0,1,1">
+                                                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                                                        <TextBlock FontSize="16"
+                                                                        Margin="0,10,0,0"
+                                                                        Text="Night Activities"
+                                                                        HorizontalAlignment="Center"/>
+                                                                        <Button Margin="0,10,0,0"
+                                                                        Width="30"
+                                                                        Height="30"
+                                                                        Background="{StaticResource btnAdd}"
+                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                            <fa:IconImage Icon="Add" 
+                                                                      Height="15" 
+                                                                      Foreground="White"/>
+                                                                        </Button>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
+                                                            <Grid Grid.Column="1">
+                                                                <Border BorderBrush="DarkGray"
+                                                                BorderThickness="0,0,1,1">
+                                                                    <ListView ItemsSource="{Binding AfternoonActivities}">
+                                                                    </ListView>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
                     </Grid>
                     <Grid Grid.Row="5">
                         <Button HorizontalAlignment="Center" 

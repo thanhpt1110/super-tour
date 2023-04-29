@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Super_Tour.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Super_Tour.View
         public CreateTourView()
         {
             InitializeComponent();
+            this.DataContext = new CreateTourViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
