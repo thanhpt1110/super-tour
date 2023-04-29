@@ -34,7 +34,7 @@
                                 Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
-                                 Width="200"
+                                 Width="300"
                                  Height="50"
                                  FontSize="15"
                                  BorderBrush="Black"
@@ -44,7 +44,7 @@
                                  CaretBrush="Black"
                                  materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                  materialDesign:HintAssist.Foreground="Black"
-                                 materialDesign:HintAssist.Hint="Enter Type Name         🔍"
+                                 materialDesign:HintAssist.Hint="Enter package type"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 >
                             <i:Interaction.Triggers>
