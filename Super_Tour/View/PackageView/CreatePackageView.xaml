@@ -168,7 +168,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
                                             <StackPanel Orientation="Vertical">
-                                                    <Button
+                                                <Button
                                                         BorderThickness="0"
                                                         Width="100"
                                                         FontSize="13"
@@ -179,14 +179,10 @@
                                                         Content="Add Image"
                                                         Cursor="Hand"
                                                         Command="{Binding OpenPictureCommand}">
-                                                    </Button>
-                                                <Button Margin="10,15" Height="340"
-                                                        Background="{StaticResource BackgroundControlBarButtonHover}"
-                                                        BorderThickness="0"
-                                                        Cursor="Hand">
-                                                    <fa:IconImage Icon="Camera" Height="150"  />
-                                                     
                                                 </Button>
+                                                <Image Height="340" Margin="5,10,5,5">
+                                                    
+                                                </Image>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Grid.Column="1">
