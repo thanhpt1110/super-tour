@@ -55,6 +55,7 @@
                 <Grid Grid.Column="2">
                     <Button x:Name="btnAddNewPackage"
                                 Background="{StaticResource btnAdd}"
+                                Effect="{StaticResource MaterialDesignElevationShadow5}"    
                                 BorderThickness="0"
                                 Width="200"
                                 Margin="0,10,55,0"

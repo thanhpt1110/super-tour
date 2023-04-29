@@ -19,15 +19,18 @@
             CornerRadius="10"
             Background="{StaticResource MyMessageBoxTitle}">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="113*"/>
+                <ColumnDefinition Width="283*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"
-                  Margin="0"
                   Height="35"
-                  Background="Transparent">
+                  Background="Transparent" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -77,12 +80,12 @@
 
             <!--Second Row for Image and Message-->
             <Grid Grid.Row="1"
-                  Background="{StaticResource MyMessageBoxContent}">
-            <StackPanel Grid.Row="1"
+                  Background="{StaticResource MyMessageBoxContent}" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2">
+                <StackPanel Grid.Row="1"
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Margin="0, 20, 0, 20">
-                <!--Image-->
+                    <!--Image-->
                     <fa:IconImage Margin="20,0,10,0" 
                                   x:Name="imgIcon" 
                                   Foreground="DarkBlue" 
@@ -90,7 +93,7 @@
                                   Icon="FacebookMessenger"/>
 
                     <!--Message-->
-                <TextBlock x:Name="txtBlockMessage"
+                    <TextBlock x:Name="txtBlockMessage"
                                FontSize="15"
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
@@ -99,62 +102,66 @@
                                Width="250">
                         fksdajds dkasj dkasdj k dsajd askdj sadjkd sajdas kdsajd dsa d sadjksd jsakd das
                          dasdsad asd sad asdsa dasd as
-                </TextBlock>
-            </StackPanel>
-                
+                    </TextBlock>
+                </StackPanel>
+
             </Grid>
-            
+
             <!--Third Row for Buttons-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Border Background="White"
                         CornerRadius="0,0,10,10">
                     <StackPanel x:Name="ContainButton"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal"
-                            Margin="5"
+                            Margin="10"
                                 >
-                    <Button x:Name="btnOk"  
+                        <Button x:Name="btnOk"  
                             Click="btnOk_Click"
                                 Background="{StaticResource MyMessageBoxButtonOK}" 
                                 Foreground="White" 
                                 MinWidth="85" 
-                            Style="{StaticResource roundedButton}"
-                            Height="30"
-                            Margin="5,0,5,0"
+                                Margin="5,0,5,0"
+                                Style="{StaticResource roundedButton}"
+                                Height="30"
+                                IsDefault="True"
                                 >
-                        OK
-                    </Button>
-                    <Button x:Name="btnYes"
+                            OK
+                        </Button>
+                        <Button x:Name="btnYes"
                             Click="btnYes_Click"
                             Style="{StaticResource roundedButton}"
                                 Background="{StaticResource MyMessageBoxButtonYes}" 
                                 Foreground="White" 
                                 MinWidth="85" 
-                            Margin="5,0,5,0"
+                                Height="30"
+                                Margin="5,0,5,0"
                                 >
-                        Yes
-                    </Button>
-                    <Button x:Name="btnNo"  
+                            Yes
+                        </Button>
+                        <Button x:Name="btnNo"  
                             Click="btnNo_Click"
                             Style="{StaticResource roundedButton}"
                                 Background="{StaticResource MyMessageBoxButtonNo}" 
                                 Foreground="White" 
                                 MinWidth="85" 
-                            Margin="5,0,5,0"
+                                Height="30"
+                                Margin="5,0,5,0"
                                >
-                        No
-                    </Button>
-                    <Button x:Name="btnCancel"  
+                            No
+                        </Button>
+                        <Button x:Name="btnCancel"  
                             Click="btnCancel_Click"
                             Style="{StaticResource roundedButton}"
                                 Background="{StaticResource MyMessageBoxButtonCancel}" 
                                 Foreground="White" 
                                 MinWidth="85" 
-                            Margin="5,0,5,0"
+                                Height="30"
+                                Margin="5,0,5,0"
                                 >
-                        Cancel
-                    </Button>
-                </StackPanel>
+                            Cancel
+                        </Button>
+                    </StackPanel>
                 </Border>
             </Grid>
         </Grid>
