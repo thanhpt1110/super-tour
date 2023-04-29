@@ -226,5 +226,7 @@ namespace Super_Tour.ViewModel
 
 
         }
+
+        
     } 
 }

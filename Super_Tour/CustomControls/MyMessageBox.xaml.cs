@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -106,16 +107,17 @@ namespace Super_Tour.CustomControls
 
         public static void Show(string text, string title = "", MyMessageBox.MessageBoxButton button = MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage img = MyMessageBox.MessageBoxImage.Information)
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate {
+            System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate {
                 new MyMessageBox(text, title, button, img).Show();
             });
         }
         public static void ShowDialog(string text, string title = "", MyMessageBox.MessageBoxButton button = MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage img = MyMessageBox.MessageBoxImage.Information)
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate {
+            System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate {
                 new MyMessageBox(text, title, button, img).ShowDialog();
             });
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
