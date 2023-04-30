@@ -35,10 +35,9 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
-                        <RowDefinition Height="50"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -81,11 +80,23 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <StackPanel Orientation="Horizontal"
+                        <Border Margin="20,0,20,0"
+                                    CornerRadius="10"
+                                    Background="{StaticResource BackgroundDataGridRowHover}"
+                                   >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center">
-                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                      materialDesign:HintAssist.Hint="Tour of this travel"
                                      Width="300"
+                                     Height="50"
                                      FontSize="15"
                                      IsReadOnly="True"
                                      Text="Select a tour for this travel"
@@ -94,28 +105,18 @@
                                      Background="{StaticResource BackgroundChildContent}"
                                      materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
                                      Margin="5"/>
-                            <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        <Button Style="{StaticResource MaterialDesignIconButton}"
                                     Background="{StaticResource btnAdd}"
                                     Effect="{StaticResource MaterialDesignElevationShadow3}"
                                     Width="40"
                                     Height="40">
-                                <fa:IconImage Foreground="White" 
+                                            <fa:IconImage Foreground="White" 
                                               Icon="Edit" 
                                               Width="20"/>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Border Margin="20,0,20,0"
-                                    CornerRadius="10"
-                                    Background="{StaticResource BackgroundDataGridRowHover}"
-                                   >
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
@@ -132,7 +133,7 @@
                                                  Background="{StaticResource TextBoxColor}"
                                                  materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
                                     </Grid>
-                                    <Grid Grid.Column="1">
+                                    <Grid Grid.Column="2">
                                         <StackPanel Orientation="Horizontal">
                                             <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                         BorderThickness="0"
@@ -154,7 +155,7 @@
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
-                                <Grid Grid.Row="1">
+                                <Grid Grid.Row="2">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
@@ -191,7 +192,8 @@
                         <Button Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
-                                Width="150"></Button>
+                                Width="140"
+                                Height="40"></Button>
                     </Grid>
                 </Grid>
             </Border>
