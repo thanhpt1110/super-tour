@@ -159,6 +159,8 @@ namespace Super_Tour.ViewModel
                 ListCities.Add(city);
             }
         }
+        // End test
+        public ICommand AddADayCommand { get; }
         public CreateTourViewModel()
         {
             // Test 
@@ -216,6 +218,16 @@ namespace Super_Tour.ViewModel
             TotalDay = DateActivityList.Count;
 
             // End Test
+            AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
+        }
+
+        private void ExecuteAddADayCommand(object obj)
+        {
+            List<string> morAct = new List<string>();
+            List<string> afterAct = new List<string>();
+            List<string> nightAct = new List<string>();
+            DateActivity dateActivity = new DateActivity("Date ID",morAct,afterAct,nightAct);
+            DateActivityList.Add(dateActivity);
         }
     }
 }

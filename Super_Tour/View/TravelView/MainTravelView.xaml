@@ -85,7 +85,7 @@
                                 FontFamily="Segoe UI"
                                 Foreground="{StaticResource plainTextColor1}"
                                 Height="40"
-                                Command="{Binding OpenCreateTourViewCommand}"/>
+                                Command="{Binding OpenCreateTravelViewCommand}"/>
 
                 </Grid>
             </Grid>

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Super_Tour"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              Startup="ApplicationStart"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+            xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
         <ResourceDictionary>
             <Style x:Key="iconWindow" TargetType="Window">
