@@ -57,7 +57,7 @@
                                 Background="{StaticResource btnAdd}"
                                 Effect="{StaticResource MaterialDesignElevationShadow5}"    
                                 BorderThickness="0"
-                                Width="200"
+                                Width="215"
                                 Margin="0,10,55,0"
                                 HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"

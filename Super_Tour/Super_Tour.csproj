@@ -320,8 +320,8 @@
     <Compile Include="ViewModel\TechnicalHelpViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\PrintTicketViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\MainTicketViewModel.cs" />
+    <Compile Include="ViewModel\TourViewModel\AddPackageToTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\CreateTourViewModel.cs" />
-    <Compile Include="ViewModel\TourViewModel\DetailTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\MainTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\UpdateTourViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\CreateTravelViewModel.cs" />
@@ -397,11 +397,11 @@
     <Compile Include="View\TicketView\MainTicketView.xaml.cs">
       <DependentUpon>MainTicketView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TourView\AddPackageToTourView.xaml.cs">
+      <DependentUpon>AddPackageToTourView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TourView\CreateTourView.xaml.cs">
       <DependentUpon>CreateTourView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TourView\DetailTourView.xaml.cs">
-      <DependentUpon>DetailTourView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TourView\MainTourView.xaml.cs">
       <DependentUpon>MainTourView.xaml</DependentUpon>
@@ -446,6 +446,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\SmallerDataGridStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -557,11 +561,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TourView\CreateTourView.xaml">
+    <Page Include="View\TourView\AddPackageToTourView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TourView\DetailTourView.xaml">
+    <Page Include="View\TourView\CreateTourView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

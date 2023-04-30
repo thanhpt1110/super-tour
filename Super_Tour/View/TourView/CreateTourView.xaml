@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Title="CreatePackageView" Height="800" Width="800"
+        Height="800" Width="800"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -209,7 +209,8 @@
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
-                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                                        Command="{Binding AddPackageToTourCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                             Height="15" 
                                                                             Foreground="White"/>
@@ -242,7 +243,8 @@
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
-                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                                        Command="{Binding AddPackageToTourCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                           Height="15" 
                                                                           Foreground="White"/>
@@ -275,7 +277,8 @@
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
-                                                                        Style="{StaticResource MaterialDesignIconButton}">
+                                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                                        Command="{Binding AddPackageToTourCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                       Height="15" 
                                                                       Foreground="White"/>

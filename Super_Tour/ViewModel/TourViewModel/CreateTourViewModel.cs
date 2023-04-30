@@ -1,27 +1,38 @@
-﻿using Super_Tour.Ultis;
+﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.Ultis;
+using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Super_Tour.ViewModel
 {
     internal class CreateTourViewModel: ObservableObject
     {
+        //Test
         public class DateActivity
         {
             private string _dateID;
             private List<string> _morningActivities;
             private List<string> _afternoonActivities;
             private List<string> _eveningActivities;
+            public ICommand AddPackageToTourCommand { get; }
             public DateActivity()
             {
-
+                AddPackageToTourCommand = new RelayCommand(ExecuteAddPackageToTourCommand);
+            }
+            private void ExecuteAddPackageToTourCommand(object obj)
+            {
+                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                addPackageToTourView.ShowDialog();
             }
             public DateActivity(string dateID, List<string> morningActivities, List<string> afternoonActivities, List<string> eveningActivities)
             {
+                AddPackageToTourCommand = new RelayCommand(ExecuteAddPackageToTourCommand);
                 _dateID = dateID;
                 _morningActivities = morningActivities;
                 _afternoonActivities = afternoonActivities;
@@ -43,8 +54,10 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(DateActivityList));
             }
         }
+        // End test
         public CreateTourViewModel()
         {
+            // Test 
             DateActivityList = new ObservableCollection<DateActivity>();
             List<string> morAct1 = new List<string>();
             List<string> afterAct1 = new List<string>();
@@ -92,6 +105,7 @@ namespace Super_Tour.ViewModel
             nightAct3.Add("Hoạt động tối 3 - Ngày 3");
             DateActivity dateActivity3 = new DateActivity("Lịch trình ngày 3", morAct3, afterAct3, nightAct3);
             DateActivityList.Add(dateActivity3);
+            // End Test
         }
     }
 }

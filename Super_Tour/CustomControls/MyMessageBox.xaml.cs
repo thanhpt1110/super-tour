@@ -88,7 +88,8 @@ namespace Super_Tour.CustomControls
             switch (img)
             {
                 case MessageBoxImage.Information:
-                    imgIcon.Icon = IconChar.Info;
+                    imgIcon.Icon = IconChar.CircleInfo;
+                    imgIcon.Foreground = new SolidColorBrush(Color.FromRgb(45, 96, 123));
                     break;
                 case MessageBoxImage.Warning:
                     imgIcon.Icon = IconChar.Warning;

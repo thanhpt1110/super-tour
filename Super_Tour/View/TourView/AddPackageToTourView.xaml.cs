@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Super_Tour.View
 {
     /// <summary>
-    /// Interaction logic for UpdateTourView.xaml
+    /// Interaction logic for AddPackageToTourView.xaml
     /// </summary>
-    public partial class UpdateTourView : Window
+    public partial class AddPackageToTourView : Window
     {
-        public UpdateTourView()
+        public AddPackageToTourView()
         {
             InitializeComponent();
-            this.DataContext = new UpdateTourViewModel();   
+            this.DataContext = new AddPackageToTourViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

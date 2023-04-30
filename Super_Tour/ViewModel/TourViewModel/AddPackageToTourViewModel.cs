@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.ViewModel
 {
-    internal class UpdateTourViewModel: ObservableObject
+    internal class AddPackageToTourViewModel: ObservableObject
     {
-        public UpdateTourViewModel() 
+        public AddPackageToTourViewModel() 
         {
 
         }
