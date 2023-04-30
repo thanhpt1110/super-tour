@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="800" Width="800"
+        Height="400" Width="800"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -32,7 +32,168 @@
             </Border.BorderBrush>
             <Border CornerRadius="10,10,10,10"
                     Background="{StaticResource BackgroundChildContent}">
-                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                            <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="Red"
+                                Click="btnClose_Click">
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Green"
+                                Click="btnMaximize_Click">
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Orange"
+                                Click="btnMinimize_Click">
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0" 
+                                          Icon="Plane" Height="30"/>
+                            <TextBlock
+                                        FontSize="25"
+                                        FontWeight="Medium"
+                                        TextAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="Add Travel"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                     materialDesign:HintAssist.Hint="Tour of this travel"
+                                     Width="300"
+                                     FontSize="15"
+                                     IsReadOnly="True"
+                                     Text="Select a tour for this travel"
+                                     Foreground="Black"
+                                     materialDesign:HintAssist.Foreground="Black"
+                                     Background="{StaticResource BackgroundChildContent}"
+                                     materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
+                                     Margin="5"/>
+                            <Button Style="{StaticResource MaterialDesignIconButton}"
+                                    Background="{StaticResource btnAdd}"
+                                    Effect="{StaticResource MaterialDesignElevationShadow3}"
+                                    Width="40"
+                                    Height="40">
+                                <fa:IconImage Foreground="White" 
+                                              Icon="Edit" 
+                                              Width="20"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Border Margin="20,0,20,0"
+                                    CornerRadius="10"
+                                    Background="{StaticResource BackgroundDataGridRowHover}"
+                                   >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 materialDesign:HintAssist.Hint="Enter Start Location"
+                                                 Height="50"
+                                                 Width="300"
+                                                 BorderThickness="0"
+                                                 Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                 Foreground="Black"
+                                                 materialDesign:HintAssist.Foreground="Black"
+                                                 Background="{StaticResource TextBoxColor}"
+                                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                                        BorderThickness="0"
+                                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                        Foreground="Black"
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        Background="{StaticResource TextBoxColor}"
+                                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                        materialDesign:HintAssist.Hint="Select Start Date"
+                                                        Width="170"/>
+                                            <materialDesign:TimePicker Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                        Foreground="Black"
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                        materialDesign:HintAssist.Hint="Select Start Time"
+                                                        Width="170"
+                                                                       Margin="30,0,0,0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         materialDesign:HintAssist.Hint="Enter Max Number of Ticket"
+                                         Height="50"
+                                         Width="200"
+                                         BorderThickness="0"
+                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                         Foreground="Black"
+                                         materialDesign:HintAssist.Foreground="Black"
+                                         Background="{StaticResource TextBoxColor}"
+                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                         materialDesign:HintAssist.Hint="Enter Discount"
+                                         Height="50"
+                                         Width="200"
+                                         BorderThickness="0"
+                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                         Foreground="Black"
+                                         materialDesign:HintAssist.Foreground="Black"
+                                         Background="{StaticResource TextBoxColor}"
+                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Button Content="Save"
+                                Background="{StaticResource btnAdd}"
+                                BorderThickness="0"
+                                Width="150"></Button>
+                    </Grid>
+                </Grid>
             </Border>
         </Border>
     </Grid>
