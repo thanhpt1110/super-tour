@@ -177,6 +177,7 @@
                             BorderBrush="{StaticResource BackgroundNavMenuButton}">
                             <ScrollViewer>
                                 <Grid Margin="5">
+                                    <StackPanel Orientation="Vertical">
                                     <ItemsControl ItemsSource="{Binding DateActivityList}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -281,7 +282,7 @@
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
-                                                                                                        Height="14" 
+                                                                                                        Height="12" 
                                                                                                         Foreground="White"/>
                                                                                             </Button>
                                                                                         </Border>
@@ -383,7 +384,7 @@
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
-                                                                                                        Height="14" 
+                                                                                                        Height="12" 
                                                                                                         Foreground="White"/>
                                                                                             </Button>
                                                                                         </Border>
@@ -484,7 +485,7 @@
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
-                                                                                                        Height="14" 
+                                                                                                        Height="12" 
                                                                                                         Foreground="White"/>
                                                                                             </Button>
                                                                                         </Border>
@@ -502,6 +503,13 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
+                                                    <Button Margin="20" 
+                                                            Content="+ Add a day to schedule"
+                                                            Width="200"
+                                                            BorderThickness="0"
+                                                            Background="{StaticResource btnAdd}"
+                                                            Command="{Binding AddADayCommand}"/>
+                                    </StackPanel>
                                 </Grid>
                             </ScrollViewer>
                         </Border>

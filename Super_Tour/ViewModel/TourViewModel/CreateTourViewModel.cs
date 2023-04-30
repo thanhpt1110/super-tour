@@ -55,6 +55,7 @@ namespace Super_Tour.ViewModel
             }
         }
         // End test
+        public ICommand AddADayCommand { get; }
         public CreateTourViewModel()
         {
             // Test 
@@ -106,6 +107,16 @@ namespace Super_Tour.ViewModel
             DateActivity dateActivity3 = new DateActivity("Lịch trình ngày 3", morAct3, afterAct3, nightAct3);
             DateActivityList.Add(dateActivity3);
             // End Test
+            AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
+        }
+
+        private void ExecuteAddADayCommand(object obj)
+        {
+            List<string> morAct = new List<string>();
+            List<string> afterAct = new List<string>();
+            List<string> nightAct = new List<string>();
+            DateActivity dateActivity = new DateActivity("Date ID",morAct,afterAct,nightAct);
+            DateActivityList.Add(dateActivity);
         }
     }
 }
