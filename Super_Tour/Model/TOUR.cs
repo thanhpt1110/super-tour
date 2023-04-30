@@ -14,7 +14,9 @@ namespace Super_Tour.Model
         public byte TotalDay { get; set; }
         public byte TotalNight { get; set; }
         public int MaxTicket { get; set; }
+        public string PlaceOfTour { get; set; }
         public string Status_Tour { get; set; }
+        public string Name_Tour { get; set; }
  /*       public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs
         {
             get; set;

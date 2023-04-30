@@ -29,7 +29,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<City> _listCity;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private ObservableCollection<District> _listDistrict;
-        private City _selectedCity;
+        private City _selectedCity=null;
         private string _imagePath;
         private District _selectedDistrict;
         private TYPE_PACKAGE _selectedTypePackage; // Danh
@@ -316,11 +316,11 @@ namespace Super_Tour.ViewModel
 
                 List<City> cities = Get_Api_Address.getCities();
                 cities = cities.OrderBy(p => p.name).ToList();
+                SelectedCity = FindCity(package.Id_Province);
                 foreach (City city in cities)
                 {
                     _listCity.Add(city);
                 }
-                SelectedCity = FindCity(package.Id_Province);
 
             }
             catch (Exception ex)

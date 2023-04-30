@@ -164,27 +164,33 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(() =>
                 {
-                    List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
-                    if(!listOriginalPackage.SequenceEqual(updatePackage))
+                    try
                     {
-                        listOriginalPackage = updatePackage;
-                        Application.Current.Dispatcher.Invoke(() =>
+                        List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
+                        if (!listOriginalPackage.SequenceEqual(updatePackage))
                         {
-                            if (_listPackagesDataGrid.Count != 0)
-                                _listPackagesDataGrid.Clear();
-                            foreach (PACKAGE package in listOriginalPackage)
+                            listOriginalPackage = updatePackage;
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-                                TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
-                                _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
-                            }
-                        });                    
+                                if (_listPackagesDataGrid.Count != 0)
+                                    _listPackagesDataGrid.Clear();
+                                foreach (PACKAGE package in listOriginalPackage)
+                                {
+                                    TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
+                                    _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
+                                }
+                            });
+                        }
                     }
-
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
                 });
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         private async Task LoadPackageDataAsync()
@@ -193,23 +199,29 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(() =>
             {
-
-                listOriginalPackage = db.PACKAGEs.ToList();
-                Application.Current.Dispatcher.Invoke(() =>
+                try
                 {
-                    foreach (PACKAGE package in listOriginalPackage)
+                    listOriginalPackage = db.PACKAGEs.ToList();
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
-                        _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
-                    }
-                });
+                        foreach (PACKAGE package in listOriginalPackage)
+                        {
+                            TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
+                            _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
+                        }
+                    });
+                }
+                catch(Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
 
+                }
             });
                 timer.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         private void ExecuteOpenCreatePackageViewCommand(object obj)
@@ -221,7 +233,8 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
             }
 
 

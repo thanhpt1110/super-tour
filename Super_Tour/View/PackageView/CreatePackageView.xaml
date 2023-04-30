@@ -180,7 +180,7 @@
                                                         Cursor="Hand"
                                                         Command="{Binding OpenPictureCommand}">
                                                 </Button>
-                                                <Image Height="340" Margin="5,10,5,5">
+                                                <Image Height="340" Margin="5,10,5,5" Source="{Binding SelectedImage}">
                                                     
                                                 </Image>
                                             </StackPanel>
@@ -230,7 +230,14 @@
                                                      Height="50"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                ></TextBox>
+                                                    
+                                                >
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="PreviewTextInput">
+                                                            <i:InvokeCommandAction Command="{Binding TextChangeOnlyNum}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </TextBox>
                                             </StackPanel>
                                         </Grid>
                                     </Grid>

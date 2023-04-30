@@ -28,5 +28,9 @@ namespace Super_Tour.Ultis
 
             return sb.ToString();
         }
+        public static string MORNING = "Morning";
+        public static string AFTERNOON = "Afternoon";
+        public static string EVENING = "Evening";
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Ultis;
+using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
 using System;
 using System.Collections.Generic;
@@ -7,32 +8,60 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Super_Tour.ViewModel
 {
     internal class CreateTourViewModel: ObservableObject
     {
-        //Test
+        //Real not test anymore
         public class DateActivity
         {
             private string _dateID;
             private List<string> _morningActivities;
             private List<string> _afternoonActivities;
             private List<string> _eveningActivities;
-            public ICommand AddPackageToTourCommand { get; }
+            public ICommand AddPackageToTourMorningCommand { get; private set; }
+            public ICommand AddPackageToTourAfternoonCommand { get; private set; }
+            public ICommand AddPackageToTourEveningCommand { get; private set; }
+
             public DateActivity()
             {
-                AddPackageToTourCommand = new RelayCommand(ExecuteAddPackageToTourCommand);
+
+                generateCommand();
             }
-            private void ExecuteAddPackageToTourCommand(object obj)
+            private void generateCommand()
+            {
+                AddPackageToTourMorningCommand = new RelayCommand(ExecuteAddPackageToTourMorningCommand);
+                AddPackageToTourAfternoonCommand = new RelayCommand(ExecuteAddPackageToTourAfternoonCommand);
+                AddPackageToTourEveningCommand = new RelayCommand(ExecuteAddPackageToTourEveningCommand);
+            }
+            private void ExecuteAddPackageToTourMorningCommand(object obj)
             {
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(Constant.MORNING);
+                addPackageToTourView.ShowDialog();
+            }
+            private void ExecuteAddPackageToTourAfternoonCommand(object obj)
+            {
+                MessageBox.Show("Afternoon");
+
+                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(Constant.AFTERNOON);
+                addPackageToTourView.ShowDialog();
+            }
+            private void ExecuteAddPackageToTourEveningCommand(object obj)
+            {
+                //MessageBox.Show("Evening");
+                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(Constant.EVENING);
+
                 addPackageToTourView.ShowDialog();
             }
             public DateActivity(string dateID, List<string> morningActivities, List<string> afternoonActivities, List<string> eveningActivities)
             {
-                AddPackageToTourCommand = new RelayCommand(ExecuteAddPackageToTourCommand);
+                generateCommand();
                 _dateID = dateID;
                 _morningActivities = morningActivities;
                 _afternoonActivities = afternoonActivities;
@@ -44,7 +73,42 @@ namespace Super_Tour.ViewModel
             public List<string> EveningActivities { get => _eveningActivities; set => _eveningActivities = value; }
 
         }
+
+
+
+
+        // End test
+        private string _nameTour;
         private ObservableCollection<DateActivity> _dateActivityList;
+        private int _totalDay;
+        private int _totalNight;
+        private City _selectedCity;
+        private ObservableCollection<City> _listCities;
+
+        public int TotalDay
+        {
+            get
+            {
+                return _totalDay;
+            }
+            set
+            {
+                _totalDay = value;
+                OnPropertyChanged(nameof(TotalDay));
+            }
+        }
+        public int TotalNight
+        {
+            get
+            {
+                return _totalNight;
+            }
+            set
+            {
+                _totalNight = value;
+                OnPropertyChanged(nameof(TotalNight));
+            }
+        }
         public ObservableCollection<DateActivity> DateActivityList
         {
             get => _dateActivityList;
@@ -54,10 +118,53 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(DateActivityList));
             }
         }
-        // End test
+        public string NameTour
+        {
+            get { return _nameTour; }
+            set
+            {
+                _nameTour = value;
+                OnPropertyChanged(nameof(NameTour));
+            }
+        }
+        public ObservableCollection<City> ListCities
+        {
+            get
+            {
+                return _listCities;
+            }
+            set
+            {
+                _listCities = value;
+                OnPropertyChanged(nameof(ListCities));
+            }
+        }
+        public City SelectedCity
+        {
+            get
+            {
+                return _selectedCity;
+            }
+            set
+            {
+                _selectedCity = value;
+                OnPropertyChanged(nameof(SelectedCity));
+            }
+        }
+        private void LoadCities()
+        {
+            ListCities = new ObservableCollection<City>();
+            foreach(City city in Get_Api_Address.getCities())
+            {
+                ListCities.Add(city);
+            }
+        }
         public CreateTourViewModel()
         {
             // Test 
+
+            LoadCities();
+            //SelectedCity = Get_Api_Address.getCities().Where(p => p.code == 1).SingleOrDefault();
             DateActivityList = new ObservableCollection<DateActivity>();
             List<string> morAct1 = new List<string>();
             List<string> afterAct1 = new List<string>();
@@ -105,6 +212,9 @@ namespace Super_Tour.ViewModel
             nightAct3.Add("Hoạt động tối 3 - Ngày 3");
             DateActivity dateActivity3 = new DateActivity("Lịch trình ngày 3", morAct3, afterAct3, nightAct3);
             DateActivityList.Add(dateActivity3);
+            TotalNight = (DateActivityList.Count - 1);
+            TotalDay = DateActivityList.Count;
+
             // End Test
         }
     }

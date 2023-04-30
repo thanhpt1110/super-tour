@@ -35,23 +35,16 @@ namespace Super_Tour.ViewModel
         private PACKAGE package;
         private string _namePackage;
         private string _description;
-        private string _price;
+        private decimal _price;
         private bool _execute = true;
         #endregion
         #region Declare public variable
-        public string Price
+        public decimal Price
         {
             get { return _price; }
             set
             {
-                if (Regex.IsMatch(value, "^[0-9]*$"))
-                {
                     _price = value;
-                }
-                else
-                {
-                    // Hiển thị thông báo lỗi tại đây
-                }
                 OnPropertyChanged(nameof(Price));
             }
         }
@@ -158,6 +151,7 @@ namespace Super_Tour.ViewModel
         public ICommand SelectedCityCommand { get; }
         public ICommand CreateNewPackageCommand { get; }
         public ICommand OpenPictureCommand { get; }
+        public ICommand TextChangeOnlyNum { get; }
         #endregion
         public CreatePackageViewModel()
         {
@@ -167,10 +161,36 @@ namespace Super_Tour.ViewModel
             CreateNewPackageCommand = new RelayCommand(ExecuteCreatePackageCommand, CanExecuteCreateNewPackage);
             SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
             OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
+            //TextChangeOnlyNum = new RelayCommand(ExecuteMyCommand, CanExecuteTextChangeOnlyNum);
             _listDistrict = new ObservableCollection<District>();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>();
             LoadPackageType();
             LoadProvinces();
+        }
+/*        private void ExecuteMyCommand(object parameter)
+        {
+            string input = parameter as string;
+            if (ValidateNumericInput(input))
+            {
+                // Nếu giá trị nhập vào là số, set giá trị của MyProperty bằng giá trị đó
+                Price = input;
+            }
+            else
+            {
+                // Nếu giá trị nhập vào không phải là số, không làm gì cả
+            }
+        }*/
+        private bool CanExecuteTextChangeOnlyNum(object parameter)
+        {
+            // Kiểm tra xem người dùng đã nhập dữ liệu hợp lệ vào TextBox chưa
+            return ValidateNumericInput(parameter as string);
+        }
+
+        private bool ValidateNumericInput(string input)
+        {
+            // Kiểm tra xem ký tự được nhập vào có phải là số không
+            double result;
+            return Double.TryParse(input, out result);
         }
         private bool CanExecuteCreateNewPackage(object obj)
         {
@@ -258,7 +278,7 @@ namespace Super_Tour.ViewModel
                 package.Id_Province = _selectedCity.codename;
                 package.Id_District = _selectedDistrict.codename;
                 package.Description_Package = _description;
-                package.Price = decimal.Parse(_price);
+                package.Price = _price;
                 package.Image_Package = await UploadImg();
                 db.PACKAGEs.Add(package);
                 await db.SaveChangesAsync();

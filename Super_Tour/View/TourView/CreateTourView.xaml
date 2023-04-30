@@ -88,6 +88,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <TextBox 
+                                    Text="{Binding SelectedCity.name}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     FontSize="15"
                                     Margin="20,5,0,5"
@@ -103,7 +104,11 @@
                         </Grid>
                         <Grid Grid.Column="1">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <ComboBox Margin="50,5,0,5"
+                                <ComboBox 
+                                    ItemsSource="{Binding ListCities}"
+                                    DisplayMemberPath="name"
+                                    SelectedValue="{Binding SelectedCity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="50,5,0,5"
                                         FontSize="15"
                                         Height="50"
                                         Width="200"
@@ -148,7 +153,7 @@
                                     <TextBlock x:Name="dayNum" 
                                                FontSize="22"
                                                HorizontalAlignment="Center"
-                                               Text="0" />
+                                               Text="{Binding TotalDay}" />
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Column="1">
@@ -160,7 +165,7 @@
                                     <TextBlock x:Name="nightNum" 
                                                FontSize="22"
                                                HorizontalAlignment="Center"
-                                               Text="0" />
+                                               Text="{Binding TotalNight}" />
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -210,7 +215,7 @@
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
+                                                                        Command="{Binding AddPackageToTourMorningCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                             Height="15" 
                                                                             Foreground="White"/>
@@ -244,7 +249,7 @@
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
+                                                                        Command="{Binding AddPackageToTourAfternoonCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                           Height="15" 
                                                                           Foreground="White"/>
@@ -278,7 +283,7 @@
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
+                                                                        Command="{Binding AddPackageToTourEveningCommand}">
                                                                             <fa:IconImage Icon="Add" 
                                                                       Height="15" 
                                                                       Foreground="White"/>

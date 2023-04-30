@@ -132,13 +132,6 @@ namespace Super_Tour.ViewModel
             timer.Tick += Timer_Tick;
         }
 
-        private void inititalCustom()
-        {
-            LoadDataByPage(_listTypePackageOriginal);
-            setResultNumber();
-            setButtonAndPage();
-        }
-
         private void UpdatePackage(object obj)
         {
             timer.Stop();
@@ -226,21 +219,7 @@ namespace Super_Tour.ViewModel
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
-        }
-        private void getAllPackage()
-        {
-            try
-            {
-                List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                LoadDataByPage(_listTypePackageOriginal);
-                setButtonAndPage();
-                setResultNumber();
-            }
-            catch(Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-        }    
+        }  
         private async void ExecuteDeletePackageCommand(object obj)
         {
             try
@@ -288,8 +267,9 @@ namespace Super_Tour.ViewModel
             try
             {
                 CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
+                timer.Stop();
                 createPackageTypeView.ShowDialog();
-                getAllPackage();
+                LoadDataAsync();
             }
             catch(Exception ex)
             {

@@ -179,7 +179,7 @@
                                                         Cursor="Hand"
                                                         Command="{Binding OpenPictureCommand}">
                                                 </Button>
-                                                <Image Height="340" Margin="5,10,5,5">
+                                                <Image Height="340" Margin="5,10,5,5" Source="{Binding SelectedImage}">
 
                                                 </Image>
                                             </StackPanel>
