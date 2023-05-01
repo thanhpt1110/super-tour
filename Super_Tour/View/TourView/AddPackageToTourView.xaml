@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="600" Width="900"
+        Height="650" Width="900"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -38,6 +38,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -200,6 +201,16 @@
                             </StackPanel>
                             </Border>
                         </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Button HorizontalAlignment="Center" 
+                                Content="Save" 
+                                Height="40"
+                                Width="120"
+                                FontSize="18"
+                                BorderThickness="0"
+                                Background="{StaticResource btnAdd}"
+                                Command="" />
                     </Grid>
                 </Grid>
             </Border>
