@@ -305,9 +305,9 @@ namespace Super_Tour.ViewModel
             }
 
         }
-        private City FindCity(string namecode)
+        private City FindCity(string codename)
         {
-            return Get_Api_Address.getCities().Where(p => p.codename == namecode).FirstOrDefault();
+            return Get_Api_Address.getCities().Where(p => p.codename == codename).FirstOrDefault();
         }
         private void LoadProvinces()
         {
@@ -315,8 +315,8 @@ namespace Super_Tour.ViewModel
             {
 
                 List<City> cities = Get_Api_Address.getCities();
+                _selectedCity = cities.Where(p=>p.codename==package.Id_Province).First();
                 cities = cities.OrderBy(p => p.name).ToList();
-                SelectedCity = FindCity(package.Id_Province);
                 foreach (City city in cities)
                 {
                     _listCity.Add(city);
