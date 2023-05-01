@@ -233,8 +233,7 @@
                         </Button>
                         <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="Green"
-                                Click="btnMaximize_Click">
+                                Tag="Green">
                             <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
                         <Button x:Name="btnMinimize"
@@ -292,15 +291,14 @@
                             </Ellipse>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="2"
-                          Background="{StaticResource BackgroundChildContent}">
-                        <Border 
-                                CornerRadius="0,0,0,10">
+                    <Grid Grid.Row="2">
+                        <Border CornerRadius="0,0,10,0"
+                                Background="{StaticResource BackgroundChildContent}">
+                            <ContentControl 
+                                Content="{Binding CurrentChildView}"
+                                Margin="25"/>
                         </Border>
                     </Grid>
-                    <ContentControl Content="{Binding CurrentChildView}"
-                                    Grid.Row="2"
-                                    Margin="25"/>
                 </Grid>
             </Border>
         </Grid>

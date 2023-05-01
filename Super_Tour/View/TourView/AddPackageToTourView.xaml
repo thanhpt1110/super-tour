@@ -38,7 +38,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="65"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -56,8 +56,7 @@
                             </Button>
                             <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="Green"
-                                Click="btnMaximize_Click">
+                                Tag="Green">
                                 <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                             </Button>
                             <Button x:Name="btnMinimize"
@@ -214,7 +213,9 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
-                                Command="" />
+                                Command="" 
+                                Margin="0, 0, 0, 10"
+                                IsDefault="True"/>
                     </Grid>
                 </Grid>
             </Border>

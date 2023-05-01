@@ -36,7 +36,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="65"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -54,8 +54,7 @@
                             </Button>
                             <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="Green"
-                                Click="btnMaximize_Click">
+                                Tag="Green">
                                 <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                             </Button>
                             <Button x:Name="btnMinimize"
@@ -142,7 +141,7 @@
                     <Grid Grid.Row="2">
                         <Button Style="{StaticResource roundedButton}"
                             Width="120"
-                            Height="37"
+                            Height="35"
                             Background="{StaticResource btnAdd}"
                                 Effect="{StaticResource MaterialDesignElevationShadow4}"
                             Content="SAVE"
@@ -150,7 +149,10 @@
                             FontSize="17"
                             FontWeight="Medium"
                             Foreground="{StaticResource plainTextColor1}"
-                            Command="{Binding UpdatePackageCommand}"></Button>
+                            Command="{Binding UpdatePackageCommand}"
+                            Margin="0, 10, 0, 10"
+                            IsDefault="True">
+                        </Button>
                     </Grid>
                 </Grid>
             </Border>
