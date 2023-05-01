@@ -131,7 +131,9 @@
                                                 CanUserResize="False" 
                                                 Width="1.5*"
                                                 Binding="{Binding Name_Package}"/>
-                                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                                        <DataGridTemplateColumn Header="Operations" 
+                                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                                IsReadOnly="True" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -180,7 +182,7 @@
                                                 CanUserResize="False" 
                                                 Width="1.5*"
                                                 Binding="{Binding Name_Package}"/>
-                                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                                        <DataGridTemplateColumn Header="Operations" HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" IsReadOnly="True" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">

@@ -237,4 +237,44 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="DataGridColumnHeaderStyle2" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundDataGridHeader}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColorDataGridRow}" />
+        <Setter Property="Margin" Value="0 0 0 0" />
+        <Setter Property="Padding" Value="12 0 0 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Border x:Name="DGR_Border" 
+                                    Padding="0 8" 
+                                    CornerRadius="0" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderThickness="0" 
+                                    SnapsToDevicePixels="True">
+                        <StackPanel Orientation="Horizontal">
+                            <theme:DataGridHeaderBorder Background="{TemplateBinding Background}" 
+                                                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                IsClickable="{TemplateBinding CanUserSort}" 
+                                                                IsPressed="{TemplateBinding IsPressed}" 
+                                                                IsHovered="{TemplateBinding IsMouseOver}" 
+                                                                Padding="{TemplateBinding Padding}" 
+                                                                SeparatorBrush="{TemplateBinding SeparatorBrush}" 
+                                                                SortDirection="{TemplateBinding SortDirection}" 
+                                                                SeparatorVisibility="{TemplateBinding SeparatorVisibility}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  RecognizesAccessKey="True" 
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </theme:DataGridHeaderBorder>
+                            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                            <TextBlock Text="  "/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

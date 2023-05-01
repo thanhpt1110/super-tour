@@ -337,9 +337,6 @@
     <Compile Include="View\CustomerView\CreateCustomerView.xaml.cs">
       <DependentUpon>CreateCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomerView\DetailCustomerView.xaml.cs">
-      <DependentUpon>DetailCustomerView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CustomerView\MainCustomerView.xaml.cs">
       <DependentUpon>MainCustomerView.xaml</DependentUpon>
     </Compile>
@@ -412,9 +409,6 @@
     <Compile Include="View\TravelView\CreateTravelView.xaml.cs">
       <DependentUpon>CreateTravelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TravelView\DetailTravelView.xaml.cs">
-      <DependentUpon>DetailTravelView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TravelView\MainTravelView.xaml.cs">
       <DependentUpon>MainTravelView.xaml</DependentUpon>
     </Compile>
@@ -466,10 +460,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomerView\CreateCustomerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CustomerView\DetailCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -578,10 +568,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TravelView\CreateTravelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TravelView\DetailTravelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
