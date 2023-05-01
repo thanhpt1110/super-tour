@@ -315,6 +315,7 @@ namespace Super_Tour.ViewModel
             {
 
                 List<City> cities = Get_Api_Address.getCities();
+                _selectedCity = cities.Where(p=>p.codename==package.Id_Province).First();
                 cities = cities.OrderBy(p => p.name).ToList();
                 foreach (City city in cities)
                 {

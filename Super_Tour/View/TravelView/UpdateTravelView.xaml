@@ -196,8 +196,10 @@
                         <Button Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
-                                Width="140"
-                                Height="40"></Button>
+                                Width="120"
+                                Height="35"
+                                IsDefault="True">
+                        </Button>
                     </Grid>
                 </Grid>
             </Border>
