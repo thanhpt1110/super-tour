@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="600" Width="900"
+        Height="650" Width="900"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -38,6 +38,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition/>
+                        <RowDefinition Height="65"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -55,8 +56,7 @@
                             </Button>
                             <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="Green"
-                                Click="btnMaximize_Click">
+                                Tag="Green">
                                 <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                             </Button>
                             <Button x:Name="btnMinimize"
@@ -130,19 +130,21 @@
                                                 CanUserResize="False" 
                                                 Width="1.5*"
                                                 Binding="{Binding Name_Package}"/>
-                                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                                        <DataGridTemplateColumn Header="Operations" 
+                                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                                IsReadOnly="True" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Button Style="{StaticResource iconButton}"
+                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                                    Background="{StaticResource btnAdd}"
+                                                                    Width="20"
+                                                                Height="20"
                                                                 Command="{Binding DataContext.AddAvailablePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}">
-                                                            <fa:IconImage Icon="Add" Foreground="#32C948"/>
+                                                            <fa:IconImage Width="12" Icon="Add" Foreground="White"/>
                                                         </Button>
-                                                        <Button Margin="15 0 0 0" Style="{StaticResource iconButton}"
-                                                                >
-                                                            <fa:IconImage Icon="DeleteLeft" Foreground="#FF4A4F"/>
-                                                        </Button>
+                                                        
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
@@ -179,19 +181,21 @@
                                                 CanUserResize="False" 
                                                 Width="1.5*"
                                                 Binding="{Binding Name_Package}"/>
-                                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                                        <DataGridTemplateColumn Header="Operations" HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" IsReadOnly="True" Width="*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Button Style="{StaticResource iconButton}">
-                                                            <fa:IconImage Icon="Edit" Foreground="#32C948"/>
-                                                        </Button>
-                                                        <Button Margin="15 0 0 0" Style="{StaticResource iconButton}"
-                                                                Command="{Binding DataContext.DeletePickedPackageCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}">
-                                                            <fa:IconImage Icon="DeleteLeft" Foreground="#FF4A4F"/>
-                                                        </Button>
-                                                    </StackPanel>
+                                                            <Button Margin="15 0 0 0" 
+                                                                Background="#FF4A4F"
+                                                                Width="20"
+                                                                Height="20"
+                                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                                    Command="{Binding DataContext.DeletePickedPackageCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}"
+                                                                >
+                                                                <fa:IconImage Width="10" Icon="Remove" Foreground="White"/>
+                                                            </Button>
+                                                        </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -200,6 +204,18 @@
                             </StackPanel>
                             </Border>
                         </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Button HorizontalAlignment="Center" 
+                                Content="Save" 
+                                Height="40"
+                                Width="120"
+                                FontSize="18"
+                                BorderThickness="0"
+                                Background="{StaticResource btnAdd}"
+                                Command="" 
+                                Margin="0, 0, 0, 10"
+                                IsDefault="True"/>
                     </Grid>
                 </Grid>
             </Border>

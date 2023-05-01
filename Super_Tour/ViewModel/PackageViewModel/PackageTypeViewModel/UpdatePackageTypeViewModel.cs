@@ -66,7 +66,7 @@ namespace Super_Tour.ViewModel
                         _typePackage.Name_Type = _typePackageName;
                         db.TYPE_PACKAGEs.AddOrUpdate(_typePackage);
                         await db.SaveChangesAsync();
-                        MyMessageBox.ShowDialog("Update type package successfull!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                        MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                         UpdatePackageTypeView updatePackageTypeView = null;
                         foreach (Window window in Application.Current.Windows)
                         {

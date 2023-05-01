@@ -55,8 +55,7 @@
                             </Button>
                             <Button x:Name="btnMaximize"
                                 Style="{StaticResource controlButton}"
-                                Tag="Green"
-                                Click="btnMaximize_Click">
+                                Tag="Green">
                                 <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
                             </Button>
                             <Button x:Name="btnMinimize"
@@ -192,8 +191,10 @@
                         <Button Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
-                                Width="140"
-                                Height="40"></Button>
+                                Width="120"
+                                Height="35"
+                                IsDefault="True">
+                        </Button>
                     </Grid>
                 </Grid>
             </Border>

@@ -101,7 +101,10 @@
                                                 CanUserResize="False" 
                                                 Width="*"
                                                 Binding="{Binding Package.Price}"/>
-                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn Header="Operations"
+                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                IsReadOnly="True" 
+                                                Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

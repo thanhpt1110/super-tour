@@ -17,6 +17,7 @@ using Super_Tour.CustomControls;
 using System.Windows.Markup;
 using Org.BouncyCastle.Crypto.Tls;
 using System.IO.Packaging;
+using Org.BouncyCastle.Asn1.Cms;
 
 namespace Super_Tour.ViewModel
 {
@@ -24,6 +25,7 @@ namespace Super_Tour.ViewModel
     {
         private SUPER_TOUR db = new SUPER_TOUR();
         private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
+        private List<TYPE_PACKAGE> _listTypePackageSearching; // Data lúc mà có người search
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
         private DispatcherTimer timer = new DispatcherTimer();
         private string _searchType="";
@@ -32,6 +34,7 @@ namespace Super_Tour.ViewModel
         private string _pageNumberText;
         private bool _enableButtonNext;
         private bool _enableButtonPrevious;
+        private bool _onSearching = false;
         private string _resultNumberText;
         private int _startIndex;
         private int _endIndex;
@@ -126,7 +129,6 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            //inititalCustom();
             LoadDataAsync();
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
@@ -146,16 +148,16 @@ namespace Super_Tour.ViewModel
         {
             if (string.IsNullOrEmpty(_searchType))
             {
-                this._currentPage = 1;
-                LoadDataByPage(_listTypePackageOriginal);
-                setButtonAndPage();
-                setResultNumber();
-                return;
+                _onSearching = false;
+                ReloadData(_listTypePackageOriginal);
             }
-            List<TYPE_PACKAGE> TypePackages = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-            LoadDataByPage(TypePackages);
-            setButtonAndPage();
-            setResultNumber();
+            else
+            {
+                _onSearching = true;
+                this._currentPage = 1;
+                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+                ReloadData(_listTypePackageSearching);
+            }
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
@@ -175,20 +177,18 @@ namespace Super_Tour.ViewModel
                     {
                         // Dữ liệu đã được cập nhật
                         // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        _listTypePackageOriginal = myEntities;
-                        if (!string.IsNullOrEmpty(_searchType))
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
-                            SearchCommand(null);
-                        }
-                        else
-                        {
-                            setButtonAndPage();
-                            LoadDataByPage(_listTypePackageOriginal);
-                            setResultNumber();
-                        }
-                    });
+                            _listTypePackageOriginal = myEntities;
+                            if (!string.IsNullOrEmpty(_searchType))
+                            {
+                                SearchCommand(null);
+                            }
+                            else
+                            {
+                                ReloadData(_listTypePackageOriginal);
+                            }
+                        });
                     }
 
                 });
@@ -205,12 +205,13 @@ namespace Super_Tour.ViewModel
                 await Task.Run(() =>
                 {
                     _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                    _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        LoadDataByPage(_listTypePackageOriginal);
-                        setButtonAndPage();
-                        setResultNumber();
-
+                        if (_onSearching)
+                            ReloadData(_listTypePackageSearching);
+                        else
+                            ReloadData(_listTypePackageOriginal);
                     });
                 });
                 timer.Start();
@@ -240,13 +241,9 @@ namespace Super_Tour.ViewModel
                         db.TYPE_PACKAGEs.Remove(type_packageFind);
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        List<TYPE_PACKAGE> ListTypePackage = db.TYPE_PACKAGEs.ToList();
-                        LoadDataByPage(ListTypePackage);
-                        setButtonAndPage();
-                        setResultNumber();
-
+                        List<TYPE_PACKAGE> ListTypePackage = new List<TYPE_PACKAGE>();
+                        LoadDataAsync();
                     }
-                    
                 }
                 else
                 {
@@ -295,9 +292,21 @@ namespace Super_Tour.ViewModel
             try
             {
                 this._totalResult = typePackages.Count();
-                this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
-                this._startIndex = (this._currentPage - 1) * 13;
-                this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+                if (_totalResult == 0)
+                {
+                    _startIndex = -1; 
+                    _endIndex = 0;
+                    _totalPage = 1;
+                    _currentPage = 1;
+                }
+                else
+                {
+                    this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+                    if (this._totalPage < _currentPage )
+                        _currentPage = this._totalPage;
+                    this._startIndex = (this._currentPage - 1) * 13;
+                    this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+                }
 
                 List<TYPE_PACKAGE> ListTypePackage = GetData(typePackages, this._startIndex, this._endIndex);
                 _listTypePackages.Clear();
@@ -327,10 +336,18 @@ namespace Super_Tour.ViewModel
                 else 
                     EnableButtonPrevious = true;
             }
-            else
+            if (this._currentPage == this._totalPage)
             {
-                EnableButtonPrevious = true;
-                EnableButtonNext = false;
+                if (this._currentPage == 1)
+                {
+                    EnableButtonPrevious = false;
+                    EnableButtonNext = false;
+                }
+                else
+                {
+                    EnableButtonPrevious = true;
+                    EnableButtonNext = false;
+                }
             }
             PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
         }
@@ -338,9 +355,13 @@ namespace Super_Tour.ViewModel
         private void ExcecuteGoToPreviousPageCommand(object obj)
         {
             if (this._currentPage > 1)
-                --this._currentPage;   
+                --this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listTypePackageSearching);
+            else
+                LoadDataByPage(_listTypePackageOriginal);
+
             setButtonAndPage();
-            LoadDataByPage(_listTypePackageOriginal);
             setResultNumber();
         }
 
@@ -348,8 +369,19 @@ namespace Super_Tour.ViewModel
         {
             if (this._currentPage < this._totalPage)
                 ++this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listTypePackageSearching);
+            else
+                LoadDataByPage(_listTypePackageOriginal);
+
             setButtonAndPage();
-            LoadDataByPage(_listTypePackageOriginal);
+            setResultNumber();
+        }
+
+        private void ReloadData(List<TYPE_PACKAGE> typePackages)
+        {
+            LoadDataByPage(typePackages);
+            setButtonAndPage();
             setResultNumber();
         }
     }
