@@ -20,7 +20,7 @@ using Super_Tour.View;
 using System.Windows;
 using Firebase.Storage;
 using System.Data.Entity.Migrations;
-using Super_Tour.View.PackageView;
+using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
@@ -29,7 +29,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<City> _listCity;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private ObservableCollection<District> _listDistrict;
-        private City _selectedCity=null;
+        private City _selectedCity;
         private string _imagePath;
         private District _selectedDistrict;
         private TYPE_PACKAGE _selectedTypePackage; // Danh
@@ -305,9 +305,9 @@ namespace Super_Tour.ViewModel
             }
 
         }
-        private City FindCity(string namecode)
+        private City FindCity(string codename)
         {
-            return Get_Api_Address.getCities().Where(p => p.codename == namecode).FirstOrDefault();
+            return Get_Api_Address.getCities().Where(p => p.codename == codename).FirstOrDefault();
         }
         private void LoadProvinces()
         {
@@ -316,10 +316,13 @@ namespace Super_Tour.ViewModel
 
                 List<City> cities = Get_Api_Address.getCities();
                 cities = cities.OrderBy(p => p.name).ToList();
-                SelectedCity = FindCity(package.Id_Province);
                 foreach (City city in cities)
                 {
                     _listCity.Add(city);
+                    if(city.codename==package.Id_Province)
+                    {
+                        SelectedCity = city;
+                    }
                 }
 
             }

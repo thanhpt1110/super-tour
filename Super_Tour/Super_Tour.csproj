@@ -325,8 +325,8 @@
     <Compile Include="ViewModel\TourViewModel\MainTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\UpdateTourViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\CreateTravelViewModel.cs" />
-    <Compile Include="ViewModel\TravelViewModel\DetailTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
+    <Compile Include="ViewModel\TravelViewModel\SelectTourForTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
     <Compile Include="View\AccountView\MainAccountView.xaml.cs">
       <DependentUpon>MainAccountView.xaml</DependentUpon>
@@ -412,6 +412,9 @@
     <Compile Include="View\TravelView\MainTravelView.xaml.cs">
       <DependentUpon>MainTravelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TravelView\SelectTourForTravelView.xaml.cs">
+      <DependentUpon>SelectTourForTravelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TravelView\UpdateTravelView.xaml.cs">
       <DependentUpon>UpdateTravelView.xaml</DependentUpon>
     </Compile>
@@ -428,6 +431,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DataGridStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\MyTimePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -572,6 +579,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TravelView\MainTravelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TravelView\SelectTourForTravelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

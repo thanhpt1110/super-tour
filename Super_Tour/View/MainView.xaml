@@ -245,7 +245,7 @@
                         </Button>
                     </StackPanel>
                     <Grid Grid.Row="1">
-                            
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -292,15 +292,15 @@
                             </Ellipse>
                         </StackPanel>
                     </Grid>
-                    <Grid Grid.Row="2"
-                          Background="{StaticResource BackgroundChildContent}">
-                        <Border 
-                                CornerRadius="0,0,0,10">
+                    <Grid Grid.Row="2">
+                        <Border CornerRadius="0,0,10,0"
+                                Background="{StaticResource BackgroundChildContent}"
+                                >
+                            <ContentControl Content="{Binding CurrentChildView}"
+                                                Margin="25"
+                                            />
                         </Border>
                     </Grid>
-                    <ContentControl Content="{Binding CurrentChildView}"
-                                    Grid.Row="2"
-                                    Margin="25"/>
                 </Grid>
             </Border>
         </Grid>

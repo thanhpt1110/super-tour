@@ -15,7 +15,6 @@ using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
-using Super_Tour.View.PackageView;
 
 namespace Super_Tour.ViewModel
 {
