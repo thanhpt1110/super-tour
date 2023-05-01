@@ -20,7 +20,7 @@
         <Setter Property="CanUserDeleteRows" Value="False" />
         <Setter Property="CanUserReorderColumns" Value="False" />
         <Setter Property="CanUserResizeRows" Value="False" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="MaxHeight" Value="570"/>
         <Setter Property="GridLinesVisibility" Value="None" />
         <Setter Property="ColumnWidth" Value="*" />
