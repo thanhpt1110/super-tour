@@ -119,7 +119,8 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.8*"/>
-                        <DataGridTemplateColumn Header="Operations" 
+                        <DataGridTemplateColumn Header="Operations"
+                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False"
                                                 Width="0.8*">
