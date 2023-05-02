@@ -17,16 +17,23 @@ namespace Super_Tour.ViewModel
     internal class CreateTourViewModel: ObservableObject
     {
         //Real not test anymore
+          public class GridActivity
+        {
+            public TOUR_DETAILS Tour_detail { get; set; }
+            public string PackageName { get; set; }
+
+        }
         public class DateActivity:ObservableObject
         {
             private int _dateID;
-            private ObservableCollection<string> _morningActivitiesText;
-            private ObservableCollection<string> _afternoonActivitiesText;
-            private ObservableCollection<string> _eveningActivitiesText;
-            private List<TOUR_DETAILS> _morningTourDetail;
-            private List<TOUR_DETAILS> _afternoonTourDetail;
-            private List<TOUR_DETAILS> _eveningTourDetail;
+            private ObservableCollection<GridActivity> _morningTourDetail;
+            private ObservableCollection<GridActivity> _afternoonTourDetail;
+            private ObservableCollection<GridActivity> _eveningTourDetail;
             private SUPER_TOUR db = new SUPER_TOUR();
+            public ICommand DeletePackageMorningCommand { get; private set; }
+            public ICommand DeletePackageAfternoonCommand { get; private set; }
+            public ICommand DeletePackageEveningCommand { get; private set; }
+
             public ICommand AddPackageToTourMorningCommand { get; private set; }
             public ICommand AddPackageToTourAfternoonCommand { get; private set; }
             public ICommand AddPackageToTourEveningCommand { get; private set; }
@@ -38,27 +45,40 @@ namespace Super_Tour.ViewModel
             }
             private void generateCommand()
             {
-                _morningActivitiesText=new ObservableCollection<string>();
-                _afternoonActivitiesText = new ObservableCollection<string>();
-                _eveningActivitiesText = new ObservableCollection<string>();
+                _morningTourDetail = new ObservableCollection<GridActivity>();
+                _afternoonTourDetail = new ObservableCollection<GridActivity>();
+                _eveningTourDetail = new ObservableCollection<GridActivity>();
+                DeletePackageAfternoonCommand = new RelayCommand(ExecuteDeletePacakgeAfternoonCommand);
+                DeletePackageEveningCommand = new RelayCommand(ExecuteDeletePacakgeEveningCommand);
 
-                _morningTourDetail = new List<TOUR_DETAILS>();
-                _afternoonTourDetail = new List<TOUR_DETAILS>();
-                _eveningTourDetail = new List<TOUR_DETAILS>();
+                DeletePackageMorningCommand = new RelayCommand(ExecuteDeletePacakgeMorningCommand);
                 AddPackageToTourMorningCommand = new RelayCommand(ExecuteAddPackageToTourMorningCommand);
                 AddPackageToTourAfternoonCommand = new RelayCommand(ExecuteAddPackageToTourAfternoonCommand);
                 AddPackageToTourEveningCommand = new RelayCommand(ExecuteAddPackageToTourEveningCommand);
             }
+            private void ExecuteDeletePacakgeMorningCommand(object obj)
+            {
+                MessageBox.Show("DeleteMorning");
+/*                TOUR_DETAILS tour_detail = obj as TOUR_DETAILS;
+                _morningTourDetail.Remove(tour_detail);*/
+            }
+            private void ExecuteDeletePacakgeAfternoonCommand(object obj)
+            {
+                GridActivity tour_detail = obj as GridActivity;
+                _afternoonTourDetail.Remove(tour_detail);
+            }
+            private void ExecuteDeletePacakgeEveningCommand(object obj)
+            {
+                GridActivity tour_detail = obj as GridActivity;
+                _eveningTourDetail.Remove(tour_detail);
+                
+
+            }
             private void ExecuteAddPackageToTourMorningCommand(object obj)
             {
-                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();               
                 addPackageToTourView.DataContext = new AddPackageToTourViewModel(_morningTourDetail);
                 addPackageToTourView.ShowDialog();
-                MorningActivities.Clear();
-                foreach(TOUR_DETAILS tourDetail in _morningTourDetail)
-                {
-                    MorningActivities.Add(db.PACKAGEs.Find(tourDetail.Id_Package).Name_Package + $"- Ngày {DateID}");
-                }
             }
             private void ExecuteAddPackageToTourAfternoonCommand(object obj)
             {
@@ -67,11 +87,6 @@ namespace Super_Tour.ViewModel
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
                 addPackageToTourView.DataContext = new AddPackageToTourViewModel(_afternoonTourDetail);
                 addPackageToTourView.ShowDialog();
-                _afternoonActivitiesText.Clear();
-                foreach (TOUR_DETAILS tourDetail in _afternoonTourDetail)
-                {
-                    _afternoonActivitiesText.Add(db.PACKAGEs.Find(tourDetail.Id_Package).Name_Package + $"- Ngày {DateID}");
-                }
             }
             private void ExecuteAddPackageToTourEveningCommand(object obj)
             {
@@ -79,11 +94,6 @@ namespace Super_Tour.ViewModel
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
                 addPackageToTourView.DataContext = new AddPackageToTourViewModel(_eveningTourDetail);
                 addPackageToTourView.ShowDialog();
-                _eveningActivitiesText.Clear();
-                foreach (TOUR_DETAILS tourDetail in _eveningTourDetail)
-                {
-                    _eveningActivitiesText.Add(db.PACKAGEs.Find(tourDetail.Id_Package).Name_Package + $"- Ngày {DateID}");
-                }
             }
             public DateActivity(int dateID, List<string> morningActivities, List<string> afternoonActivities, List<string> eveningActivities)
             {
@@ -95,11 +105,10 @@ namespace Super_Tour.ViewModel
             }
 
             public string DateID { get => $"Lịch trình ngày {_dateID}";   }
-            public ObservableCollection<string> MorningActivities { get => _morningActivitiesText; set { _morningActivitiesText = value;
+            public ObservableCollection<GridActivity> MorningActivities { get => _morningTourDetail; set { _morningTourDetail = value;
                     OnPropertyChanged(nameof(MorningActivities)); } }
-            public ObservableCollection<string> AfternoonActivities { get => _afternoonActivitiesText; set { _afternoonActivitiesText = value; OnPropertyChanged(nameof(AfternoonActivities)); } }
-            public ObservableCollection<string> EveningActivities { get => _eveningActivitiesText; set { _eveningActivitiesText = value; OnPropertyChanged(nameof(EveningActivities)); } }
-
+            public ObservableCollection<GridActivity> AfternoonActivities { get => _afternoonTourDetail; set { _afternoonTourDetail = value; OnPropertyChanged(nameof(AfternoonActivities)); } }
+            public ObservableCollection<GridActivity> EveningActivities { get => _eveningTourDetail; set { _eveningTourDetail = value; OnPropertyChanged(nameof(EveningActivities)); } }
         }
 
 
@@ -111,6 +120,8 @@ namespace Super_Tour.ViewModel
         private int _totalDay;
         private int _totalNight;
         private City _selectedCity;
+        public ICommand DeletePackageMorningCommand { get; private set; }
+
         private ObservableCollection<City> _listCities;
 
         public int TotalDay
@@ -203,7 +214,6 @@ namespace Super_Tour.ViewModel
             // End Test
             AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
         }
-
         private void ExecuteAddADayCommand(object obj)
         {
             DateActivity dateActivity = new DateActivity(DateActivityList.Count + 1);

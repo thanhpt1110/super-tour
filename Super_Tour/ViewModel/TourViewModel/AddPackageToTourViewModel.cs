@@ -11,9 +11,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static Super_Tour.ViewModel.CreateTourViewModel;
 
 namespace Super_Tour.ViewModel
 {
+
     internal class AddPackageToTourViewModel: ObservableObject
     {
         private TOUR_DETAILS _tour_detail;
@@ -23,7 +25,7 @@ namespace Super_Tour.ViewModel
         private SUPER_TOUR db = new SUPER_TOUR();
         private ObservableCollection<PACKAGE> _observableListAvailablePackage;
         private ObservableCollection<PACKAGE> _observableListPickedPackage;
-        private List<TOUR_DETAILS> _listTourDetail;
+        private ObservableCollection<GridActivity> _listTourDetail;
         
         public ObservableCollection<PACKAGE> ObservableListAvailablePackage
         {
@@ -68,8 +70,9 @@ namespace Super_Tour.ViewModel
                 {
                     TOUR_DETAILS tour_detail = new TOUR_DETAILS();
                     tour_detail.Id_Package = package.Id_Package;
+                    string namePacakge = db.PACKAGEs.Find(tour_detail.Id_Package).Name_Package;
                     tour_detail.Id_TourDetails = 1;
-                    _listTourDetail.Add(tour_detail);
+                    _listTourDetail.Add(new GridActivity() { Tour_detail = tour_detail,PackageName= namePacakge });
                 }
                 AddPackageToTourView addPackageToTourView = null;
                 foreach (Window window in Application.Current.Windows)
@@ -97,7 +100,7 @@ namespace Super_Tour.ViewModel
         {
             return _executeSave;
         }
-        public AddPackageToTourViewModel(List<TOUR_DETAILS> listTourDetail)
+        public AddPackageToTourViewModel(ObservableCollection<GridActivity> listTourDetail)
         {
             _listTourDetail = listTourDetail;
             _observableListPickedPackage = new ObservableCollection<PACKAGE>();
@@ -129,9 +132,9 @@ namespace Super_Tour.ViewModel
                         ObservableListAvailablePackage = new ObservableCollection<PACKAGE>(_listAvailablePackage);
                         if(_listTourDetail.Count>0)
                         {
-                            foreach(TOUR_DETAILS item in _listTourDetail)
+                            foreach(GridActivity item in _listTourDetail)
                             {
-                                PACKAGE package = db.PACKAGEs.Find(item.Id_Package);
+                                PACKAGE package = db.PACKAGEs.Find(item.Tour_detail.Id_Package);
                                 ObservableListAvailablePackage.Remove(package);
                                 ObservableListPickedPackage.Add(package);
                             }

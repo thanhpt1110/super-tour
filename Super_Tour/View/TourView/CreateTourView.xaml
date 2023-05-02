@@ -237,7 +237,7 @@
                                                                                         <ColumnDefinition Width="*" />
                                                                                     </Grid.ColumnDefinitions>
                                                                                     <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                        <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" FontSize="14"/>
                                                                                     </Grid>
                                                                                     <Grid Grid.Column="1">
                                                                                         <Border BorderBrush="DarkGray"
@@ -284,6 +284,7 @@
                                                                                                 Height="25"
                                                                                                 Background="Red"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
+                                                                                                Command="{Binding DataContext.DeletePackageMorningCommand}"                                         
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
                                                                                                         Height="12" 
@@ -339,7 +340,7 @@
                                                                                         <ColumnDefinition Width="*" />
                                                                                     </Grid.ColumnDefinitions>
                                                                                     <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                        <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" FontSize="14"/>
                                                                                     </Grid>
                                                                                     <Grid Grid.Column="1">
                                                                                         <Border BorderBrush="DarkGray"
@@ -386,6 +387,7 @@
                                                                                                 Height="25"
                                                                                                 Background="Red"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
+                                                                                                Command="{Binding DateActivityList.DeletePackageAfternoonCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"                                         
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
                                                                                                         Height="12" 
@@ -440,7 +442,7 @@
                                                                                         <ColumnDefinition Width="*" />
                                                                                     </Grid.ColumnDefinitions>
                                                                                     <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                        <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" FontSize="14"/>
                                                                                     </Grid>
                                                                                     <Grid Grid.Column="1">
                                                                                         <Border BorderBrush="DarkGray"
@@ -487,6 +489,7 @@
                                                                                                 Height="25"
                                                                                                 Background="Red"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
+                                                                                                Command="{Binding DateActivityList.DeletePackageEveningCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"                                         
                                                                                                 >
                                                                                                 <fa:IconImage Icon="Remove" 
                                                                                                         Height="12" 
