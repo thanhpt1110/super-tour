@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="500" Width="800"
+        Height="450" Width="800"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -101,88 +101,6 @@
                                             <materialDesign:PackIcon 
                                                 Height="40"
                                                 Width="40"
-                                                Kind="Account"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
-                                            <TextBox
-                                        materialDesign:HintAssist.Hint="Enter customer name"
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="50"
-                                        Margin="10,0,0,0"
-                                        Foreground="Black"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        BorderThickness="0"
-                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                        Width="280"
-                                        CaretBrush="Black"
-                                        />
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="GenderMaleFemale"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
-                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  HorizontalAlignment="Left"
-                                                  Margin="10,0,0,0"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  BorderThickness="0"
-                                                  materialDesign:HintAssist.Hint="Select customer gender"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                  Width="200"
-                                                  Height="50"
-                                                  BorderBrush="DarkGray"
-                                                  >
-                                            <ComboBoxItem>Nam</ComboBoxItem>
-                                            <ComboBoxItem>Nữ</ComboBoxItem>
-                                        </ComboBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="Phone"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
-                                            <TextBox
-                                        materialDesign:HintAssist.Hint="Enter customer phone number"
-                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="50"
-                                        Margin="10,0,0,0"
-                                        Foreground="Black"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                        BorderThickness="0"
-                                        Width="280"
-                                            CaretBrush="Black"
-                                        />
-                                        </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
                                                 Kind="IdentificationCard"
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
@@ -207,24 +125,104 @@
                                             <materialDesign:PackIcon 
                                                 Height="40"
                                                 Width="40"
+                                                Kind="Account"
+                                                Margin="20,0,0,0"
+                                                VerticalAlignment="Center"/>
+                                            <TextBox
+                                                materialDesign:HintAssist.Hint="Enter customer name"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Height="50"
+                                                Margin="10,0,0,0"
+                                                Foreground="Black"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                Background="{StaticResource TextBoxColor}"
+                                                BorderThickness="0"
+                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                Width="280"
+                                                CaretBrush="Black"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon 
+                                                Height="40"
+                                                Width="40"
+                                                Kind="GenderMaleFemale"
+                                                Margin="20,0,0,0"
+                                                VerticalAlignment="Center"/>
+                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                  HorizontalAlignment="Left"
+                                                  Margin="10,0,0,0"
+                                                  Foreground="Black"
+                                                  materialDesign:HintAssist.Foreground="Black"
+                                                  Background="{StaticResource ComboBoxColor}"
+                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                  BorderThickness="0"
+                                                  materialDesign:HintAssist.Hint="Select customer gender"
+                                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                  Width="200"
+                                                  Height="50"
+                                                  BorderBrush="DarkGray"
+                                                  >
+                                                <ComboBoxItem>Nam</ComboBoxItem>
+                                                <ComboBoxItem>Nữ</ComboBoxItem>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon 
+                                                Height="40"
+                                                Width="40"
+                                                Kind="Phone"
+                                                Margin="20,0,0,0"
+                                                VerticalAlignment="Center"/>
+                                            <TextBox
+                                                materialDesign:HintAssist.Hint="Enter customer phone number"
+                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Height="50"
+                                                Margin="10,0,0,0"
+                                                Foreground="Black"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                Background="{StaticResource TextBoxColor}"
+                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                BorderThickness="0"
+                                                Width="280"
+                                                CaretBrush="Black"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon 
+                                                Height="40"
+                                                Width="40"
                                                 Kind="AddressMarker"
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <TextBox
-                                        materialDesign:HintAssist.Hint="Enter customer address"
-                                        Text="Customer address"
-                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="50"
-                                        Margin="12,0,0,0"
-                                        Foreground="Black"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                        BorderThickness="0"
-                                        Width="280"
-                                        CaretBrush="Black"
-                                        />
+                                                materialDesign:HintAssist.Hint="Enter customer address"
+                                                Text="Customer address"
+                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Height="50"
+                                                Margin="12,0,0,0"
+                                                Foreground="Black"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                Background="{StaticResource TextBoxColor}"
+                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                BorderThickness="0"
+                                                Width="280"
+                                                CaretBrush="Black"/>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="2">

@@ -298,7 +298,11 @@
     <Compile Include="Ultis\RelayCommand.cs" />
     <Compile Include="ViewModel\AccountViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\AddTouristViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\CreateBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\SelectTravelForBookingViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\UpdateBookingViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CreateCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\MainCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\DetailCustomerViewModel.cs" />
@@ -339,8 +343,20 @@
     <Compile Include="View\AccountView\UpdateAccountView.xaml.cs">
       <DependentUpon>UpdateAccountView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookingView\AddTouristView.xaml.cs">
+      <DependentUpon>AddTouristView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingView\CreateBookingView.xaml.cs">
+      <DependentUpon>CreateBookingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingView\SelectTravelForBookingView.xaml.cs">
+      <DependentUpon>SelectTravelForBookingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingView\UpdateBookingView.xaml.cs">
+      <DependentUpon>UpdateBookingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\CreateCustomerView.xaml.cs">
       <DependentUpon>CreateCustomerView.xaml</DependentUpon>
@@ -478,7 +494,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\BookingView\AddTouristView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\CreateBookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BookingView\MainBookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\SelectTravelForBookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\UpdateBookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

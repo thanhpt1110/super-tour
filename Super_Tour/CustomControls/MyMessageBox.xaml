@@ -124,6 +124,7 @@
                                 Margin="5,0,5,0"
                                 Style="{StaticResource roundedButton}"
                                 Height="30"
+                                FontWeight="Medium"
                                 IsDefault="True"
                                 >
                             OK
@@ -135,28 +136,31 @@
                                 Foreground="White" 
                                 MinWidth="85" 
                                 Height="30"
+                                FontWeight="Medium"
                                 Margin="5,0,5,0"
                                 >
                             Yes
                         </Button>
                         <Button x:Name="btnNo"  
                             Click="btnNo_Click"
-                            Style="{StaticResource roundedButton}"
+                                Style="{StaticResource roundedRedButton}"
                                 Background="{StaticResource MyMessageBoxButtonNo}" 
                                 Foreground="White" 
                                 MinWidth="85" 
                                 Height="30"
+                                FontWeight="Medium"
                                 Margin="5,0,5,0"
                                >
                             No
                         </Button>
                         <Button x:Name="btnCancel"  
                             Click="btnCancel_Click"
-                            Style="{StaticResource roundedButton}"
+                            Style="{StaticResource roundedYellowButton}"
                                 Background="{StaticResource MyMessageBoxButtonCancel}" 
                                 Foreground="White" 
                                 MinWidth="85" 
                                 Height="30"
+                                FontWeight="Medium"
                                 Margin="5,0,5,0"
                                 >
                             Cancel

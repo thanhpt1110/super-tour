@@ -14,7 +14,7 @@
     <SolidColorBrush x:Key="BackgroundDataGridRowHover" Color="#CCD8E3"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDataGridRowClick" Color="#AFC2D3"></SolidColorBrush>
     <SolidColorBrush x:Key="TextColorDataGridRow" Color="#1D242E"></SolidColorBrush>
-    
+    <SolidColorBrush x:Key="BackgroundBorderMainContent" Color="#DFE7EE"></SolidColorBrush>
     <!--MyMessageBox Colors-->
     <SolidColorBrush x:Key="MyMessageBoxTitle" Color="#1A3848"></SolidColorBrush>
     <SolidColorBrush x:Key="MyMessageBoxContent" Color="White"></SolidColorBrush>
@@ -95,4 +95,5 @@
     <!--Child Content-->
     <SolidColorBrush x:Key="searchColor" Color="#D3D3D3"></SolidColorBrush>
     <SolidColorBrush x:Key="btnAdd" Color="#2FC445"></SolidColorBrush>
+    <SolidColorBrush x:Key="btnDelete" Color="#FF4A4F"></SolidColorBrush>
 </ResourceDictionary>

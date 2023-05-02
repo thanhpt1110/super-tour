@@ -198,6 +198,7 @@
                                                      materialDesign:HintAssist.Foreground="Black"
                                                      materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                      Height="50"
+                                                    CaretBrush="Black"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 ></TextBox>
@@ -211,6 +212,7 @@
                                                      materialDesign:HintAssist.Foreground="Black"
                                                      materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                      Height="250"
+                                                     CaretBrush="Black"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                      Text="{Binding Description}"
@@ -227,6 +229,7 @@
                                                      materialDesign:HintAssist.Foreground="Black"
                                                      materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                      Height="50"
+                                                    CaretBrush="Black"
                                                      Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                     
