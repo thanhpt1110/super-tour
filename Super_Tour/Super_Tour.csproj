@@ -298,6 +298,7 @@
     <Compile Include="Ultis\RelayCommand.cs" />
     <Compile Include="ViewModel\AccountViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\AddTouristViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\CreateBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\UpdateBookingViewModel.cs" />
@@ -340,6 +341,9 @@
     </Compile>
     <Compile Include="View\AccountView\UpdateAccountView.xaml.cs">
       <DependentUpon>UpdateAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingView\AddTouristView.xaml.cs">
+      <DependentUpon>AddTouristView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookingView\CreateBookingView.xaml.cs">
       <DependentUpon>CreateBookingView.xaml</DependentUpon>
@@ -483,6 +487,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AccountView\UpdateAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\AddTouristView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Super_Tour.View
 {
     /// <summary>
-    /// Interaction logic for CreateBookingView.xaml
+    /// Interaction logic for AddTouristView.xaml
     /// </summary>
-    public partial class CreateBookingView : Window
+    public partial class AddTouristView : Window
     {
-        public CreateBookingView()
+        public AddTouristView()
         {
             InitializeComponent();
-            this.DataContext = new CreateBookingViewModel();
+            this.DataContext = new AddTouristViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -43,17 +43,6 @@ namespace Super_Tour.View
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-        private void btnMaximize_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.WindowState == WindowState.Normal)
-            {
-                this.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = WindowState.Normal;
-            }
         }
     }
 }
