@@ -92,6 +92,7 @@
                                 <Grid Grid.Row="0">
                                     <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center">
+                                        <fa:IconImage Icon="CalendarPlus" Height="35"/>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                      materialDesign:HintAssist.Hint="Tour of this travel"
                                      Width="300"
@@ -124,7 +125,14 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0">
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon 
+                                                VerticalAlignment="Center" 
+                                                Kind="Location"
+                                                Height="50"
+                                                Width="35"
+                                                Margin="10,0,0,0"/>
+                                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="Enter Start Location"
                                                  Height="50"
                                                  Width="300"
@@ -135,11 +143,13 @@
                                                  Background="{StaticResource TextBoxColor}"
                                                  materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                  CaretBrush="Black"/>
+                                        </StackPanel>
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <StackPanel Orientation="Horizontal">
                                             <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                         BorderThickness="0"
+                                                        BorderBrush="DarkGray"
                                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                         Foreground="Black"
                                                         materialDesign:HintAssist.Foreground="Black"
@@ -150,10 +160,10 @@
                                             <materialDesign:TimePicker Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                         Foreground="Black"
-                                                                       Background="{StaticResource BackgroundDataGridRowHover}"
+                                                        Background="{StaticResource BackgroundDataGridRowHover}"
                                                         materialDesign:HintAssist.Foreground="Black"
                                                         materialDesign:HintAssist.Hint="Select Start Time"
-                                                                       materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
+                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
                                                         Width="170"
                                                         Margin="30,0,0,0"/>
                                         </StackPanel>
@@ -165,20 +175,38 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0">
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon
+                                                Kind="Peak"
+                                                Height="50"
+                                                Width="35"
+                                                Margin="0,0,0,0"
+                                                VerticalAlignment="Center"/>
+                                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          materialDesign:HintAssist.Hint="Enter Max Number of Ticket"
                                          Height="50"
                                          Width="200"
                                          BorderThickness="0"
+                                         Margin="10,0,0,0"
                                          Effect="{StaticResource MaterialDesignElevationShadow6}"
                                          Foreground="Black"
                                          materialDesign:HintAssist.Foreground="Black"
                                          Background="{StaticResource TextBoxColor}"
                                          materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                          CaretBrush="Black"/>
+                                        </StackPanel>
                                     </Grid>
                                     <Grid Grid.Column="1">
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon
+                                                Kind="Discount"
+                                                Height="50"
+                                                Width="35"
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Center"/>
+                                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          materialDesign:HintAssist.Hint="Enter Discount"
                                          Height="50"
                                          Width="200"
@@ -189,6 +217,7 @@
                                          Background="{StaticResource TextBoxColor}"
                                          materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                          CaretBrush="Black"/>
+                                        </StackPanel>
                                     </Grid>
                                 </Grid>
                             </Grid>

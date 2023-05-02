@@ -1,5 +1,4 @@
-﻿using Super_Tour.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Super_Tour.View
 {
     /// <summary>
-    /// Interaction logic for MainBookingView.xaml
+    /// Interaction logic for CreateBookingView.xaml
     /// </summary>
-    public partial class MainBookingView : UserControl
+    public partial class CreateBookingView : Window
     {
-        public MainBookingView()
+        public CreateBookingView()
         {
             InitializeComponent();
-            this.DataContext = new MainBookingViewModel();
         }
     }
 }
