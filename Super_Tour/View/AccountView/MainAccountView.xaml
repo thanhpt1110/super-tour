@@ -70,7 +70,7 @@
                                 FontFamily="Segoe UI"
                                 Foreground="{StaticResource plainTextColor1}"
                                 Height="40"
-                                Command="{Binding OpenCreatePackageTypeViewCommand}"/>
+                                Command="{Binding OpenCreateAccountViewCommand}"/>
 
                 </Grid>
             </Grid>

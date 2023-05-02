@@ -296,6 +296,8 @@
     <Compile Include="Ultis\Constant.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
+    <Compile Include="ViewModel\AccountViewModel\CreateAccountViewModel.cs" />
+    <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CreateCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\MainCustomerViewModel.cs" />
@@ -328,8 +330,14 @@
     <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\SelectTourForTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
+    <Compile Include="View\AccountView\CreateAccountView.xaml.cs">
+      <DependentUpon>CreateAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AccountView\MainAccountView.xaml.cs">
       <DependentUpon>MainAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AccountView\UpdateAccountView.xaml.cs">
+      <DependentUpon>UpdateAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
@@ -458,7 +466,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AccountView\CreateAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AccountView\MainAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AccountView\UpdateAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

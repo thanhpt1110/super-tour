@@ -36,6 +36,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="50"/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
@@ -80,12 +81,51 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Height="50"
+                                 Width="300"
+                                 BorderThickness="0"
+                                 Background="{StaticResource TextBoxColor}"
+                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                 Foreground="Black"
+                                 materialDesign:HintAssist.Foreground="Black"
+                                 HorizontalAlignment="Left"
+                                 Margin="20,0,0,0"
+                                 materialDesign:HintAssist.Hint="Search..."
+                                 FontSize="15"
+                                 CaretBrush="Black"
+                                 Effect="{StaticResource MaterialDesignElevationShadow6}"/>
+                            <fa:IconBlock 
+                                Margin="50, 0, 10, 0"
+                                Icon="Filter"
+                                Foreground="Black"
+                                FontSize="20"
+                                Effect="{StaticResource MaterialDesignElevationShadow2}"/>
+                            <ComboBox
+                                ItemsSource="{Binding ListSearchFilterBy}"
+                                SelectedItem="{Binding SelectedFilter}"
+                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                FontSize="15"
+                                Width="180"
+                                Margin="5,0,0,0"
+                                BorderThickness="0"
+                                Foreground="Black"
+                                Background="{StaticResource ComboBoxColor}"
+                                Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                BorderBrush="DarkGray"
+                                materialDesign:HintAssist.Hint="- Select Filter By -"
+                                materialDesign:HintAssist.Foreground="Black"
+                                materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"></ComboBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
                         <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding Tours}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              Style="{DynamicResource DataGridStyle1}" Margin="20,30,25,20">
+                              Style="{DynamicResource DataGridStyle1}" Margin="20,10,25,20">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tour ID"
                                                 IsReadOnly="True" 
