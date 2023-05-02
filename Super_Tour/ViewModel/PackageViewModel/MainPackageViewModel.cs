@@ -118,7 +118,7 @@ namespace Super_Tour.ViewModel
                 }
                 else
                 {
-                    MyMessageBox.ShowDialog("The package type could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    MyMessageBox.ShowDialog("The package could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)

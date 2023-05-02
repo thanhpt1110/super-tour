@@ -300,7 +300,6 @@ namespace Super_Tour.ViewModel
                 //db.PACKAGEs.Remove(_package);
                 Console.WriteLine("Lỗi: " + ex.InnerException.Message);
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
             }
             finally
             {

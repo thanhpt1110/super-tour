@@ -14,6 +14,7 @@ namespace Super_Tour.Model
         public int Id_Travel { get; set; }
         public int Id_Tour { get; set; }
         public string StartLocation { get; set; }
+        public int MaxTicket { get; set; }
         public DateTime StartDateTimeTravel { get; set; }
         public int RemainingTicket { get; set; }
         public int Discount { get; set; }

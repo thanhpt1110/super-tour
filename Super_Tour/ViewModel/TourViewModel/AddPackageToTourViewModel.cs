@@ -18,15 +18,34 @@ namespace Super_Tour.ViewModel
 
     internal class AddPackageToTourViewModel: ObservableObject
     {
-        private TOUR_DETAILS _tour_detail;
+        private TYPE_PACKAGE _selectedTypePackage;
         private List<PACKAGE> _listAvailablePackage;
-        private List<PACKAGE> _listAlreadyPickedPackage;
         private bool _executeSave=true;
         private SUPER_TOUR db = new SUPER_TOUR();
         private ObservableCollection<PACKAGE> _observableListAvailablePackage;
         private ObservableCollection<PACKAGE> _observableListPickedPackage;
         private ObservableCollection<GridActivity> _listTourDetail;
-        
+        private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
+
+
+        public ObservableCollection<TYPE_PACKAGE> ListTypePackage
+        {
+            get { return _listTypePackage; }
+            set {
+                _listTypePackage = value;
+                OnPropertyChanged(nameof(ListTypePackage));
+            }
+        }
+
+        public TYPE_PACKAGE SelectedTypePackage
+        {
+            get => _selectedTypePackage;
+            set
+            {
+                _selectedTypePackage = value;
+                OnPropertyChanged(nameof(SelectedTypePackage));
+            }
+        }
         public ObservableCollection<PACKAGE> ObservableListAvailablePackage
         {
             get
@@ -54,11 +73,49 @@ namespace Super_Tour.ViewModel
         public ICommand AddAvailablePackageCommand { get; }
         public ICommand DeletePickedPackageCommand { get; }
         public ICommand SavePackageCommand { get; }
+        public ICommand CreateNewPacakgeCommand { get; }
+        public ICommand SearchCommand { get; }
         public AddPackageToTourViewModel() 
         {
             AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
             DeletePickedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
             SavePackageCommand = new RelayCommand(ExecuteSavePackage, CanExecuteSavePackage);
+            CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
+            SearchCommand = new RelayCommand(ExecuteSearchCommand);
+        }
+        private void LoadTypePackage()
+        {
+            List<TYPE_PACKAGE> package =  db.TYPE_PACKAGEs.ToList();
+            _listTypePackage = new ObservableCollection<TYPE_PACKAGE>(package);
+        }
+        private void ExecuteSearchCommand(object obj)
+        {
+            /*            List<PACKAGE> listPackageSearch = _listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+                        _listAvailablePackage.Clear();
+                        foreach(PACKAGE package in listPackageSearch)
+                        {
+                            _listAvailablePackage.Add(package);
+                        }    */
+            LoadWithSearch();
+        }
+        private void LoadWithSearch()
+        {
+            List<PACKAGE> listSearchType = this._listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+            ObservableListAvailablePackage.Clear();
+            foreach (PACKAGE package in listSearchType)
+            {
+                ObservableListAvailablePackage.Add(package);
+            }
+            foreach (PACKAGE package in _observableListPickedPackage)
+            {
+                ObservableListAvailablePackage.Remove(package);
+            }
+        }
+        private void ExecuteCreatePackgeCommand(object obj)
+        {
+            CreatePackageView view = new CreatePackageView();
+            view.ShowDialog();
+            ReloadPackage(); 
         }
         public void ExecuteSavePackage(object obj)
         {
@@ -107,6 +164,9 @@ namespace Super_Tour.ViewModel
             AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
             SavePackageCommand = new RelayCommand(ExecuteSavePackage, CanExecuteSavePackage);
             DeletePickedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
+            CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
+            SearchCommand = new RelayCommand(ExecuteSearchCommand);
+            LoadTypePackage();
             LoadAvailablePackage();
         }
         public void ExecuteDeletePickedPackage(object obj)
@@ -132,6 +192,7 @@ namespace Super_Tour.ViewModel
                         ObservableListAvailablePackage = new ObservableCollection<PACKAGE>(_listAvailablePackage);
                         if(_listTourDetail.Count>0)
                         {
+
                             foreach(GridActivity item in _listTourDetail)
                             {
                                 PACKAGE package = db.PACKAGEs.Find(item.Tour_detail.Id_Package);
@@ -142,6 +203,35 @@ namespace Super_Tour.ViewModel
                     });
                 }
                 catch(Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+            });
+        }
+        private async Task ReloadPackage()
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    _listAvailablePackage = db.PACKAGEs.ToList();
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ObservableListAvailablePackage = new ObservableCollection<PACKAGE>(_listAvailablePackage);
+
+                            foreach (PACKAGE item in ObservableListPickedPackage)
+                            {
+                                ObservableListAvailablePackage.Remove(item);                            
+                            }
+                         if(_selectedTypePackage!=null)
+                        {
+                            LoadWithSearch();
+                        }    
+                    }
+                            
+                    );
+                }
+                catch (Exception ex)
                 {
                     MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }

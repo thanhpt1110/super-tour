@@ -15,7 +15,7 @@ namespace Super_Tour.Model
         public int Id_Tour { get; set; }
         public int Id_Package { get; set; }
         public string Session { get; set; }
-        public byte Date_Order_Package { get; set; }
+        public int Date_Order_Package { get; set; }
         public TimeSpan Start_Time_Package { get; set; }
 /*        [ForeignKey("tour_details_ibfk_1")]
         public virtual TOUR TOUR { get; set; }

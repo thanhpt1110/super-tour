@@ -87,7 +87,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <TextBox 
-                                    Text="{Binding SelectedCity.name}"
+                                    Text="{Binding NameTour}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     FontSize="15"
                                     Margin="20,5,0,5"
@@ -252,7 +252,8 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}">
 
                                                                                             </materialDesign:TimePicker>
                                                                                         </Border>
@@ -355,9 +356,11 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}">
 
-                                                                                            </materialDesign:TimePicker>
+
+                                                                                                </materialDesign:TimePicker>
                                                                                         </Border>
                                                                                     </Grid>
                                                                                     <Grid Grid.Column="2">
@@ -457,9 +460,11 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}">
 
-                                                                                            </materialDesign:TimePicker>
+
+                                                                                                </materialDesign:TimePicker>
                                                                                         </Border>
                                                                                     </Grid>
                                                                                     <Grid Grid.Column="2">
@@ -529,9 +534,10 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
-                                Command="{Binding }" 
+                                Command="{Binding CreateTourCommnand}" 
                                 Margin="0, 10, 0, 10"
-                                IsDefault="True"/>
+                                IsDefault="True"
+                                />
                     </Grid>
                 </Grid>
             </Border>

@@ -87,6 +87,7 @@ namespace Super_Tour.ViewModel
         public ICommand OpenCreateTourViewCommand { get; }
         public ICommand OnSearchTextChangedCommand { get;}
         public ICommand SelectedFilterCommand { get; }
+        public ICommand DeleteTourCommnand { get; }
         public MainTourViewModel() 
         {
             timer = new DispatcherTimer();
@@ -97,6 +98,8 @@ namespace Super_Tour.ViewModel
             OpenCreateTourViewCommand = new RelayCommand(ExecuteOpenCreateTourViewCommand);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
+            DeleteTourCommnand = new RelayCommand(ExecuteDeleteTour);
+            LoadTourDataAsync();
             generateFilterItem();
         }
         private void ExecuteSelectFilter(object obj)
@@ -124,7 +127,7 @@ namespace Super_Tour.ViewModel
                     List<TOUR> Updatetours = db.TOURs.ToList();
                     if (!Updatetours.SequenceEqual(_listToursOriginal))
                     {
-                        _listToursOriginal=Updatetours;
+                        _listToursOriginal = Updatetours;
                         Application.Current.Dispatcher.Invoke(() =>
                     {
                         _listDataGridTour.Clear();
@@ -148,9 +151,67 @@ namespace Super_Tour.ViewModel
                 catch (Exception ex)
                 {
                     MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
                 }
             });
+        }
+        private async void ExecuteDeleteTour(object obj)
+        {
+
+            try
+            {
+                DataGridTour dataGridTour = obj as DataGridTour;
+                TOUR tourMain = dataGridTour.Tour;
+                timer.Stop();
+                TOUR TourFind = await db.TOURs.FindAsync(tourMain.Id_Tour);
+                if (db.TRAVELs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList().Count > 0)
+                {
+                    MyMessageBox.ShowDialog("The tour could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return;
+                }
+                if (TourFind != null)
+                {
+                    MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                    {
+                        List<TOUR_DETAILS> tour_details = db.TOUR_DETAILs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList();
+                        foreach (TOUR_DETAILS tour_detail in tour_details)
+                        {
+                            db.TOUR_DETAILs.Remove(tour_detail);
+                        }
+                        db.TOURs.Remove(TourFind);
+                        await db.SaveChangesAsync();
+                        MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                        _listToursOriginal = db.TOURs.ToList();
+                        _listDataGridTour.Clear();
+                        foreach (TOUR tour in _listToursOriginal)
+                        {
+                            decimal SumPrice = 0;
+                            if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
+                            {
+                                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                                continue;
+                            }
+                            foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
+                            {
+                                SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
+                            }
+                            _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                        }
+                    }
+                }
+                else
+                {
+                    MyMessageBox.ShowDialog("The tour could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+                timer.Start();
+            }
         }
 
         private void ExecuteOpenCreateTourViewCommand(object obj)

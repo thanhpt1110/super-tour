@@ -1,4 +1,5 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.Ultis.Api_Address;
@@ -17,10 +18,20 @@ namespace Super_Tour.ViewModel
     internal class CreateTourViewModel: ObservableObject
     {
         //Real not test anymore
-          public class GridActivity
+          public class GridActivity:ObservableObject
         {
+            private DateTime _timeOfPacakge;
             public TOUR_DETAILS Tour_detail { get; set; }
             public string PackageName { get; set; }
+            public DateTime TimeOfPackage
+            {
+                get => _timeOfPacakge; 
+                set
+                {
+                    _timeOfPacakge=value;
+                    OnPropertyChanged(nameof(TimeOfPackage));
+                }
+            }
 
         }
         public class DateActivity:ObservableObject
@@ -33,7 +44,6 @@ namespace Super_Tour.ViewModel
             public ICommand DeletePackageMorningCommand { get; private set; }
             public ICommand DeletePackageAfternoonCommand { get; private set; }
             public ICommand DeletePackageEveningCommand { get; private set; }
-
             public ICommand AddPackageToTourMorningCommand { get; private set; }
             public ICommand AddPackageToTourAfternoonCommand { get; private set; }
             public ICommand AddPackageToTourEveningCommand { get; private set; }
@@ -70,9 +80,7 @@ namespace Super_Tour.ViewModel
             private void ExecuteDeletePacakgeEveningCommand(object obj)
             {
                 GridActivity tour_detail = obj as GridActivity;
-                _eveningTourDetail.Remove(tour_detail);
-                
-
+                _eveningTourDetail.Remove(tour_detail);               
             }
             private void ExecuteAddPackageToTourMorningCommand(object obj)
             {
@@ -115,12 +123,15 @@ namespace Super_Tour.ViewModel
 
 
         // End test
+        private bool _executeSave=true;
+        private SUPER_TOUR db = new SUPER_TOUR();
         private string _nameTour;
         private ObservableCollection<DateActivity> _dateActivityList;
         private int _totalDay;
         private int _totalNight;
+        private string _selectedProvinces;
         private City _selectedCity;
-        public ICommand DeletePackageMorningCommand { get; private set; }
+        public ICommand CreateTourCommnand { get; }
 
         private ObservableCollection<City> _listCities;
 
@@ -198,6 +209,15 @@ namespace Super_Tour.ViewModel
                 ListCities.Add(city);
             }
         }
+        public string SelectedProvinces
+        {
+            get => _selectedProvinces;
+            set
+            {
+                _selectedProvinces = value;
+                OnPropertyChanged(nameof(SelectedProvinces));
+            }
+        }
         // End test
         public ICommand AddADayCommand { get; }
         public CreateTourViewModel()
@@ -210,14 +230,100 @@ namespace Super_Tour.ViewModel
             else
             TotalNight = (DateActivityList.Count - 1);
             TotalDay = DateActivityList.Count;
-
+            CreateTourCommnand = new RelayCommand(ExecuteCreateTourCommand, checkExecuteSave);
             // End Test
             AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
+        }
+        private bool checkExecuteSave(object obj)
+        {
+            return _executeSave;
+        }
+        private async void ExecuteCreateTourCommand(object obj)
+        {
+            if (string.IsNullOrEmpty(_nameTour) || DateActivityList.Count==0)
+            {
+                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                _executeSave = false;
+                TOUR tour = new TOUR();
+                tour.Id_Tour = 1;
+                tour.Name_Tour = _nameTour;
+                tour.TotalDay = TotalDay;
+                tour.TotalNight = TotalNight;
+                tour.PlaceOfTour = "hcm";
+                tour.Status_Tour = "Available";
+                db.TOURs.Add(tour);
+                int i = 1;
+                await db.SaveChangesAsync();
+                int IdTour = db.TOURs.Max(p => p.Id_Tour);
+                foreach (DateActivity dateActivity in _dateActivityList)
+                {
+
+                    foreach (GridActivity activity in dateActivity.MorningActivities)
+                    {
+                        TOUR_DETAILS tourDetail = activity.Tour_detail;
+                        tourDetail.Id_Tour = IdTour;
+                        tourDetail.Date_Order_Package = i;
+                        tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
+                        tourDetail.Id_TourDetails = 1;
+                        tourDetail.Session = "Morning";
+                        db.TOUR_DETAILs.Add(tourDetail);
+                    }
+                    foreach (GridActivity activity in dateActivity.AfternoonActivities)
+                    {
+                        TOUR_DETAILS tourDetail = activity.Tour_detail;
+                        tourDetail.Date_Order_Package = i;
+                        tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
+                        tourDetail.Session = "Afternoon";
+                        tourDetail.Id_TourDetails = 1;
+                        tourDetail.Id_Tour = IdTour;
+                        db.TOUR_DETAILs.Add(tourDetail);
+                    }
+                    foreach (GridActivity activity in dateActivity.EveningActivities)
+                    {
+                        TOUR_DETAILS tourDetail = activity.Tour_detail;
+                        tourDetail.Id_Tour = IdTour;
+                        tourDetail.Id_TourDetails = 1;
+                        tourDetail.Date_Order_Package = i;
+                        tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
+                        tourDetail.Session = "Evening";
+                        db.TOUR_DETAILs.Add(tourDetail);
+                    }
+                    i++;
+                }
+                await db.SaveChangesAsync();
+                MyMessageBox.ShowDialog("Add new tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                CreateTourView createTourView = null;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    Console.WriteLine(window.ToString());
+                    if (window is CreateTourView)
+                    {
+                        createTourView = window as CreateTourView;
+                        break;
+                    }
+                }
+                createTourView.Close();
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+                _executeSave = true;
+            }
+
         }
         private void ExecuteAddADayCommand(object obj)
         {
             DateActivity dateActivity = new DateActivity(DateActivityList.Count + 1);
             DateActivityList.Add(dateActivity);
+            TotalNight = (DateActivityList.Count - 1);
+            TotalDay = DateActivityList.Count;
         }
     }
 }
