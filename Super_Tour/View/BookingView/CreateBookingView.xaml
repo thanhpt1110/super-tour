@@ -113,7 +113,7 @@
                                     Effect="{StaticResource MaterialDesignElevationShadow3}"
                                     Width="35"
                                     Height="35"
-                                    Command="{Binding OpenSelectTourForTravelViewCommand}">
+                                    Command="{Binding OpenSelectTravelForBookingViewCommand}">
                                     <fa:IconImage Foreground="White" 
                                               Icon="Edit" 
                                               Width="20"/>

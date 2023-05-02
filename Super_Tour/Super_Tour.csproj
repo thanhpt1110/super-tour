@@ -301,6 +301,7 @@
     <Compile Include="ViewModel\BookingViewModel\AddTouristViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\CreateBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\SelectTravelForBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\UpdateBookingViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\CreateCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel\MainCustomerViewModel.cs" />
@@ -350,6 +351,9 @@
     </Compile>
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingView\SelectTravelForBookingView.xaml.cs">
+      <DependentUpon>SelectTravelForBookingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BookingView\UpdateBookingView.xaml.cs">
       <DependentUpon>UpdateBookingView.xaml</DependentUpon>
@@ -499,6 +503,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookingView\MainBookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\SelectTravelForBookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
