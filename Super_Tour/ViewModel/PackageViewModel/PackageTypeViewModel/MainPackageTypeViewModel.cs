@@ -202,19 +202,29 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                int flag = 0;
                 await Task.Run(() =>
                 {
-                    _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
-                    _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-                    Application.Current.Dispatcher.Invoke(() =>
+                    try
                     {
-                        if (_onSearching)
-                            ReloadData(_listTypePackageSearching);
-                        else
-                            ReloadData(_listTypePackageOriginal);
-                    });
+                        _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                        _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            if (_onSearching)
+                                ReloadData(_listTypePackageSearching);
+                            else
+                                ReloadData(_listTypePackageOriginal);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        flag = 1;
+                    }
                 });
-                timer.Start();
+                if(flag==0)
+                    timer.Start();
             }
             catch(Exception ex)
             {

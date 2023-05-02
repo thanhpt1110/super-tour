@@ -526,7 +526,7 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
-                                Command="" 
+                                Command="{Binding }" 
                                 Margin="0, 10, 0, 10"
                                 IsDefault="True"/>
                     </Grid>

@@ -213,7 +213,7 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
-                                Command="" 
+                                Command="{Binding SavePackageCommand}" 
                                 Margin="0, 0, 0, 10"
                                 IsDefault="True"/>
                     </Grid>

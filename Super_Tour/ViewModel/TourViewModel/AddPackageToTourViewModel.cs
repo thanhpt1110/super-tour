@@ -2,6 +2,7 @@
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,9 +68,20 @@ namespace Super_Tour.ViewModel
                 {
                     TOUR_DETAILS tour_detail = new TOUR_DETAILS();
                     tour_detail.Id_Package = package.Id_Package;
-                    _tour_detail.Id_TourDetails = 1;
+                    tour_detail.Id_TourDetails = 1;
                     _listTourDetail.Add(tour_detail);
                 }
+                AddPackageToTourView addPackageToTourView = null;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    Console.WriteLine(window.ToString());
+                    if (window is AddPackageToTourView)
+                    {
+                        addPackageToTourView = window as AddPackageToTourView;
+                        break;
+                    }
+                }
+                addPackageToTourView.Close();
             }
             catch(Exception ex)
             {
@@ -105,10 +117,6 @@ namespace Super_Tour.ViewModel
             PACKAGE package = obj as PACKAGE;
             ObservableListAvailablePackage.Remove(package);
             ObservableListPickedPackage.Add(package);
-            TOUR_DETAILS tour_detail = new TOUR_DETAILS();
-            tour_detail.Id_Package = package.Id_Package;
-            tour_detail.Id_TourDetails = 1;
-            _listTourDetail.Add(tour_detail);
         }
         private async Task LoadAvailablePackage()
         {
