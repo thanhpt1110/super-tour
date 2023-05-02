@@ -174,20 +174,19 @@ namespace Super_Tour.ViewModel
                     var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
                     if (!myEntities.SequenceEqual(_listTypePackageOriginal))
-                    {
+                    { 
                         // Dữ liệu đã được cập nhật
                         // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listTypePackageOriginal = myEntities;
-                            if (!string.IsNullOrEmpty(_searchType))
+                            if (_onSearching)
                             {
-                                SearchCommand(null);
+                                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+                                ReloadData(_listTypePackageSearching);
                             }
                             else
-                            {
                                 ReloadData(_listTypePackageOriginal);
-                            }
                         });
                     }
 
@@ -251,7 +250,6 @@ namespace Super_Tour.ViewModel
                         db.TYPE_PACKAGEs.Remove(type_packageFind);
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        List<TYPE_PACKAGE> ListTypePackage = new List<TYPE_PACKAGE>();
                         LoadDataAsync();
                     }
                 }

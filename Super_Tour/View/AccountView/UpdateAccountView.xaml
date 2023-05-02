@@ -1,0 +1,232 @@
+﻿<Window x:Class="Super_Tour.View.UpdateAccountView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Height="550" Width="500"
+        ShowInTaskbar="False">
+    <Grid>
+        <Border CornerRadius="10"
+                BorderThickness="2">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border CornerRadius="10,10,10,10"
+                    Background="{StaticResource BackgroundChildContent}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                            <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="Red"
+                                Click="btnClose_Click">
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Green">
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Orange"
+                                Click="btnMinimize_Click">
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0" 
+                                          Icon="AddressBook" 
+                                          Height="30"/>
+                            <TextBlock
+                                        FontSize="25"
+                                        FontWeight="Medium"
+                                        TextAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="Update Account"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Border Margin="20,0,20,0"
+                                    CornerRadius="10"
+                                    Background="{StaticResource BackgroundDataGridRowHover}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal" 
+                                                HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon 
+                                                Height="40"
+                                                Width="40"
+                                                Kind="Rename"
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Center"/>
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                             BorderThickness="0"
+                                             Background="{StaticResource TextBoxColor}"
+                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                             Foreground="Black"
+                                             materialDesign:HintAssist.Foreground="Black"
+                                             FontSize="15"
+                                             materialDesign:HintAssist.Hint="Enter account name"
+                                             Height="50"
+                                             Width="300"
+                                             CaretBrush="Black"
+                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                             />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon 
+                                                    Height="40"
+                                                    Width="40"
+                                                    Kind="Category"
+                                                    Margin="0,0,12,0"
+                                                    VerticalAlignment="Center"/>
+                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                  Foreground="Black"
+                                                  materialDesign:HintAssist.Foreground="Black"
+                                                  Background="{StaticResource ComboBoxColor}"
+                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                  Height="50"
+                                                  Width="300"
+                                                  BorderThickness="0"
+                                                  BorderBrush="DarkGray"
+                                                  Margin="0"
+                                                  materialDesign:HintAssist.Hint="Select account priority"
+                                                  Effect="{StaticResource MaterialDesignElevationShadow6}">
+
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <StackPanel Orientation="Horizontal" 
+                                                HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon 
+                                                Height="40"
+                                                Width="40"
+                                                Kind="User"
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Center"/>
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                             BorderThickness="0"
+                                             Background="{StaticResource TextBoxColor}"
+                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                             Foreground="Black"
+                                             materialDesign:HintAssist.Foreground="Black"
+                                             FontSize="15"
+                                             materialDesign:HintAssist.Hint="Enter account username"
+                                             Height="50"
+                                             Width="300"
+                                             CaretBrush="Black"
+                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                             />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="3">
+                                    <StackPanel Orientation="Horizontal" 
+                                                HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon 
+                                                Height="35"
+                                                Width="35"
+                                                Kind="Password"
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Center"/>
+                                        <PasswordBox
+                                            Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
+                                            BorderThickness="0"
+                                            Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            Foreground="Black"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            FontSize="15"
+                                            materialDesign:HintAssist.Hint="Enter account password"
+                                            Height="50"
+                                            Width="300"
+                                            Margin="5,0,0,0"
+                                            CaretBrush="Black"
+                                            Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                             />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="4">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon 
+                                                    Height="40"
+                                                    Width="40"
+                                                    Kind="ServiceToolbox"
+                                                    Margin="0,0,12,0"
+                                                    VerticalAlignment="Center"/>
+                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                  Foreground="Black"
+                                                  materialDesign:HintAssist.Foreground="Black"
+                                                  Background="{StaticResource ComboBoxColor}"
+                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                  Height="50"
+                                                  Width="300"
+                                                  BorderThickness="0"
+                                                  BorderBrush="DarkGray"
+                                                  Margin="0"
+                                                  materialDesign:HintAssist.Hint="Select account service"
+                                                  Effect="{StaticResource MaterialDesignElevationShadow6}">
+
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Button Content="Save"
+                                Background="{StaticResource btnAdd}"
+                                BorderThickness="0"
+                                Width="140"
+                                Height="40"></Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

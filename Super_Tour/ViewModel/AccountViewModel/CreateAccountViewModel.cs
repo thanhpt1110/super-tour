@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.ViewModel
 {
-    internal class DetailTravelViewModel
+    internal class CreateAccountViewModel
     {
     }
 }
-

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Student_wpf_application.ViewModels.Command;
 using Super_Tour.Ultis;
-using Super_Tour.View.TravelView;
+using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
