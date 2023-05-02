@@ -244,7 +244,7 @@
                         </Button>
                     </StackPanel>
                     <Grid Grid.Row="1">
-                            
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>

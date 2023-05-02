@@ -20,9 +20,9 @@ namespace Super_Tour.ViewModel
         public class DateActivity:ObservableObject
         {
             private int _dateID;
-            private List<string> _morningActivitiesText;
-            private List<string> _afternoonActivitiesText;
-            private List<string> _eveningActivitiesText;
+            private ObservableCollection<string> _morningActivitiesText;
+            private ObservableCollection<string> _afternoonActivitiesText;
+            private ObservableCollection<string> _eveningActivitiesText;
             private List<TOUR_DETAILS> _morningTourDetail;
             private List<TOUR_DETAILS> _afternoonTourDetail;
             private List<TOUR_DETAILS> _eveningTourDetail;
@@ -38,9 +38,9 @@ namespace Super_Tour.ViewModel
             }
             private void generateCommand()
             {
-                _morningActivitiesText=new List<string>();
-                _afternoonActivitiesText = new List<string>();
-                _eveningActivitiesText = new List<string>();
+                _morningActivitiesText=new ObservableCollection<string>();
+                _afternoonActivitiesText = new ObservableCollection<string>();
+                _eveningActivitiesText = new ObservableCollection<string>();
 
                 _morningTourDetail = new List<TOUR_DETAILS>();
                 _afternoonTourDetail = new List<TOUR_DETAILS>();
@@ -89,16 +89,16 @@ namespace Super_Tour.ViewModel
             {
                 generateCommand();
                 _dateID = dateID;
-                _morningActivitiesText = morningActivities;
+/*                _morningActivitiesText = morningActivities;
                 _afternoonActivitiesText = afternoonActivities;
-                _eveningActivitiesText = eveningActivities;
+                _eveningActivitiesText = eveningActivities;*/
             }
 
             public string DateID { get => $"Lịch trình ngày {_dateID}";   }
-            public List<string> MorningActivities { get => _morningActivitiesText; set { _morningActivitiesText = value;
+            public ObservableCollection<string> MorningActivities { get => _morningActivitiesText; set { _morningActivitiesText = value;
                     OnPropertyChanged(nameof(MorningActivities)); } }
-            public List<string> AfternoonActivities { get => _afternoonActivitiesText; set => _afternoonActivitiesText = value; }
-            public List<string> EveningActivities { get => _eveningActivitiesText; set => _eveningActivitiesText = value; }
+            public ObservableCollection<string> AfternoonActivities { get => _afternoonActivitiesText; set { _afternoonActivitiesText = value; OnPropertyChanged(nameof(AfternoonActivities)); } }
+            public ObservableCollection<string> EveningActivities { get => _eveningActivitiesText; set { _eveningActivitiesText = value; OnPropertyChanged(nameof(EveningActivities)); } }
 
         }
 

@@ -1,9 +1,9 @@
-﻿<Window x:Class="Super_Tour.View.TravelView.CreateTravelView"
+﻿<Window x:Class="Super_Tour.View.CreateTravelView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Super_Tour.View.TravelView"
+        xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -101,14 +101,17 @@
                                      Text="Select a tour for this travel"
                                      Foreground="Black"
                                      materialDesign:HintAssist.Foreground="Black"
+                                     BorderThickness="0"
+                                     Effect="{StaticResource MaterialDesignElevationShadow3}"
                                      Background="{StaticResource BackgroundChildContent}"
                                      materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
                                      Margin="5"/>
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                     Background="{StaticResource btnAdd}"
                                     Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                    Width="40"
-                                    Height="40">
+                                    Width="35"
+                                    Height="35"
+                                    Command="{Binding OpenSelectTourForTravelViewCommand}">
                                             <fa:IconImage Foreground="White" 
                                               Icon="Edit" 
                                               Width="20"/>
@@ -130,7 +133,8 @@
                                                  Foreground="Black"
                                                  materialDesign:HintAssist.Foreground="Black"
                                                  Background="{StaticResource TextBoxColor}"
-                                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                 CaretBrush="Black"/>
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <StackPanel Orientation="Horizontal">
@@ -146,11 +150,12 @@
                                             <materialDesign:TimePicker Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                         Foreground="Black"
+                                                                       Background="{StaticResource BackgroundDataGridRowHover}"
                                                         materialDesign:HintAssist.Foreground="Black"
-                                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                         materialDesign:HintAssist.Hint="Select Start Time"
+                                                                       materialDesign:HintAssist.Background="{StaticResource BackgroundDataGridRowHover}"
                                                         Width="170"
-                                                                       Margin="30,0,0,0"/>
+                                                        Margin="30,0,0,0"/>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
@@ -169,7 +174,8 @@
                                          Foreground="Black"
                                          materialDesign:HintAssist.Foreground="Black"
                                          Background="{StaticResource TextBoxColor}"
-                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                         CaretBrush="Black"/>
                                     </Grid>
                                     <Grid Grid.Column="1">
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -181,7 +187,8 @@
                                          Foreground="Black"
                                          materialDesign:HintAssist.Foreground="Black"
                                          Background="{StaticResource TextBoxColor}"
-                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"/>
+                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                         CaretBrush="Black"/>
                                     </Grid>
                                 </Grid>
                             </Grid>
