@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="BackgroundDataGridRowClick" Color="#AFC2D3"></SolidColorBrush>
     <SolidColorBrush x:Key="TextColorDataGridRow" Color="#1D242E"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundBorderMainContent" Color="#DFE7EE"></SolidColorBrush>
+    <SolidColorBrush x:Key="ThemeColor" Color="#2196F3"></SolidColorBrush>
     <!--MyMessageBox Colors-->
     <SolidColorBrush x:Key="MyMessageBoxTitle" Color="#1A3848"></SolidColorBrush>
     <SolidColorBrush x:Key="MyMessageBoxContent" Color="White"></SolidColorBrush>
