@@ -77,7 +77,7 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListTypePackages}"
+                              ItemsSource="{Binding ListObservableAccount}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -87,20 +87,24 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.7*"
-                                                x:Name="Id_Type_Package_Column"/>
+                                                x:Name="Id_Type_Package_Column"
+                                            Binding="{Binding Id_Account}"/>
 
                         <DataGridTextColumn Header="Account name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.4*"/>
+                                                Width="1.4*"
+                                            Binding="{Binding Account_Name}"/>
                         <DataGridTextColumn Header="Username" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="*"/>
+                                                Width="*"
+                                            Binding="{Binding Username}"/>
                         <DataGridTextColumn Header="Priority" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.5*"/>
+                                                Width="0.5*"
+                                            Binding="{Binding Service}"/>
                         <DataGridTemplateColumn Header="Operations" 
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

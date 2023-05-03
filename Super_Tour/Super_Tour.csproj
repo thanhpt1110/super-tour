@@ -279,12 +279,12 @@
     </Compile>
     <Compile Include="Model\ACCOUNT.cs" />
     <Compile Include="Model\BOOKING.cs" />
-    <Compile Include="Model\BOOKING_DETAILS.cs" />
     <Compile Include="Model\CUSTOMER.cs" />
     <Compile Include="Model\PACKAGE.cs" />
     <Compile Include="Model\SUPER_TOUR.cs" />
     <Compile Include="Model\TICKET.cs" />
     <Compile Include="Model\TOUR.cs" />
+    <Compile Include="Model\TOURIST.cs" />
     <Compile Include="Model\TOUR_DETAILS.cs" />
     <Compile Include="Model\TRAVEL.cs" />
     <Compile Include="Model\TYPE_PACKAGE.cs" />

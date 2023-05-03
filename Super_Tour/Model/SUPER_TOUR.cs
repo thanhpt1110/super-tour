@@ -18,7 +18,7 @@ namespace Super_Tour.Model
         }
         public DbSet<ACCOUNT> ACCOUNTs {get; set;}
         public DbSet<BOOKING> BOOKINGs { get; set; }
-        public DbSet<BOOKING_DETAILS> BOOKING_DETAILSs { get; set; }
+        public DbSet<TOURIST> BOOKING_DETAILSs { get; set; }
         public DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public DbSet<PACKAGE> PACKAGEs { get; set; }
         public DbSet<TICKET> TICKETs { get; set; }
@@ -30,7 +30,7 @@ namespace Super_Tour.Model
         {
             modelBuilder.Entity<ACCOUNT>().ToTable("ACCOUNT");
             modelBuilder.Entity<BOOKING>().ToTable("BOOKING");
-            modelBuilder.Entity<BOOKING_DETAILS>().ToTable("BOOKING_DETAILS");
+            modelBuilder.Entity<TOURIST>().ToTable("TOURIST");
             modelBuilder.Entity<CUSTOMER>().ToTable("CUSTOMER");
             modelBuilder.Entity<PACKAGE>().ToTable("PACKAGE");
             modelBuilder.Entity<TICKET>().ToTable("TICKET");

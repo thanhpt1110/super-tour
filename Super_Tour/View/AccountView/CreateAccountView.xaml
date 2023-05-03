@@ -101,6 +101,7 @@
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"/>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            local:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay}" 
                                              BorderThickness="0"
                                              Background="{StaticResource TextBoxColor}"
                                              materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
@@ -112,6 +113,7 @@
                                              Width="300"
                                              CaretBrush="Black"
                                              Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                 Text="{Binding AccountName}"
                                              />
                                     </StackPanel>
                                 </Grid>
@@ -124,7 +126,10 @@
                                                     Kind="Category"
                                                     Margin="0,0,12,0"
                                                     VerticalAlignment="Center"/>
-                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                        <ComboBox
+                                                ItemsSource="{Binding ListPriority}"
+                                                SelectedItem="{Binding SelectedPriority}"
+                                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                   Foreground="Black"
                                                   materialDesign:HintAssist.Foreground="Black"
                                                   Background="{StaticResource ComboBoxColor}"
@@ -149,7 +154,9 @@
                                                 Kind="User"
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"/>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox 
+                                            Text="{Binding Username}"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                              BorderThickness="0"
                                              Background="{StaticResource TextBoxColor}"
                                              materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
@@ -173,7 +180,7 @@
                                                 Kind="Password"
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"/>
-                                        <PasswordBox
+                                        <PasswordBox 
                                             Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
                                             BorderThickness="0"
                                             Background="{StaticResource TextBoxColor}"
@@ -199,7 +206,10 @@
                                                     Kind="ServiceToolbox"
                                                     Margin="0,0,12,0"
                                                     VerticalAlignment="Center"/>
-                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                        <ComboBox 
+                                            ItemsSource="{Binding ListServices}"
+                                            SelectedItem="{Binding SelectedService}"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                   Foreground="Black"
                                                   materialDesign:HintAssist.Foreground="Black"
                                                   Background="{StaticResource ComboBoxColor}"
@@ -219,7 +229,9 @@
                         </Border>
                     </Grid>
                     <Grid Grid.Row="3">
-                        <Button Content="Save"
+                        <Button 
+                                Command="{Binding CreateAccountCommand}"
+                                Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="140"

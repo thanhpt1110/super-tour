@@ -10,6 +10,7 @@ namespace Super_Tour.Model
     public class ACCOUNT
     {
         [Key]
+        public int Id_Account { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Account_Name { get; set; }
