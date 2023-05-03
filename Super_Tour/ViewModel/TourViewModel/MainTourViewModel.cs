@@ -173,29 +173,35 @@ namespace Super_Tour.ViewModel
                     MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                     if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                     {
-                        List<TOUR_DETAILS> tour_details = db.TOUR_DETAILs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList();
-                        foreach (TOUR_DETAILS tour_detail in tour_details)
+                        using (SUPER_TOUR db = new SUPER_TOUR())
                         {
-                            db.TOUR_DETAILs.Remove(tour_detail);
-                        }
-                        db.TOURs.Remove(TourFind);
-                        await db.SaveChangesAsync();
-                        MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        _listToursOriginal = db.TOURs.ToList();
-                        _listDataGridTour.Clear();
-                        foreach (TOUR tour in _listToursOriginal)
-                        {
-                            decimal SumPrice = 0;
-                            if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
+                            List<TOUR_DETAILS> tour_details = db.TOUR_DETAILs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList();
+                            foreach (TOUR_DETAILS tour_detail in tour_details)
                             {
+                                db.TOUR_DETAILs.Remove(tour_detail);
+                            }
+                            await db.SaveChangesAsync();
+                            List<TOUR_DETAILS> tour_details1 = db.TOUR_DETAILs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList();
+                            db.TOURs.Remove(db.TOURs.Find(TourFind.Id_Tour));
+                            await db.SaveChangesAsync();
+
+                            MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                            _listToursOriginal = db.TOURs.AsNoTracking().ToList();
+                            _listDataGridTour.Clear();
+                            foreach (TOUR tour in _listToursOriginal)
+                            {
+                                decimal SumPrice = 0;
+                                if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
+                                {
+                                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                                    continue;
+                                }
+                                foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
+                                {
+                                    SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
+                                }
                                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                                continue;
                             }
-                            foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
-                            {
-                                SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
-                            }
-                            _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
                         }
                     }
                 }
@@ -206,6 +212,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
+                //Console.WriteLine("Lỗi: " + ex.InnerException.Message);
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
             finally
