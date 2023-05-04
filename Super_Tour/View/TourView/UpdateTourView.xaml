@@ -87,6 +87,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <TextBox 
+                                    Text="{Binding NameTour}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     FontSize="15"
                                     Margin="20,5,0,5"
@@ -147,7 +148,7 @@
                                     <TextBlock x:Name="dayNum" 
                                                FontSize="22"
                                                HorizontalAlignment="Center"
-                                               Text="0" />
+                                               Text="{Binding TotalDay}" />
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Column="1">
@@ -159,7 +160,7 @@
                                     <TextBlock x:Name="nightNum" 
                                                FontSize="22"
                                                HorizontalAlignment="Center"
-                                               Text="0" />
+                                               Text="{Binding TotalNight}" />
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -177,7 +178,7 @@
                             <ScrollViewer>
                                 <Grid Margin="5">
                                     <StackPanel Orientation="Vertical">
-                                        <ItemsControl ItemsSource="{Binding DateActivityList}">
+                                        <ItemsControl ItemsSource="{Binding ListDateAcitivities}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Vertical">
@@ -200,18 +201,19 @@
                                                                 <Grid Grid.Column="0">
                                                                     <Border BorderBrush="DarkGray"
                                                                 BorderThickness="1,1,1,1">
-                                                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                                                        <StackPanel Orientation="Vertical" 
+                                                                                VerticalAlignment="Center">
                                                                             <TextBlock FontSize="16"
                                                                     Margin="0,10,0,0"
                                                                     Text="Morning Activities"
                                                                     HorizontalAlignment="Center"/>
-                                                                            <Button Margin="0,10,0,0"
+                                                                            <Button Margin="0,10,0,10"
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
-                                                                                <fa:IconImage Icon="Add" 
+                                                                        Command="{Binding AddPackageToTourMorningCommand}">
+                                                                                <fa:IconImage Icon="Edit" 
                                                                             Height="15" 
                                                                             Foreground="White"/>
                                                                             </Button>
@@ -224,19 +226,19 @@
                                                                         <ListView ItemsSource="{Binding MorningActivities}">
                                                                             <ListView.ItemTemplate>
                                                                                 <DataTemplate>
-                                                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                                                    <Grid VerticalAlignment="Center" 
+                                                                                      HorizontalAlignment="Left">
                                                                                         <Grid.ColumnDefinitions>
-                                                                                            <ColumnDefinition Width="200" />
-                                                                                            <ColumnDefinition Width="150" />
-                                                                                            <ColumnDefinition Width="*" />
+                                                                                            <ColumnDefinition Width="300"/>
+                                                                                            <ColumnDefinition Width="100"/>
                                                                                             <ColumnDefinition Width="*" />
                                                                                         </Grid.ColumnDefinitions>
                                                                                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                            <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" 
+                                                                                                       FontSize="14"/>
                                                                                         </Grid>
                                                                                         <Grid Grid.Column="1">
                                                                                             <Border BorderBrush="DarkGray"
-                                                                                                
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
                                                                                                 <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
@@ -247,7 +249,9 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}"
+                                                                                                                       Height="40">
 
                                                                                                 </materialDesign:TimePicker>
                                                                                             </Border>
@@ -256,31 +260,13 @@
                                                                                             <Border BorderBrush="DarkGray"
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
-                                                                                                <Button Margin="10,0,10,0"
+                                                                                                <Button Margin="20,0,0,0"
                                                                                                 Width="25"
                                                                                                 Height="25"
-                                                                                                Background="{StaticResource btnAdd}"
+                                                                                                Background="{StaticResource ThemeColor}"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
-                                                                                                    <fa:IconImage Icon="Edit" 
-                                                                                                        Height="14" 
-                                                                                                        Foreground="White"/>
-                                                                                                </Button>
-                                                                                            </Border>
-                                                                                        </Grid>
-                                                                                        <Grid Grid.Column="3">
-                                                                                            <Border BorderBrush="DarkGray"
-                                                                                                BorderThickness="1,0,0,0"
-                                                                                                HorizontalAlignment="Center"
-                                                                                                VerticalAlignment="Center"
-                                                                                                >
-                                                                                                <Button Margin="10,0,10,0"
-                                                                                                Width="25"
-                                                                                                Height="25"
-                                                                                                Background="Red"
-                                                                                                Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                >
-                                                                                                    <fa:IconImage Icon="Remove" 
+                                                                                                    <fa:IconImage Icon="Info" 
                                                                                                         Height="12" 
                                                                                                         Foreground="White"/>
                                                                                                 </Button>
@@ -289,7 +275,6 @@
                                                                                     </Grid>
                                                                                 </DataTemplate>
                                                                             </ListView.ItemTemplate>
-
                                                                         </ListView>
                                                                     </Border>
                                                                 </Grid>
@@ -307,13 +292,13 @@
                                                                         Margin="0,10,0,0"
                                                                         Text="Afternoon Activities"
                                                                         HorizontalAlignment="Center"/>
-                                                                            <Button Margin="0,10,0,0"
+                                                                            <Button Margin="0,10,0,10"
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
-                                                                                <fa:IconImage Icon="Add" 
+                                                                        Command="{Binding AddPackageToTourAfternoonCommand}">
+                                                                                <fa:IconImage Icon="Edit" 
                                                                           Height="15" 
                                                                           Foreground="White"/>
                                                                             </Button>
@@ -322,23 +307,23 @@
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
                                                                     <Border BorderBrush="DarkGray"
-                                                        BorderThickness="0,0,1,1">
+                                                                        BorderThickness="0,0,1,1">
                                                                         <ListView ItemsSource="{Binding AfternoonActivities}">
                                                                             <ListView.ItemTemplate>
                                                                                 <DataTemplate>
-                                                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                                                    <Grid VerticalAlignment="Center" 
+                                                                                      HorizontalAlignment="Left">
                                                                                         <Grid.ColumnDefinitions>
-                                                                                            <ColumnDefinition Width="200" />
-                                                                                            <ColumnDefinition Width="150" />
-                                                                                            <ColumnDefinition Width="*" />
+                                                                                            <ColumnDefinition Width="300"/>
+                                                                                            <ColumnDefinition Width="100"/>
                                                                                             <ColumnDefinition Width="*" />
                                                                                         </Grid.ColumnDefinitions>
                                                                                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                            <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" 
+                                                                                                       FontSize="14"/>
                                                                                         </Grid>
                                                                                         <Grid Grid.Column="1">
                                                                                             <Border BorderBrush="DarkGray"
-                                                                                                
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
                                                                                                 <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
@@ -349,7 +334,10 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}"
+                                                                                                                       Height="40">
+
 
                                                                                                 </materialDesign:TimePicker>
                                                                                             </Border>
@@ -358,31 +346,13 @@
                                                                                             <Border BorderBrush="DarkGray"
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
-                                                                                                <Button Margin="10,0,10,0"
+                                                                                                <Button Margin="20,0,0,0"
                                                                                                 Width="25"
                                                                                                 Height="25"
-                                                                                                Background="{StaticResource btnAdd}"
+                                                                                                Background="{StaticResource ThemeColor}"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
-                                                                                                    <fa:IconImage Icon="Edit" 
-                                                                                                        Height="14" 
-                                                                                                        Foreground="White"/>
-                                                                                                </Button>
-                                                                                            </Border>
-                                                                                        </Grid>
-                                                                                        <Grid Grid.Column="3">
-                                                                                            <Border BorderBrush="DarkGray"
-                                                                                                BorderThickness="1,0,0,0"
-                                                                                                HorizontalAlignment="Center"
-                                                                                                VerticalAlignment="Center"
-                                                                                                >
-                                                                                                <Button Margin="10,0,10,0"
-                                                                                                Width="25"
-                                                                                                Height="25"
-                                                                                                Background="Red"
-                                                                                                Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                >
-                                                                                                    <fa:IconImage Icon="Remove" 
+                                                                                                    <fa:IconImage Icon="Info" 
                                                                                                         Height="12" 
                                                                                                         Foreground="White"/>
                                                                                                 </Button>
@@ -408,13 +378,13 @@
                                                                         Margin="0,10,0,0"
                                                                         Text="Night Activities"
                                                                         HorizontalAlignment="Center"/>
-                                                                            <Button Margin="0,10,0,0"
+                                                                            <Button Margin="0,10,0,10"
                                                                         Width="30"
                                                                         Height="30"
                                                                         Background="{StaticResource btnAdd}"
                                                                         Style="{StaticResource MaterialDesignIconButton}"
-                                                                        Command="{Binding AddPackageToTourCommand}">
-                                                                                <fa:IconImage Icon="Add" 
+                                                                        Command="{Binding AddPackageToTourEveningCommand}">
+                                                                                <fa:IconImage Icon="Edit" 
                                                                       Height="15" 
                                                                       Foreground="White"/>
                                                                             </Button>
@@ -427,19 +397,19 @@
                                                                         <ListView ItemsSource="{Binding EveningActivities}">
                                                                             <ListView.ItemTemplate>
                                                                                 <DataTemplate>
-                                                                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                                                                                    <Grid VerticalAlignment="Center" 
+                                                                                      HorizontalAlignment="Left">
                                                                                         <Grid.ColumnDefinitions>
-                                                                                            <ColumnDefinition Width="200" />
-                                                                                            <ColumnDefinition Width="150" />
-                                                                                            <ColumnDefinition Width="*" />
+                                                                                            <ColumnDefinition Width="300"/>
+                                                                                            <ColumnDefinition Width="100"/>
                                                                                             <ColumnDefinition Width="*" />
                                                                                         </Grid.ColumnDefinitions>
                                                                                         <Grid Grid.Column="0" VerticalAlignment="Center">
-                                                                                            <TextBlock Text="{Binding}" FontSize="14"/>
+                                                                                            <TextBlock Text="{Binding PackageName}" 
+                                                                                                       FontSize="14"/>
                                                                                         </Grid>
                                                                                         <Grid Grid.Column="1">
                                                                                             <Border BorderBrush="DarkGray"
-                                                                                                
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
                                                                                                 <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
@@ -450,7 +420,10 @@
                                                                                                                        BorderBrush="Black"
                                                                                                                        Background="{StaticResource BackgroundChildContent}"
                                                                                                                        materialDesign:HintAssist.Background="{StaticResource BackgroundChildContent}"
-                                                                                                                       Width="100">
+                                                                                                                       Width="100"
+                                                                                                                       SelectedTime="{Binding TimeOfPackage}"
+                                                                                                                       Height="40">
+
 
                                                                                                 </materialDesign:TimePicker>
                                                                                             </Border>
@@ -459,31 +432,13 @@
                                                                                             <Border BorderBrush="DarkGray"
                                                                                                 HorizontalAlignment="Center"
                                                                                                 VerticalAlignment="Center">
-                                                                                                <Button Margin="10,0,10,0"
+                                                                                                <Button Margin="20,0,0,0"
                                                                                                 Width="25"
                                                                                                 Height="25"
-                                                                                                Background="{StaticResource btnAdd}"
+                                                                                                Background="{StaticResource ThemeColor}"
                                                                                                 Style="{StaticResource MaterialDesignIconButton}"
                                                                                                 >
-                                                                                                    <fa:IconImage Icon="Edit" 
-                                                                                                        Height="14" 
-                                                                                                        Foreground="White"/>
-                                                                                                </Button>
-                                                                                            </Border>
-                                                                                        </Grid>
-                                                                                        <Grid Grid.Column="3">
-                                                                                            <Border BorderBrush="DarkGray"
-                                                                                                BorderThickness="1,0,0,0"
-                                                                                                HorizontalAlignment="Center"
-                                                                                                VerticalAlignment="Center"
-                                                                                                >
-                                                                                                <Button Margin="10,0,10,0"
-                                                                                                Width="25"
-                                                                                                Height="25"
-                                                                                                Background="Red"
-                                                                                                Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                >
-                                                                                                    <fa:IconImage Icon="Remove" 
+                                                                                                    <fa:IconImage Icon="Info" 
                                                                                                         Height="12" 
                                                                                                         Foreground="White"/>
                                                                                                 </Button>
@@ -521,9 +476,9 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
-                                Command=""
                                 Margin="0, 10, 0, 10"
-                                IsDefault="True"/>
+                                IsDefault="True"
+                                Command="{Binding SaveUpdateTourCommand}"/>
                     </Grid>
                 </Grid>
             </Border>

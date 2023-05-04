@@ -143,7 +143,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource iconButton}">
+                                        <Button Style="{StaticResource iconButton}"
+                                                Command="{Binding DataContext.UpdateTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}">
                                             <fa:IconImage Icon="Edit" Foreground="#32C948"/>
                                         </Button>
                                         <Button Margin="15 0 0 0" Style="{StaticResource iconButton}"

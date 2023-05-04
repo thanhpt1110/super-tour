@@ -22,7 +22,8 @@ namespace Super_Tour.ViewModel
         {
             private DateTime _timeOfPacakge;
             public TOUR_DETAILS Tour_detail { get; set; }
-            public string PackageName { get; set; }
+            private string _packageName;
+            public string PackageName { get { return _packageName; } set { _packageName = value; OnPropertyChanged(nameof(PackageName)); } }
             public DateTime TimeOfPackage
             {
                 get => _timeOfPacakge; 
@@ -37,6 +38,8 @@ namespace Super_Tour.ViewModel
         public class DateActivity:ObservableObject
         {
             private int _dateID;
+            private bool _isUpdate = false;
+            private TOUR _tour = null;
             private ObservableCollection<GridActivity> _morningTourDetail;
             private ObservableCollection<GridActivity> _afternoonTourDetail;
             private ObservableCollection<GridActivity> _eveningTourDetail;
@@ -48,9 +51,11 @@ namespace Super_Tour.ViewModel
             public ICommand AddPackageToTourAfternoonCommand { get; private set; }
             public ICommand AddPackageToTourEveningCommand { get; private set; }
 
-            public DateActivity(int dateID)
+            public DateActivity(int dateID,bool isUpdate=false,TOUR tour=null)
             {
                 this._dateID=dateID;
+                this._tour = tour;
+                this._isUpdate=isUpdate;
                 generateCommand();
             }
             private void generateCommand()
@@ -85,7 +90,7 @@ namespace Super_Tour.ViewModel
             private void ExecuteAddPackageToTourMorningCommand(object obj)
             {
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();               
-                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_morningTourDetail);
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_morningTourDetail, _isUpdate, _tour);
                 addPackageToTourView.ShowDialog();
             }
             private void ExecuteAddPackageToTourAfternoonCommand(object obj)
@@ -93,14 +98,14 @@ namespace Super_Tour.ViewModel
                 MessageBox.Show("Afternoon");
 
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
-                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_afternoonTourDetail);
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_afternoonTourDetail, _isUpdate, _tour);
                 addPackageToTourView.ShowDialog();
             }
             private void ExecuteAddPackageToTourEveningCommand(object obj)
             {
                 //MessageBox.Show("Evening");
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
-                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_eveningTourDetail);
+                addPackageToTourView.DataContext = new AddPackageToTourViewModel(_eveningTourDetail, _isUpdate, _tour);
                 addPackageToTourView.ShowDialog();
             }
             public DateActivity(int dateID, List<string> morningActivities, List<string> afternoonActivities, List<string> eveningActivities)
@@ -269,7 +274,7 @@ namespace Super_Tour.ViewModel
                         tourDetail.Date_Order_Package = i;
                         tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                         tourDetail.Id_TourDetails = 1;
-                        tourDetail.Session = "Morning";
+                        tourDetail.Session = Constant.MORNING;
                         db.TOUR_DETAILs.Add(tourDetail);
                     }
                     foreach (GridActivity activity in dateActivity.AfternoonActivities)
@@ -277,7 +282,7 @@ namespace Super_Tour.ViewModel
                         TOUR_DETAILS tourDetail = activity.Tour_detail;
                         tourDetail.Date_Order_Package = i;
                         tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
-                        tourDetail.Session = "Afternoon";
+                        tourDetail.Session = Constant.AFTERNOON;
                         tourDetail.Id_TourDetails = 1;
                         tourDetail.Id_Tour = IdTour;
                         db.TOUR_DETAILs.Add(tourDetail);
@@ -289,7 +294,7 @@ namespace Super_Tour.ViewModel
                         tourDetail.Id_TourDetails = 1;
                         tourDetail.Date_Order_Package = i;
                         tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
-                        tourDetail.Session = "Evening";
+                        tourDetail.Session = Constant.EVENING;
                         db.TOUR_DETAILs.Add(tourDetail);
                     }
                     i++;
