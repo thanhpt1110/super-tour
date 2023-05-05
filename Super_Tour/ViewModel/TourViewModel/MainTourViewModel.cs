@@ -88,6 +88,7 @@ namespace Super_Tour.ViewModel
         public ICommand OnSearchTextChangedCommand { get;}
         public ICommand SelectedFilterCommand { get; }
         public ICommand DeleteTourCommnand { get; }
+        public ICommand UpdateTourCommand { get; }
         public MainTourViewModel() 
         {
             timer = new DispatcherTimer();
@@ -99,8 +100,19 @@ namespace Super_Tour.ViewModel
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             DeleteTourCommnand = new RelayCommand(ExecuteDeleteTour);
+            UpdateTourCommand = new RelayCommand(ExecuteUpdateTourCommand);
             LoadTourDataAsync();
             generateFilterItem();
+        }
+        private void ExecuteUpdateTourCommand(object obj)
+        {
+            timer.Stop();
+            DataGridTour dataGridTour = (DataGridTour)obj;
+            TOUR tour = dataGridTour.Tour;
+            UpdateTourView view = new UpdateTourView();
+            view.DataContext = new UpdateTourViewModel(tour);
+            view.ShowDialog();
+            LoadTourDataAsync();
         }
         private void ExecuteSelectFilter(object obj)
         {

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using static Super_Tour.ViewModel.CreateTourViewModel;
+using static Super_Tour.ViewModel.SelectTourForTravelViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -26,7 +27,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<PACKAGE> _observableListPickedPackage;
         private ObservableCollection<GridActivity> _listTourDetail;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
-
+        private TOUR _tour;
 
         public ObservableCollection<TYPE_PACKAGE> ListTypePackage
         {
@@ -117,20 +118,90 @@ namespace Super_Tour.ViewModel
             view.ShowDialog();
             ReloadPackage(); 
         }
+        public void ExecuteUpdatePackage(object obj)
+        {
+            try
+            {
+                _executeSave = false;
+
+                if (_listTourDetail.Count <= _observableListPickedPackage.Count)
+            {
+                int i = 0;
+                foreach (PACKAGE package in ObservableListPickedPackage)
+                {
+                    if (i >= _listTourDetail.Count)
+                    {
+                        TOUR_DETAILS tour_detail = new TOUR_DETAILS();
+                        tour_detail.Id_Package = package.Id_Package;
+                        tour_detail.Id_Tour = _tour.Id_Tour;
+                        string namePacakge = db.PACKAGEs.Find(tour_detail.Id_Package).Name_Package;
+                        tour_detail.Id_TourDetails = 1;
+                        _listTourDetail.Add(new GridActivity() { Tour_detail = tour_detail, PackageName = namePacakge });
+                    }
+                    else
+                    {
+                        _listTourDetail[i].Tour_detail.Id_Package = package.Id_Package;
+                        _listTourDetail[i].PackageName = package.Name_Package;
+
+                    }
+                    i++;
+                }
+            }
+            else
+            {
+                int i = 0;
+                foreach (GridActivity gridActivity in _listTourDetail)
+                {
+                    if (ObservableListPickedPackage.Count <= i)
+                        break;
+                    gridActivity.Tour_detail.Id_Package = ObservableListPickedPackage[i].Id_Package;
+                    gridActivity.PackageName = ObservableListPickedPackage[i].Name_Package;
+                    i++;
+                }
+                for(;i< _listTourDetail.Count;i++)
+                {
+                    _listTourDetail.RemoveAt(i);
+                    i--;
+                }    
+            }
+            AddPackageToTourView addPackageToTourView = null;
+            foreach (Window window in Application.Current.Windows)
+            {
+                Console.WriteLine(window.ToString());
+                if (window is AddPackageToTourView)
+                {
+                    addPackageToTourView = window as AddPackageToTourView;
+                    break;
+                }
+            }
+            addPackageToTourView.Close();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
+            }
+            finally
+            {
+                _executeSave = true;
+            }
+        }
         public void ExecuteSavePackage(object obj)
         {
             try
             {
                 _executeSave = false;
-                _listTourDetail.Clear();
-                foreach(PACKAGE package in ObservableListPickedPackage)
-                {
-                    TOUR_DETAILS tour_detail = new TOUR_DETAILS();
-                    tour_detail.Id_Package = package.Id_Package;
-                    string namePacakge = db.PACKAGEs.Find(tour_detail.Id_Package).Name_Package;
-                    tour_detail.Id_TourDetails = 1;
-                    _listTourDetail.Add(new GridActivity() { Tour_detail = tour_detail,PackageName= namePacakge });
-                }
+
+                    _listTourDetail.Clear();
+                    foreach (PACKAGE package in ObservableListPickedPackage)
+                    {
+                        TOUR_DETAILS tour_detail = new TOUR_DETAILS();
+                        tour_detail.Id_Package = package.Id_Package;
+                        string namePacakge = db.PACKAGEs.Find(tour_detail.Id_Package).Name_Package;
+                        tour_detail.Id_TourDetails = 1;
+                        _listTourDetail.Add(new GridActivity() { Tour_detail = tour_detail, PackageName = namePacakge });
+                    }
+                
                 AddPackageToTourView addPackageToTourView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
@@ -157,11 +228,15 @@ namespace Super_Tour.ViewModel
         {
             return _executeSave;
         }
-        public AddPackageToTourViewModel(ObservableCollection<GridActivity> listTourDetail)
+        public AddPackageToTourViewModel(ObservableCollection<GridActivity> listTourDetail,bool isUpdate,TOUR tour=null)
         {
+            _tour = tour;
             _listTourDetail = listTourDetail;
             _observableListPickedPackage = new ObservableCollection<PACKAGE>();
             AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
+            if(isUpdate)
+                SavePackageCommand = new RelayCommand(ExecuteUpdatePackage, CanExecuteSavePackage);
+            else
             SavePackageCommand = new RelayCommand(ExecuteSavePackage, CanExecuteSavePackage);
             DeletePickedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
             CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
