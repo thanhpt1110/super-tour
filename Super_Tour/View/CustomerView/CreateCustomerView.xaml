@@ -198,6 +198,8 @@
                                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                 BorderThickness="0"
                                                 Width="280"
+                                                materialDesign:TransitionAssist.DisableTransitions="True"
+                                                MaxLength="12" 
                                                 CaretBrush="Black"/>
                                         </StackPanel>
                                     </Grid>

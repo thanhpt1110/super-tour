@@ -101,7 +101,6 @@
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"/>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                            local:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay}" 
                                              BorderThickness="0"
                                              Background="{StaticResource TextBoxColor}"
                                              materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"

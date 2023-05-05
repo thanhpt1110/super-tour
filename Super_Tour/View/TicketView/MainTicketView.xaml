@@ -5,8 +5,185 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="788" d:DesignWidth="1138">
+    <Border Background="{StaticResource BackgroundChildContent}">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox 
+                                Text="{Binding SearchTour}"
+                                x:Name="txtBoxSearchType" 
+                                 Width="300"
+                                 Height="50"
+                                 FontSize="15"
+                                 BorderBrush="Black"
+                                 BorderThickness="0"
+                                 Margin="55, 10 ,0, 0"
+                                 Background="{StaticResource TextBoxColor}"
+                                 Effect="{StaticResource MaterialDesignElevationShadow6}"   
+                                 CaretBrush="Black"
+                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                 materialDesign:HintAssist.Foreground="Black"
+                                 materialDesign:HintAssist.Hint="Search..."
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <fa:IconBlock 
+                                Margin="50, 15, 10, 0"
+                                Icon="Filter"
+                                Foreground="Black"
+                                FontSize="20"
+                                Effect="{StaticResource MaterialDesignElevationShadow2}"/>
+                        <ComboBox
+                                ItemsSource="{Binding ListSearchFilterBy}"
+                                SelectedItem="{Binding SelectedFilter}"
+                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                FontSize="15"
+                                Width="180"
+                                Margin="5,10,0,0"
+                                BorderThickness="0"
+                                Foreground="Black"
+                                Background="{StaticResource ComboBoxColor}"
+                                Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                BorderBrush="DarkGray"
+                                materialDesign:HintAssist.Hint="- Select Filter By -"
+                                materialDesign:HintAssist.Foreground="Black"
+                                materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                    >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Button Command="{Binding OpenTicket}"
+                            Width="120">Test</Button>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1"
+                  Margin="0,0,0,0">
+                <DataGrid x:Name="membersDataGrid" 
+                              ItemsSource="{Binding ListDataGridTour}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource DataGridStyle1}" Margin="55,30,55,10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Booking ID"
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="0.6*"
+                                                Binding="{Binding Tour.Id_Tour}"/>
+
+                        <DataGridTextColumn Header="Customer Booking Name" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1*"
+                                                Binding="{Binding Tour.Name_Tour}"/>
+                        <DataGridTextColumn Header="Travel Name" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1.3*"
+                                                Binding="{Binding Tour.TotalDay}"/>
+                        <DataGridTextColumn Header="Status" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="0.5*"
+                                                Binding="{Binding Tour.TotalNight}"/>
+                        <DataGridTemplateColumn Header="Operations"
+                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                IsReadOnly="True" 
+                                                Width="0.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource iconButton}">
+                                            <fa:IconImage Icon="Edit" Foreground="#32C948"/>
+                                        </Button>
+                                        <Button Margin="15 0 0 0" Style="{StaticResource iconButton}">
+                                            <fa:IconImage Icon="DeleteLeft" Foreground="#FF4A4F"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!--Footer-->
+            <Grid Grid.Row="2"
+                  Margin="55, 0, 55, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Result Number Text-->
+                <Grid Grid.Column="0">
+                    <TextBlock FontSize="15" 
+                               Height="20"
+                               Text="{Binding ResultNumberText}">
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1"
+                      HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 0">
+                        <Button Margin="0, 0, 20, 0"
+                                Background="Black"
+                                BorderThickness="0"
+                                Command="{Binding GoToPreviousPageCommand}"
+                                IsEnabled="{Binding EnableButtonPrevious}"
+                                Tag="{StaticResource TitleText}">
+                            <fa:IconImage Icon="AnglesLeft" 
+                                      Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+                        <TextBlock FontSize="15"    
+                                   Height="20"
+                                   Margin="10, 0, 10, 0"
+                                   Text="{Binding PageNumberText}">
+                        </TextBlock>
+                        <Button Margin="20, 0, 0, 0"
+                                Background="Black"
+                                BorderThickness="0"
+                                Command="{Binding GoToNextPageCommand}"
+                                IsEnabled="{Binding EnableButtonNext}"
+                                Tag="{StaticResource TitleText}">
+                            <fa:IconImage 
+                                Icon="AnglesRight" 
+                                Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>
