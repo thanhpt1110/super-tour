@@ -221,6 +221,9 @@ namespace Super_Tour.ViewModel
                     }
                     i++;
                 }
+                _tour.TotalDay = _totalDay;
+                _tour.TotalNight=_totalNight;
+                db.TOURs.AddOrUpdate(_tour);
                 await db.SaveChangesAsync();
                 MyMessageBox.ShowDialog("Update tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 UpdateTourView updateTourView = null;

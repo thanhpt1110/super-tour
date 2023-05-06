@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace Super_Tour.ViewModel
     class DataGridTour
     {
         private TOUR _tour;
+
         public TOUR Tour
         {
             get { return _tour; }
@@ -32,7 +34,10 @@ namespace Super_Tour.ViewModel
     }
     internal class MainTourViewModel: ObservableObject
     {
+        private List<TOUR> _listSearchTour;
         private List<TOUR> _listToursOriginal;
+        private readonly object _locker = new object();
+        private CancellationTokenSource _cancellationTokenSource;
         private ObservableCollection<DataGridTour> _listDataGridTour;
         private string _searchTour;
         private SUPER_TOUR db = new SUPER_TOUR();
@@ -69,7 +74,21 @@ namespace Super_Tour.ViewModel
             set
             {
                 _searchTour = value;
-                OnPropertyChanged(nameof(SearchTour));
+                if (_cancellationTokenSource != null)
+                {
+                    _cancellationTokenSource.Cancel();
+                }
+                _cancellationTokenSource = new CancellationTokenSource();
+                Task.Delay(TimeSpan.FromSeconds(0.5), _cancellationTokenSource.Token).ContinueWith(task =>
+                {
+                    if (!task.IsCanceled)
+                    {
+                        if (_selectedFilter == "Name")
+                            SearchByName();
+                        else
+                            SearchByPlace();
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
         public ObservableCollection<DataGridTour> ListDataGridTour
@@ -125,10 +144,39 @@ namespace Super_Tour.ViewModel
 
             }    
         }
+        private void LoadGrid(List<TOUR> listTour)
+        {
+            _listDataGridTour.Clear();
+            foreach (TOUR tour in listTour)
+            {
+                decimal SumPrice = 0;
+                if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
+                {
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                    continue;
+                }
+                foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
+                {
+                    SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
+                }
+                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+            }
+        }
         private void generateFilterItem()
         {
             _listSearchFilterBy.Add("Name");
             _listSearchFilterBy.Add("Place");
+        }
+        private void SearchByName()
+        {
+            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(SearchTour)).ToList();
+            LoadGrid(_listSearchTour);
+        }
+        private void SearchByPlace()
+        {
+
+            this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
+            LoadGrid(_listSearchTour);
         }
         private async void Timer_Tick(object sender, EventArgs e)
         {
@@ -142,21 +190,8 @@ namespace Super_Tour.ViewModel
                         _listToursOriginal = Updatetours;
                         Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _listDataGridTour.Clear();
-                        foreach (TOUR tour in _listToursOriginal)
-                        {
-                            decimal SumPrice = 0;
-                            if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
-                            {
-                                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                                continue;
-                            }
-                            foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
-                            {
-                                SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
-                            }
-                            _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                        }
+                        LoadGrid(_listToursOriginal);
+                        
                     });
                     }
                 }
@@ -198,22 +233,8 @@ namespace Super_Tour.ViewModel
                             await db.SaveChangesAsync();
 
                             MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                            _listToursOriginal = db.TOURs.AsNoTracking().ToList();
-                            _listDataGridTour.Clear();
-                            foreach (TOUR tour in _listToursOriginal)
-                            {
-                                decimal SumPrice = 0;
-                                if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
-                                {
-                                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                                    continue;
-                                }
-                                foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
-                                {
-                                    SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
-                                }
-                                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                            }
+                            //_listToursOriginal = db.TOURs.AsNoTracking().ToList();
+                            _listDataGridTour.Remove(dataGridTour);
                         }
                     }
                 }
@@ -247,21 +268,7 @@ namespace Super_Tour.ViewModel
                     _listToursOriginal = db.TOURs.ToList();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _listDataGridTour.Clear();
-                        foreach (TOUR tour in _listToursOriginal)
-                        {
-                            decimal SumPrice = 0;
-                            if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
-                            {
-                                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                                continue;
-                            }
-                            foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
-                            {
-                                SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
-                            }
-                            _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                        }
+                        LoadGrid(_listToursOriginal);
                     });
                     timer.Start();
                 }

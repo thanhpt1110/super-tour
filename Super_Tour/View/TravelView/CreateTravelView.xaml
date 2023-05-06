@@ -99,7 +99,7 @@
                                      Height="50"
                                      FontSize="15"
                                      IsReadOnly="True"
-                                     Text="Select a tour for this travel"
+                                     Text="{Binding Tour.Name_Tour}"
                                      Foreground="Black"
                                      materialDesign:HintAssist.Foreground="Black"
                                      BorderThickness="0"
