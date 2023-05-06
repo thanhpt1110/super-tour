@@ -292,10 +292,10 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <Border CornerRadius="0,0,10,0"
-                                Background="{StaticResource BackgroundChildContent}">
+                                Background="White">
                             <ContentControl 
                                 Content="{Binding CurrentChildView}"
-                                Margin="25"/>
+                                Margin="0,0,0,25"/>
                         </Border>
                     </Grid>
                 </Grid>
