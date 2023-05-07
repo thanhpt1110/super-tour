@@ -320,6 +320,7 @@
     <Compile Include="CustomControls\MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\PrintVisual.cs" />
     <Compile Include="Model\ACCOUNT.cs" />
     <Compile Include="Model\BOOKING.cs" />
     <Compile Include="Model\CUSTOMER.cs" />
@@ -460,6 +461,9 @@
     </Compile>
     <Compile Include="View\TicketView\MainTicketView.xaml.cs">
       <DependentUpon>MainTicketView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TicketView\TicketPrintableContent.xaml.cs">
+      <DependentUpon>TicketPrintableContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TourView\AddPackageToTourView.xaml.cs">
       <DependentUpon>AddPackageToTourView.xaml</DependentUpon>
@@ -646,6 +650,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TicketView\MainTicketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TicketView\TicketPrintableContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

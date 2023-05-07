@@ -18,11 +18,28 @@ using System.Windows.Interop;
 using System.Windows;
 using ZXing.QrCode.Internal;
 using System.Security.RightsManagement;
+using System.Windows.Controls;
+using Super_Tour.CustomControls;
+using Super_Tour.View.TicketView;
+using System.Windows.Media;
+
 namespace Super_Tour.ViewModel
 {
     internal class ExportedTicketViewModel : ObservableObject
     {
-        private string _barcodeText; 
+        private string _barcodeText;
+        private TicketPrintableContent _ticketPrintableContent;
+
+
+        #region Declare Binding Command
+        public ICommand PrintTicketCommand { get; private set; }
+        #endregion
+
+        protected TicketPrintableContent TicketPrintableContent
+        {
+            get { return _ticketPrintableContent; }
+        }
+
         public string BarcodeText
         {
             get { return _barcodeText; }
@@ -93,6 +110,38 @@ namespace Super_Tour.ViewModel
         public ExportedTicketViewModel()
         {
             BarcodeText = "BK00123468";
+            PrintTicketCommand = new RelayCommand(ExecutePrintTicketCommand);
+        }
+
+        private void ExecutePrintTicketCommand(object obj)
+        {
+            try
+            {
+                _ticketPrintableContent = new TicketPrintableContent();
+                _ticketPrintableContent.DataContext = this;
+
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    // Get the printable area of the page
+                    double pageWidth = printDialog.PrintableAreaWidth;
+                    double pageHeight = printDialog.PrintableAreaHeight;
+
+                    // Adjust the size of the visual to fit within the printable area of the page
+                    double scaleX = pageWidth / _ticketPrintableContent.Width;
+                    double scaleY = pageHeight / _ticketPrintableContent.Height;
+                    double scale = Math.Min(scaleX, scaleY);
+                    _ticketPrintableContent.LayoutTransform = new ScaleTransform(scale, scale);
+
+                    printDialog.PrintVisual(_ticketPrintableContent, "Print Ticket");
+                    MyMessageBox.ShowDialog("Print ticket successfully!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally { }
         }
     }
 }
