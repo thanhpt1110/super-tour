@@ -16,13 +16,13 @@ namespace Super_Tour.Model
         public string PlaceOfTour { get; set; }
         public string Status_Tour { get; set; }
         public string Name_Tour { get; set; }
- /*       public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs
+        public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs
         {
             get; set;
         }
         public virtual ICollection<TRAVEL> TRAVELs
         {
             get; set;
-        }*/
+        }
     }
 }

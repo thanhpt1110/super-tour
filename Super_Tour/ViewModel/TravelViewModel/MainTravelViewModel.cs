@@ -15,15 +15,11 @@ using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
-    class GridTravel
-    {
-        public TRAVEL Travel { get; set; }
-        public string nameTour { get; set; }
-    }
+
     internal class MainTravelViewModel: ObservableObject
     {
         private SUPER_TOUR db = new SUPER_TOUR();
-        private ObservableCollection<GridTravel> _listObservableGridTravel;
+        private ObservableCollection<TRAVEL> _listObservableTravel;
         private DispatcherTimer timer = new DispatcherTimer();
         private List<TRAVEL> _listOriginalTravel;
         private string _searchItem;
@@ -57,11 +53,11 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public ObservableCollection<GridTravel> ListObservableTravel
-        { get { return _listObservableGridTravel; }
+        public ObservableCollection<TRAVEL> ListObservableTravel
+        { get { return _listObservableTravel; }
            set
-            { 
-                _listObservableGridTravel = value;
+            {
+                _listObservableTravel = value;
                 OnPropertyChanged(nameof(ListObservableTravel));
             }
         }
@@ -75,7 +71,7 @@ namespace Super_Tour.ViewModel
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick; 
             OpenCreateTravelViewCommand = new RelayCommand(ExecuteOpenCreateTravelViewCommand);
-            this._listObservableGridTravel = new ObservableCollection<GridTravel>();
+            this._listObservableTravel = new ObservableCollection<TRAVEL>();
             LoadFilter();
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
             DeleteTravelCommnand = new RelayCommand(ExecuteDeleteTravel);
@@ -84,7 +80,19 @@ namespace Super_Tour.ViewModel
         }
         private async void ExecuteUpdateCommand(object obj)
         {
+            TRAVEL travel = obj as TRAVEL;
+            UpdateTravelView view = new UpdateTravelView();
+            view.DataContext = new UpdateTravelViewModel(travel);
+            view.ShowDialog();
 
+        }
+        private void LoadGrid(List<TRAVEL> listTravel)
+        {
+            _listObservableTravel.Clear();
+            foreach (TRAVEL travel in _listOriginalTravel)
+            {
+                _listObservableTravel.Add(travel);
+            }
         }
         private async void Timer_Tick(object sender, EventArgs e)
         {
@@ -98,12 +106,7 @@ namespace Super_Tour.ViewModel
                         _listOriginalTravel = Updatetours;
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listObservableGridTravel.Clear();
-                            foreach (TRAVEL travel in _listOriginalTravel)
-                            {
-                                string nameTour = db.TOURs.Find(travel.Id_Tour).Name_Tour;
-                                _listObservableGridTravel.Add(new GridTravel() { Travel = travel, nameTour = nameTour });
-                            }
+                            LoadGrid(_listOriginalTravel);
                         });
                     }
                 }
@@ -118,8 +121,7 @@ namespace Super_Tour.ViewModel
 
             try
             {
-                GridTravel gridTravel = obj as GridTravel;
-                TRAVEL travel = gridTravel.Travel;
+                TRAVEL travel = obj as TRAVEL;
                 timer.Stop();
                 TRAVEL TravelFind = await db.TRAVELs.FindAsync(travel.Id_Travel);
                 if (TravelFind == null)
@@ -155,12 +157,7 @@ namespace Super_Tour.ViewModel
                     _listOriginalTravel = db.TRAVELs.ToList();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _listObservableGridTravel.Clear();
-                        foreach (TRAVEL travel in _listOriginalTravel)
-                        {
-                            TOUR tour = db.TOURs.Find(travel.Id_Tour);
-                            _listObservableGridTravel.Add(new GridTravel() { Travel = travel, nameTour = tour.Name_Tour });
-                        }
+                        LoadGrid(_listOriginalTravel);
                     });
                     timer.Start();
                 }

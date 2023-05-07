@@ -10,6 +10,19 @@ namespace Super_Tour.Model
 {
     public class TRAVEL
     {
+        public TRAVEL()
+        { }
+        public TRAVEL(TRAVEL travel)
+        {
+            Id_Travel = travel.Id_Travel;
+            Id_Tour = travel.Id_Tour;
+            StartLocation = travel.StartLocation;
+            MaxTicket = travel.MaxTicket;
+            StartDateTimeTravel = travel.StartDateTimeTravel;
+            RemainingTicket = travel.RemainingTicket;
+            Discount = travel.Discount;
+        }
+
         [Key]
         public int Id_Travel { get; set; }
         public int Id_Tour { get; set; }
@@ -18,7 +31,7 @@ namespace Super_Tour.Model
         public DateTime StartDateTimeTravel { get; set; }
         public int RemainingTicket { get; set; }
         public int Discount { get; set; }
-/*        [ForeignKey("travel_ibfk_1  ")]
-        public virtual TOUR TOUR { get; set; }*/
+        [ForeignKey("Id_Tour")]
+        public virtual TOUR TOUR { get; set; }
     }
 }

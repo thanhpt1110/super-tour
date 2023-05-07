@@ -109,28 +109,28 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.6*"
-                                                Binding="{Binding Travel.Id_Travel}"/>
+                                                Binding="{Binding Id_Travel}"/>
 
                         <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.2*"
-                                                Binding="{Binding nameTour}"/>
+                                                Binding="{Binding TOUR.Name_Tour}"/>
                         <DataGridTextColumn Header="Start Location" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Travel.StartLocation}"/>
+                                                Binding="{Binding StartLocation}"/>
                         <DataGridTextColumn Header="Start Date Time" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Travel.StartDateTimeTravel}"/>
+                                                Binding="{Binding StartDateTimeTravel,StringFormat='dd/MM/yyyy HH:mm'}"/>
                         <DataGridTextColumn Header="Remain Ticket"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.8*"
-                                                Binding="{Binding Travel.RemainingTicket}"/>
+                                                Binding="{Binding RemainingTicket}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

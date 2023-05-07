@@ -19,11 +19,11 @@ namespace Super_Tour.Model
         public string Image_Package { get; set; }
         public string Description_Package { get; set; }
         public decimal Price { get; set; }
-/*        [ForeignKey("package_ibfk_1")]
+        [ForeignKey("Id_Type_Package")]
         public virtual TYPE_PACKAGE TYPEPACKAGE { get; set; }
         public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs
         {
             get; set;
-        }*/
+        }
     }
 }
