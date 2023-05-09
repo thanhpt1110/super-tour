@@ -128,6 +128,9 @@ namespace Super_Tour.ViewModel
         public ICommand UpdateTourCommand { get; }
         public MainTourViewModel() 
         {
+            //  string a = "";
+
+            cache = new MemoryCache(new MemoryCacheOptions());
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
@@ -204,6 +207,11 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
                     List<TOUR> Updatetours = db.TOURs.ToList();
                     if (!Updatetours.SequenceEqual(_listToursOriginal))
                     {
@@ -281,28 +289,19 @@ namespace Super_Tour.ViewModel
         }
         public async Task LoadTourDataAsync()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 try
                 {
-                    Stopwatch stopwatch = new Stopwatch();
-
-                    // Bắt đầu đếm thời gian
-                    stopwatch.Start();
-                        _listToursOriginal = db.TOURs.ToList();
-                    
-                    // Dừng đếm thời gian
-                    stopwatch.Stop();
-
-                    // In ra thời gian đã trôi qua
-                    Console.WriteLine("Time Load From db: {0}", stopwatch.Elapsed.TotalSeconds);
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
+                    _listToursOriginal = await db.TOURs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-
-
-                        // Thực hiện một đoạn mã bất kỳ
                         LoadGrid(_listToursOriginal);
-
                     });
                     timer.Start();
                 }

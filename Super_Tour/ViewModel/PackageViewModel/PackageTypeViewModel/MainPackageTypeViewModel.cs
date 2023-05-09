@@ -172,6 +172,11 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
                     var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
                     if (!myEntities.SequenceEqual(_listTypePackageOriginal))
@@ -210,6 +215,11 @@ namespace Super_Tour.ViewModel
                     // Bắt đầu đếm thời gian
                     try
                     {
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
                         stopwatch.Start();
 
                         _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();

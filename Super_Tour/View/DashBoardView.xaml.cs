@@ -24,7 +24,6 @@ namespace Super_Tour.View
         public DashBoardView()
         {
             InitializeComponent();
-            this.DataContext = new DashBoardViewModel();
         }
     }
 }

@@ -121,7 +121,7 @@
                     </Grid>
                     <Grid Grid.Row="3">
                         <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding Tours}"
+                              ItemsSource="{Binding ListObservableTravel}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -130,24 +130,29 @@
                                 <DataGridTextColumn Header="Travel ID"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.6*"/>
+                                                Width="0.6*"
+                                                Binding="{Binding Id_Travel}"/>
 
                                 <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.2*"/>
+                                                Width="1.2*"
+                                                    Binding="{Binding TOUR.Name_Tour}"/>
                                 <DataGridTextColumn Header="Start Location" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
+                                                Binding="{Binding StartLocation}"
                                                 Width="*"/>
                                 <DataGridTextColumn Header="Start Date Time" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="*"/>
+                                                Width="*"
+                                                Binding="{Binding StartDateTimeTravel,StringFormat='dd/MM/yyyy HH:mm'}"/>
                                 <DataGridTextColumn Header="Remain Ticket"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.8*"/>
+                                                Width="0.8*"
+                                                Binding="{Binding RemainingTicket}"/>
                                 <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
@@ -163,6 +168,7 @@
                                                     <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
                                                 </Button>
                                                 <Button Margin="15 0 0 0"
+                                                        Command="{Binding SelectTravelForBookingCommand}"
                                                         Width="Auto"
                                                         Background="{StaticResource btnAdd}"
                                                         BorderThickness="0"

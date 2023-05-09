@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -140,6 +141,11 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
                         List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
                         if (!listOriginalPackage.SequenceEqual(updatePackage))
                         {
@@ -165,11 +171,16 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
             {
                 try
                 {
-                    listOriginalPackage = db.PACKAGEs.ToList();
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
+                    listOriginalPackage = await db.PACKAGEs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         LoadGrid(listOriginalPackage);

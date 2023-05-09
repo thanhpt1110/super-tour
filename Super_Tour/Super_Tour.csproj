@@ -320,7 +320,6 @@
     <Compile Include="CustomControls\MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\PrintVisual.cs" />
     <Compile Include="Model\ACCOUNT.cs" />
     <Compile Include="Model\BOOKING.cs" />
     <Compile Include="Model\CUSTOMER.cs" />

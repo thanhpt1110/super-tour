@@ -18,7 +18,7 @@ namespace Super_Tour.ViewModel
 
     internal class MainTravelViewModel: ObservableObject
     {
-        private SUPER_TOUR db = new SUPER_TOUR();
+        private SUPER_TOUR db;
         private ObservableCollection<TRAVEL> _listObservableTravel;
         private DispatcherTimer timer = new DispatcherTimer();
         private List<TRAVEL> _listOriginalTravel;
@@ -62,7 +62,7 @@ namespace Super_Tour.ViewModel
             }
         }
         public ICommand OpenCreateTravelViewCommand { get; }
-        public ICommand DeleteTravelCommnand { get; }
+        public ICommand DeleteTravelCommand { get; }
         public ICommand SearchTravelCommand { get; }
         public ICommand UpdateTravelCommand { get; }
         public MainTravelViewModel() 
@@ -74,7 +74,7 @@ namespace Super_Tour.ViewModel
             this._listObservableTravel = new ObservableCollection<TRAVEL>();
             LoadFilter();
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
-            DeleteTravelCommnand = new RelayCommand(ExecuteDeleteTravel);
+            DeleteTravelCommand = new RelayCommand(ExecuteDeleteTravel);
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
             LoadTourDataAsync();
         }
@@ -82,9 +82,10 @@ namespace Super_Tour.ViewModel
         {
             TRAVEL travel = obj as TRAVEL;
             UpdateTravelView view = new UpdateTravelView();
+            timer.Stop();
             view.DataContext = new UpdateTravelViewModel(travel);
             view.ShowDialog();
-
+            LoadTourDataAsync();
         }
         private void LoadGrid(List<TRAVEL> listTravel)
         {
@@ -100,6 +101,8 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
+                    db.Dispose();
+                    db = new SUPER_TOUR();
                     List<TRAVEL> Updatetours = db.TRAVELs.ToList();
                     if (!Updatetours.SequenceEqual(_listOriginalTravel))
                     {
@@ -121,22 +124,29 @@ namespace Super_Tour.ViewModel
 
             try
             {
-                TRAVEL travel = obj as TRAVEL;
-                timer.Stop();
-                TRAVEL TravelFind = await db.TRAVELs.FindAsync(travel.Id_Travel);
-                if (TravelFind == null)
+                MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
-                    MyMessageBox.ShowDialog("The tour could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    return;
-                }
-                if (db.BOOKINGs.Where(p => p.Id_Travel == TravelFind.Id_Travel).ToList().Count > 0)
-                {
-                    MyMessageBox.ShowDialog("The tour could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    return;
-                }
+                    TRAVEL travel = obj as TRAVEL;
+                    timer.Stop();
+                    TRAVEL TravelFind = await db.TRAVELs.FindAsync(travel.Id_Travel);
+                    if (TravelFind == null)
+                    {
+                        MyMessageBox.ShowDialog("The tour could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        return;
+                    }
+                    if (db.BOOKINGs.Where(p => p.Id_Travel == TravelFind.Id_Travel).ToList().Count > 0)
+                    {
+                        MyMessageBox.ShowDialog("The tour could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        return;
+                    }
 
-                db.TRAVELs.Remove(TravelFind);
-                await db.SaveChangesAsync();
+                    db.TRAVELs.Remove(TravelFind);
+                    await db.SaveChangesAsync();
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    _listObservableTravel.Remove(TravelFind);
+                    _listOriginalTravel.Remove(TravelFind);
+                }
             }
             catch (Exception ex)
             {
@@ -154,6 +164,11 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
+                    if (db != null)
+                    {
+                        db.Dispose();                       
+                    }
+                    db = new SUPER_TOUR();
                     _listOriginalTravel = db.TRAVELs.ToList();
                     Application.Current.Dispatcher.Invoke(() =>
                     {

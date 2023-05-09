@@ -1,4 +1,5 @@
 ﻿using Student_wpf_application.ViewModels.Command;
+using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
 using System;
@@ -13,26 +14,23 @@ namespace Super_Tour.ViewModel
 {
     internal class CreateBookingViewModel: ObservableObject
     {
-        public class Tourist
-        {
-            private string _id;
-            private string _name;
-            public Tourist(string id, string name)
-            {
-                Id = id;
-                Name = name;
-            }
-            public string Id { get => _id; set => _id = value; }
-            public string Name { get => _name; set => _name = value; }
-        }
-        private ObservableCollection<Tourist> _tourists;
+        private TRAVEL _travel;
+        private SUPER_TOUR db = new SUPER_TOUR();
+       
+        private ObservableCollection<TOURIST> _tourists;
         public ICommand OpenSelectTravelForBookingViewCommand { get; }
-        private void ExecuteOpenSelectTravelForBookingViewCommand(object obj)
+        public ICommand OpenAddTouristForBookingViewCommand { get; }
+
+        public TRAVEL Travel
         {
-            SelectTravelForBookingView selectTravelForBookingView = new SelectTravelForBookingView();
-            selectTravelForBookingView.ShowDialog();
+            get { return _travel; }
+            set
+            {
+                _travel = value;
+                OnPropertyChanged(nameof(Travel));
+            }
         }
-        public ObservableCollection<Tourist> Tourists 
+        public ObservableCollection<TOURIST> Tourists 
         { 
             get => _tourists;
             set
@@ -41,16 +39,33 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(Tourists));
             }
         }
+        
         public CreateBookingViewModel()
         {
             OpenSelectTravelForBookingViewCommand = new RelayCommand(ExecuteOpenSelectTravelForBookingViewCommand);
-            Tourists = new ObservableCollection<Tourist>();
-            Tourist tourist = new Tourist("1", "Tourist 1");
+            Tourists = new ObservableCollection<TOURIST>();
+            OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
+ /*           Tourist tourist = new Tourist("1", "Tourist 1");
             Tourists.Add(tourist);
             tourist = new Tourist("2", "Tourist 2");
             Tourists.Add(tourist);
             tourist = new Tourist("2", "Tourist 3");
-            Tourists.Add(tourist);
+            Tourists.Add(tourist);*/
+        }
+        private void ExecuteOpenAddTouristForBookingViewCommand(object obj)
+        {
+            AddTouristView view = new AddTouristView();
+            view.DataContext = new AddTouristViewModel(Tourists);
+            view.ShowDialog();
+        }
+        private void ExecuteOpenSelectTravelForBookingViewCommand(object obj)
+        {
+            _travel = new TRAVEL();
+            SelectTravelForBookingView selectTravelForBookingView = new SelectTravelForBookingView();
+            selectTravelForBookingView.DataContext = new SelectTravelForBookingViewModel(_travel);
+            selectTravelForBookingView.ShowDialog();
+            Travel = db.TRAVELs.Find(_travel.Id_Travel);
+            
         }
     }
 }
