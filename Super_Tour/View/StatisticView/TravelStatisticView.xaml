@@ -5,8 +5,317 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            TextElement.FontWeight="Regular"
+            TextElement.FontSize="13"
+            TextOptions.TextFormattingMode="Ideal"
+            TextOptions.TextRenderingMode="Auto"
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            d:DesignHeight="788" d:DesignWidth="1138">
+    <Grid Background="{StaticResource BackgroundChildContent}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <DatePicker
+                    Width="200"
+                    Margin="30,0,0,0"
+                    materialDesign:HintAssist.Hint="From Date"
+                    Foreground="Black"
+                    materialDesign:HintAssist.Foreground="Black"
+                    Background="White"
+                    materialDesign:HintAssist.Background="White"
+                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="0"
+                    materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="0"
+                    Effect="{StaticResource MaterialDesignElevationShadow6}"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <DatePicker
+                    Width="200"
+                    Margin="60,0,0,0"
+                    materialDesign:HintAssist.Hint="To Date"
+                    Foreground="Black"
+                    materialDesign:HintAssist.Foreground="Black"
+                    Background="White"
+                    materialDesign:HintAssist.Background="White"
+                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="0"
+                    materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="0"
+                    Effect="{StaticResource MaterialDesignElevationShadow6}"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border CornerRadius="10"
+                            BorderThickness="0"
+                            Margin="20,10,10,10"
+                            Background="White">
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Border CornerRadius="10"
+                            BorderThickness="0"
+                            Margin="10,10,20,10"
+                            Background="White">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Most revenue dates"
+                                       FontWeight="Bold"
+                                       Margin="20,10,0,0"
+                                       FontSize="22"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <fa:IconImage Icon="CalendarDay"
+                                              Foreground="#FED500"
+                                              Height="45"
+                                              Margin="20,0,0,0"/>
+                                    <TextBlock Text="27/06/2023"
+                                           FontSize="20"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                    <materialDesign:PackIcon Kind="Money"
+                                        Height="50"
+                                        Width="50"
+                                        Foreground="#01A768"
+                                        Margin="40,0,0,0"/>
+                                    <TextBlock Text="512"
+                                           FontSize="22"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <fa:IconImage Icon="CalendarDay"
+                                              Foreground="#FED500"
+                                              Height="45"
+                                              Margin="20,0,0,0"/>
+                                    <TextBlock Text="27/06/2023"
+                                           FontSize="20"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                    <materialDesign:PackIcon Kind="Money"
+                                        Height="50"
+                                        Width="50"
+                                        Foreground="#01A768"
+                                        Margin="40,0,0,0"/>
+                                    <TextBlock Text="512"
+                                           FontSize="22"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <fa:IconImage Icon="CalendarDay"
+                                              Foreground="#FED500"
+                                              Height="45"
+                                              Margin="20,0,0,0"/>
+                                    <TextBlock Text="27/06/2023"
+                                           FontSize="20"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                    <materialDesign:PackIcon Kind="Money"
+                                        Height="50"
+                                        Width="50"
+                                        Foreground="#01A768"
+                                        Margin="40,0,0,0"/>
+                                    <TextBlock Text="512"
+                                           FontSize="22"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"
+                                           Margin="20,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Border CornerRadius="10"
+                            BorderThickness="0"
+                            Margin="20,10,10,10"
+                            Background="White">
+                    <Grid>
+
+                        <Border CornerRadius="10,10,0,0"
+                            VerticalAlignment="Top"
+                            Background="{StaticResource StatisticItemColor1}"
+                            Height="38">
+                        </Border>
+                        <DataGrid x:Name="membersDataGrid" 
+                              ItemsSource="{Binding ListTypePackages}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource StatisticDataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource statisticDataGridStyle1}" 
+                              Margin="5">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Travel name"
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1.5*"/>
+                                <DataGridTextColumn Header="Total Bookings" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1*"/>
+                                <DataGridTextColumn Header="Total Revenue" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1.5*"/>
+                                <DataGridTemplateColumn Header="Operations" 
+                                                HeaderStyle="{StaticResource StatisticDataGridColumnHeaderStyle2}"
+                                                IsReadOnly="True" 
+                                                Width="0.7*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Style="{StaticResource iconButton}" 
+                                                Command="{Binding DataContext.UpdatePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}">
+                                                    <fa:IconImage Icon="Info" Foreground="{StaticResource ThemeColor}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Border CornerRadius="10"
+                            BorderThickness="0"
+                            Margin="10,10,20,10"
+                            Background="White">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Total"
+                                       FontWeight="Bold"
+                                       Margin="20,10,0,0"
+                                       FontSize="22"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <materialDesign:PackIcon Kind="Summation"
+                                                             Height="50"
+                                                             Width="50"/>
+                                    <TextBlock Text="Total customers: "
+                                               FontSize="20"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Medium"/>
+                                    <TextBlock Text="250"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               Margin="20,0,0,0"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <materialDesign:PackIcon Kind="Summation"
+                                                             Height="50"
+                                                             Width="50"/>
+                                    <TextBlock Text="Total re-booking customers: "
+                                               FontSize="20"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Medium"/>
+                                    <TextBlock Text="250"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               Margin="10,0,0,0"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Border CornerRadius="10"
+                                    Background="{StaticResource StatisticItemColor1}"
+                                    Margin="10,3">
+                                <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Top"
+                                        Margin="10,20,10,0">
+                                    <materialDesign:PackIcon Kind="Summation"
+                                                             Height="50"
+                                                             Width="50"/>
+                                    <TextBlock Text="Total tourists: "
+                                               FontSize="20"
+                                               VerticalAlignment="Center"
+                                               FontWeight="Medium"/>
+                                    <TextBlock Text="250"
+                                               FontSize="22"
+                                               VerticalAlignment="Center"
+                                               Margin="20,0,0,0"
+                                               FontWeight="Bold"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
