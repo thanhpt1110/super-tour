@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="Super_Tour.View.DashBoardView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Super_Tour.View"
-             mc:Ignorable="d" 
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:Super_Tour.View"
+            mc:Ignorable="d" 
+            xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
             TextElement.FontWeight="Regular"
@@ -13,7 +13,7 @@
             TextOptions.TextFormattingMode="Ideal"
             TextOptions.TextRenderingMode="Auto"
             FontFamily="{DynamicResource MaterialDesignFont}"
-             d:DesignHeight="788" d:DesignWidth="1138">
+            d:DesignHeight="788" d:DesignWidth="1138">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="320"/>
@@ -63,7 +63,8 @@
                             BorderBrush="{StaticResource DashboardBorderColor1}"
                             Margin="40,45,40,55"
                             CornerRadius="20"
-                            Background="White">
+                            Background="White"
+                            Effect="{StaticResource MaterialDesignElevationShadow6}">
                     </Border>
                     <Grid Margin="40,45,40,55">
                             <Grid.RowDefinitions>
@@ -90,7 +91,8 @@
                                            HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1"
+                              Cursor="Hand">
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor1}"
                                     CornerRadius="0,0,20,20"
@@ -107,7 +109,8 @@
                             BorderBrush="{StaticResource DashboardBorderColor2}"
                             Margin="40,45,40,55"
                             CornerRadius="20"
-                            Background="White"></Border>
+                            Background="White"
+                            Effect="{StaticResource MaterialDesignElevationShadow6}"></Border>
                     <Grid Margin="40,45,40,55">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -133,7 +136,8 @@
                                            HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1"
+                              Cursor="Hand">
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor2}"
                                     CornerRadius="0,0,20,20"
@@ -150,7 +154,8 @@
                             BorderBrush="{StaticResource DashboardBorderColor3}"
                             Margin="40,45,40,55"
                             CornerRadius="20"
-                            Background="White"></Border>
+                            Background="White"
+                            Effect="{StaticResource MaterialDesignElevationShadow6}"></Border>
                     <Grid Margin="40,45,40,55">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -176,7 +181,8 @@
                                            HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1"
+                              Cursor="Hand">
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor3}"
                                     CornerRadius="0,0,20,20"
@@ -193,7 +199,8 @@
                             BorderBrush="{StaticResource DashboardBorderColor4}"
                             Margin="40,45,40,55"
                             CornerRadius="20"
-                            Background="White"></Border>
+                            Background="White"
+                            Effect="{StaticResource MaterialDesignElevationShadow6}"></Border>
                     <Grid Margin="40,45,40,55">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -219,7 +226,8 @@
                                            HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1"
+                              Cursor="Hand">
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor4}"
                                     CornerRadius="0,0,20,20"
@@ -247,7 +255,8 @@
                     <Border BorderBrush="{StaticResource DashboardGrayBorder}"
                             BorderThickness="1"
                             Margin="40"
-                            CornerRadius="3"></Border>
+                            CornerRadius="3"
+                            Effect="{StaticResource MaterialDesignElevationShadow16}"></Border>
                     <Grid Margin="40">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
@@ -316,14 +325,15 @@
                     <Border BorderBrush="{StaticResource DashboardGrayBorder}"
                             BorderThickness="1"
                             Margin="40"
-                            CornerRadius="3"></Border>
+                            CornerRadius="3"
+                            Effect="{StaticResource MaterialDesignElevationShadow12}"></Border>
                     <Grid Margin="40">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border BorderBrush="{StaticResource DashboardGrayBorder}"
-                                        BorderThickness="0,0,0,1"/>
+                                BorderThickness="0,0,0,1"/>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -391,7 +401,8 @@
                     <Border BorderBrush="{StaticResource DashboardGrayBorder}"
                             BorderThickness="1"
                             Margin="40,20,40,60"
-                            CornerRadius="3"></Border>
+                            CornerRadius="3"
+                            Effect="{StaticResource MaterialDesignElevationShadow16}"></Border>
                     <Grid Margin="40,20,40,60">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>
@@ -460,7 +471,8 @@
                     <Border BorderBrush="{StaticResource DashboardGrayBorder}"
                             BorderThickness="1"
                             Margin="40,20,40,60"
-                            CornerRadius="3"></Border>
+                            CornerRadius="3"
+                            Effect="{StaticResource MaterialDesignElevationShadow12}"></Border>
                     <Grid Margin="40,20,40,60">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45"/>

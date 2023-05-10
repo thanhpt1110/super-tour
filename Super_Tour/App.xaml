@@ -21,8 +21,10 @@
                 <ResourceDictionary Source="./Styles/PlaceHolderTextBox.xaml"/>
                 <ResourceDictionary Source="./Styles/RoundedButton.xaml"/>
                 <ResourceDictionary Source="./Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="./Styles/StatisticDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/SmallerDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/MyTimePicker.xaml"/>
+                
                 <!--Material Toolkit-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
