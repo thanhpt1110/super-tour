@@ -121,23 +121,23 @@
                                         <materialDesign:PackIcon 
                                                     Height="40"
                                                     Width="40"
-                                                    Kind="Category"
+                                                    Kind="Email"
                                                     Margin="0,0,12,0"
                                                     VerticalAlignment="Center"/>
-                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  Height="50"
-                                                  Width="300"
-                                                  BorderThickness="0"
-                                                  BorderBrush="DarkGray"
-                                                  Margin="0"
-                                                  materialDesign:HintAssist.Hint="Select account priority"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}">
-
-                                        </ComboBox>
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                             BorderThickness="0"
+                                             Background="{StaticResource TextBoxColor}"
+                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                             Foreground="Black"
+                                             materialDesign:HintAssist.Foreground="Black"
+                                             FontSize="15"
+                                             materialDesign:HintAssist.Hint="Enter account email"
+                                             Height="50"
+                                             Width="300"
+                                             CaretBrush="Black"
+                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                 Text="{Binding Email}"
+                                             />
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="2">
