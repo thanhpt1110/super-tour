@@ -167,10 +167,7 @@ namespace Super_Tour.ViewModel
         }
         private void LoadGrid(List<TOUR> listTour)
         {
-            Stopwatch stopwatch = new Stopwatch();
 
-            // Bắt đầu đếm thời gian
-            stopwatch.Start();
             _listDataGridTour.Clear();
             foreach (TOUR tour in listTour)
             {
@@ -180,8 +177,6 @@ namespace Super_Tour.ViewModel
                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
                
             }
-            stopwatch.Stop();
-                    Console.WriteLine("Time Load From UI: {0}", stopwatch.Elapsed.TotalSeconds);
 
 
         }

@@ -15,6 +15,8 @@ namespace Super_Tour.ViewModel
     internal class MainViewModel: ObservableObject
     {
         //Fields
+        // Tạo một cache mới với tên "myCache"
+        private MemoryCache myCache;
         private ObservableObject _currentChildView;
         private readonly IMemoryCache _cache;
         private string _caption;
@@ -29,7 +31,6 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
-
         public string Caption 
         { 
             get => _caption;
@@ -69,6 +70,7 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public MainViewModel()
         {
+            this.myCache = new MemoryCache(new MemoryCacheOptions());
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
             ShowTravelViewCommand = new RelayCommand(ExecuteShowTravelViewCommand);
             ShowBookingViewCommand = new RelayCommand(ExecuteShowBookingViewCommand);
@@ -90,15 +92,13 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
         {
             TechnicalHelpViewModel  technicalHelpViewModel= null;
-            foreach (var form in _formViewModel)
+            if (myCache.TryGetValue("myKey", out technicalHelpViewModel))
             {
-                if (form is TechnicalHelpViewModel)
-                {
-                    technicalHelpViewModel = form as TechnicalHelpViewModel;
-                    break;
-                }
-            }    
-            if(technicalHelpViewModel==null)
+            }
+            else
+            {
+            }
+            if (technicalHelpViewModel==null)
             {
                 technicalHelpViewModel = new TechnicalHelpViewModel();
                 _formViewModel.Add(technicalHelpViewModel);

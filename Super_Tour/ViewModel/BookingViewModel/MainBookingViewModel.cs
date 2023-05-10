@@ -172,6 +172,7 @@ namespace Super_Tour.ViewModel
         {
             {
                 CreateBookingView createBookingView = new CreateBookingView();
+                
                 createBookingView.ShowDialog();
 
             }
