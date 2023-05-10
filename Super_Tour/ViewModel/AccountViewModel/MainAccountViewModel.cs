@@ -75,6 +75,11 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
                         _listAccountOriginal = db.ACCOUNTs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {

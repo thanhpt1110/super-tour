@@ -16,14 +16,14 @@ namespace Super_Tour.Model
         public int Id_Travel { get; set; }
         public DateTime Booking_Date { get; set; }
         public string Status { get; set; }
-       // [ForeignKey("booking_ibfk_1")]
-        //public virtual CUSTOMER CUSTOMER { get; set; }
-       // [ForeignKey("booking_ibfk_2")]
-        //public virtual TRAVEL TRAVEL { get; set; }
-        /*public virtual ICollection<BOOKING_DETAILS> BOOKING_DETAILSs
+         [ForeignKey("Id_Customer_Booking")]
+        public virtual CUSTOMER CUSTOMER { get; set; }
+         [ForeignKey("Id_Travel")]
+        public virtual TRAVEL TRAVEL { get; set; }
+        public virtual ICollection<TOURIST> TOURISTs
         {
             get; set;
-        }*/
+        }
 
     }
 }

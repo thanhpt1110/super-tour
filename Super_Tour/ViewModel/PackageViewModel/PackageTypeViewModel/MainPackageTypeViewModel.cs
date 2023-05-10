@@ -18,6 +18,7 @@ using System.Windows.Markup;
 using Org.BouncyCastle.Crypto.Tls;
 using System.IO.Packaging;
 using Org.BouncyCastle.Asn1.Cms;
+using System.Diagnostics;
 
 namespace Super_Tour.ViewModel
 {
@@ -171,6 +172,11 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
                     var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
                     // Kiểm tra dữ liệu có được cập nhật chưa
                     if (!myEntities.SequenceEqual(_listTypePackageOriginal))
@@ -204,9 +210,22 @@ namespace Super_Tour.ViewModel
                 int flag = 0;
                 await Task.Run(() =>
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+
+                    // Bắt đầu đếm thời gian
                     try
                     {
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
+                        stopwatch.Start();
+
                         _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                        stopwatch.Stop();
+                        Console.WriteLine("Time elapsed: {0}", stopwatch.Elapsed.TotalSeconds);
+
                         _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
@@ -221,6 +240,9 @@ namespace Super_Tour.ViewModel
                         MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                         flag = 1;
                     }
+                    
+
+                    // In ra thời gian đã trôi qua
                 });
                 if(flag==0)
                     timer.Start();

@@ -24,7 +24,6 @@ namespace Super_Tour.View
         public MainTravelView()
         {
             InitializeComponent();
-            this.DataContext = new MainTravelViewModel();
         }
     }
 }

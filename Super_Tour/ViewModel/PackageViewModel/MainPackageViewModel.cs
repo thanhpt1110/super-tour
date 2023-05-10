@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,26 +19,6 @@ using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
-    class PackageDataGrid
-    {
-        private PACKAGE _package;
-        public PACKAGE Package
-        {
-            get { return _package; }
-            set
-            {
-                _package = value;
-            }
-        }
-        private string _namePackageType;
-        public string NamePackageType {
-            get { return _namePackageType; }
-            set
-            {
-                _namePackageType = value;
-            }
-        }
-    }
     internal class MainPackageViewModel : ObservableObject
     {
         private string _searchPackageName;
@@ -55,17 +36,17 @@ namespace Super_Tour.ViewModel
         public ICommand OpenCreatePackageViewCommand { get; }
         public ICommand DeletePackageCommand { get; }
         public ICommand UpdatePackageViewCommand { get; }
-        private ObservableCollection<PackageDataGrid> _listPackagesDataGrid;
-        public ObservableCollection<PackageDataGrid> ListPackagesDataGrid
+        private ObservableCollection<PACKAGE> _listPackages;
+        public ObservableCollection<PACKAGE> ListPackages
         {
             get
             {
-                return _listPackagesDataGrid;
+                return _listPackages;
             }
             set
             {
-                _listPackagesDataGrid = value;
-                OnPropertyChanged(nameof(ListPackagesDataGrid));
+                _listPackages = value;
+                OnPropertyChanged(nameof(ListPackages));
             }
         }
         private DispatcherTimer timer = new DispatcherTimer();
@@ -77,19 +58,25 @@ namespace Super_Tour.ViewModel
             OpenCreatePackageViewCommand = new RelayCommand(ExecuteOpenCreatePackageViewCommand);
             DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             UpdatePackageViewCommand = new RelayCommand(ExecuteUpdatePackage);
-            _listPackagesDataGrid = new ObservableCollection<PackageDataGrid>();
+            _listPackages = new ObservableCollection<PACKAGE>();
             timer.Interval = TimeSpan.FromSeconds(3);
             OnSearchTextChangedCommand = new RelayCommand(SearchPackage);
             timer.Tick += Timer_Tick;
             LoadPackageDataAsync();
         }
-
+        void LoadGrid(List<PACKAGE> listPackage)
+        {
+            _listPackages.Clear();
+            foreach(PACKAGE packgage in listPackage)
+            {
+                _listPackages.Add(packgage);
+            }    
+        }
         private async void ExecuteDeletePackage(object obj)
         {
             try
             {
-                PackageDataGrid packageDataGrid = obj as PackageDataGrid;
-                PACKAGE package = packageDataGrid.Package;
+                PACKAGE package = obj as PACKAGE;
                 timer.Stop();
                 PACKAGE packageFind = await db.PACKAGEs.FindAsync(package.Id_Package);
                 if (db.TOUR_DETAILs.Where(p => p.Id_Package == packageFind.Id_Package).ToList().Count > 0)
@@ -107,12 +94,7 @@ namespace Super_Tour.ViewModel
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                         listOriginalPackage = db.PACKAGEs.ToList();
-                        _listPackagesDataGrid.Clear();
-                        foreach (PACKAGE package1 in listOriginalPackage)
-                        {
-                            TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package1.Id_Type_Package);
-                            _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package1, NamePackageType = type.Name_Type });
-                        }
+                        LoadGrid(listOriginalPackage);
                     }
 
                 }
@@ -132,15 +114,13 @@ namespace Super_Tour.ViewModel
         }
         private async void ExecuteUpdatePackage(object obj)
         {
-            PackageDataGrid packageDataGrid = obj as PackageDataGrid;
-            PACKAGE package = packageDataGrid.Package;
+            PACKAGE package = obj as PACKAGE;
             UpdatePackageView view = new UpdatePackageView();
             view.DataContext = new UpdatePackageViewModel(package);
             view.ShowDialog();
         }
         private void SearchPackage(object obj)
         {
-            _listPackagesDataGrid.Clear();
             List<PACKAGE> list;
             if(string.IsNullOrEmpty(_searchPackageName))
             {
@@ -151,11 +131,7 @@ namespace Super_Tour.ViewModel
             {
                 list = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
             }
-            foreach (PACKAGE package in list)
-            {
-                TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
-                _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
-            }
+            LoadGrid(list);
         }
         private async void Timer_Tick(object sender, EventArgs e)
         {
@@ -165,19 +141,18 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
                         List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
                         if (!listOriginalPackage.SequenceEqual(updatePackage))
                         {
                             listOriginalPackage = updatePackage;
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                if (_listPackagesDataGrid.Count != 0)
-                                    _listPackagesDataGrid.Clear();
-                                foreach (PACKAGE package in listOriginalPackage)
-                                {
-                                    TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
-                                    _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
-                                }
+                                SearchPackage(null);
                             });
                         }
                     }
@@ -196,18 +171,19 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
             {
                 try
                 {
-                    listOriginalPackage = db.PACKAGEs.ToList();
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
+                    listOriginalPackage = await db.PACKAGEs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        foreach (PACKAGE package in listOriginalPackage)
-                        {
-                            TYPE_PACKAGE type = db.TYPE_PACKAGEs.Find(package.Id_Type_Package);
-                            _listPackagesDataGrid.Add(new PackageDataGrid() { Package = package, NamePackageType = type.Name_Type });
-                        }
+                        LoadGrid(listOriginalPackage);
                     });
                 }
                 catch(Exception ex)

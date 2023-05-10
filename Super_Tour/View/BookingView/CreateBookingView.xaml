@@ -100,7 +100,7 @@
                                          Height="50"
                                          FontSize="15"
                                          IsReadOnly="True"
-                                         Text="Select a travel for this booking"
+                                         Text="{Binding Travel.TOUR.Name_Tour}"
                                          Foreground="Black"
                                          materialDesign:HintAssist.Foreground="Black"
                                          BorderThickness="0"
@@ -321,12 +321,12 @@
                                               Style="{DynamicResource smallerDataGridStyle1}" Margin="10,10,10,10">        
                                                 <DataGrid.Columns>
                                                     <DataGridTextColumn Header="ID"
-                                                                        Binding="{Binding Id}"
+                                                                        Binding="{Binding Id_Tourist}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.6*"/>
                                                     <DataGridTextColumn Header="Customer Name" 
-                                                                        Binding="{Binding Name}"
+                                                                        Binding="{Binding Name_Tourist}"
                                                                         IsReadOnly="True" 
                                                                         CanUserResize="False" 
                                                                         Width="2*"/>    
@@ -352,7 +352,8 @@
                                             <Button Content="Add new tourist"
                                                     BorderThickness="0"
                                                     Background="{StaticResource btnAdd}"
-                                                    Width="300"></Button>
+                                                    Width="300"
+                                                    Command="{Binding OpenAddTouristForBookingViewCommand}"></Button>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>

@@ -94,8 +94,18 @@ namespace Super_Tour.ViewModel
             {
                 // Thực hiện truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng
                 ConvertPassToMD5();
-                var user = await Task.Run(() =>
-                    db.ACCOUNTs.FirstOrDefault(u => u.Username == Username && u.Password == converted_password));
+                ACCOUNT user=null;
+               await Task.Run(()=> {
+                   try
+                   {
+                       user = db.ACCOUNTs.FirstOrDefault(u => u.Username == Username && u.Password == converted_password);
+                   }
+                   catch (Exception ex)
+                   {
+                       MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
+                   }
+               });
 
                 // Nếu thông tin đăng nhập hợp lệ
                 if (user != null)

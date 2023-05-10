@@ -112,7 +112,8 @@
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="140"
-                                Height="40"></Button>
+                                Height="40"
+                                Command="{Binding SaveTouristCommand}"></Button>
                     </Grid>
                 </Grid>
             </Border>

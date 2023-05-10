@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Xml;
+using Microsoft.Extensions.Caching.Memory;
 using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
@@ -34,6 +39,7 @@ namespace Super_Tour.ViewModel
     }
     internal class MainTourViewModel: ObservableObject
     {
+        private MemoryCache cache;
         private List<TOUR> _listSearchTour;
         private List<TOUR> _listToursOriginal;
         private readonly object _locker = new object();
@@ -44,7 +50,19 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<string> _listSearchFilterBy;
         private DispatcherTimer timer = new DispatcherTimer();
         private string _selectedFilter = "Name";
-
+        private Visibility _isLoading = Visibility.Hidden;
+        public Visibility IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
         public string SelectedFilter
         {
             get { return _selectedFilter; }
@@ -110,6 +128,9 @@ namespace Super_Tour.ViewModel
         public ICommand UpdateTourCommand { get; }
         public MainTourViewModel() 
         {
+            //  string a = "";
+
+            cache = new MemoryCache(new MemoryCacheOptions());
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick;
@@ -146,21 +167,23 @@ namespace Super_Tour.ViewModel
         }
         private void LoadGrid(List<TOUR> listTour)
         {
+            Stopwatch stopwatch = new Stopwatch();
+
+            // Bắt đầu đếm thời gian
+            stopwatch.Start();
             _listDataGridTour.Clear();
             foreach (TOUR tour in listTour)
             {
-                decimal SumPrice = 0;
-                if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
-                {
-                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-                    continue;
-                }
-                foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
-                {
-                    SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
-                }
+                decimal SumPrice = tour.TOUR_DETAILs
+                .Where(p => p.Id_Tour == tour.Id_Tour)
+                .Sum(p => p.PACKAGE.Price);
                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+               
             }
+            stopwatch.Stop();
+                    Console.WriteLine("Time Load From UI: {0}", stopwatch.Elapsed.TotalSeconds);
+
+
         }
         private void generateFilterItem()
         {
@@ -184,6 +207,11 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
                     List<TOUR> Updatetours = db.TOURs.ToList();
                     if (!Updatetours.SequenceEqual(_listToursOriginal))
                     {
@@ -261,11 +289,16 @@ namespace Super_Tour.ViewModel
         }
         public async Task LoadTourDataAsync()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 try
                 {
-                    _listToursOriginal = db.TOURs.ToList();
+                    if (db != null)
+                    {
+                        db.Dispose();
+                    }
+                    db = new SUPER_TOUR();
+                    _listToursOriginal = await db.TOURs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         LoadGrid(_listToursOriginal);

@@ -94,12 +94,12 @@
                                     HorizontalAlignment="Center">
                                         <fa:IconImage Icon="CalendarPlus" Height="35"/>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 Text="{Binding Travel.TOUR.Name_Tour}"
                                      materialDesign:HintAssist.Hint="Tour of this travel"
                                      Width="300"
                                      Height="50"
                                      FontSize="15"
                                      IsReadOnly="True"
-                                     Text="Select a tour for this travel"
                                      Foreground="Black"
                                      materialDesign:HintAssist.Foreground="Black"
                                      BorderThickness="0"
@@ -133,6 +133,7 @@
                                                 Width="35"
                                                 Margin="10,0,0,0"/>
                                             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 Text="{Binding Travel.StartLocation}"
                                                  materialDesign:HintAssist.Hint="Enter Start Location"
                                                  Height="50"
                                                  Width="300"
@@ -147,7 +148,9 @@
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <StackPanel Orientation="Horizontal">
-                                            <DatePicker Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                            <DatePicker 
+                                                SelectedDate="{Binding Travel.StartDateTimeTravel}"
+                                                        Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                         BorderThickness="0"
                                                         BorderBrush="DarkGray"
                                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
@@ -157,7 +160,9 @@
                                                         materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
                                                         materialDesign:HintAssist.Hint="Select Start Date"
                                                         Width="170"/>
-                                            <materialDesign:TimePicker Style="{StaticResource MaterialDesignOutlinedTimePicker}"
+                                            <materialDesign:TimePicker 
+                                                SelectedTime="{Binding Travel.StartDateTimeTravel}"
+                                                Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                         Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                         Foreground="Black"
                                                         Background="{StaticResource BackgroundDataGridRowHover}"
@@ -183,7 +188,9 @@
                                                 Width="35"
                                                 Margin="0,0,0,0"
                                                 VerticalAlignment="Center"/>
-                                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            <TextBox 
+                                                Text="{Binding MaxTicket}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          materialDesign:HintAssist.Hint="Enter Max Number of Ticket"
                                          Height="50"
                                          Width="200"
@@ -206,7 +213,9 @@
                                                 Width="35"
                                                 Margin="0,0,10,0"
                                                 VerticalAlignment="Center"/>
-                                            <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            <TextBox
+                                                Text="{Binding Discount}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                          materialDesign:HintAssist.Hint="Enter Discount"
                                          Height="50"
                                          Width="200"
@@ -225,6 +234,7 @@
                     </Grid>
                     <Grid Grid.Row="5">
                         <Button Content="Save"
+                                Command="{Binding SaveUpdateCommand}"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="120"

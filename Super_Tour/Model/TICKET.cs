@@ -12,9 +12,9 @@ namespace Super_Tour.Model
     {
         [Key]
         public int Id_Ticket { get; set; }
-        public int Id_Booking_Details { get; set; }
+        public int Id_Tourist { get; set; }
         public string Status { get; set; }
- /*       [ForeignKey("ticket_ibfk_1")]
-        public virtual BOOKING_DETAILS BOOKING_DETAILS { get; set; }*/
+        [ForeignKey("Id_Tourist")]
+        public virtual TOURIST TOURIST { get; set; }
     }
 }

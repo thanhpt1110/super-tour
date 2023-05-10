@@ -23,7 +23,6 @@ namespace Super_Tour.View
         public AddTouristView()
         {
             InitializeComponent();
-            this.DataContext = new AddTouristViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

@@ -74,7 +74,7 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListPackagesDataGrid}"
+                              ItemsSource="{Binding ListPackages}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -84,23 +84,23 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Package.Id_Package}"/>
+                                                Binding="{Binding Id_Package}"/>
 
                         <DataGridTextColumn Header="Package Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="2*"
-                                                Binding="{Binding Package.Name_Package}"/>
+                                                Binding="{Binding Name_Package}"/>
                         <DataGridTextColumn Header="Type Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.5*"
-                                                Binding="{Binding NamePackageType}"/>
+                                                Binding="{Binding TYPEPACKAGE.Name_Type}"/>
                         <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Package.Price}"/>
+                                                Binding="{Binding Price}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

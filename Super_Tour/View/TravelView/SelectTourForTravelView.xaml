@@ -177,14 +177,15 @@
                                                     <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
                                                 </Button>
                                                 <Button 
-                                                        Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        Command="{Binding DataContext.SelectTravelForBookingCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}"
                                                         Margin="15 0 0 0"
                                                         Width="Auto"
                                                         Background="{StaticResource btnAdd}"
                                                         BorderThickness="0"
                                                         Foreground="White"
-                                                        Content="Select this tour">
+                                                        Content="Select this tour"
+                                                   >
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>

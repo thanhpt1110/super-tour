@@ -17,7 +17,6 @@
              d:DesignHeight="788" d:DesignWidth="1138">
     <Border Background="{StaticResource BackgroundChildContent}">
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="65"/>
                 <RowDefinition Height="*"/>
@@ -28,6 +27,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 

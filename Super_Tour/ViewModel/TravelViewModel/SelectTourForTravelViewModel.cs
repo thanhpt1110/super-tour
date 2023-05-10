@@ -117,7 +117,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteSelectTourCommand(object obj)
         {
             DataGridTour dataGridTour = obj as DataGridTour;
-            _tour = dataGridTour.Tour;
+            _tour.Id_Tour = dataGridTour.Tour.Id_Tour;
             SelectTourForTravelView selectTourForTravelView = null;
             foreach (Window window in Application.Current.Windows)
             {
@@ -148,14 +148,14 @@ namespace Super_Tour.ViewModel
             foreach (TOUR tour in listTour)
             {
                 decimal SumPrice = 0;
-                if (db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
+                if (tour.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList().Count == 0)
                 {
                     _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
                     continue;
                 }
-                foreach (TOUR_DETAILS tour_detail in db.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
+                foreach (TOUR_DETAILS tour_detail in tour.TOUR_DETAILs.Where(p => p.Id_Tour == tour.Id_Tour).ToList())
                 {
-                    SumPrice += db.PACKAGEs.Find(tour_detail.Id_Package).Price;
+                    SumPrice += tour_detail.PACKAGE.Price;
                 }
                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
             }
