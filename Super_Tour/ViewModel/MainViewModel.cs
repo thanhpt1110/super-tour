@@ -272,6 +272,23 @@ namespace Super_Tour.ViewModel
         {
             Caption = "Customer Statistic";
             Icon = IconChar.Database;
+            CustomerStatisticViewModel viewModel = null;
+            foreach (var form in _formViewModel)
+            {
+                if (form is CustomerStatisticViewModel)
+                {
+                    viewModel = form as CustomerStatisticViewModel;
+                    break;
+                }
+            }
+            if (viewModel == null)
+            {
+                viewModel = new CustomerStatisticViewModel();
+                _formViewModel.Add(viewModel);
+            }
+            CurrentChildView = viewModel;
+            Caption = "Customer Statistic";
+            Icon = IconChar.BagShopping;
         }
         private void ExecuteShowRevenueStatisticViewCommand(object obj)
         {
