@@ -106,7 +106,7 @@ namespace Super_Tour.ViewModel
                         }
                         db = new SUPER_TOUR();*/
                         List<BOOKING> UpdateBooking = db.BOOKINGs.ToList();
-                        //db.Entry(UpdateBooking).Reload();
+                        db.Entry(UpdateBooking).Reload();
                         if (!UpdateBooking.SequenceEqual(_listOriginalBooking))
                         {
                             _listOriginalBooking = UpdateBooking;

@@ -63,7 +63,6 @@ namespace Super_Tour.ViewModel
 
         public MainLoginViewModel()
         {
-            
             LoginCommand = new RelayCommand(Login, canExecute);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }

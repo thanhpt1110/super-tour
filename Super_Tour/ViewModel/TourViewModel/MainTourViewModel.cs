@@ -222,12 +222,14 @@ namespace Super_Tour.ViewModel
                 {
                     if (MainViewModel.CurrentChild is MainTourViewModel)
                     {
-                        if (db != null)
+/*                        if (db != null)
                         {
                             db.Dispose();
                         }
-                        db = new SUPER_TOUR();
+                        db = new SUPER_TOUR();*/
                         List<TOUR> Updatetours = db.TOURs.ToList();
+                        db.Entry(Updatetours).Reload();
+
                         if (!Updatetours.SequenceEqual(_listToursOriginal))
                         {
                             _listToursOriginal = Updatetours;
