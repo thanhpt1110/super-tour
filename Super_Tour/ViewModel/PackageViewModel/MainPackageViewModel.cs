@@ -222,25 +222,28 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        if (db != null)
+                        if (MainViewModel.CurrentChild is MainPackageViewModel)
                         {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        var updatePackage = await db.PACKAGEs.ToListAsync();
-                        if (!updatePackage.SequenceEqual(listOriginalPackage))
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            if (db != null)
                             {
-                                listOriginalPackage = updatePackage;
-                                if (_onSearching)
+                                db.Dispose();
+                            }
+                            db = new SUPER_TOUR();
+                            var updatePackage = await db.PACKAGEs.ToListAsync();
+                            if (!updatePackage.SequenceEqual(listOriginalPackage))
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                                    ReloadData(listPackagesSearching);
-                                }
-                                else
-                                    ReloadData(listOriginalPackage);
-                            });
+                                    listOriginalPackage = updatePackage;
+                                    if (_onSearching)
+                                    {
+                                        listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                                        ReloadData(listPackagesSearching);
+                                    }
+                                    else
+                                        ReloadData(listOriginalPackage);
+                                });
+                            }
                         }
                     }
                     catch (Exception ex)

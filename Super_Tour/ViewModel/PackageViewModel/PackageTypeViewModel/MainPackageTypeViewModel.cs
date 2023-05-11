@@ -172,31 +172,34 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
-                    if (db != null)
+                    if (MainViewModel.CurrentChild is MainPackageTypeViewModel)
                     {
-                        db.Dispose();
-                    }
-                    db = new SUPER_TOUR();
-                    var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
-                    // Kiểm tra dữ liệu có được cập nhật chưa
-                    if (!myEntities.SequenceEqual(_listTypePackageOriginal))
-                    { 
-                        // Dữ liệu đã được cập nhật
-                        // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                        Application.Current.Dispatcher.Invoke(() =>
+                        if (db != null)
                         {
-                            _listTypePackageOriginal = myEntities;
-                            if (_onSearching)
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
+                        var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
+                        // Kiểm tra dữ liệu có được cập nhật chưa
+                        if (!myEntities.SequenceEqual(_listTypePackageOriginal))
+                        {
+                            // Dữ liệu đã được cập nhật
+                            // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-                                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-                                ReloadData(_listTypePackageSearching);
-                            }
-                            else
-                                ReloadData(_listTypePackageOriginal);
-                        });
+                                _listTypePackageOriginal = myEntities;
+                                if (_onSearching)
+                                {
+                                    _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+                                    ReloadData(_listTypePackageSearching);
+                                }
+                                else
+                                    ReloadData(_listTypePackageOriginal);
+                            });
+                        }
                     }
-
                 });
+                
             }
             catch(Exception ex)
             {

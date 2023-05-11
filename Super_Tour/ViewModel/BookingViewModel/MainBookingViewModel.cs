@@ -78,9 +78,15 @@ namespace Super_Tour.ViewModel
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-                await Task.Run(() =>
+            await LoadDataPerSecond();
+         }
+        private async Task LoadDataPerSecond()
+        {
+            await Task.Run(() =>
+            {
+                try
                 {
-                    try
+                    if (MainViewModel.CurrentChild is MainBookingViewModel)
                     {
                         if (db != null)
                         {
@@ -98,12 +104,13 @@ namespace Super_Tour.ViewModel
                             });
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    }
-                });
-         }
+                }
+                catch (Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+            });
+        }
         private async void ExecuteUpdateBooking(object obj)
         {
             UpdateBookingView view = new UpdateBookingView();

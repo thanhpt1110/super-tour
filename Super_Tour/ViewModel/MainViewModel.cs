@@ -16,7 +16,8 @@ namespace Super_Tour.ViewModel
     {
         //Fields
         // Tạo một cache mới với tên "myCache"
-        private MemoryCache myCache;
+        //private MemoryCache myCache;
+        public static ObservableObject CurrentChild;
         private ObservableObject _currentChildView;
         private readonly IMemoryCache _cache;
         private string _caption;
@@ -70,7 +71,6 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public MainViewModel()
         {
-            this.myCache = new MemoryCache(new MemoryCacheOptions());
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
             ShowTravelViewCommand = new RelayCommand(ExecuteShowTravelViewCommand);
             ShowBookingViewCommand = new RelayCommand(ExecuteShowBookingViewCommand);
@@ -92,18 +92,13 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
         {
             TechnicalHelpViewModel  technicalHelpViewModel= null;
-            if (myCache.TryGetValue("myKey", out technicalHelpViewModel))
-            {
-            }
-            else
-            {
-            }
             if (technicalHelpViewModel==null)
             {
                 technicalHelpViewModel = new TechnicalHelpViewModel();
                 _formViewModel.Add(technicalHelpViewModel);
             }    
             CurrentChildView = technicalHelpViewModel;
+            CurrentChild = technicalHelpViewModel;
             Caption = "Technical Help";
             Icon = IconChar.QuestionCircle;
         }
@@ -125,6 +120,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(dashBoardViewModel);
             }
             CurrentChildView = dashBoardViewModel;
+            CurrentChild = dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
@@ -145,6 +141,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainTravelViewModel);
             }
             CurrentChildView = mainTravelViewModel;
+            CurrentChild = mainTravelViewModel;
             Caption = "Travel";
             Icon = IconChar.Plane;
         }
@@ -165,6 +162,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainBookingViewModel);
             }
             CurrentChildView = mainBookingViewModel;
+            CurrentChild = mainBookingViewModel;
             Caption = "Booking";
             Icon = IconChar.Hand;
         }
@@ -185,6 +183,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainCustomerViewModel);
             }
             CurrentChildView = mainCustomerViewModel;
+            CurrentChild = mainCustomerViewModel;
             Caption = "Customer";
             Icon = IconChar.AddressBook;
         }
@@ -205,6 +204,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainTicketViewModel);
             }
             CurrentChildView = mainTicketViewModel;
+            CurrentChild = mainTicketViewModel;
             Caption = "Ticket";
             Icon = IconChar.Ticket;
         }
@@ -225,6 +225,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainTourViewModel);
             }
             CurrentChildView = mainTourViewModel;
+            CurrentChild = mainTourViewModel;
             Caption = "Tour";
             Icon = IconChar.CalendarPlus;
         }
@@ -245,6 +246,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(mainPackageViewModel);
             }
             CurrentChildView = mainPackageViewModel;
+            CurrentChild = mainPackageViewModel;
             Caption = "Package";
             Icon = IconChar.BagShopping;
         }
@@ -265,6 +267,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(viewModel);
             }
             CurrentChildView =   viewModel;
+            CurrentChild = viewModel;
             Caption = "Package Type";
             Icon = IconChar.BagShopping;
         }
@@ -287,6 +290,7 @@ namespace Super_Tour.ViewModel
                 _formViewModel.Add(viewModel);
             }
             CurrentChildView = viewModel;
+            CurrentChild = viewModel;
             Caption = "Customer Statistic";
             Icon = IconChar.BagShopping;
         }
