@@ -28,7 +28,7 @@ namespace Super_Tour.ViewModel
         private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
         private List<TYPE_PACKAGE> _listTypePackageSearching; // Data lúc mà có người search
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer _timer = null;
         private string _searchType="";
         private int _currentPage = 1;
         private int _totalPage;
@@ -36,7 +36,7 @@ namespace Super_Tour.ViewModel
         private bool _enableButtonNext;
         private bool _enableButtonPrevious;
         private bool _onSearching = false;
-        private string _resultNumberText;
+        private string _resultNumberText;   
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
@@ -121,6 +121,7 @@ namespace Super_Tour.ViewModel
         public ICommand UpdatePackageCommand { get;private set; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
 
         public  MainPackageTypeViewModel() 
         {
@@ -130,14 +131,15 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            LoadDataAsync();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            LoadDataAsync(); 
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick;
         }
 
         private void UpdatePackage(object obj)
         {
-            timer.Stop();
+            Timer.Stop();
             TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
             UpdatePackageTypeView view = new UpdatePackageTypeView();
             view.DataContext = new UpdatePackageTypeViewModel(type_package);
@@ -237,7 +239,7 @@ namespace Super_Tour.ViewModel
                     }
                 });
                 if(flag==0)
-                    timer.Start();
+                    Timer.Start();
             }
             catch(Exception ex)
             {
@@ -249,7 +251,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
-                timer.Stop();
+                Timer.Stop();
                 TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
                 if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count>0)
                 {
@@ -278,7 +280,7 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                Timer.Start();
             }
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
@@ -286,7 +288,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
-                timer.Stop();
+                Timer.Stop();
                 createPackageTypeView.ShowDialog();
                 LoadDataAsync();
             }

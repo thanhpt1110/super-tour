@@ -20,11 +20,13 @@ namespace Super_Tour.ViewModel
     {
         private SUPER_TOUR db;
         private ObservableCollection<TRAVEL> _listObservableTravel;
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer _timer = null;  
         private List<TRAVEL> _listOriginalTravel;
         private string _searchItem;
         private string _selectedFilter;
         private ObservableCollection<string> _listFilter;
+
+        #region Declare binding
         public ObservableCollection<string> ListFilter
         {
             get { return _listFilter; }
@@ -32,6 +34,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListFilter));
             }
         }
+
         public string SelectedFilter
         {
             get
@@ -61,28 +64,34 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListObservableTravel));
             }
         }
+        #endregion
+
+        #region Command 
         public ICommand OpenCreateTravelViewCommand { get; }
         public ICommand DeleteTravelCommand { get; }
         public ICommand SearchTravelCommand { get; }
         public ICommand UpdateTravelCommand { get; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
+
         public MainTravelViewModel() 
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick; 
+            LoadFilter();
             OpenCreateTravelViewCommand = new RelayCommand(ExecuteOpenCreateTravelViewCommand);
             this._listObservableTravel = new ObservableCollection<TRAVEL>();
-            LoadFilter();
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
             DeleteTravelCommand = new RelayCommand(ExecuteDeleteTravel);
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
             LoadTourDataAsync();
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick; 
         }
         private async void ExecuteUpdateCommand(object obj)
         {
             TRAVEL travel = obj as TRAVEL;
             UpdateTravelView view = new UpdateTravelView();
-            timer.Stop();
+            Timer.Stop();
             view.DataContext = new UpdateTravelViewModel(travel);
             view.ShowDialog();
             LoadTourDataAsync();
@@ -131,7 +140,7 @@ namespace Super_Tour.ViewModel
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
                     TRAVEL travel = obj as TRAVEL;
-                    timer.Stop();
+                    Timer.Stop();
                     TRAVEL TravelFind = await db.TRAVELs.FindAsync(travel.Id_Travel);
                     if (TravelFind == null)
                     {
@@ -158,7 +167,7 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                Timer.Start();
             }
         }
         public async Task LoadTourDataAsync()
@@ -177,7 +186,7 @@ namespace Super_Tour.ViewModel
                     {
                         LoadGrid(_listOriginalTravel);
                     });
-                    timer.Start();
+                    Timer.Start();
                 }
                 catch (Exception ex)
                 {

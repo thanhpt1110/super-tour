@@ -18,11 +18,15 @@ namespace Super_Tour.ViewModel
 {
     internal class MainAccountViewModel : ObservableObject
     {
+        #region Declare variable
         private List<ACCOUNT> _listAccountOriginal;
         private ObservableCollection<ACCOUNT> _listObservableAccount;
         private string _searchUserNameAccount;
-        private SUPER_TOUR db = new SUPER_TOUR();
-        private DispatcherTimer timer;
+        private SUPER_TOUR db = null;
+        private DispatcherTimer _timer = null;
+        #endregion
+
+        #region Declare binding
         public string SearchUserNameAccount
         {
             get { return _searchUserNameAccount; }
@@ -32,6 +36,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SearchUserNameAccount));
             }
         }
+
         public ObservableCollection<ACCOUNT> ListObservableAccount
         {
             get
@@ -44,21 +49,27 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListObservableAccount));
             }
         }
+        #endregion
+
+        #region Command
         public ICommand OpenCreateAccountViewCommand { get; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
 
         public MainAccountViewModel()
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            db = MainViewModel.db;
             _listObservableAccount = new ObservableCollection<ACCOUNT>();
             OpenCreateAccountViewCommand = new RelayCommand(ExecuteOpenCreateAccountViewCommand);
             LoadAccountDataAsync();
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-           // throw new NotImplementedException();
+
         }
 
         private void ExecuteOpenCreateAccountViewCommand(object obj)
@@ -67,6 +78,7 @@ namespace Super_Tour.ViewModel
             createAccountView.ShowDialog();
             LoadAccountDataAsync();
         }
+
         private async Task LoadAccountDataAsync()
         {
             try
@@ -75,12 +87,7 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        if (db != null)
-                        {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        _listAccountOriginal = db.ACCOUNTs.ToList();
+                        db.Entry(_listAccountOriginal).Reload();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listObservableAccount.Clear();
@@ -96,7 +103,7 @@ namespace Super_Tour.ViewModel
 
                     }
                 });
-                timer.Start();
+                _timer.Start();
             }
             catch (Exception ex)
             {

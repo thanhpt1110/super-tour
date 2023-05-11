@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Super_Tour.Ultis;
 using Microsoft.Extensions.Caching.Memory;
+using System.Windows.Threading;
 
 namespace Super_Tour.ViewModel
 {
@@ -19,7 +20,6 @@ namespace Super_Tour.ViewModel
         //private MemoryCache myCache;
         public static ObservableObject CurrentChild;
         private ObservableObject _currentChildView;
-        private readonly IMemoryCache _cache;
         private string _caption;
         private IconChar _icon;
         private TechnicalHelpViewModel _technicalHelpViewModel = null;
@@ -32,7 +32,10 @@ namespace Super_Tour.ViewModel
         private MainPackageViewModel _mainPackageViewModel = null;
         private MainPackageTypeViewModel _mainPackageTypeViewModel = null;
         private MainAccountViewModel _mainAccountViewModel = null;
+        private DispatcherTimer _timer = null;
+        public static SUPER_TOUR db = null;
 
+        #region Declare binding
         public ObservableObject CurrentChildView
         {
             get => _currentChildView;
@@ -62,7 +65,9 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(Icon));
             }
         }
-        //Command
+        #endregion
+
+        #region Command
         public RelayCommand ShowDashboardViewCommand { get; }
         public RelayCommand ShowTravelViewCommand { get; }
         public RelayCommand ShowBookingViewCommand { get; }
@@ -71,15 +76,14 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTourViewCommand { get; }
         public RelayCommand ShowPackageViewCommand { get; }
         public RelayCommand ShowPackageTypeViewCommand { get; }
-
         public RelayCommand ShowStatisticViewCommand { get; }
         public RelayCommand ShowCustomerStatisticViewCommand { get; }
         public RelayCommand ShowRevenueStatisticViewCommand { get; }
         public RelayCommand ShowTravelStatisticViewCommand { get; }
-
-
         public RelayCommand ShowAccountViewCommand { get; }
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
+        #endregion
+
         public MainViewModel()
         {
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
@@ -99,6 +103,94 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
+            db = new SUPER_TOUR();
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Dashboard
+            /*if (_dashBoardViewModel != null)
+            {
+                if (CurrentChildView == _dashBoardViewModel)
+                    _dashBoardViewModel.Timer.Start();
+                else    
+                    _dashBoardViewModel.Timer.Stop();
+            }*/
+
+            // Travel
+            if (_mainTravelViewModel != null)
+            {
+                if (CurrentChildView == _mainTravelViewModel) 
+                    _mainTravelViewModel.Timer.Start();
+                else 
+                    _mainTravelViewModel.Timer.Stop();
+            }   
+
+            // Booking
+            if (_mainBookingViewModel != null)
+            {
+                if (CurrentChildView == _mainBookingViewModel)
+                    _mainBookingViewModel.Timer.Start();
+                else
+                    _mainBookingViewModel.Timer.Stop();
+            }
+
+            // Customer
+            if (_mainCustomerViewModel != null)
+            {
+                if (CurrentChildView == _mainCustomerViewModel)
+                    _mainCustomerViewModel.Timer.Start();
+                else
+                    _mainCustomerViewModel.Timer.Stop();
+            }
+
+            // Ticket
+            if (_mainTicketViewModel != null)
+            {
+                if (CurrentChildView == _mainTicketViewModel)
+                    _mainTicketViewModel.Timer.Start();
+                else
+                    _mainTicketViewModel.Timer.Stop();
+            }
+
+            // Tour
+            if (_mainTourViewModel != null)
+            {
+                if (CurrentChildView == _mainTourViewModel)
+                    _mainTourViewModel.Timer.Start();
+                else
+                    _mainTourViewModel.Timer.Stop();
+            }
+                
+            // Package
+            if (_mainPackageViewModel != null)
+            {
+                if (CurrentChildView == _mainPackageViewModel)
+                    _mainPackageViewModel.Timer.Start();
+                else 
+                    _mainPackageViewModel.Timer.Stop();
+            }
+
+            // Package Type
+            if (_mainPackageTypeViewModel != null)
+            {
+                if (CurrentChildView == _mainPackageTypeViewModel)
+                    _mainPackageTypeViewModel.Timer.Start();
+                else
+                    _mainPackageTypeViewModel.Timer.Stop();
+            }
+
+            // Account
+            if (_mainAccountViewModel != null)
+            {
+                if (CurrentChildView == _mainAccountViewModel)
+                    _mainAccountViewModel.Timer.Start();
+                else
+                    _mainAccountViewModel.Timer.Stop();
+            }
         }
 
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
@@ -210,4 +302,4 @@ namespace Super_Tour.ViewModel
             Icon = IconChar.AddressCard;
         }
     }
-    }
+}

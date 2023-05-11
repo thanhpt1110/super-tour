@@ -20,13 +20,17 @@ namespace Super_Tour.ViewModel
 {
     internal class MainBookingViewModel: ObservableObject
     {
+        #region Declare variable
         private SUPER_TOUR db;
         private List<BOOKING> _listOriginalBooking;
-        private DispatcherTimer timer;
+        private DispatcherTimer _timer = null;
         private List<BOOKING> _listSearchBooking;
         private ObservableCollection<BOOKING> _listObservableBooking;
         private string _searchItem;
         private string _selectedItem;
+        #endregion
+
+        #region Declare binding 
         public ObservableCollection<BOOKING> ListOriginalBooking
         {
             get
@@ -62,19 +66,26 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
+        #endregion
+
+        #region Command
         public ICommand OpenCreateBookingViewCommand { get; }
         public ICommand UpdateBookingViewCommand { get; }
         public ICommand DeleteBookingViewCommand { get; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
+
         public MainBookingViewModel() 
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            db = MainViewModel.db;
             OpenCreateBookingViewCommand = new RelayCommand(ExecuteOpenCreateBookingViewCommand);
             _listObservableBooking = new ObservableCollection<BOOKING>();
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
             LoadBookingDataAsync();
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Tick += Timer_Tick;
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
@@ -89,12 +100,13 @@ namespace Super_Tour.ViewModel
                 {
                     if (MainViewModel.CurrentChild is MainBookingViewModel)
                     {
-                        if (db != null)
+                        /*if (db != null)
                         {
                             db.Dispose();
                         }
-                        db = new SUPER_TOUR();
+                        db = new SUPER_TOUR();*/
                         List<BOOKING> UpdateBooking = db.BOOKINGs.ToList();
+                        //db.Entry(UpdateBooking).Reload();
                         if (!UpdateBooking.SequenceEqual(_listOriginalBooking))
                         {
                             _listOriginalBooking = UpdateBooking;
@@ -114,9 +126,10 @@ namespace Super_Tour.ViewModel
         }
         private async void ExecuteUpdateBooking(object obj)
         {
+            BOOKING booking = obj as BOOKING;
             UpdateBookingView view = new UpdateBookingView();
-            view.DataContext = new UpdateBookingViewModel();
-            timer.Stop();
+            view.DataContext = new UpdateBookingViewModel(booking);
+            _timer.Stop();
             view.ShowDialog();
             LoadBookingDataAsync();
         }
@@ -139,7 +152,7 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                _timer.Start();
             }
         }
         private void LoadGrid(List<BOOKING> listBooking)
@@ -156,17 +169,17 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                    if (db != null)
+                   /* if (db != null)
                     {
                         db.Dispose();
                     }
-                    db = new SUPER_TOUR();
+                    db = new SUPER_TOUR();*/
                     _listOriginalBooking = await db.BOOKINGs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         LoadGrid(_listOriginalBooking);
                     });
-                    timer.Start();
+                    _timer.Start();
                 }
                 catch (Exception ex)
                 {
