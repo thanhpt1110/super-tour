@@ -110,16 +110,19 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                    db.Dispose();
-                    db = new SUPER_TOUR();
-                    List<TRAVEL> Updatetours = db.TRAVELs.ToList();
-                    if (!Updatetours.SequenceEqual(_listOriginalTravel))
+                    if (MainViewModel.CurrentChild is MainTravelViewModel)
                     {
-                        _listOriginalTravel = Updatetours;
-                        Application.Current.Dispatcher.Invoke(() =>
+                        db.Dispose();
+                        db = new SUPER_TOUR();
+                        List<TRAVEL> Updatetours = db.TRAVELs.ToList();
+                        if (!Updatetours.SequenceEqual(_listOriginalTravel))
                         {
-                            LoadGrid(_listOriginalTravel);
-                        });
+                            _listOriginalTravel = Updatetours;
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                LoadGrid(_listOriginalTravel);
+                            });
+                        }
                     }
                 }
                 catch (Exception ex)

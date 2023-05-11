@@ -15,6 +15,7 @@ namespace Super_Tour.Model
         public int Id_Customer_Booking { get; set; }
         public int Id_Travel { get; set; }
         public DateTime Booking_Date { get; set; }
+        public decimal TotalPrice { get; set; }
         public string Status { get; set; }
          [ForeignKey("Id_Customer_Booking")]
         public virtual CUSTOMER CUSTOMER { get; set; }

@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Caching.Memory;
+using System.Data.Entity.Migrations;
+
 namespace Super_Tour.ViewModel
 {
     internal class CreateTourViewModel: ObservableObject
@@ -260,10 +262,11 @@ namespace Super_Tour.ViewModel
                 tour.TotalNight = TotalNight;
                 tour.PlaceOfTour = "hcm";
                 tour.Status_Tour = "Available";
-                db.TOURs.Add(tour);
+                tour.PriceTour = 0;
+                this.db.TOURs.Add(tour);
                 int i = 1;
-                await db.SaveChangesAsync();
-                int IdTour = db.TOURs.Max(p => p.Id_Tour);
+                await this.db.SaveChangesAsync();
+                int IdTour = this.db.TOURs.Max(p => p.Id_Tour);
                 foreach (DateActivity dateActivity in _dateActivityList)
                 {
 
@@ -275,6 +278,7 @@ namespace Super_Tour.ViewModel
                         tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                         tourDetail.Id_TourDetails = 1;
                         tourDetail.Session = Constant.MORNING;
+                        tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                         db.TOUR_DETAILs.Add(tourDetail);
                     }
                     foreach (GridActivity activity in dateActivity.AfternoonActivities)
@@ -285,6 +289,7 @@ namespace Super_Tour.ViewModel
                         tourDetail.Session = Constant.AFTERNOON;
                         tourDetail.Id_TourDetails = 1;
                         tourDetail.Id_Tour = IdTour;
+                        tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                         db.TOUR_DETAILs.Add(tourDetail);
                     }
                     foreach (GridActivity activity in dateActivity.EveningActivities)
@@ -295,10 +300,13 @@ namespace Super_Tour.ViewModel
                         tourDetail.Date_Order_Package = i;
                         tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                         tourDetail.Session = Constant.EVENING;
+                        tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                         db.TOUR_DETAILs.Add(tourDetail);
+             
                     }
                     i++;
                 }
+                db.TOURs.AddOrUpdate(tour);
                 await db.SaveChangesAsync();
                 MyMessageBox.ShowDialog("Add new tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 CreateTourView createTourView = null;

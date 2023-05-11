@@ -23,7 +23,6 @@ namespace Super_Tour.View
         public UpdateBookingView()
         {
             InitializeComponent();
-            this.DataContext = new UpdateBookingViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

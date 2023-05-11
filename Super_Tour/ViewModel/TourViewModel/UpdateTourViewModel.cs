@@ -137,6 +137,7 @@ namespace Super_Tour.ViewModel
                 _executeSave = false;
                 int i = 1;
                 int IdTour = _tour.Id_Tour;
+                _tour.PriceTour = 0;
                 foreach (DateActivity dateActivity in _listDateActitvities)
                 {
                     if (listTourDetail.Where(p => p.Date_Order_Package == i).ToList().Count == 0)
@@ -149,6 +150,7 @@ namespace Super_Tour.ViewModel
                                 tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                                 tourDetail.Id_TourDetails = 1;
                                 tourDetail.Session = Constant.MORNING;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                                 db.TOUR_DETAILs.Add(tourDetail);
                             }
                             foreach (GridActivity activity in dateActivity.AfternoonActivities)
@@ -159,8 +161,9 @@ namespace Super_Tour.ViewModel
                                 tourDetail.Session = Constant.AFTERNOON;
                                 tourDetail.Id_TourDetails = 1;
                                 tourDetail.Id_Tour = IdTour;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                                 db.TOUR_DETAILs.Add(tourDetail);
-                            }
+                        }
                             foreach (GridActivity activity in dateActivity.EveningActivities)
                             {
                                 TOUR_DETAILS tourDetail = activity.Tour_detail;
@@ -169,8 +172,9 @@ namespace Super_Tour.ViewModel
                                 tourDetail.Date_Order_Package = i;
                                 tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                                 tourDetail.Session = Constant.EVENING;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                                 db.TOUR_DETAILs.Add(tourDetail);
-                            }
+                        }
                         
                     }
                     else
@@ -181,6 +185,7 @@ namespace Super_Tour.ViewModel
                             tourDetail.Session = Constant.MORNING;
                             tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
                             tourDetail.Date_Order_Package = i;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                             db.TOUR_DETAILs.AddOrUpdate(tourDetail);
                         }
                         foreach (GridActivity activity in dateActivity.AfternoonActivities)
@@ -189,6 +194,7 @@ namespace Super_Tour.ViewModel
                             tourDetail.Date_Order_Package = i;
                             tourDetail.Session = Constant.AFTERNOON;
                             tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                             db.TOUR_DETAILs.AddOrUpdate(tourDetail);
                         }
                         foreach (GridActivity activity in dateActivity.EveningActivities)
@@ -197,6 +203,7 @@ namespace Super_Tour.ViewModel
                             tourDetail.Date_Order_Package = i;
                             tourDetail.Session = Constant.EVENING;
                             tourDetail.Start_Time_Package = activity.TimeOfPackage.TimeOfDay;
+                                _tour.PriceTour += this.db.PACKAGEs.Find(tourDetail.Id_Package).Price;
                             db.TOUR_DETAILs.AddOrUpdate(tourDetail);
                         }
                         List<TOUR_DETAILS> tOUR_DETAILs= db.TOUR_DETAILs.Where(p => p.Id_Tour == _tour.Id_Tour && p.Date_Order_Package==i).ToList();

@@ -177,7 +177,7 @@
                                                     <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
                                                 </Button>
                                                 <Button 
-                                                        Command="{Binding DataContext.SelectTravelForBookingCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}"
                                                         Margin="15 0 0 0"
                                                         Width="Auto"

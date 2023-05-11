@@ -82,6 +82,7 @@ namespace Super_Tour.ViewModel
             _listObservableBooking = new ObservableCollection<BOOKING>();
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
+            LoadBookingDataAsync();
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += Timer_Tick;
@@ -89,9 +90,15 @@ namespace Super_Tour.ViewModel
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-                await Task.Run(() =>
+            await LoadDataPerSecond();
+         }
+        private async Task LoadDataPerSecond()
+        {
+            await Task.Run(() =>
+            {
+                try
                 {
-                    try
+                    if (MainViewModel.CurrentChild is MainBookingViewModel)
                     {
                         /*if (db != null)
                         {
@@ -110,16 +117,18 @@ namespace Super_Tour.ViewModel
                             });
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    }
-                });
-         }
+                }
+                catch (Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+            });
+        }
         private async void ExecuteUpdateBooking(object obj)
         {
+            BOOKING booking = obj as BOOKING;
             UpdateBookingView view = new UpdateBookingView();
-            view.DataContext = new UpdateBookingViewModel();
+            view.DataContext = new UpdateBookingViewModel(booking);
             _timer.Stop();
             view.ShowDialog();
             LoadBookingDataAsync();
@@ -179,6 +188,7 @@ namespace Super_Tour.ViewModel
         {
             {
                 CreateBookingView createBookingView = new CreateBookingView();
+                
                 createBookingView.ShowDialog();
 
             }

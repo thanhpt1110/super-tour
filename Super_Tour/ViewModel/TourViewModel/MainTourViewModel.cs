@@ -190,6 +190,8 @@ namespace Super_Tour.ViewModel
                 .Sum(p => p.PACKAGE.Price);
                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
             }
+
+
         }
 
         private void generateFilterItem()
@@ -200,7 +202,9 @@ namespace Super_Tour.ViewModel
 
         private void SearchByName()
         {
-            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(SearchTour)).ToList();
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchTour)).ToList();
             LoadGrid(_listSearchTour);
         }
 
@@ -216,20 +220,23 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                    if (db != null)
+                    if (MainViewModel.CurrentChild is MainTourViewModel)
                     {
-                        db.Dispose();
-                    }
-                    db = new SUPER_TOUR();
-                    List<TOUR> Updatetours = db.TOURs.ToList();
-                    if (!Updatetours.SequenceEqual(_listToursOriginal))
-                    {
-                        _listToursOriginal = Updatetours;
-                        Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        LoadGrid(_listToursOriginal);
-                        
-                    });
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
+                        List<TOUR> Updatetours = db.TOURs.ToList();
+                        if (!Updatetours.SequenceEqual(_listToursOriginal))
+                        {
+                            _listToursOriginal = Updatetours;
+                            Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            LoadGrid(_listToursOriginal);
+
+                        });
+                        }
                     }
                 }
                 catch (Exception ex)

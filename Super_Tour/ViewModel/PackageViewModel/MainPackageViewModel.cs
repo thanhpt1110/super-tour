@@ -148,7 +148,6 @@ namespace Super_Tour.ViewModel
                 _listPackages.Add(packgage);
             }    
         }*/
-        
         private async void ExecuteDeletePackage(object obj)
         {
             try
@@ -166,13 +165,13 @@ namespace Super_Tour.ViewModel
                     MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                     if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                     {
-                        await firebaseStorage.Child("Images").Child("Package"+packageFind.Id_Package.ToString()).DeleteAsync();
+                        await firebaseStorage.Child("Images").Child("Package" + packageFind.Id_Package.ToString()).DeleteAsync();
                         db.PACKAGEs.Remove(packageFind);
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                         /*listOriginalPackage = db.PACKAGEs.ToList();
                         ReloadData(listOriginalPackage);*/
-                        LoadPackageDataAsync();   
+                        LoadPackageDataAsync();
                     }
                 }
                 else
@@ -224,25 +223,28 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        if (db != null)
+                        if (MainViewModel.CurrentChild is MainPackageViewModel)
                         {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        var updatePackage = await db.PACKAGEs.ToListAsync();
-                        if (!updatePackage.SequenceEqual(listOriginalPackage))
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            if (db != null)
                             {
-                                listOriginalPackage = updatePackage;
-                                if (_onSearching)
+                                db.Dispose();
+                            }
+                            db = new SUPER_TOUR();
+                            var updatePackage = await db.PACKAGEs.ToListAsync();
+                            if (!updatePackage.SequenceEqual(listOriginalPackage))
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                                    ReloadData(listPackagesSearching);
-                                }
-                                else
-                                    ReloadData(listOriginalPackage);
-                            });
+                                    listOriginalPackage = updatePackage;
+                                    if (_onSearching)
+                                    {
+                                        listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                                        ReloadData(listPackagesSearching);
+                                    }
+                                    else
+                                        ReloadData(listOriginalPackage);
+                                });
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -251,7 +253,7 @@ namespace Super_Tour.ViewModel
                     }
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
@@ -281,7 +283,7 @@ namespace Super_Tour.ViewModel
                                 ReloadData(listOriginalPackage);
                         });
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         flag = 1;
                         MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
@@ -303,7 +305,7 @@ namespace Super_Tour.ViewModel
             {
                 CreatePackageView createPackageView = new CreatePackageView();
                 createPackageView.ShowDialog();
-                LoadPackageDataAsync(); 
+                LoadPackageDataAsync();
             }
             catch (Exception ex)
             {
