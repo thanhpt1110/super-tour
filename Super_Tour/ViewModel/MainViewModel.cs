@@ -92,7 +92,8 @@ namespace Super_Tour.ViewModel
             ShowTravelStatisticViewCommand = new RelayCommand(ExecuteShowTravelStatisticViewCommand);
             ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
-            CurrentChildView = new DashBoardViewModel();
+            _dashBoardViewModel = new DashBoardViewModel();
+            CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
