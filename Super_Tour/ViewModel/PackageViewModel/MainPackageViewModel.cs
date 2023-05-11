@@ -21,8 +21,76 @@ namespace Super_Tour.ViewModel
 {
     internal class MainPackageViewModel : ObservableObject
     {
-        private string _searchPackageName;
+        #region Declare variable 
+        private string _searchPackageName="";
         private FirebaseStorage firebaseStorage;
+        private ObservableCollection<PACKAGE> _listPackages;
+        private DispatcherTimer timer = new DispatcherTimer();
+        private List<PACKAGE> listOriginalPackage;
+        private List<PACKAGE> listPackagesSearching;
+        private SUPER_TOUR db = new SUPER_TOUR();
+        private int _currentPage = 1;
+        private int _totalPage;
+        private string _pageNumberText;
+        private bool _enableButtonNext;
+        private bool _enableButtonPrevious;
+        private bool _onSearching = false;
+        private string _resultNumberText;
+        private int _startIndex;
+        private int _endIndex;
+        private int _totalResult;
+        #endregion
+
+        #region Declare binding
+        public string ResultNumberText
+        {
+            get { return _resultNumberText; }
+            set
+            {
+                _resultNumberText = value;
+                OnPropertyChanged(nameof(ResultNumberText));
+            }
+        }
+
+        public string PageNumberText
+        {
+            get
+            {
+                return _pageNumberText;
+            }
+            set
+            {
+                _pageNumberText = value;
+                OnPropertyChanged(nameof(PageNumberText));
+            }
+        }
+
+        public bool EnableButtonNext
+        {
+            get
+            {
+                return _enableButtonNext;
+            }
+            set
+            {
+                _enableButtonNext = value;
+                OnPropertyChanged(nameof(EnableButtonNext));
+            }
+        }
+
+        public bool EnableButtonPrevious
+        {
+            get
+            {
+                return _enableButtonPrevious;
+            }
+            set
+            {
+                _enableButtonPrevious = value;
+                OnPropertyChanged(nameof(EnableButtonPrevious));
+            }
+        }
+
         public string SearchPackageName
         {
             get { return _searchPackageName; }
@@ -32,11 +100,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SearchPackageName));
             }
         }
-        public ICommand OnSearchTextChangedCommand { get; }
-        public ICommand OpenCreatePackageViewCommand { get; }
-        public ICommand DeletePackageCommand { get; }
-        public ICommand UpdatePackageViewCommand { get; }
-        private ObservableCollection<PACKAGE> _listPackages;
+
         public ObservableCollection<PACKAGE> ListPackages
         {
             get
@@ -49,29 +113,40 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListPackages));
             }
         }
-        private DispatcherTimer timer = new DispatcherTimer();
-        private List<PACKAGE> listOriginalPackage;
-        private SUPER_TOUR db = new SUPER_TOUR();
+        #endregion
+
+        // Command 
+        public ICommand OnSearchTextChangedCommand { get; }
+        public ICommand OpenCreatePackageViewCommand { get; }
+        public ICommand DeletePackageCommand { get; }
+        public ICommand UpdatePackageViewCommand { get; }
+        public ICommand GoToPreviousPageCommand { get; private set; }
+        public ICommand GoToNextPageCommand { get; private set; }
+
         public MainPackageViewModel()
         {
-            firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             OpenCreatePackageViewCommand = new RelayCommand(ExecuteOpenCreatePackageViewCommand);
             DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             UpdatePackageViewCommand = new RelayCommand(ExecuteUpdatePackage);
-            _listPackages = new ObservableCollection<PACKAGE>();
-            timer.Interval = TimeSpan.FromSeconds(3);
             OnSearchTextChangedCommand = new RelayCommand(SearchPackage);
-            timer.Tick += Timer_Tick;
+            GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
+            GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
+            firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
+            _listPackages = new ObservableCollection<PACKAGE>();
             LoadPackageDataAsync();
+            timer.Interval = TimeSpan.FromSeconds(3);
+            timer.Tick += Timer_Tick;
         }
-        void LoadGrid(List<PACKAGE> listPackage)
+
+        /* void LoadGrid(List<PACKAGE> listPackage)
         {
             _listPackages.Clear();
             foreach(PACKAGE packgage in listPackage)
             {
                 _listPackages.Add(packgage);
             }    
-        }
+        }*/
+        
         private async void ExecuteDeletePackage(object obj)
         {
             try
@@ -93,10 +168,10 @@ namespace Super_Tour.ViewModel
                         db.PACKAGEs.Remove(packageFind);
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        listOriginalPackage = db.PACKAGEs.ToList();
-                        LoadGrid(listOriginalPackage);
+                        /*listOriginalPackage = db.PACKAGEs.ToList();
+                        ReloadData(listOriginalPackage);*/
+                        LoadPackageDataAsync();   
                     }
-
                 }
                 else
                 {
@@ -112,32 +187,38 @@ namespace Super_Tour.ViewModel
                 timer.Start();
             }
         }
-        private async void ExecuteUpdatePackage(object obj)
+
+        private void ExecuteUpdatePackage(object obj)
         {
+            timer.Stop();
             PACKAGE package = obj as PACKAGE;
             UpdatePackageView view = new UpdatePackageView();
             view.DataContext = new UpdatePackageViewModel(package);
             view.ShowDialog();
+            LoadPackageDataAsync();
         }
+
         private void SearchPackage(object obj)
         {
-            List<PACKAGE> list;
-            if(string.IsNullOrEmpty(_searchPackageName))
+            if (string.IsNullOrEmpty(_searchPackageName))
             {
-                list = listOriginalPackage;
-
-            }    
+                _onSearching = false;
+                ReloadData(listOriginalPackage);
+            }
             else
             {
-                list = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                _onSearching = true;
+                this._currentPage = 1;
+                listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                ReloadData(listPackagesSearching);
             }
-            LoadGrid(list);
         }
+
         private async void Timer_Tick(object sender, EventArgs e)
         {
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
                     try
                     {
@@ -146,13 +227,19 @@ namespace Super_Tour.ViewModel
                             db.Dispose();
                         }
                         db = new SUPER_TOUR();
-                        List<PACKAGE> updatePackage = db.PACKAGEs.ToList();
-                        if (!listOriginalPackage.SequenceEqual(updatePackage))
+                        var updatePackage = await db.PACKAGEs.ToListAsync();
+                        if (!updatePackage.SequenceEqual(listOriginalPackage))
                         {
-                            listOriginalPackage = updatePackage;
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                SearchPackage(null);
+                                listOriginalPackage = updatePackage;
+                                if (_onSearching)
+                                {
+                                    listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                                    ReloadData(listPackagesSearching);
+                                }
+                                else
+                                    ReloadData(listOriginalPackage);
                             });
                         }
                     }
@@ -167,54 +254,172 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+
         private async Task LoadPackageDataAsync()
         {
             try
             {
+                int flag = 0;
                 await Task.Run(async () =>
-            {
-                try
                 {
-                    if (db != null)
+                    try
                     {
-                        db.Dispose();
+                        if (db != null)
+                        {
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
+                        listOriginalPackage = db.PACKAGEs.ToList();
+                        listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            if (_onSearching)
+                                ReloadData(listPackagesSearching);
+                            else
+                                ReloadData(listOriginalPackage);
+                        });
                     }
-                    db = new SUPER_TOUR();
-                    listOriginalPackage = await db.PACKAGEs.ToListAsync();
-                    Application.Current.Dispatcher.Invoke(() =>
+                    catch(Exception ex)
                     {
-                        LoadGrid(listOriginalPackage);
-                    });
-                }
-                catch(Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        flag = 1;
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
 
-                }
-            });
-                timer.Start();
+                    }
+                });
+                if (flag == 0)
+                    timer.Start();
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+
         private void ExecuteOpenCreatePackageViewCommand(object obj)
         {
             try
             {
                 CreatePackageView createPackageView = new CreatePackageView();
                 createPackageView.ShowDialog();
+                LoadPackageDataAsync(); 
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
             }
-
-
         }
 
-        
-    } 
+        #region Custom datagrid by page
+        private List<PACKAGE> GetData(List<PACKAGE> ListPackage, int startIndex, int endIndex)
+        {
+            try
+            {
+                return ListPackage.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex - startIndex).ToList();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        private void LoadDataByPage(List<PACKAGE> packages)
+        {
+            try
+            {
+                this._totalResult = packages.Count();
+                if (_totalResult == 0)
+                {
+                    _startIndex = -1;
+                    _endIndex = 0;
+                    _totalPage = 1;
+                    _currentPage = 1;
+                }
+                else
+                {
+                    this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+                    if (this._totalPage < _currentPage)
+                        _currentPage = this._totalPage;
+                    this._startIndex = (this._currentPage - 1) * 13;
+                    this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+                }
+
+                List<PACKAGE> ListPackage = GetData(packages, this._startIndex, this._endIndex);
+                _listPackages.Clear();
+                foreach (PACKAGE package in ListPackage)
+                {
+                    _listPackages.Add(package);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+
+        private void setResultNumber()
+        {
+            ResultNumberText = $"Showing {this._startIndex + 1} - {this._endIndex} of {this._totalResult} results";
+        }
+
+        private void setButtonAndPage()
+        {
+            if (this._currentPage < this._totalPage)
+            {
+                EnableButtonNext = true;
+                if (this._currentPage == 1)
+                    EnableButtonPrevious = false;
+                else
+                    EnableButtonPrevious = true;
+            }
+            if (this._currentPage == this._totalPage)
+            {
+                if (this._currentPage == 1)
+                {
+                    EnableButtonPrevious = false;
+                    EnableButtonNext = false;
+                }
+                else
+                {
+                    EnableButtonPrevious = true;
+                    EnableButtonNext = false;
+                }
+            }
+            PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
+        }
+
+        private void ExcecuteGoToPreviousPageCommand(object obj)
+        {
+            if (this._currentPage > 1)
+                --this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(listPackagesSearching);
+            else
+                LoadDataByPage(listOriginalPackage);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ExcecuteGoToNextPageCommand(object obj)
+        {
+            if (this._currentPage < this._totalPage)
+                ++this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(listPackagesSearching);
+            else
+                LoadDataByPage(listOriginalPackage);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ReloadData(List<PACKAGE> packages)
+        {
+            LoadDataByPage(packages);
+            setButtonAndPage();
+            setResultNumber();
+        }
+        #endregion
+    }
 }
