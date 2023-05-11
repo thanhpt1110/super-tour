@@ -37,20 +37,23 @@ namespace Super_Tour.ViewModel
             set { _totalPrice = value; }
         }
     }
+
     internal class MainTourViewModel: ObservableObject
     {
-        private MemoryCache cache;
+        #region Declare variable
         private List<TOUR> _listSearchTour;
         private List<TOUR> _listToursOriginal;
-        private readonly object _locker = new object();
         private CancellationTokenSource _cancellationTokenSource;
         private ObservableCollection<DataGridTour> _listDataGridTour;
-        private string _searchTour;
-        private SUPER_TOUR db = new SUPER_TOUR();
+        private string _searchTour = null;
+        private SUPER_TOUR db = null;
         private ObservableCollection<string> _listSearchFilterBy;
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer _timer = null;
         private string _selectedFilter = "Name";
         private Visibility _isLoading = Visibility.Hidden;
+        #endregion
+
+        #region Declare binding
         public Visibility IsLoading
         {
             get
@@ -63,6 +66,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(IsLoading));
             }
         }
+
         public string SelectedFilter
         {
             get { return _selectedFilter; }
@@ -70,6 +74,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SelectedFilter));
             }
         }
+
         public ObservableCollection<string> ListSearchFilterBy
         {
             get
@@ -109,6 +114,7 @@ namespace Super_Tour.ViewModel
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
+
         public ObservableCollection<DataGridTour> ListDataGridTour
         {
             get
@@ -121,21 +127,23 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListDataGridTour));
             }
         }
+
+        #endregion
+
+        #region Command
         public ICommand OpenCreateTourViewCommand { get; }
         public ICommand OnSearchTextChangedCommand { get;}
         public ICommand SelectedFilterCommand { get; }
         public ICommand DeleteTourCommnand { get; }
         public ICommand UpdateTourCommand { get; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
+
         public MainTourViewModel() 
         {
-            //  string a = "";
-
-            cache = new MemoryCache(new MemoryCacheOptions());
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            db = new SUPER_TOUR();
             _listDataGridTour = new ObservableCollection<DataGridTour>();
-            _listSearchFilterBy=new ObservableCollection<string>();
+            _listSearchFilterBy= new ObservableCollection<string>();
             OpenCreateTourViewCommand = new RelayCommand(ExecuteOpenCreateTourViewCommand);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
@@ -143,10 +151,14 @@ namespace Super_Tour.ViewModel
             UpdateTourCommand = new RelayCommand(ExecuteUpdateTourCommand);
             LoadTourDataAsync();
             generateFilterItem();
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick;
         }
+
         private void ExecuteUpdateTourCommand(object obj)
         {
-            timer.Stop();
+            Timer.Stop();
             DataGridTour dataGridTour = (DataGridTour)obj;
             TOUR tour = dataGridTour.Tour;
             UpdateTourView view = new UpdateTourView();
@@ -154,10 +166,12 @@ namespace Super_Tour.ViewModel
             view.ShowDialog();
             LoadTourDataAsync();
         }
+
         private void ExecuteSelectFilter(object obj)
         {
             SearchTour = "";
         }
+
         private void ExecuteSearchTour(object obj)
         {
             switch(_selectedFilter)
@@ -165,12 +179,9 @@ namespace Super_Tour.ViewModel
 
             }    
         }
+
         private void LoadGrid(List<TOUR> listTour)
         {
-            Stopwatch stopwatch = new Stopwatch();
-
-            // Bắt đầu đếm thời gian
-            stopwatch.Start();
             _listDataGridTour.Clear();
             foreach (TOUR tour in listTour)
             {
@@ -178,29 +189,27 @@ namespace Super_Tour.ViewModel
                 .Where(p => p.Id_Tour == tour.Id_Tour)
                 .Sum(p => p.PACKAGE.Price);
                 _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-               
             }
-            stopwatch.Stop();
-                    Console.WriteLine("Time Load From UI: {0}", stopwatch.Elapsed.TotalSeconds);
-
-
         }
+
         private void generateFilterItem()
         {
             _listSearchFilterBy.Add("Name");
             _listSearchFilterBy.Add("Place");
         }
+
         private void SearchByName()
         {
             this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(SearchTour)).ToList();
             LoadGrid(_listSearchTour);
         }
+
         private void SearchByPlace()
         {
-
             this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
             LoadGrid(_listSearchTour);
         }
+
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await Task.Run(() =>
@@ -229,6 +238,7 @@ namespace Super_Tour.ViewModel
                 }
             });
         }
+
         private async void ExecuteDeleteTour(object obj)
         {
 
@@ -236,7 +246,7 @@ namespace Super_Tour.ViewModel
             {
                 DataGridTour dataGridTour = obj as DataGridTour;
                 TOUR tourMain = dataGridTour.Tour;
-                timer.Stop();
+                Timer.Stop();
                 TOUR TourFind = await db.TOURs.FindAsync(tourMain.Id_Tour);
                 if (db.TRAVELs.Where(p => p.Id_Tour == TourFind.Id_Tour).ToList().Count > 0)
                 {
@@ -278,7 +288,7 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                Timer.Start();
             }
         }
 
@@ -303,7 +313,7 @@ namespace Super_Tour.ViewModel
                     {
                         LoadGrid(_listToursOriginal);
                     });
-                    timer.Start();
+                    Timer.Start();
                 }
                 catch (Exception ex)
                 {

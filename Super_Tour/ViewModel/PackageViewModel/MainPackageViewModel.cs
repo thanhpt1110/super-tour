@@ -25,7 +25,7 @@ namespace Super_Tour.ViewModel
         private string _searchPackageName="";
         private FirebaseStorage firebaseStorage;
         private ObservableCollection<PACKAGE> _listPackages;
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer _timer = null;
         private List<PACKAGE> listOriginalPackage;
         private List<PACKAGE> listPackagesSearching;
         private SUPER_TOUR db = new SUPER_TOUR();
@@ -122,6 +122,7 @@ namespace Super_Tour.ViewModel
         public ICommand UpdatePackageViewCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
 
         public MainPackageViewModel()
         {
@@ -134,8 +135,9 @@ namespace Super_Tour.ViewModel
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             _listPackages = new ObservableCollection<PACKAGE>();
             LoadPackageDataAsync();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick;
         }
 
         /* void LoadGrid(List<PACKAGE> listPackage)
@@ -152,7 +154,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 PACKAGE package = obj as PACKAGE;
-                timer.Stop();
+                Timer.Stop();
                 PACKAGE packageFind = await db.PACKAGEs.FindAsync(package.Id_Package);
                 if (db.TOUR_DETAILs.Where(p => p.Id_Package == packageFind.Id_Package).ToList().Count > 0)
                 {
@@ -184,13 +186,13 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                Timer.Start();
             }
         }
 
         private void ExecuteUpdatePackage(object obj)
         {
-            timer.Stop();
+            Timer.Stop();
             PACKAGE package = obj as PACKAGE;
             UpdatePackageView view = new UpdatePackageView();
             view.DataContext = new UpdatePackageViewModel(package);
@@ -287,7 +289,7 @@ namespace Super_Tour.ViewModel
                     }
                 });
                 if (flag == 0)
-                    timer.Start();
+                    Timer.Start();
             }
             catch (Exception ex)
             {
