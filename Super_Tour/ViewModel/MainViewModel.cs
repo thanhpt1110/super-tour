@@ -12,7 +12,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Super_Tour.ViewModel
 {
-    internal class MainViewModel: ObservableObject
+    internal class MainViewModel : ObservableObject
     {
         //Fields
         // Tạo một cache mới với tên "myCache"
@@ -22,9 +22,19 @@ namespace Super_Tour.ViewModel
         private readonly IMemoryCache _cache;
         private string _caption;
         private IconChar _icon;
-        private List<object> _formViewModel = new List<object>();
+        private TechnicalHelpViewModel _technicalHelpViewModel = null;
+        private DashBoardViewModel _dashBoardViewModel = null;
+        private MainTravelViewModel _mainTravelViewModel = null;
+        private MainBookingViewModel _mainBookingViewModel = null;
+        private MainCustomerViewModel _mainCustomerViewModel = null;
+        private MainTicketViewModel _mainTicketViewModel = null;
+        private MainTourViewModel _mainTourViewModel = null;
+        private MainPackageViewModel _mainPackageViewModel = null;
+        private MainPackageTypeViewModel _mainPackageTypeViewModel = null;
+        private MainAccountViewModel _mainAccountViewModel = null;
+
         public ObservableObject CurrentChildView
-        { 
+        {
             get => _currentChildView;
             set
             {
@@ -32,8 +42,9 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
-        public string Caption 
-        { 
+
+        public string Caption
+        {
             get => _caption;
             set
             {
@@ -42,8 +53,8 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public IconChar Icon 
-        { 
+        public IconChar Icon
+        {
             get => _icon;
             set
             {
@@ -65,7 +76,7 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowCustomerStatisticViewCommand { get; }
         public RelayCommand ShowRevenueStatisticViewCommand { get; }
         public RelayCommand ShowTravelStatisticViewCommand { get; }
-        
+
 
         public RelayCommand ShowAccountViewCommand { get; }
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
@@ -84,190 +95,93 @@ namespace Super_Tour.ViewModel
             ShowTravelStatisticViewCommand = new RelayCommand(ExecuteShowTravelStatisticViewCommand);
             ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
-            CurrentChildView = new DashBoardViewModel();
+            _dashBoardViewModel = new DashBoardViewModel();
+            CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
 
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
         {
-            TechnicalHelpViewModel  technicalHelpViewModel= null;
-            if (technicalHelpViewModel==null)
-            {
-                technicalHelpViewModel = new TechnicalHelpViewModel();
-                _formViewModel.Add(technicalHelpViewModel);
-            }    
-            CurrentChildView = technicalHelpViewModel;
-            CurrentChild = technicalHelpViewModel;
+            if (_technicalHelpViewModel == null)
+                _technicalHelpViewModel = new TechnicalHelpViewModel();
+            CurrentChildView = _technicalHelpViewModel;
+            CurrentChild=_technicalHelpViewModel;
             Caption = "Technical Help";
             Icon = IconChar.QuestionCircle;
         }
 
         private void ExecuteShowDashboardViewCommand(object obj)
         {
-            DashBoardViewModel dashBoardViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is DashBoardViewModel)
-                {
-                    dashBoardViewModel = form as DashBoardViewModel;
-                    break;
-                }
-            }
-            if (dashBoardViewModel == null)
-            {
-                dashBoardViewModel = new DashBoardViewModel();
-                _formViewModel.Add(dashBoardViewModel);
-            }
-            CurrentChildView = dashBoardViewModel;
-            CurrentChild = dashBoardViewModel;
+            if (_dashBoardViewModel == null)
+                _dashBoardViewModel = new DashBoardViewModel();
+            CurrentChildView = _dashBoardViewModel;
+            CurrentChild=_dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
+
         private void ExecuteShowTravelViewCommand(object obj)
         {
-            MainTravelViewModel mainTravelViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainTravelViewModel)
-                {
-                    mainTravelViewModel = form as MainTravelViewModel;
-                    break;
-                }
-            }
-            if (mainTravelViewModel == null)
-            {
-                mainTravelViewModel = new MainTravelViewModel();
-                _formViewModel.Add(mainTravelViewModel);
-            }
-            CurrentChildView = mainTravelViewModel;
-            CurrentChild = mainTravelViewModel;
+            if (_mainTravelViewModel == null)
+                _mainTravelViewModel = new MainTravelViewModel();
+            CurrentChildView = _mainTravelViewModel;
+            CurrentChild=_mainTravelViewModel;
             Caption = "Travel";
             Icon = IconChar.Plane;
         }
+
         private void ExecuteShowBookingViewCommand(object obj)
         {
-            MainBookingViewModel mainBookingViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainBookingViewModel)
-                {
-                    mainBookingViewModel = form as MainBookingViewModel;
-                    break;
-                }
-            }
-            if (mainBookingViewModel == null)
-            {
-                mainBookingViewModel = new MainBookingViewModel();
-                _formViewModel.Add(mainBookingViewModel);
-            }
-            CurrentChildView = mainBookingViewModel;
-            CurrentChild = mainBookingViewModel;
+            if (_mainBookingViewModel == null)
+                _mainBookingViewModel= new MainBookingViewModel();
+            CurrentChildView = _mainBookingViewModel;
+            CurrentChild=_mainBookingViewModel;
             Caption = "Booking";
             Icon = IconChar.Hand;
         }
         private void ExecuteShowCustomerViewCommand(object obj)
         {
-            MainCustomerViewModel mainCustomerViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainCustomerViewModel)
-                {
-                    mainCustomerViewModel = form as MainCustomerViewModel;
-                    break;
-                }
-            }
-            if (mainCustomerViewModel == null)
-            {
-                mainCustomerViewModel = new MainCustomerViewModel();
-                _formViewModel.Add(mainCustomerViewModel);
-            }
-            CurrentChildView = mainCustomerViewModel;
-            CurrentChild = mainCustomerViewModel;
+            if (_mainCustomerViewModel == null)
+                _mainCustomerViewModel = new MainCustomerViewModel();
+            CurrentChildView = _mainCustomerViewModel;
+            CurrentChild=_mainCustomerViewModel;
             Caption = "Customer";
             Icon = IconChar.AddressBook;
         }
         private void ExecuteShowTicketViewCommand(object obj)
         {
-            MainTicketViewModel mainTicketViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainTicketViewModel)
-                {
-                    mainTicketViewModel = form as MainTicketViewModel;
-                    break;
-                }
-            }
-            if (mainTicketViewModel == null)
-            {
-                mainTicketViewModel = new MainTicketViewModel();
-                _formViewModel.Add(mainTicketViewModel);
-            }
-            CurrentChildView = mainTicketViewModel;
-            CurrentChild = mainTicketViewModel;
+            if (_mainTicketViewModel == null)
+                _mainTicketViewModel = new MainTicketViewModel();
+            CurrentChildView = _mainTicketViewModel;
+            CurrentChild=_mainTicketViewModel;
             Caption = "Ticket";
             Icon = IconChar.Ticket;
         }
         private void ExecuteShowTourViewCommand(object obj)
         {
-            MainTourViewModel mainTourViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainTourViewModel)
-                {
-                    mainTourViewModel = form as MainTourViewModel;
-                    break;
-                }
-            }
-            if (mainTourViewModel == null)
-            {
-                mainTourViewModel = new MainTourViewModel();
-                _formViewModel.Add(mainTourViewModel);
-            }
-            CurrentChildView = mainTourViewModel;
-            CurrentChild = mainTourViewModel;
+            if (_mainTourViewModel == null)
+                _mainTourViewModel = new MainTourViewModel();
+            CurrentChildView = _mainTourViewModel;
+            CurrentChild=_mainTourViewModel;
             Caption = "Tour";
             Icon = IconChar.CalendarPlus;
         }
         private void ExecuteShowPackageViewCommand(object obj)
         {
-            MainPackageViewModel mainPackageViewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainPackageViewModel)
-                {
-                    mainPackageViewModel = form as MainPackageViewModel;
-                    break;
-                }
-            }
-            if (mainPackageViewModel == null)
-            {
-                mainPackageViewModel = new MainPackageViewModel();
-                _formViewModel.Add(mainPackageViewModel);
-            }
-            CurrentChildView = mainPackageViewModel;
-            CurrentChild = mainPackageViewModel;
+            if (_mainPackageViewModel == null)
+                _mainPackageViewModel = new MainPackageViewModel();
+            CurrentChildView = _mainPackageViewModel;
+            CurrentChild=_mainPackageViewModel;
             Caption = "Package";
             Icon = IconChar.BagShopping;
         }
         private void ExecuteShowPackageTypeViewCommand(object obj)
         {
-            MainPackageTypeViewModel viewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainPackageTypeViewModel)
-                {
-                    viewModel = form as MainPackageTypeViewModel;
-                    break;
-                }
-            }
-            if (viewModel == null)
-            {
-                viewModel = new MainPackageTypeViewModel();
-                _formViewModel.Add(viewModel);
-            }
-            CurrentChildView =   viewModel;
-            CurrentChild = viewModel;
+            if (_mainPackageTypeViewModel == null)
+                _mainPackageTypeViewModel = new MainPackageTypeViewModel();
+            CurrentChildView = _mainPackageTypeViewModel;
+            CurrentChild=_mainPackageTypeViewModel;
             Caption = "Package Type";
             Icon = IconChar.BagShopping;
         }
@@ -275,24 +189,6 @@ namespace Super_Tour.ViewModel
         {
             Caption = "Customer Statistic";
             Icon = IconChar.Database;
-            CustomerStatisticViewModel viewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is CustomerStatisticViewModel)
-                {
-                    viewModel = form as CustomerStatisticViewModel;
-                    break;
-                }
-            }
-            if (viewModel == null)
-            {
-                viewModel = new CustomerStatisticViewModel();
-                _formViewModel.Add(viewModel);
-            }
-            CurrentChildView = viewModel;
-            CurrentChild = viewModel;
-            Caption = "Customer Statistic";
-            Icon = IconChar.BagShopping;
         }
         private void ExecuteShowRevenueStatisticViewCommand(object obj)
         {
@@ -306,24 +202,12 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteShowAccountViewCommand(object obj)
         {
-            MainAccountViewModel viewModel = null;
-            foreach (var form in _formViewModel)
-            {
-                if (form is MainAccountViewModel)
-                {
-                    viewModel = form as MainAccountViewModel;
-                    break;
-                }
-            }
-            if (viewModel == null)
-            {
-                viewModel = new MainAccountViewModel();
-                _formViewModel.Add(viewModel);
-            }
-            CurrentChildView = viewModel;
-/*            CurrentChildView = new MainAccountViewModel();*/
+            if (_mainAccountViewModel == null)
+                _mainAccountViewModel = new MainAccountViewModel();
+            CurrentChildView = _mainAccountViewModel;
+            CurrentChild=_mainAccountViewModel;
             Caption = "Manage Account";
             Icon = IconChar.AddressCard;
         }
     }
-}
+    }

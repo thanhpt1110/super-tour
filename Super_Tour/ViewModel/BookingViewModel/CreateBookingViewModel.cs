@@ -7,9 +7,11 @@ using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Super_Tour.ViewModel
@@ -25,6 +27,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<District> _listDistrict;
         private City _selectedCity;
         private CUSTOMER _customer;
+        private bool _execute = true;
         private ObservableCollection<string> _listGender=new ObservableCollection<string>();
 
         public ObservableCollection<string> ListGender { 
@@ -117,20 +120,40 @@ namespace Super_Tour.ViewModel
         public ICommand SelectedCityCommand { get; }
         public ICommand OpenAddTouristForBookingViewCommand { get; }
         public ICommand CreateNewBookingCommand { get; }
-        
+        public ICommand AutoFillInformationCommand { get; }
+
+
         public CreateBookingViewModel()
         {
             //Tourists = new ObservableCollection<TOURIST>();
             _customer = new CUSTOMER();
+            _customer.Id_Customer = 0;
             _listGender = new ObservableCollection<string>();
             _tourists = new ObservableCollection<TOURIST>();
             OpenSelectTravelForBookingViewCommand = new RelayCommand(ExecuteOpenSelectTravelForBookingViewCommand);
             SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
-            _listCities = new ObservableCollection<City>();
             _listDistrict = new ObservableCollection<District>();
             OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
+            AutoFillInformationCommand = new RelayCommand(ExecuteAutoFillInformationCommand);
+            CreateNewBookingCommand = new RelayCommand(ExecuteCreateNewBookingCommand, CanExecuteCreateNewBooking);
             loadGender();
             LoadProvinces();
+        }
+        private void ExecuteAutoFillInformationCommand(object obj)
+        {
+            CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(p => p.IdNumber == _customer.IdNumber);
+            if(customer!=null)
+            {
+                Customer = customer;
+                SelectedCity = _listCities.Where(p=>p.codename== customer.Province).First();
+                SelectedGender = customer.Gender;
+                List<District> districts = Get_Api_Address.getDistrict(_selectedCity).OrderBy(p => p.name).ToList();
+                foreach (District district in districts)
+                {
+                    _listDistrict.Add(district);
+                }
+                SelectedDistrict = _selectedCity.districts.Where(p => p.codename == customer.District).FirstOrDefault();
+            }    
         }
         private void LoadProvinces()
         {
@@ -138,10 +161,8 @@ namespace Super_Tour.ViewModel
             {
                 List<City> cities = Get_Api_Address.getCities();
                 cities = cities.OrderBy(p => p.name).ToList();
-                foreach (City city in cities)
-                {
-                    _listCities.Add(city);
-                }
+                _listCities = new ObservableCollection<City>(cities);
+
             }
             catch (Exception ex)
             {
@@ -153,38 +174,66 @@ namespace Super_Tour.ViewModel
             _listGender.Add("Female");
             _listGender.Add("Male");
         }
+        private bool CanExecuteCreateNewBooking(object obj)
+        {
+            return _execute;
+        }
         private async void ExecuteCreateNewBookingCommand(object obj)
         {
-            if (SelectedCity == null || SelectedDistrict == null || string.IsNullOrEmpty(_selectedGender)
-                || string.IsNullOrEmpty(_customer.IdNumber)
-                || string.IsNullOrEmpty(_customer.PhoneNumber)
-                || string.IsNullOrEmpty(_customer.Name_Customer)
-                || string.IsNullOrEmpty(_customer.Address)
-                || _travel == null
-                || _tourists.Count == 0)
+            try
             {
-                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
+                _execute = false;
+                if (SelectedCity == null || SelectedDistrict == null || string.IsNullOrEmpty(_selectedGender)
+                    || string.IsNullOrEmpty(_customer.IdNumber)
+                    || string.IsNullOrEmpty(_customer.PhoneNumber)
+                    || string.IsNullOrEmpty(_customer.Name_Customer)
+                    || string.IsNullOrEmpty(_customer.Address)
+                    || _travel == null
+                    || _tourists.Count == 0)
+                {
+                    MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return;
+                }
+                Customer.Province = _selectedCity.codename;
+                Customer.District = _selectedDistrict.codename;
+                Customer.Gender = _selectedGender;
+                db.CUSTOMERs.AddOrUpdate(_customer);
+                await db.SaveChangesAsync();
+                BOOKING booking = new BOOKING();
+                booking.Status = "Payed";
+                booking.Id_Travel = _travel.Id_Travel;
+                booking.Id_Customer_Booking = db.CUSTOMERs.Max(p => p.Id_Customer);
+                booking.TotalPrice = _travel.TOUR.PriceTour * _tourists.Count;
+                booking.Booking_Date = DateTime.Now;
+                booking.Id_Booking = 1;
+                db.BOOKINGs.Add(booking);
+                await db.SaveChangesAsync();
+                foreach (TOURIST tourist in _tourists)
+                {
+                    tourist.Id_Tourist = 1;
+                    tourist.Id_Booking = db.BOOKINGs.Max(p => p.Id_Booking);
+                    db.TOURISTs.Add(tourist);
+                }
+                await db.SaveChangesAsync();
+                CreateBookingView view = null;
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is CreateBookingView)
+                    {
+                        view = window as CreateBookingView;
+                        break;
+                    }
+                }
+                view.Close();
             }
-            Customer.Id_Customer = 1;
-            Customer.Province = _selectedCity.name;
-            Customer.District = _selectedDistrict.name;
-            Customer.Gender = _selectedGender;
-            db.CUSTOMERs.Add(Customer);
-            await db.SaveChangesAsync();
-            BOOKING booking = new BOOKING();
-            booking.Status = "Payed";
-            booking.Id_Travel = _travel.Id_Travel;
-            booking.Id_Customer_Booking = db.CUSTOMERs.Max(p => p.Id_Customer);
-            booking.TotalPrice = _travel.TOUR.PriceTour* _tourists.Count;
-            booking.Booking_Date = DateTime.Now;
-            booking.Id_Booking = 1;
-            db.BOOKINGs.Add(booking);
-            await db.SaveChangesAsync();
-/*            foreach(TOURIST tourist in _tourists)
+            catch(Exception ex)
             {
-                tourist.
-            }    */
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+                _execute = true;
+            }
         }
         private void ExecuteSelectedCityComboBox(object obj)
         {
@@ -216,7 +265,6 @@ namespace Super_Tour.ViewModel
             selectTravelForBookingView.DataContext = new SelectTravelForBookingViewModel(_travel);
             selectTravelForBookingView.ShowDialog();
             Travel = db.TRAVELs.Find(_travel.Id_Travel);
-            Console.WriteLine("a");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Super_Tour.Model
         }
         public DbSet<ACCOUNT> ACCOUNTs {get; set;}
         public DbSet<BOOKING> BOOKINGs { get; set; }
-        public DbSet<TOURIST> BOOKING_DETAILSs { get; set; }
+        public DbSet<TOURIST> TOURISTs { get; set; }
         public DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public DbSet<PACKAGE> PACKAGEs { get; set; }
         public DbSet<TICKET> TICKETs { get; set; }

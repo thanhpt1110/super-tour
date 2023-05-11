@@ -92,6 +92,7 @@
                                                     Margin="20,0,0,0"
                                                     VerticalAlignment="Center"/>
                                 <TextBox
+                                                    Text="{Binding Tourist.Name_Tourist}"
                                                     materialDesign:HintAssist.Hint="Enter tourist name"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                     Height="50"

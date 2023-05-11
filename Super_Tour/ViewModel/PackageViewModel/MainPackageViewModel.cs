@@ -146,7 +146,6 @@ namespace Super_Tour.ViewModel
                 _listPackages.Add(packgage);
             }    
         }*/
-
         private async void ExecuteDeletePackage(object obj)
         {
             try

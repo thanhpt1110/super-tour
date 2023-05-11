@@ -163,7 +163,13 @@
                                                     BorderThickness="0"
                                                     Width="280"
                                                     CaretBrush="Black"
-                                                />
+                                                >
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="LostFocus">
+                                                            <i:InvokeCommandAction Command="{Binding AutoFillInformationCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </TextBox>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal"
                                                         Margin="20,20,0,0">
@@ -286,8 +292,8 @@
                                                   Width="150"
                                                   Height="50"
                                                 BorderBrush="DarkGray"
-                                                                                                      ItemsSource="{Binding ListCities}"
                                                   SelectedItem="{Binding SelectedCity}"
+                                                  ItemsSource="{Binding ListCities}"
                                                   DisplayMemberPath="name"
                                                   >
                                                     <i:Interaction.Triggers>
@@ -385,6 +391,7 @@
                     </Grid>
                     <Grid Grid.Row="3">
                         <Button Content="Save"
+                                Command="{Binding CreateNewBookingCommand}"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="140"
