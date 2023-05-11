@@ -87,7 +87,7 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        db.Entry(_listAccountOriginal).Reload();
+                        _listAccountOriginal = db.ACCOUNTs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listObservableAccount.Clear();

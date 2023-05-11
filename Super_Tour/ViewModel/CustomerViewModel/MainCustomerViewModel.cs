@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Student_wpf_application.ViewModels.Command;
+using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
 
@@ -14,7 +15,8 @@ namespace Super_Tour.ViewModel
     internal class MainCustomerViewModel: ObservableObject
     {
         #region Declare variable 
-        private DispatcherTimer _timer;
+        private DispatcherTimer _timer = null;
+        private SUPER_TOUR db = null;
         #endregion
 
         #region Declare binding
@@ -28,6 +30,7 @@ namespace Super_Tour.ViewModel
 
         public MainCustomerViewModel() 
         {
+            db = MainViewModel.db; 
             OpenCreateCustomerViewCommand = new RelayCommand(ExecuteOpenCreateCustomerViewCommand);
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);

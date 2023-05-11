@@ -9,16 +9,24 @@ namespace Super_Tour.ViewModel
 {
     internal class CreatePackageTypeViewModel
     {
-        SUPER_TOUR db = new SUPER_TOUR();
+        #region Declare variale 
+        SUPER_TOUR db = null;
         private string _packageTypeName;
         private string _description;
         public string PackageTypeName { get => _packageTypeName; set => _packageTypeName = value; }
         public string Description { get => _description; set => _description = value; }
+        #endregion
+
+        #region Command
         public RelayCommand CreateNewPackageCommand { get; }
+        #endregion
+
         public CreatePackageTypeViewModel()
         {
+            db = MainViewModel.db;
             CreateNewPackageCommand = new RelayCommand(execute_CreateNewType_Package);
         }
+
         public void execute_CreateNewType_Package(object obj)
         {
             if (string.IsNullOrEmpty(_packageTypeName) || string.IsNullOrEmpty(_description))
@@ -34,10 +42,11 @@ namespace Super_Tour.ViewModel
                 type_package.Description = _description;
                 db.TYPE_PACKAGEs.Add(type_package);
                 db.SaveChangesAsync();
+
+                // Find view to close
                 CreatePackageTypeView createPackageTypeView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
-                    Console.WriteLine(window.ToString());
                     if (window is CreatePackageTypeView)
                     {
                         createPackageTypeView = window as CreatePackageTypeView;

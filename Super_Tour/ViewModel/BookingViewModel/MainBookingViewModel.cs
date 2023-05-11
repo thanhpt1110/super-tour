@@ -21,13 +21,13 @@ namespace Super_Tour.ViewModel
     internal class MainBookingViewModel: ObservableObject
     {
         #region Declare variable
-        private SUPER_TOUR db;
+        private SUPER_TOUR db = null;
         private List<BOOKING> _listOriginalBooking;
         private DispatcherTimer _timer = null;
         private List<BOOKING> _listSearchBooking;
         private ObservableCollection<BOOKING> _listObservableBooking;
-        private string _searchItem;
-        private string _selectedItem;
+        private string _searchItem = null;
+        private string _selectedItem = null;
         #endregion
 
         #region Declare binding 
@@ -169,11 +169,6 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                   /* if (db != null)
-                    {
-                        db.Dispose();
-                    }
-                    db = new SUPER_TOUR();*/
                     _listOriginalBooking = await db.BOOKINGs.ToListAsync();
                     Application.Current.Dispatcher.Invoke(() =>
                     {

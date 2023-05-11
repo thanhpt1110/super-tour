@@ -11,11 +11,15 @@ namespace Super_Tour.ViewModel
 {
     internal class UpdatePackageTypeViewModel : ObservableObject
     {
-        private SUPER_TOUR db = new SUPER_TOUR();
+        #region Declare variable
+        private SUPER_TOUR db = null;
         private bool _execute = true;
         private string _description;
         private string _typePackageName;
         private TYPE_PACKAGE _typePackage;
+        #endregion
+
+        #region Declare binding
         public string Description
         {
             get => _description;
@@ -25,6 +29,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(Description));
             }
         }
+
         public string TypePackageName
         {
             get => _typePackageName;
@@ -34,18 +39,26 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(TypePackageName));
             }
         }
+        #endregion
+
+        #region Command
         public RelayCommand UpdatePackageCommand { get; }
+        #endregion
+
         public UpdatePackageTypeViewModel(TYPE_PACKAGE typePackage)
         {
+            db = MainViewModel.db;
             UpdatePackageCommand = new RelayCommand(ExecuteUpdateNewCommand, canExecuteUpdateNew);
             _typePackage = typePackage;
             _description = typePackage.Description;
             _typePackageName = typePackage.Name_Type;
         }
+
         private bool canExecuteUpdateNew(object obj)
         {
             return _execute;
         }
+
         private async void ExecuteUpdateNewCommand(object obj)
         {
             if(string.IsNullOrEmpty(_description) || string.IsNullOrEmpty(_typePackageName))
@@ -67,6 +80,8 @@ namespace Super_Tour.ViewModel
                         db.TYPE_PACKAGEs.AddOrUpdate(_typePackage);
                         await db.SaveChangesAsync();
                         MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                        
+                        // Find view to close
                         UpdatePackageTypeView updatePackageTypeView = null;
                         foreach (Window window in Application.Current.Windows)
                         {
@@ -79,7 +94,7 @@ namespace Super_Tour.ViewModel
                         updatePackageTypeView.Close();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }
@@ -88,8 +103,6 @@ namespace Super_Tour.ViewModel
                     _execute = true;
                 }
             }
-
-
         }
     }
 }
