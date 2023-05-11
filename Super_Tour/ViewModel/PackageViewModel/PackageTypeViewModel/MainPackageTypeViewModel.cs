@@ -24,7 +24,8 @@ namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
-        private SUPER_TOUR db = new SUPER_TOUR();
+        #region Declare variable
+        private SUPER_TOUR db = null;
         private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
         private List<TYPE_PACKAGE> _listTypePackageSearching; // Data lúc mà có người search
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
@@ -40,6 +41,7 @@ namespace Super_Tour.ViewModel
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
+        #endregion
 
         #region Declare binding
         public string ResultNumberText
@@ -114,7 +116,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        // End Test
+        #region Command
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
         public ICommand OnSearchTextChangedCommand { get; private set; }
@@ -122,9 +124,11 @@ namespace Super_Tour.ViewModel
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
 
-        public  MainPackageTypeViewModel() 
+        public MainPackageTypeViewModel() 
         {
+            db = MainViewModel.db;
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             UpdatePackageCommand = new RelayCommand(UpdatePackage);

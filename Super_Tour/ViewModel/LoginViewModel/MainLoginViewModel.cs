@@ -17,10 +17,16 @@ namespace Super_Tour.ViewModel
 {
     internal class MainLoginViewModel: ObservableObject
     {
+        #region Declare variable
         private bool _isViewVisible = true;
-        private string _username;
-        private string _password;
+        private string _username = null;
+        private string _password = null;
         private bool executeButton = true;
+        private string converted_password;
+        private SUPER_TOUR db = null;
+        #endregion
+
+        #region Declare binding
         public string Username 
         {
             get
@@ -45,11 +51,6 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(Password));
             }
         }
-        private string converted_password;
-        public RelayCommand LoginCommand { get;private set; }
-        public RelayCommand CommandForgotPassword { get;private set; }
-
-        private SUPER_TOUR db = new SUPER_TOUR();
 
         public bool IsViewVisible
         {
@@ -60,10 +61,16 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(IsViewVisible));
             }
         }
+        #endregion
+
+        #region Command
+        public RelayCommand LoginCommand { get;private set; }
+        public RelayCommand CommandForgotPassword { get;private set; }
+        #endregion
 
         public MainLoginViewModel()
         {
-            
+            db = new SUPER_TOUR(); 
             LoginCommand = new RelayCommand(Login, canExecute);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
@@ -94,16 +101,15 @@ namespace Super_Tour.ViewModel
             {
                 // Thực hiện truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng
                 ConvertPassToMD5();
-                ACCOUNT user=null;
-               await Task.Run(()=> {
+                ACCOUNT user = null;
+                await Task.Run(()=> {
                    try
                    {
                        user = db.ACCOUNTs.FirstOrDefault(u => u.Username == Username && u.Password == converted_password);
                    }
                    catch (Exception ex)
                    {
-                       MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                    }
                });
 
