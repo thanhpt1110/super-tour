@@ -16,9 +16,10 @@ namespace Super_Tour.Model
         public SUPER_TOUR() : base(ConfigurationManager.ConnectionStrings["SuperTour"].ConnectionString)
         {
         }
+        public DbSet<REFERENCE> REFERENCEs { get; set; }
         public DbSet<ACCOUNT> ACCOUNTs {get; set;}
         public DbSet<BOOKING> BOOKINGs { get; set; }
-        public DbSet<TOURIST> BOOKING_DETAILSs { get; set; }
+        public DbSet<TOURIST> TOURISTs { get; set; }
         public DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public DbSet<PACKAGE> PACKAGEs { get; set; }
         public DbSet<TICKET> TICKETs { get; set; }
@@ -28,6 +29,7 @@ namespace Super_Tour.Model
         public DbSet<TYPE_PACKAGE> TYPE_PACKAGEs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<REFERENCE>().ToTable("REFERENCE");
             modelBuilder.Entity<ACCOUNT>().ToTable("ACCOUNT");
             modelBuilder.Entity<BOOKING>().ToTable("BOOKING");
             modelBuilder.Entity<TOURIST>().ToTable("TOURIST");

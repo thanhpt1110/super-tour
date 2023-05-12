@@ -24,11 +24,12 @@ namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
-        private SUPER_TOUR db = new SUPER_TOUR();
+        #region Declare variable
+        private SUPER_TOUR db = null;
         private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
         private List<TYPE_PACKAGE> _listTypePackageSearching; // Data lúc mà có người search
         private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer _timer = null;
         private string _searchType="";
         private int _currentPage = 1;
         private int _totalPage;
@@ -36,10 +37,11 @@ namespace Super_Tour.ViewModel
         private bool _enableButtonNext;
         private bool _enableButtonPrevious;
         private bool _onSearching = false;
-        private string _resultNumberText;
+        private string _resultNumberText;   
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
+        #endregion
 
         #region Declare binding
         public string ResultNumberText
@@ -114,30 +116,34 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        // End Test
+        #region Command
         public ICommand OpenCreatePackageTypeViewCommand { get;private set; }
         public ICommand DeletePackageInDataGridView { get;private set; }
         public ICommand OnSearchTextChangedCommand { get; private set; }
         public ICommand UpdatePackageCommand { get;private set; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
 
-        public  MainPackageTypeViewModel() 
+        public MainPackageTypeViewModel() 
         {
+            db = MainViewModel.db;
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             UpdatePackageCommand = new RelayCommand(UpdatePackage);
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            LoadDataAsync();
-            timer.Interval = TimeSpan.FromSeconds(3);
-            timer.Tick += Timer_Tick;
+            LoadDataAsync(); 
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Tick += Timer_Tick;
         }
 
         private void UpdatePackage(object obj)
         {
-            timer.Stop();
+            Timer.Stop();
             TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
             UpdatePackageTypeView view = new UpdatePackageTypeView();
             view.DataContext = new UpdatePackageTypeViewModel(type_package);
@@ -172,31 +178,34 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
-                    if (db != null)
+                    if (MainViewModel.CurrentChild is MainPackageTypeViewModel)
                     {
-                        db.Dispose();
-                    }
-                    db = new SUPER_TOUR();
-                    var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
-                    // Kiểm tra dữ liệu có được cập nhật chưa
-                    if (!myEntities.SequenceEqual(_listTypePackageOriginal))
-                    { 
-                        // Dữ liệu đã được cập nhật
-                        // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                        Application.Current.Dispatcher.Invoke(() =>
+                        if (db != null)
                         {
-                            _listTypePackageOriginal = myEntities;
-                            if (_onSearching)
+                            db.Dispose();
+                        }
+                        db = new SUPER_TOUR();
+                        var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
+                        // Kiểm tra dữ liệu có được cập nhật chưa
+                        if (!myEntities.SequenceEqual(_listTypePackageOriginal))
+                        {
+                            // Dữ liệu đã được cập nhật
+                            // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-                                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-                                ReloadData(_listTypePackageSearching);
-                            }
-                            else
-                                ReloadData(_listTypePackageOriginal);
-                        });
+                                _listTypePackageOriginal = myEntities;
+                                if (_onSearching)
+                                {
+                                    _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+                                    ReloadData(_listTypePackageSearching);
+                                }
+                                else
+                                    ReloadData(_listTypePackageOriginal);
+                            });
+                        }
                     }
-
                 });
+                
             }
             catch(Exception ex)
             {
@@ -210,9 +219,6 @@ namespace Super_Tour.ViewModel
                 int flag = 0;
                 await Task.Run(() =>
                 {
-                    Stopwatch stopwatch = new Stopwatch();
-
-                    // Bắt đầu đếm thời gian
                     try
                     {
                         if (db != null)
@@ -220,12 +226,7 @@ namespace Super_Tour.ViewModel
                             db.Dispose();
                         }
                         db = new SUPER_TOUR();
-                        stopwatch.Start();
-
                         _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
-                        stopwatch.Stop();
-                        Console.WriteLine("Time elapsed: {0}", stopwatch.Elapsed.TotalSeconds);
-
                         _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
@@ -240,12 +241,9 @@ namespace Super_Tour.ViewModel
                         MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                         flag = 1;
                     }
-                    
-
-                    // In ra thời gian đã trôi qua
                 });
                 if(flag==0)
-                    timer.Start();
+                    Timer.Start();
             }
             catch(Exception ex)
             {
@@ -257,7 +255,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
-                timer.Stop();
+                Timer.Stop();
                 TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
                 if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count>0)
                 {
@@ -286,7 +284,7 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                timer.Start();
+                Timer.Start();
             }
         }
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
@@ -294,7 +292,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
-                timer.Stop();
+                Timer.Stop();
                 createPackageTypeView.ShowDialog();
                 LoadDataAsync();
             }

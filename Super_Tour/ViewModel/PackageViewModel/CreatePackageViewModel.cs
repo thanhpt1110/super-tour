@@ -223,7 +223,8 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
             }
         }
         private void LoadPackageType()
@@ -239,7 +240,8 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
             }
 
         }
@@ -256,7 +258,8 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+
 
             }
         }

@@ -104,7 +104,7 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListDataGridTour}"
+                              ItemsSource="{Binding ListOriginalBooking}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -114,23 +114,23 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.6*"
-                                                Binding="{Binding Tour.Id_Tour}"/>
+                                                Binding="{Binding Id_Booking}"/>
 
                         <DataGridTextColumn Header="Customer Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.3*"
-                                                Binding="{Binding Tour.Name_Tour}"/>
+                                                Binding="{Binding CUSTOMER.Name_Customer}"/>
                         <DataGridTextColumn Header="Travel Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.3*"
-                                                Binding="{Binding Tour.TotalDay}"/>
+                                                Binding="{Binding TRAVEL.TOUR.Name_Tour}"/>
                         <DataGridTextColumn Header="Status" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
-                                                Binding="{Binding Tour.TotalNight}"/>
+                                                Binding="{Binding Status}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

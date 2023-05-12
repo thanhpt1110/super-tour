@@ -135,7 +135,7 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding TotalPrice}"/>
+                                                Binding="{Binding Tour.PriceTour}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

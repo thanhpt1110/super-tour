@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using Student_wpf_application.ViewModels.Command;
+
 namespace Super_Tour.ViewModel
 {
     internal class AddTouristViewModel:ObservableObject
@@ -34,6 +36,7 @@ namespace Super_Tour.ViewModel
             this._listTourist = listTourist;
             _tourist = new TOURIST();
             _tourist.Id_Tourist = listTourist.Count+1;
+            SaveTouristCommand = new RelayCommand(ExecuteSaveTouristCommand);
         }
         public void ExecuteSaveTouristCommand(object obj)
         {
