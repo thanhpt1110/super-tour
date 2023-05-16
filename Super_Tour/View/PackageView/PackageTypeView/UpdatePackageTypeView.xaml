@@ -129,7 +129,7 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             TextWrapping="Wrap"
                                             VerticalContentAlignment="Top"
-                                            Text="{Binding Description}"
+                                            Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                 </StackPanel>

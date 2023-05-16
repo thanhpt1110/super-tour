@@ -27,7 +27,7 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" >
                     <Button Margin="30,0,0,0"    
-                            materialDesign:ButtonAssist.CornerRadius="5"
+                            materialDesign:ButtonAssist.CornerRadius="10"
                             Height="50"
                             Background="{StaticResource TextBoxColor}"
                             BorderThickness="0"
@@ -39,14 +39,12 @@
                         Margin="30,0,0,0"
                         Width="200"
                         materialDesign:HintAssist.Hint="Pick Date"
-                        materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="0"
-                        materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="0"
                         Background="{StaticResource TextBoxColor}"
-                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                        materialDesign:HintAssist.Background="Transparent"
                         Foreground="Black"
                         BorderBrush="Black"
                         materialDesign:HintAssist.Foreground="Black"
-                        Effect="{StaticResource MaterialDesignElevationShadow6}"
+                        materialDesign:HintAssist.IsFloating="False"
                         Style="{StaticResource MaterialDesignOutlinedDatePicker}" />      
                 </StackPanel>
             </Grid>
