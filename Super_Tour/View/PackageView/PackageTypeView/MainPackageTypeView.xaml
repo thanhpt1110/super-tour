@@ -78,6 +78,7 @@
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListTypePackages}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 

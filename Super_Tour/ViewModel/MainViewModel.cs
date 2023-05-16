@@ -16,10 +16,6 @@ namespace Super_Tour.ViewModel
     internal class MainViewModel : ObservableObject
     {
         //Fields
-        // Tạo một cache mới với tên "myCache"
-        //private MemoryCache myCache;
-        #region Declare private object
-        public static ObservableObject CurrentChild;
         private ObservableObject _currentChildView;
         private ObservableObject _nextChildView1;
         private string _nextChildCaption1;
@@ -36,8 +32,6 @@ namespace Super_Tour.ViewModel
         private MainPackageTypeViewModel _mainPackageTypeViewModel = null;
         private MainAccountViewModel _mainAccountViewModel = null;
         private DispatcherTimer _timer = null;
-        public static SUPER_TOUR db = null;
-        #endregion
 
         #region Declare property
         public ObservableObject CurrentChildView
@@ -131,10 +125,9 @@ namespace Super_Tour.ViewModel
             Caption = "Dashboard";
             NextChildCaption1 = "Add Travel";
             Icon = IconChar.Home;
-            db = new SUPER_TOUR();
-            _timer = new DispatcherTimer();
+            /*_timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
-            _timer.Tick += Timer_Tick;
+            _timer.Tick += Timer_Tick;*/
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -226,7 +219,6 @@ namespace Super_Tour.ViewModel
             if (_technicalHelpViewModel == null)
                 _technicalHelpViewModel = new TechnicalHelpViewModel();
             CurrentChildView = _technicalHelpViewModel;
-            CurrentChild=_technicalHelpViewModel;
             Caption = "Technical Help";
             Icon = IconChar.QuestionCircle;
         }
@@ -236,7 +228,6 @@ namespace Super_Tour.ViewModel
             if (_dashBoardViewModel == null)
                 _dashBoardViewModel = new DashBoardViewModel();
             CurrentChildView = _dashBoardViewModel;
-            CurrentChild=_dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
@@ -246,7 +237,6 @@ namespace Super_Tour.ViewModel
             if (_mainTravelViewModel == null)
                 _mainTravelViewModel = new MainTravelViewModel();
             CurrentChildView = _mainTravelViewModel;
-            CurrentChild=_mainTravelViewModel;
             Caption = "Travel";
             Icon = IconChar.Plane;
         }
@@ -256,7 +246,6 @@ namespace Super_Tour.ViewModel
             if (_mainBookingViewModel == null)
                 _mainBookingViewModel= new MainBookingViewModel();
             CurrentChildView = _mainBookingViewModel;
-            CurrentChild=_mainBookingViewModel;
             Caption = "Booking";
             Icon = IconChar.Hand;
         }
@@ -265,7 +254,6 @@ namespace Super_Tour.ViewModel
             if (_mainCustomerViewModel == null)
                 _mainCustomerViewModel = new MainCustomerViewModel();
             CurrentChildView = _mainCustomerViewModel;
-            CurrentChild=_mainCustomerViewModel;
             Caption = "Customer";
             Icon = IconChar.AddressBook;
         }
@@ -274,7 +262,6 @@ namespace Super_Tour.ViewModel
             if (_mainTicketViewModel == null)
                 _mainTicketViewModel = new MainTicketViewModel();
             CurrentChildView = _mainTicketViewModel;
-            CurrentChild=_mainTicketViewModel;
             Caption = "Ticket";
             Icon = IconChar.Ticket;
         }
@@ -283,7 +270,6 @@ namespace Super_Tour.ViewModel
             if (_mainTourViewModel == null)
                 _mainTourViewModel = new MainTourViewModel();
             CurrentChildView = _mainTourViewModel;
-            CurrentChild=_mainTourViewModel;
             Caption = "Tour";
             Icon = IconChar.CalendarPlus;
         }
@@ -292,7 +278,6 @@ namespace Super_Tour.ViewModel
             if (_mainPackageViewModel == null)
                 _mainPackageViewModel = new MainPackageViewModel();
             CurrentChildView = _mainPackageViewModel;
-            CurrentChild=_mainPackageViewModel;
             Caption = "Package";
             Icon = IconChar.BagShopping;
         }
@@ -301,7 +286,6 @@ namespace Super_Tour.ViewModel
             if (_mainPackageTypeViewModel == null)
                 _mainPackageTypeViewModel = new MainPackageTypeViewModel();
             CurrentChildView = _mainPackageTypeViewModel;
-            CurrentChild=_mainPackageTypeViewModel;
             Caption = "Package Type";
             Icon = IconChar.BagShopping;
         }
@@ -325,7 +309,6 @@ namespace Super_Tour.ViewModel
             if (_mainAccountViewModel == null)
                 _mainAccountViewModel = new MainAccountViewModel();
             CurrentChildView = _mainAccountViewModel;
-            CurrentChild=_mainAccountViewModel;
             Caption = "Manage Account";
             Icon = IconChar.AddressCard;
         }

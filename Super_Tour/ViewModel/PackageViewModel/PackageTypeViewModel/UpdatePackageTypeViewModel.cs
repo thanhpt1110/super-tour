@@ -5,7 +5,9 @@ using Super_Tour.Ultis;
 using Super_Tour.View;
 using System;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace Super_Tour.ViewModel
 {
@@ -13,13 +15,23 @@ namespace Super_Tour.ViewModel
     {
         #region Declare variable
         private SUPER_TOUR db = null;
-        private bool _execute = true;
-        private string _description;
-        private string _typePackageName;
-        private TYPE_PACKAGE _typePackage;
+        private TYPE_PACKAGE temp = null;
+        private bool _isDataModified = false;
+        private string _description = null;
+        private string _packageTypeName = null;
         #endregion
 
         #region Declare binding
+        public bool IsDataModified
+        {
+            get => _isDataModified;
+            set
+            {
+                _isDataModified = value;
+                OnPropertyChanged(nameof(IsDataModified));
+            }
+        }
+
         public string Description
         {
             get => _description;
@@ -27,16 +39,18 @@ namespace Super_Tour.ViewModel
             {
                 _description = value;
                 OnPropertyChanged(nameof(Description));
+                checkDataModified();
             }
         }
 
-        public string TypePackageName
+        public string PackageTypeName
         {
-            get => _typePackageName;
+            get => _packageTypeName;
             set
             {
-                _typePackageName = value;
-                OnPropertyChanged(nameof(TypePackageName));
+                _packageTypeName = value;
+                OnPropertyChanged(nameof(PackageTypeName));
+                checkDataModified();
             }
         }
         #endregion
@@ -45,63 +59,55 @@ namespace Super_Tour.ViewModel
         public RelayCommand UpdatePackageCommand { get; }
         #endregion
 
-        public UpdatePackageTypeViewModel(TYPE_PACKAGE typePackage)
+        public UpdatePackageTypeViewModel(TYPE_PACKAGE tmp)
         {
-            db = MainViewModel.db;
-            UpdatePackageCommand = new RelayCommand(ExecuteUpdateNewCommand, canExecuteUpdateNew);
-            _typePackage = typePackage;
-            _description = typePackage.Description;
-            _typePackageName = typePackage.Name_Type;
+            UpdatePackageCommand = new RelayCommand(ExecuteUpdateNewCommand);
+            db = SUPER_TOUR.db;
+            this.temp = tmp;
+            _description = tmp.Description;
+            _packageTypeName = tmp.Name_Type;
         }
 
-        private bool canExecuteUpdateNew(object obj)
+        private void checkDataModified()
         {
-            return _execute;
+            if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(PackageTypeName) || (Description == temp.Description && PackageTypeName == temp.Name_Type))
+                IsDataModified = false;
+            else
+                IsDataModified = true;
         }
 
-        private async void ExecuteUpdateNewCommand(object obj)
+        private void ExecuteUpdateNewCommand(object obj)
         {
-            if(string.IsNullOrEmpty(_description) || string.IsNullOrEmpty(_typePackageName))
+            try
             {
-                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-            if (_description != _typePackage.Description || _typePackageName != _typePackage.Name_Type)
-            {
-                try
+                MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
-                    _execute = false;
-                    MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
-                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                    temp.Description = _description;
+                    temp.Name_Type = _packageTypeName;
+                    db.TYPE_PACKAGEs.AddOrUpdate(temp);
+                    db.SaveChanges();
+                    MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+
+                    // Find view to close
+                    UpdatePackageTypeView updatePackageTypeView = null;
+                    foreach (Window window in System.Windows.Application.Current.Windows)
                     {
-
-                        _typePackage.Description = _description;
-                        _typePackage.Name_Type = _typePackageName;
-                        db.TYPE_PACKAGEs.AddOrUpdate(_typePackage);
-                        await db.SaveChangesAsync();
-                        MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        
-                        // Find view to close
-                        UpdatePackageTypeView updatePackageTypeView = null;
-                        foreach (Window window in Application.Current.Windows)
+                        if (window is UpdatePackageTypeView)
                         {
-                            if (window is UpdatePackageTypeView)
-                            {
-                                updatePackageTypeView = window as UpdatePackageTypeView;
-                                break;
-                            }
+                            updatePackageTypeView = window as UpdatePackageTypeView;
+                            break;
                         }
-                        updatePackageTypeView.Close();
                     }
+                    updatePackageTypeView.Close();
                 }
-                catch (Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                }
-                finally
-                {
-                    _execute = true;
-                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
             }
         }
     }

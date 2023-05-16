@@ -223,8 +223,7 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                    if (MainViewModel.CurrentChild is MainTourViewModel)
-                    {
+
 /*                        if (db != null)
                         {
                             db.Dispose();
@@ -242,7 +241,7 @@ namespace Super_Tour.ViewModel
 
                         });
                         }
-                    }
+                    
                 }
                 catch (Exception ex)
                 {

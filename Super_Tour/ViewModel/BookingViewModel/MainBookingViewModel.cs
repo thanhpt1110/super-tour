@@ -77,7 +77,7 @@ namespace Super_Tour.ViewModel
 
         public MainBookingViewModel() 
         {
-            db = MainViewModel.db;
+            db = SUPER_TOUR.db;
             OpenCreateBookingViewCommand = new RelayCommand(ExecuteOpenCreateBookingViewCommand);
             _listObservableBooking = new ObservableCollection<BOOKING>();
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
@@ -98,8 +98,6 @@ namespace Super_Tour.ViewModel
             {
                 try
                 {
-                    if (MainViewModel.CurrentChild is MainBookingViewModel)
-                    {
                         /*if (db != null)
                         {
                             db.Dispose();
@@ -116,7 +114,7 @@ namespace Super_Tour.ViewModel
 
                             });
                         }
-                    }
+                    
                 }
                 catch (Exception ex)
                 {

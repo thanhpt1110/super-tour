@@ -108,7 +108,7 @@
                                             Foreground="Black"
                                             CaretBrush="Black"
                                             TextWrapping="NoWrap"
-                                            Text="{Binding PackageTypeName}"
+                                            Text="{Binding PackageTypeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,15,0,0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -138,6 +138,7 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <Button
+                            IsEnabled="{Binding IsDataModified}"
                             HorizontalAlignment="Center"
                             Width="120"
                             Height="35"

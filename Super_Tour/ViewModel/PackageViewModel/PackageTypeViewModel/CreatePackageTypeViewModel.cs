@@ -1,47 +1,87 @@
 ﻿using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
+using Super_Tour.Ultis;
 using Super_Tour.View;
 using System;
+using System.Linq;
 using System.Windows;
 
 namespace Super_Tour.ViewModel
 {
-    internal class CreatePackageTypeViewModel
+    internal class CreatePackageTypeViewModel : ObservableObject
     {
         #region Declare variale 
-        SUPER_TOUR db = null;
-        private string _packageTypeName;
-        private string _description;
-        public string PackageTypeName { get => _packageTypeName; set => _packageTypeName = value; }
-        public string Description { get => _description; set => _description = value; }
+        private SUPER_TOUR db = null;
+        private TYPE_PACKAGE temp = null;
+        private bool _isDataModified = false;
+        private string _description = null;
+        private string _packageTypeName = null;
+        #endregion
+
+        #region Declare binding
+        public bool IsDataModified
+        {
+            get => _isDataModified;
+            set
+            {
+                _isDataModified = value;
+                OnPropertyChanged(nameof(IsDataModified));
+            }
+        }
+
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                _description = value;
+                OnPropertyChanged(nameof(Description));
+                checkDataModified();
+            }
+        }
+
+        public string PackageTypeName
+        {
+            get => _packageTypeName;
+            set
+            {
+                _packageTypeName = value;
+                OnPropertyChanged(nameof(PackageTypeName));
+                checkDataModified();
+            }
+        }
         #endregion
 
         #region Command
         public RelayCommand CreateNewPackageCommand { get; }
         #endregion
 
-        public CreatePackageTypeViewModel()
+        private void checkDataModified()
         {
-            db = MainViewModel.db;
+            if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(PackageTypeName))
+                IsDataModified = false;
+            else
+                IsDataModified = true;
+        }
+
+        public CreatePackageTypeViewModel(TYPE_PACKAGE tmp)
+        {
             CreateNewPackageCommand = new RelayCommand(execute_CreateNewType_Package);
+            db = SUPER_TOUR.db;
+            this.temp = tmp;
         }
 
         public void execute_CreateNewType_Package(object obj)
         {
-            if (string.IsNullOrEmpty(_packageTypeName) || string.IsNullOrEmpty(_description))
-            {
-                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-            TYPE_PACKAGE type_package = new TYPE_PACKAGE();
             try
             {
-                type_package.Id_Type_Package = 1;
-                type_package.Name_Type = _packageTypeName;
-                type_package.Description = _description;
-                db.TYPE_PACKAGEs.Add(type_package);
-                db.SaveChangesAsync();
+                temp.Name_Type = _packageTypeName;
+                temp.Description = _description;
+                db.TYPE_PACKAGEs.Add(temp);
+                db.SaveChanges();
+                temp.Id_Type_Package = db.TYPE_PACKAGEs.Max(p=>p.Id_Type_Package);
+                MyMessageBox.ShowDialog("Add type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
 
                 // Find view to close
                 CreatePackageTypeView createPackageTypeView = null;
@@ -58,7 +98,7 @@ namespace Super_Tour.ViewModel
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                db.TYPE_PACKAGEs.Remove(type_package);
+                db.TYPE_PACKAGEs.Remove(temp);
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -27,6 +28,7 @@ namespace Super_Tour.Model
         public DbSet<TOUR_DETAILS> TOUR_DETAILs { get; set; }
         public DbSet<TRAVEL> TRAVELs { get; set; }
         public DbSet<TYPE_PACKAGE> TYPE_PACKAGEs { get; set; }
+        public static SUPER_TOUR db = new SUPER_TOUR();
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<REFERENCE>().ToTable("REFERENCE");

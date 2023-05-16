@@ -23,13 +23,6 @@ namespace Super_Tour.View
         public UpdatePackageTypeView()
         {
             InitializeComponent();
-            
-        }
-        public UpdatePackageTypeView(TYPE_PACKAGE typePackage)
-        {
-            InitializeComponent();
-            DataContext = new UpdatePackageTypeViewModel(typePackage);
-
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

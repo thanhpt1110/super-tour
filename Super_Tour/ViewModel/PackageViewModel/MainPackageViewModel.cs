@@ -223,8 +223,6 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        if (MainViewModel.CurrentChild is MainPackageViewModel)
-                        {
                             if (db != null)
                             {
                                 db.Dispose();
@@ -244,8 +242,8 @@ namespace Super_Tour.ViewModel
                                     else
                                         ReloadData(listOriginalPackage);
                                 });
-                            }
-                        }
+                           }
+                        
                     }
                     catch (Exception ex)
                     {
