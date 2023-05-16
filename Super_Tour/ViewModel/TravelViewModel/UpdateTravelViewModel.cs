@@ -54,7 +54,6 @@ namespace Super_Tour.ViewModel
             Travel = new TRAVEL(travel);
             MaxTicket = travel.MaxTicket.ToString();
             Discount = travel.Discount.ToString();
-            OpenSelectTourForTravelViewCommand = new RelayCommand(ExecuteOpenSelectTourForTravelViewCommand);
             SaveUpdateCommand = new RelayCommand(ExecuteSave, canExecuteSave);
         }
         private async void ExecuteSave(object obj)
@@ -91,7 +90,7 @@ namespace Super_Tour.ViewModel
                 await db.SaveChangesAsync();
             
                 MyMessageBox.ShowDialog("Update travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                UpdateTravelView updateTravelView = null;
+                /*UpdateTravelView updateTravelView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
                     Console.WriteLine(window.ToString());
@@ -101,7 +100,7 @@ namespace Super_Tour.ViewModel
                         break;
                     }
                 }
-                updateTravelView.Close();
+                updateTravelView.Close();*/
             }
             catch (Exception ex)
             {
@@ -116,11 +115,11 @@ namespace Super_Tour.ViewModel
         {
             return _executeSave;
         }
-        private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
+        /*private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
         {
             SelectTourForTravelView selectTourForTravelView = new SelectTourForTravelView();
             selectTourForTravelView.DataContext = new SelectTourForTravelViewModel(Travel.TOUR);
             selectTourForTravelView.ShowDialog();
-        }
+        }*/
     }
 }

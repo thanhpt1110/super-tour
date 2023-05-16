@@ -16,7 +16,7 @@ namespace Super_Tour.ViewModel
     internal class MainViewModel : ObservableObject
     {
         //Fields
-        private ObservableObject _currentChildView;
+        public static ObservableObject _currentChildView;
         private ObservableObject _nextChildView1;
         private string _nextChildCaption1;
         private string _caption;
@@ -34,6 +34,7 @@ namespace Super_Tour.ViewModel
         private DispatcherTimer _timer = null;
 
         #region Declare property
+
         public ObservableObject CurrentChildView
         {
             get => _currentChildView;
@@ -51,7 +52,7 @@ namespace Super_Tour.ViewModel
             }
             set
             {
-                this._nextChildView1 = value;
+                _nextChildView1 = value;
                 OnPropertyChanged(nameof(NextChildView1));
             }
         }
@@ -63,7 +64,7 @@ namespace Super_Tour.ViewModel
             }
             set
             {
-                this._nextChildCaption1 = value;
+                _nextChildCaption1 = value;
                 OnPropertyChanged(nameof(NextChildCaption1));
             }
         }
@@ -235,7 +236,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowTravelViewCommand(object obj)
         {
             if (_mainTravelViewModel == null)
-                _mainTravelViewModel = new MainTravelViewModel();
+                _mainTravelViewModel = new MainTravelViewModel(this);
             CurrentChildView = _mainTravelViewModel;
             Caption = "Travel";
             Icon = IconChar.Plane;

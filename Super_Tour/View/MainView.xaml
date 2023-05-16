@@ -27,6 +27,12 @@
         <DataTemplate DataType="{x:Type viewModel:MainTravelViewModel}">
             <local:MainTravelView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CreateTravelViewModel}">
+            <local:CreateTravelView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:UpdateTravelViewModel}">
+            <local:UpdateTravelView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:MainBookingViewModel}">
             <local:MainBookingView/>
         </DataTemplate>

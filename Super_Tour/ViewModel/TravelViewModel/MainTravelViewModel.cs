@@ -18,6 +18,7 @@ namespace Super_Tour.ViewModel
 
     internal class MainTravelViewModel: ObservableObject
     {
+        private MainViewModel mainViewModel;
         private SUPER_TOUR db;
         private ObservableCollection<TRAVEL> _listObservableTravel;
         private DispatcherTimer _timer = null;  
@@ -74,8 +75,9 @@ namespace Super_Tour.ViewModel
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
-        public MainTravelViewModel() 
+        public MainTravelViewModel(MainViewModel mainViewModel) 
         {
+            this.mainViewModel = mainViewModel;
             LoadFilter();
             OpenCreateTravelViewCommand = new RelayCommand(ExecuteOpenCreateTravelViewCommand);
             this._listObservableTravel = new ObservableCollection<TRAVEL>();
@@ -90,10 +92,9 @@ namespace Super_Tour.ViewModel
         private async void ExecuteUpdateCommand(object obj)
         {
             TRAVEL travel = obj as TRAVEL;
-            UpdateTravelView view = new UpdateTravelView();
+            UpdateTravelViewModel updateTravelViewModel = new UpdateTravelViewModel(travel);
             Timer.Stop();
-            view.DataContext = new UpdateTravelViewModel(travel);
-            view.ShowDialog();
+            mainViewModel.CurrentChildView = updateTravelViewModel;
             LoadTourDataAsync();
         }
         private void LoadGrid(List<TRAVEL> listTravel)
@@ -194,8 +195,8 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteOpenCreateTravelViewCommand(object obj)
         {
-            CreateTravelView createTravelView = new CreateTravelView();
-            createTravelView.ShowDialog();
+            CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel);
+            mainViewModel.CurrentChildView = createTravelViewModel;
         }
 
         private void ExecuteSearchTravel(object obj)

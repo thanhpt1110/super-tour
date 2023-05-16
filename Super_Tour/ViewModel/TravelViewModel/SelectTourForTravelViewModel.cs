@@ -118,7 +118,7 @@ namespace Super_Tour.ViewModel
         {
             DataGridTour dataGridTour = obj as DataGridTour;
             _tour.Id_Tour = dataGridTour.Tour.Id_Tour;
-            SelectTourForTravelView selectTourForTravelView = null;
+            /*SelectTourForTravelView selectTourForTravelView = null;
             foreach (Window window in Application.Current.Windows)
             {
                 Console.WriteLine(window.ToString());
@@ -128,7 +128,7 @@ namespace Super_Tour.ViewModel
                     break;
                 }
             }
-            selectTourForTravelView.Close();
+            selectTourForTravelView.Close();*/
         }
         private void ExecuteViewDetailTour(object obj)
         {

@@ -11,6 +11,7 @@ namespace Super_Tour.ViewModel
 {
     internal class CreateTravelViewModel : ObservableObject
     {
+        private MainViewModel mainViewModel;
         private TOUR _tour = null;
         private string _startLocation;
         private SUPER_TOUR db = new SUPER_TOUR();
@@ -68,10 +69,10 @@ namespace Super_Tour.ViewModel
         }
         public ICommand OpenSelectTourForTravelViewCommand { get; }
         public ICommand SaveTourCommand { get; }
-        public CreateTravelViewModel()
+        public CreateTravelViewModel(MainViewModel mainViewModel)
         {
+            this.mainViewModel = mainViewModel;
             _tour = new TOUR();
-            OpenSelectTourForTravelViewCommand = new RelayCommand(ExecuteOpenSelectTourForTravelViewCommand);
             SaveTourCommand = new RelayCommand(ExecuteSaveCommand, CanExecuteSaveCommnad);
         }
         private bool CanExecuteSaveCommnad(object obj)
@@ -118,7 +119,7 @@ namespace Super_Tour.ViewModel
                 await db.SaveChangesAsync();
                 MyMessageBox.ShowDialog("Add new travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 CreateTravelView createTravelView = null;
-                foreach (Window window in Application.Current.Windows)
+                /*foreach (Window window in Application.Current.Windows)
                 {
                     Console.WriteLine(window.ToString());
                     if (window is CreateTourView)
@@ -127,7 +128,7 @@ namespace Super_Tour.ViewModel
                         break;
                     }
                 }
-                createTravelView.Close();
+                createTravelView.Close();*/
             }
             catch (Exception ex)
             {
@@ -138,13 +139,13 @@ namespace Super_Tour.ViewModel
                 _executeCommand = true;
             }
         }
-        private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
+        /*private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
         {
             SelectTourForTravelView selectTourForTravelView = new SelectTourForTravelView();
             _tour = new TOUR();
             selectTourForTravelView.DataContext = new SelectTourForTravelViewModel(_tour);
             selectTourForTravelView.ShowDialog();
             Tour = db.TOURs.Find(Tour.Id_Tour);
-        }
+        }*/
     }
 }

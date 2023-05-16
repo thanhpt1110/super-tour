@@ -483,9 +483,6 @@
     <Compile Include="View\TravelView\MainTravelView.xaml.cs">
       <DependentUpon>MainTravelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TravelView\SelectTourForTravelView.xaml.cs">
-      <DependentUpon>SelectTourForTravelView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TravelView\UpdateTravelView.xaml.cs">
       <DependentUpon>UpdateTravelView.xaml</DependentUpon>
     </Compile>
@@ -682,10 +679,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TravelView\MainTravelView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TravelView\SelectTourForTravelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
