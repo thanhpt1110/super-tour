@@ -110,7 +110,7 @@
                                             Foreground="Black"   
                                             CaretBrush="Black"
                                             TextWrapping="NoWrap"
-                                            Text="{Binding PackageTypeName}"
+                                            Text="{Binding PackageTypeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -132,7 +132,7 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             TextWrapping="Wrap"
                                             VerticalContentAlignment="Top"
-                                            Text="{Binding Description}"
+                                            Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          ></TextBox>
                                     </StackPanel>
                                 </StackPanel>
@@ -141,6 +141,7 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <Button
+                            IsEnabled="{Binding IsDataModified}"
                             HorizontalAlignment="Center"
                             Width="120"
                             Height="35"

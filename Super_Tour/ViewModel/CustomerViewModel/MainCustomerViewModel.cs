@@ -30,7 +30,7 @@ namespace Super_Tour.ViewModel
 
         public MainCustomerViewModel() 
         {
-            db = MainViewModel.db; 
+            db = SUPER_TOUR.db; 
             OpenCreateCustomerViewCommand = new RelayCommand(ExecuteOpenCreateCustomerViewCommand);
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);

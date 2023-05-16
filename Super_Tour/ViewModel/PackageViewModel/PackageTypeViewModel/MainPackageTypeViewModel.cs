@@ -26,18 +26,21 @@ namespace Super_Tour.ViewModel
     {
         #region Declare variable
         private SUPER_TOUR db = null;
-        private List<TYPE_PACKAGE> _listTypePackageOriginal; // Data gốc
-        private List<TYPE_PACKAGE> _listTypePackageSearching; // Data lúc mà có người search
-        private ObservableCollection<TYPE_PACKAGE> _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
+        private List<TYPE_PACKAGE> _listTypePackageOriginal = null; // Data gốc
+        private List<TYPE_PACKAGE> _listTypePackageSearching = null; // Data lúc mà có người search
+        private List<TYPE_PACKAGE> _listTypePackageDatagrid = null; // Data để đổ vào datagrid 
+        private ObservableCollection<TYPE_PACKAGE> _listTypePackages = null ; // Data binding của Datagrid
+        private TYPE_PACKAGE _selectedItem = null;
+        private TYPE_PACKAGE temp = null;
         private DispatcherTimer _timer = null;
-        private string _searchType="";
+        private string _searchType = "";
         private int _currentPage = 1;
         private int _totalPage;
-        private string _pageNumberText;
+        private string _pageNumberText = null;
         private bool _enableButtonNext;
         private bool _enableButtonPrevious;
         private bool _onSearching = false;
-        private string _resultNumberText;   
+        private string _resultNumberText = null;   
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
@@ -105,6 +108,17 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SearchType));
             }
         }
+
+        public TYPE_PACKAGE SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
         public ObservableCollection<TYPE_PACKAGE> ListTypePackages
         {
             get { return _listTypePackages; }
@@ -112,7 +126,7 @@ namespace Super_Tour.ViewModel
             {
                 _listTypePackages = value;
                 OnPropertyChanged(nameof(ListTypePackages));
-            } 
+            }   
         }
         #endregion
 
@@ -126,9 +140,11 @@ namespace Super_Tour.ViewModel
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
+        #region Constructor
         public MainPackageTypeViewModel() 
         {
-            db = MainViewModel.db;
+            db = SUPER_TOUR.db;
+            _listTypePackages = new ObservableCollection<TYPE_PACKAGE>();
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             UpdatePackageCommand = new RelayCommand(UpdatePackage);
@@ -136,172 +152,162 @@ namespace Super_Tour.ViewModel
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
             LoadDataAsync(); 
-            Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromSeconds(3);
-            Timer.Tick += Timer_Tick;
+            /*_timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += Timer_Tick;*/
         }
+        #endregion
 
-        private void UpdatePackage(object obj)
+        #region Update on data on datagrid event
+        private void RefreshDatagrid()
         {
-            Timer.Stop();
-            TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
-            UpdatePackageTypeView view = new UpdatePackageTypeView();
-            view.DataContext = new UpdatePackageTypeViewModel(type_package);
-            view.ShowDialog();
-            LoadDataAsync();
-        }
-
-        private void SearchCommand(object obj)
-        {
-            if (string.IsNullOrEmpty(_searchType))
+            int index = ListTypePackages.IndexOf(SelectedItem);
+            temp = SelectedItem;
+            if (index != -1)
             {
-                _onSearching = false;
-                ReloadData(_listTypePackageOriginal);
-            }
-            else
-            {
-                _onSearching = true;
-                this._currentPage = 1;
-                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-                ReloadData(_listTypePackageSearching);
+                ListTypePackages.RemoveAt(index);
+                ListTypePackages.Insert(index, temp);
             }
         }
+        #endregion
 
-        private async void Timer_Tick(object sender, EventArgs e)
-        {
-            await CheckDataPerSecondAsync();
-        }
-
-        private async Task CheckDataPerSecondAsync()
-        {
-            try
-            {
-                await Task.Run(async () =>
-                {
-                    if (MainViewModel.CurrentChild is MainPackageTypeViewModel)
-                    {
-                        if (db != null)
-                        {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        var myEntities = await db.TYPE_PACKAGEs.ToListAsync();
-                        // Kiểm tra dữ liệu có được cập nhật chưa
-                        if (!myEntities.SequenceEqual(_listTypePackageOriginal))
-                        {
-                            // Dữ liệu đã được cập nhật
-                            // Thực hiện các xử lý cập nhật dữ liệu trong ứng dụng của bạn
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                _listTypePackageOriginal = myEntities;
-                                if (_onSearching)
-                                {
-                                    _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
-                                    ReloadData(_listTypePackageSearching);
-                                }
-                                else
-                                    ReloadData(_listTypePackageOriginal);
-                            });
-                        }
-                    }
-                });
-                
-            }
-            catch(Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-        }
+        #region Load data async
         private async Task LoadDataAsync()
         {
             try
             {
-                int flag = 0;
                 await Task.Run(() =>
                 {
                     try
                     {
-                        if (db != null)
-                        {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
-                        _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            if (_onSearching)
-                                ReloadData(_listTypePackageSearching);
-                            else
-                                ReloadData(_listTypePackageOriginal);
+                            _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                            ReloadData();
                         });
                     }
                     catch (Exception ex)
                     {
                         MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                        flag = 1;
                     }
                 });
-                if(flag==0)
-                    Timer.Start();
-            }
-            catch(Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-        }  
-        private async void ExecuteDeletePackageCommand(object obj)
-        {
-            try
-            {
-                TYPE_PACKAGE type_package = obj as TYPE_PACKAGE;
-                Timer.Stop();
-                TYPE_PACKAGE type_packageFind = await db.TYPE_PACKAGEs.FindAsync(type_package.Id_Type_Package);
-                if(db.PACKAGEs.Where(p=>p.Id_Type_Package==type_packageFind.Id_Type_Package).ToList().Count>0)
-                {
-                    MyMessageBox.ShowDialog("The package type could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    return;
-                }
-                if (type_packageFind != null)
-                {
-                    MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
-                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
-                    {
-                        db.TYPE_PACKAGEs.Remove(type_packageFind);
-                        await db.SaveChangesAsync();
-                        MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        LoadDataAsync();
-                    }
-                }
-                else
-                {
-                    MyMessageBox.ShowDialog("The package type could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                }
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
-            finally
-            {
-                Timer.Start();
-            }
         }
-        private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
+        #endregion
+
+       /* #region Check data per second
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await ReloadDataAsync();
+        }
+
+        private async Task ReloadDataAsync()
         {
             try
             {
-                CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
-                Timer.Stop();
-                createPackageTypeView.ShowDialog();
-                LoadDataAsync();
+                await Task.Run(async () =>
+                {
+                    if (db.REFERENCEs.FirstOrDefault().Update_TYPEPACKAGE)
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                            ReloadData();
+                            db.REFERENCEs.FirstOrDefault().Update_TYPEPACKAGE = false;
+                        });
+                    }
+
+                });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+        #endregion
+        */
 
+        #region Insert 
+        private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
+        {
+            try
+            {
+                if (temp == null)
+                    temp = new TYPE_PACKAGE();
+                CreatePackageTypeView createPackageTypeView = new CreatePackageTypeView();
+                createPackageTypeView.DataContext = new CreatePackageTypeViewModel(temp);
+                createPackageTypeView.ShowDialog();
+                _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
+                ReloadData();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Update
+        private void UpdatePackage(object obj)
+        {
+            UpdatePackageTypeView updatePackageView = new UpdatePackageTypeView();
+            updatePackageView.DataContext = new UpdatePackageTypeViewModel(SelectedItem);
+            updatePackageView.ShowDialog();
+            RefreshDatagrid();
+        }
+        #endregion
+
+        #region Delete
+        private void ExecuteDeletePackageCommand(object obj)
+        {
+            try
+            {
+                MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                {
+                    // Save data on database
+                    db.TYPE_PACKAGEs.Remove(SelectedItem);
+                    db.SaveChanges();
+
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    
+                    // Process UI event
+                    _listTypePackageOriginal.Remove(SelectedItem);
+                    ReloadData();
+                }
+            }
+            catch (Exception)
+            {
+                MyMessageBox.ShowDialog("The package type could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+            }
+        }
+        #endregion
+
+        #region Search
+        private void SearchCommand(object obj)
+        {
+            if (string.IsNullOrEmpty(_searchType))
+            {
+                _onSearching = false;
+                ReloadData();
+            }
+            else
+            {
+                _onSearching = true;
+                this._currentPage = 1;
+                ReloadData();
+            }
+        }
+        #endregion
+        
+        #region Custom display data grid
         private List<TYPE_PACKAGE> GetData(List<TYPE_PACKAGE> ListTypePackage,int startIndex, int endIndex)
         {
             try
@@ -315,11 +321,11 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        private void LoadDataByPage(List<TYPE_PACKAGE> typePackages)
+        private void LoadDataByPage(List<TYPE_PACKAGE> ListTypePackages)
         {
             try
             {
-                this._totalResult = typePackages.Count();
+                this._totalResult = ListTypePackages.Count();
                 if (_totalResult == 0)
                 {
                     _startIndex = -1; 
@@ -336,9 +342,9 @@ namespace Super_Tour.ViewModel
                     this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
                 }
 
-                List<TYPE_PACKAGE> ListTypePackage = GetData(typePackages, this._startIndex, this._endIndex);
+                _listTypePackageDatagrid = GetData(ListTypePackages, this._startIndex, this._endIndex);
                 _listTypePackages.Clear();
-                foreach (TYPE_PACKAGE typePackage in ListTypePackage)
+                foreach (TYPE_PACKAGE typePackage in _listTypePackageDatagrid)
                 {
                     _listTypePackages.Add(typePackage);
                 }
@@ -406,11 +412,16 @@ namespace Super_Tour.ViewModel
             setResultNumber();
         }
 
-        private void ReloadData(List<TYPE_PACKAGE> typePackages)
+        private void ReloadData()
         {
-            LoadDataByPage(typePackages);
+            _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+            if (_onSearching)
+                LoadDataByPage(_listTypePackageSearching);
+            else
+                LoadDataByPage(_listTypePackageOriginal);
             setButtonAndPage();
             setResultNumber();
         }
+        #endregion
     }
 }

@@ -23,8 +23,8 @@ namespace Super_Tour.View
         public CreatePackageTypeView()
         {
             InitializeComponent();
-            this.DataContext = new CreatePackageTypeViewModel();
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

@@ -58,7 +58,7 @@ namespace Super_Tour.ViewModel
 
         public MainAccountViewModel()
         {
-            db = MainViewModel.db;
+            db = SUPER_TOUR.db;
             _listObservableAccount = new ObservableCollection<ACCOUNT>();
             OpenCreateAccountViewCommand = new RelayCommand(ExecuteOpenCreateAccountViewCommand);
             LoadAccountDataAsync();
