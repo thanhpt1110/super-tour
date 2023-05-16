@@ -105,18 +105,20 @@
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <TextBox
-                                        materialDesign:HintAssist.Hint="Enter customer ID number"
-                                        Effect="{StaticResource MaterialDesignElevationShadow6}"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                         Height="50"
+                                        FontSize="15"
                                         Margin="10,0,0,0"
-                                        Foreground="Black"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                        BorderThickness="0"
-                                        Width="280"
                                         CaretBrush="Black"
+                                        BorderBrush="Black"
+                                        Foreground="Black"
+                                        Background="{StaticResource TextBoxColor}"
+                                        materialDesign:HintAssist.Hint="Enter customer ID number"
+                                        materialDesign:HintAssist.Foreground="Black"
+                                        materialDesign:HintAssist.Background="Transparent"
+                                        materialDesign:HintAssist.IsFloating="False"
+                                        MaxLength="12"
+                                        Width="300"
                                         />
                                         </StackPanel>
                                     </Grid>
@@ -129,18 +131,19 @@
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <TextBox
-                                                materialDesign:HintAssist.Hint="Enter customer name"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 Height="50"
+                                                FontSize="15"
                                                 Margin="10,0,0,0"
+                                                BorderBrush="Black"
+                                                CaretBrush="Black"
                                                 Foreground="Black"
-                                                materialDesign:HintAssist.Foreground="Black"
                                                 Background="{StaticResource TextBoxColor}"
-                                                BorderThickness="0"
-                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                Width="280"
-                                                CaretBrush="Black"/>
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Enter customer name"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"/>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="2">
@@ -152,18 +155,18 @@
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  HorizontalAlignment="Left"
-                                                  Margin="10,0,0,0"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  BorderThickness="0"
-                                                  materialDesign:HintAssist.Hint="Select customer gender"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                  Width="200"
-                                                  Height="50"
-                                                  BorderBrush="DarkGray"
+                                                HorizontalAlignment="Left"
+                                                Margin="10,0,0,0"
+                                                BorderBrush="Black"
+                                                Foreground="Black"
+                                                Background="{StaticResource ComboBoxColor}"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Select customer gender"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                Height="50"
+                                                FontSize="15"
                                                   >
                                                 <ComboBoxItem>Nam</ComboBoxItem>
                                                 <ComboBoxItem>Nữ</ComboBoxItem>
@@ -187,20 +190,20 @@
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <TextBox
-                                                materialDesign:HintAssist.Hint="Enter customer phone number"
-                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 Height="50"
+                                                FontSize="15"
                                                 Margin="10,0,0,0"
-                                                Foreground="Black"
-                                                materialDesign:HintAssist.Foreground="Black"
                                                 Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                BorderThickness="0"
-                                                Width="280"
-                                                materialDesign:TransitionAssist.DisableTransitions="True"
-                                                MaxLength="12" 
-                                                CaretBrush="Black"/>
+                                                BorderBrush="Black"
+                                                CaretBrush="Black"
+                                                Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Enter customer phone number"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                MaxLength="12"/>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
@@ -211,20 +214,21 @@
                                                 Kind="AddressMarker"
                                                 Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
-                                            <TextBox
-                                                materialDesign:HintAssist.Hint="Enter customer address"
-                                                Text="Customer address"
-                                                Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Height="50"
-                                                Margin="12,0,0,0"
+                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                HorizontalAlignment="Left"
+                                                Margin="10,0,0,0"
                                                 Foreground="Black"
+                                                Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
-                                                Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                BorderThickness="0"
-                                                Width="280"
-                                                CaretBrush="Black"/>
+                                                materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                materialDesign:HintAssist.Hint="Select province"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                Height="50"
+                                                FontSize="15"
+                                                BorderBrush="Black"
+                                                  >
+                                            </ComboBox>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="2">
@@ -233,36 +237,21 @@
                                                 Height="40"
                                                 Width="40"
                                                 Kind="AddressMarker"
-                                                Margin="0,0,0,0"
+                                                Margin="20,0,0,0"
                                                 VerticalAlignment="Center"/>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  HorizontalAlignment="Left"
-                                                  Margin="5,0,0,0"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  BorderThickness="0"
-                                                  materialDesign:HintAssist.Hint="Select province"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                  Width="150"
-                                                  Height="50"
-                                                BorderBrush="DarkGray"
-                                                  >
-                                            </ComboBox>
-                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  HorizontalAlignment="Left"
-                                                  Margin="10,0,0,0"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  BorderThickness="0"
-                                                  materialDesign:HintAssist.Hint="Select district"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                  Width="150"
-                                                  Height="50"
-                                                      BorderBrush="DarkGray"
+                                                HorizontalAlignment="Left"
+                                                Margin="10,0,0,0"
+                                                Foreground="Black"
+                                                Background="{StaticResource ComboBoxColor}"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                                materialDesign:HintAssist.Hint="Select district"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                Height="50"
+                                                FontSize="15"
+                                                BorderBrush="Black"
                                                   >
                                             </ComboBox>
                                         </StackPanel>
@@ -275,7 +264,9 @@
                         <Button Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
+                                materialDesign:ButtonAssist.CornerRadius="10"
                                 Width="140"
+                                FontSize="20"
                                 Height="40"></Button>
                     </Grid>
                 </Grid>
