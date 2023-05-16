@@ -70,7 +70,7 @@ namespace Super_Tour.ViewModel
 
         public MainLoginViewModel()
         {
-            db = new SUPER_TOUR(); 
+            db = SUPER_TOUR.db;
             LoginCommand = new RelayCommand(Login, canExecute);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
