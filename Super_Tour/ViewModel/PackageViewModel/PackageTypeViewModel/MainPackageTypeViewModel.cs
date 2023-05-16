@@ -199,7 +199,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-       /* #region Check data per second
+        /* #region Check data per second
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await ReloadDataAsync();
@@ -414,7 +414,7 @@ namespace Super_Tour.ViewModel
 
         private void ReloadData()
         {
-            _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.StartsWith(_searchType)).ToList();
+            _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.ToLower().Contains(_searchType.ToLower())).ToList();
             if (_onSearching)
                 LoadDataByPage(_listTypePackageSearching);
             else
