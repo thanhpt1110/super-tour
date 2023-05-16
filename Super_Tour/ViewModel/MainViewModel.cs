@@ -18,8 +18,11 @@ namespace Super_Tour.ViewModel
         //Fields
         // Tạo một cache mới với tên "myCache"
         //private MemoryCache myCache;
+        #region Declare private object
         public static ObservableObject CurrentChild;
         private ObservableObject _currentChildView;
+        private ObservableObject _nextChildView1;
+        private string _nextChildCaption1;
         private string _caption;
         private IconChar _icon;
         private TechnicalHelpViewModel _technicalHelpViewModel = null;
@@ -34,8 +37,9 @@ namespace Super_Tour.ViewModel
         private MainAccountViewModel _mainAccountViewModel = null;
         private DispatcherTimer _timer = null;
         public static SUPER_TOUR db = null;
+        #endregion
 
-        #region Declare binding
+        #region Declare property
         public ObservableObject CurrentChildView
         {
             get => _currentChildView;
@@ -45,7 +49,30 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
-
+        public ObservableObject NextChildView1
+        {
+            get
+            {
+                return _nextChildView1;
+            }
+            set
+            {
+                this._nextChildView1 = value;
+                OnPropertyChanged(nameof(NextChildView1));
+            }
+        }
+        public string NextChildCaption1
+        {
+            get
+            {
+                return _nextChildCaption1;
+            }
+            set
+            {
+                this._nextChildCaption1 = value;
+                OnPropertyChanged(nameof(NextChildCaption1));
+            }
+        }
         public string Caption
         {
             get => _caption;
@@ -102,6 +129,7 @@ namespace Super_Tour.ViewModel
             _dashBoardViewModel = new DashBoardViewModel();
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
+            NextChildCaption1 = "Add Travel";
             Icon = IconChar.Home;
             db = new SUPER_TOUR();
             _timer = new DispatcherTimer();

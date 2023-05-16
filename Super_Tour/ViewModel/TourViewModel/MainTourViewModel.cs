@@ -176,7 +176,8 @@ namespace Super_Tour.ViewModel
         {
             switch(_selectedFilter)
             {
-
+                default:
+                    return;
             }    
         }
 
@@ -210,6 +211,8 @@ namespace Super_Tour.ViewModel
 
         private void SearchByPlace()
         {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
             this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
             LoadGrid(_listSearchTour);
         }

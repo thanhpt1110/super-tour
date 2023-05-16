@@ -213,7 +213,7 @@
                         <!--Control Bar-->
                         <RowDefinition Height="25"/>
                         <!--Header-->
-                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="60"/>
                         <!--Content Section/ Child Views-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -252,17 +252,25 @@
                                     Orientation="Horizontal"
                                     VerticalAlignment="Center">
                             <fa:IconImage Icon="{Binding Icon}"
-                                          Height="20"
-                                          Width="20"
-                                          Foreground="{StaticResource TitleText}"
+                                          Height="27"
+                                          Width="27"
+                                          Foreground="{StaticResource TitleTextNotFocus}"
                                           Margin="35,0,10,0"
                                           />
                             <TextBlock Text="{Binding Caption}"
-                                       Foreground="{StaticResource TitleText}"
-                                       FontSize="20"
-                                       FontFamily="Segoe UI"
-                                       FontWeight="Medium"
+                                       Foreground="{StaticResource TitleTextNotFocus}"
+                                       FontSize="27"
+                                       FontWeight="Bold"
                                        VerticalAlignment="Center"/>
+                            <fa:IconImage Icon="ChevronRight" Height="10"
+                                          Foreground="{StaticResource TitleText}"
+                                          Margin="8,0,15,0"/>
+                            <TextBlock Text="{Binding NextChildCaption1}"
+                                       Foreground="{StaticResource TitleText}"
+                                       FontSize="27"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       />
                         </StackPanel>
                         <!--User Account Info-->
                         <StackPanel Grid.Column="1"

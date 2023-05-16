@@ -92,46 +92,44 @@
                         <Grid Margin="50,0,50,0" Grid.Row="1">
                             <Border CornerRadius="5" Background="{StaticResource BackgroundDataGridRowHover}" Height="auto">
                                 <StackPanel Orientation="Vertical">
-                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <fa:IconImage Icon="IdCard" Foreground="{StaticResource TitleText}" Width="30"/>
+                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Center">
+                                        <Label Content="Type name"
+                                               FontSize="15"/>
                                         <TextBox
-                                            Margin="20,0,0,0"
                                             Width="300"
                                             Style="{DynamicResource MaterialDesignOutlinedTextBox}"
                                             BorderBrush="Black"
-                                            BorderThickness="0"
-                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
                                             Background="{StaticResource TextBoxColor}"
                                             materialDesign:HintAssist.Hint="Enter new type name"
-                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.IsFloating="False"
                                             materialDesign:HintAssist.Foreground="Black"
                                             FontSize="17"
-                                            Foreground="Black"      
+                                            Foreground="Black"
                                             CaretBrush="Black"
                                             TextWrapping="NoWrap"
-                                            Text="{Binding TypePackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding PackageTypeName}"
                                          ></TextBox>
                                     </StackPanel>
-                                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                        <fa:IconImage Margin="0,15,0,0" VerticalAlignment="Top" Icon="Book" Foreground="{StaticResource TitleText}" Width="30"/>
+                                    <StackPanel Margin="0,15,0,0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Label Content="Description"
+                                               FontSize="15"/>
                                         <TextBox
-                                            Margin="20,0,0,0"
                                             Width="300"
-                                            Height="140"
+                                            Height="120"
                                             Style="{DynamicResource MaterialDesignOutlinedTextBox}"
                                             BorderBrush="Black"
-                                            BorderThickness="0"
                                             Foreground="Black"
                                             CaretBrush="Black"
                                             Background="{StaticResource TextBoxColor}"
-                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
                                             FontSize="17"
                                             materialDesign:HintAssist.Hint="Enter description"
-                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.IsFloating="False"
                                             materialDesign:HintAssist.Foreground="Black"
                                             TextWrapping="Wrap"
                                             VerticalContentAlignment="Top"
-                                            Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding Description}"
                                          ></TextBox>
                                     </StackPanel>
                                 </StackPanel>

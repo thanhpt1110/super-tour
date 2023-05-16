@@ -9,6 +9,7 @@
     <SolidColorBrush x:Key="BackgroundMainContent" Color="#F7FAFD"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundChildContent" Color="#EDF1F5"></SolidColorBrush>
     <SolidColorBrush x:Key="TitleText" Color="#1D242E"></SolidColorBrush>
+    <SolidColorBrush x:Key="TitleTextNotFocus" Color="#82888F"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDataGridHeader" Color="#97AFC6"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDataGridRow" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundDataGridRowHover" Color="#CCD8E3"></SolidColorBrush>

@@ -58,6 +58,10 @@
                             BorderThickness="0"
                             Margin="20,10,10,10"
                             Background="White">
+                    <TextBlock Text="Number of booking-travel by time"
+                                       FontWeight="Bold"
+                                       Margin="20,10,0,10"
+                                       FontSize="22"/>
                 </Border>
             </Grid>
             <Grid Grid.Column="1">
@@ -76,7 +80,7 @@
                         <Grid Grid.Row="0">
                             <TextBlock Text="Most travel-booking dates"
                                        FontWeight="Bold"
-                                       Margin="20,10,0,0"
+                                       Margin="20,10,0,10"
                                        FontSize="22"/>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -244,7 +248,7 @@
                         <Grid Grid.Row="0">
                             <TextBlock Text="Total"
                                        FontWeight="Bold"
-                                       Margin="20,10,0,0"
+                                       Margin="20,10,0,10"
                                        FontSize="22"/>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -257,7 +261,7 @@
                                     <materialDesign:PackIcon Kind="Summation"
                                                              Height="50"
                                                              Width="50"/>
-                                    <TextBlock Text="Total booking travel: "
+                                    <TextBlock Text="Total travel: "
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
@@ -279,7 +283,7 @@
                                     <materialDesign:PackIcon Kind="Summation"
                                                              Height="50"
                                                              Width="50"/>
-                                    <TextBlock Text="Total available travel: "
+                                    <TextBlock Text="Total booking: "
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
@@ -301,7 +305,7 @@
                                     <materialDesign:PackIcon Kind="Summation"
                                                              Height="50"
                                                              Width="50"/>
-                                    <TextBlock Text="Total tourists: "
+                                    <TextBlock Text="Total cancel booking: "
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
