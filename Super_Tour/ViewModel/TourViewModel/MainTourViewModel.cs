@@ -151,7 +151,7 @@ namespace Super_Tour.ViewModel
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             DeleteTourCommnand = new RelayCommand(ExecuteDeleteTour);
             UpdateTourCommand = new RelayCommand(ExecuteUpdateTourCommand);
-            LoadTourDataAsync();
+            //LoadTourDataAsync();
             generateFilterItem();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
@@ -163,9 +163,9 @@ namespace Super_Tour.ViewModel
             Timer.Stop();
             DataGridTour dataGridTour = (DataGridTour)obj;
             TOUR tour = dataGridTour.Tour;
-            UpdateTourView view = new UpdateTourView();
+            /*UpdateTourView view = new UpdateTourView();
             view.DataContext = new UpdateTourViewModel(tour);
-            view.ShowDialog();
+            view.ShowDialog();*/
             LoadTourDataAsync();
         }
 

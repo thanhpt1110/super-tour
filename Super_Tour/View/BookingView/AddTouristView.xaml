@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="250" Width="500"
+        Height="500" Width="500"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -68,9 +68,11 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <fa:IconImage Margin="0,0,10,0" 
-                                          Icon="Person" 
-                                          Height="20"/>
+                            <materialDesign:PackIcon Kind="PeopleGroup"
+                                                     VerticalAlignment="Center"
+                                                     Height="30"
+                                                     Width="30"
+                                                     Margin="0,0,10,0"/>
                             <TextBlock
                                         FontSize="20"
                                         FontWeight="Medium"
@@ -80,33 +82,68 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
-                        <Border Margin="20,0,20,0"
-                                CornerRadius="10"
-                                Background="{StaticResource BackgroundBorderMainContent}">
-                            <StackPanel Orientation="Horizontal"
-                                                        Margin="20,0,0,0">
-                                <materialDesign:PackIcon 
-                                                    Height="40"
-                                                    Width="40"
-                                                    Kind="Account"
-                                                    Margin="20,0,0,0"
-                                                    VerticalAlignment="Center"/>
-                                <TextBox
-                                                    Text="{Binding Tourist.Name_Tourist}"
-                                                    materialDesign:HintAssist.Hint="Enter tourist name"
-                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                    Height="50"
-                                                    Margin="10,0,0,0"
-                                                    Foreground="Black"
-                                                    materialDesign:HintAssist.Foreground="Black"
-                                                    Background="{StaticResource TextBoxColor}"
-                                                    BorderThickness="0"
-                                                    materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                                    Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                    Width="280"
-                                                    CaretBrush="Black"/>
-                            </StackPanel>
-                        </Border>
+                        <DataGrid x:Name="membersDataGrid" 
+                              ItemsSource="{Binding ListTourist}"
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              Style="{DynamicResource editableDataGridStyle}" 
+                                      FontSize="15"
+                                  Margin="20,0">
+                    <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Order"
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="0.7*"
+                                                Binding="{Binding Id_Tourist}"/>
+                                    <DataGridTextColumn Header="Tourist Name" 
+                                                IsReadOnly="False" 
+                                                CanUserResize="False"
+                                                Width="3*"
+                                                Binding="{Binding Name_Tourist}"/>
+                                    <DataGridTemplateColumn Header="Operations"
+                                                HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
+                                                IsReadOnly="True" 
+                                                Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                <Button 
+                                                        Margin="5,0,0,0"
+                                                        Height="25"
+                                                        Width="25"
+                                                        Background="{StaticResource btnAdd}"
+                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                        Command="{Binding DataContext.DeleteTourCommnand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        CommandParameter="{Binding}">
+                                                    <materialDesign:PackIcon Kind="Add"
+                                                                             Margin="2"
+                                                            Foreground="White"
+                                                            VerticalAlignment="Center"
+                                                            Height="auto"
+                                                            Width="auto"/>
+                                                </Button>
+                                                <Button 
+                                                        Margin="10,0,0,0"
+                                                        Height="25"
+                                                        Width="25"
+                                                        Background="{StaticResource btnDelete}"
+                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                        Command="{Binding DataContext.DeleteTourCommnand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        CommandParameter="{Binding}">
+                                                        <materialDesign:PackIcon Kind="Remove"
+                                                            Margin="2"
+                                                            Foreground="White"
+                                                            VerticalAlignment="Center"
+                                                            Height="auto"
+                                                            Width="auto"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
                     </Grid>
                     <Grid Grid.Row="3">
                         <Button Content="Save"

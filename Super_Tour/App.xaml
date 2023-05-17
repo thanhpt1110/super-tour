@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="./Styles/DataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/StatisticDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/SmallerDataGridStyles.xaml"/>
+                <ResourceDictionary Source="./Styles/EditableDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/MyTimePicker.xaml"/>
                 
                 <!--Material Toolkit-->

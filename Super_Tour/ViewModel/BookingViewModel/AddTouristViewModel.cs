@@ -31,9 +31,19 @@ namespace Super_Tour.ViewModel
             }
         }
         public ICommand SaveTouristCommand { get; }
+        public ObservableCollection<TOURIST> ListTourist 
+        { 
+            get => _listTourist;
+            set
+            {
+                _listTourist = value;
+                OnPropertyChanged(nameof(ListTourist));
+            }
+        }
+
         public AddTouristViewModel(ObservableCollection<TOURIST> listTourist)
         {
-            this._listTourist = listTourist;
+            this.ListTourist = listTourist;
             _tourist = new TOURIST();
             _tourist.Id_Tourist = listTourist.Count+1;
             SaveTouristCommand = new RelayCommand(ExecuteSaveTouristCommand);
@@ -45,7 +55,7 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 return;
             }
-            _listTourist.Add(_tourist);
+            ListTourist.Add(_tourist);
             AddTouristView addTouristView = null;
             foreach (Window window in Application.Current.Windows)
             {

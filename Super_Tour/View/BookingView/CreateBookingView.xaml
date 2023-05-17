@@ -368,7 +368,8 @@
                                         Height="45"
                                         Margin="0,20,0,0"
                                         materialDesign:ButtonAssist.CornerRadius="5"
-                                        FontSize="20"/>
+                                        FontSize="20"
+                                        Command="{Binding OpenAddTouristForBookingViewCommand}"/>
                             </StackPanel>
                         </Grid>
                     </Grid>

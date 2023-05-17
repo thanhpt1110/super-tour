@@ -233,7 +233,7 @@ namespace Super_Tour.ViewModel
                 db.TOURs.AddOrUpdate(_tour);
                 await db.SaveChangesAsync();
                 MyMessageBox.ShowDialog("Update tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                UpdateTourView updateTourView = null;
+                /*UpdateTourView updateTourView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
                     Console.WriteLine(window.ToString());
@@ -243,7 +243,7 @@ namespace Super_Tour.ViewModel
                         break;
                     }
                 }
-                updateTourView.Close();
+                updateTourView.Close();*/
             }
             catch (Exception ex)
             {

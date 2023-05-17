@@ -84,7 +84,7 @@ namespace Super_Tour.ViewModel
             _listObservableBooking = new ObservableCollection<BOOKING>();
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
-            LoadBookingDataAsync();
+            //LoadBookingDataAsync();
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += Timer_Tick;
