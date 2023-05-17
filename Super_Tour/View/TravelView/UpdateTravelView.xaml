@@ -17,49 +17,40 @@
             Height="788" Width="1138"
             Background="{StaticResource BackgroundChildContent}">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-
-            </Grid>
-            <Grid Grid.Row="1">
-                <Border Margin="20,0,20,0"
-                    CornerRadius="10"
-                    Background="{StaticResource BackgroundDataGridRowHover}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1" 
+        <Border 
+            Margin="0,20,0,0"
+            CornerRadius="10"
+            Background="{StaticResource BackgroundChildContent}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" 
                               Margin="0,25,20,0">
-                            <Border BorderBrush="Black"
+                    <Border BorderBrush="Black"
                                     BorderThickness="2,0,0,0"
                                     Margin="0,-25,0,0"
                                     ></Border>
-                            <StackPanel Orientation="Vertical"
+                    <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Left"
                                         Margin="20,0,0,0">
-                                <TextBlock
+                        <TextBlock
                                         FontSize="30"
                                         FontWeight="Bold"
                                         TextAlignment="Left"
                                         VerticalAlignment="Center"
                                         Text="Travel Details"/>
-                                <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Horizontal"
                                             Margin="0,12,0,0">
-                                    <Label Content="Tour name"
+                            <Label Content="Tour name"
                                            FontSize="15"/>
-                                    <Label Content="*"
+                            <Label Content="*"
                                            Foreground="Red"
                                            FontSize="15"
                                            Margin="-5,0,0,0"/>
-                                </StackPanel>
-                                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        </StackPanel>
+                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Select from list on the left"
                                     Width="auto"
                                     Height="auto"
@@ -72,16 +63,16 @@
                                     materialDesign:HintAssist.IsFloating="False"
                                     materialDesign:HintAssist.Foreground="Black"
                                     materialDesign:HintAssist.Background="Transparent"/>
-                                <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Horizontal"
                                             Margin="0,40,0,0">
-                                    <Label Content="Start location"
+                            <Label Content="Start location"
                                            FontSize="15"/>
-                                    <Label Content="*"
+                            <Label Content="*"
                                            Foreground="Red"
                                            FontSize="15"
                                            Margin="-5,0,0,0"/>
-                                </StackPanel>
-                                <TextBox
+                        </StackPanel>
+                        <TextBox
                                     Text="{Binding StartLocation}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Ex: Bến xe Miền Đông mới"
@@ -95,22 +86,22 @@
                                     Background="{StaticResource TextBoxColor}"
                                     materialDesign:HintAssist.Background="Transparent"
                                     CaretBrush="Black"/>
-                                <Grid Margin="0,40,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Start date"
+                        <Grid Margin="0,40,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Start date"
                                                    FontSize="15"/>
-                                                <Label Content="*"
+                                        <Label Content="*"
                                            Foreground="Red"
                                            FontSize="15"
                                            Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <DatePicker
+                                    </StackPanel>
+                                    <DatePicker
                                                 SelectedDate="{Binding SelectedDateTime, Mode=TwoWay}"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                 Foreground="Black"
@@ -123,19 +114,19 @@
                                                 Width="200"
                                                 FontSize="18"
                                                 Margin="0,0,20,0"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Column="1">
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Start time"
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Start time"
                                                     FontSize="15"/>
-                                                <Label Content="*"
+                                        <Label Content="*"
                                                    Foreground="Red"
                                                    FontSize="15"
                                                    Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <materialDesign:TimePicker
+                                    </StackPanel>
+                                    <materialDesign:TimePicker
                                                 SelectedTime="{Binding SelectedDateTime, Mode=TwoWay}"
                                                 Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                 Foreground="Black"
@@ -147,25 +138,25 @@
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 Width="200"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Grid Margin="0,40,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Max tickets"
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Margin="0,40,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Max tickets"
                                                     FontSize="15"/>
-                                                <Label Content="*"
+                                        <Label Content="*"
                                                     Foreground="Red"
                                                     FontSize="15"
                                                     Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <TextBox
+                                    </StackPanel>
+                                    <TextBox
                                             Text="{Binding MaxTicket}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             materialDesign:HintAssist.Hint="Ex: 50"
@@ -180,19 +171,19 @@
                                             materialDesign:HintAssist.IsFloating="False"
                                             CaretBrush="Black"
                                             Margin="0,0,20,0"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Column="1">
-                                        <StackPanel Orientation="Vertical">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Discount"
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Discount"
                                                    FontSize="15"/>
-                                                <Label Content="*"
+                                        <Label Content="*"
                                                     Foreground="Red"
                                                     FontSize="15"
                                                     Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <ComboBox
+                                    </StackPanel>
+                                    <ComboBox
                                                 ItemsSource="{Binding ListSearchDiscount}"
                                                 SelectedItem="{Binding SelectedDiscount}"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -206,10 +197,10 @@
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"></ComboBox>
-                                        </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Button
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Button
                                     Margin="0,100,0,0"
                                     Command="{Binding SaveTourCommand}"
                                     Content="Save"
@@ -220,40 +211,39 @@
                                     Height="50"
                                     materialDesign:ButtonAssist.CornerRadius="8"
                                     IsDefault="True">
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Column="0"
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="0"
                               Margin="0,15,0,0">
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <TextBlock
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock
                                         FontSize="30"
                                         FontWeight="Bold"
                                         TextAlignment="Left"
                                         Margin="20,-5,0,0"
                                         VerticalAlignment="Center"
                                         Text="Select Tour For Travel"/>
-                                </Grid>
-                                <Grid Grid.Row="1"
-                                      Margin="0,0,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <StackPanel Orientation="Vertical"
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <StackPanel Orientation="Vertical"
                                                     Margin="20,0,0,0">
 
-                                            <Label Content="Search"
+                                    <Label Content="Search"
                                                />
-                                            <TextBox 
+                                    <TextBox 
                                             Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                              Height="58"
@@ -268,19 +258,19 @@
                                              materialDesign:HintAssist.Hint="Search..."
                                                 materialDesign:HintAssist.IsFloating="False"
                                              FontSize="18">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="TextChanged">
-                                                        <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </TextBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Column="1" HorizontalAlignment="Right"
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1" HorizontalAlignment="Right"
                                           Margin="0,0,25,0">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Content="Filter"/>
-                                            <ComboBox
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Filter"/>
+                                    <ComboBox
                                             ItemsSource="{Binding ListSearchFilterBy}"
                                             SelectedItem="{Binding SelectedFilter}"
                                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -294,11 +284,11 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"></ComboBox>
-                                        </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Row="2">
-                                    <DataGrid x:Name="membersDataGrid" 
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListDataGridTour}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
@@ -306,42 +296,42 @@
                               Style="{DynamicResource smallerDataGridStyle1}" 
                                               FontSize="16"
                                               Margin="20,25,25,30">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Tour Name" 
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.4*"
                                                 Binding="{Binding Tour.Name_Tour}"/>
-                                            <DataGridTextColumn Header="Day" 
+                                    <DataGridTextColumn Header="Day" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
                                                 Binding="{Binding Tour.TotalDay}"/>
-                                            <DataGridTextColumn Header="Night" 
+                                    <DataGridTextColumn Header="Night" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
                                                 Binding="{Binding Tour.TotalNight}"/>
-                                            <DataGridTextColumn Header="Price"
+                                    <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.8*"
                                                 Binding="{Binding TotalPrice}"/>
-                                            <DataGridTemplateColumn Header="Operations"
+                                    <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
                                                 Width="0.7*">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Style="{StaticResource MaterialDesignIconButton}"
                                                         Height="25"
                                                         Width="25"
                                                         Effect="{StaticResource MaterialDesignElevationShadow3}"
                                                         Background="#2196F3">
-                                                                <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
-                                                            </Button>
-                                                            <Button 
+                                                        <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
+                                                    </Button>
+                                                    <Button 
                                                         Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}"
                                                         Margin="15 0 0 0"
@@ -351,19 +341,17 @@
                                                         Foreground="White"
                                                         Content="Select this tour"
                                                    >
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </Grid>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </Grid>
-                </Border>
+                </Grid>
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </UserControl>

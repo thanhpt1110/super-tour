@@ -97,44 +97,45 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="IdentificationCard"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="ID number"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <TextBox
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="50"
-                                        FontSize="15"
-                                        Margin="10,0,0,0"
-                                        CaretBrush="Black"
-                                        BorderBrush="Black"
-                                        Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Enter customer ID number"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        materialDesign:HintAssist.Background="Transparent"
-                                        materialDesign:HintAssist.IsFloating="False"
-                                        MaxLength="12"
-                                        Width="300"
-                                        />
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Height="auto"
+                                                FontSize="15"
+                                                CaretBrush="Black"
+                                                BorderBrush="Black"
+                                                Foreground="Black"
+                                                Background="{StaticResource TextBoxColor}"
+                                                materialDesign:HintAssist.Hint="Enter customer ID number"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                MaxLength="12"
+                                                Width="300"/>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="Account"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Name"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <TextBox
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Height="50"
+                                                Height="auto"
                                                 FontSize="15"
-                                                Margin="10,0,0,0"
                                                 BorderBrush="Black"
                                                 CaretBrush="Black"
                                                 Foreground="Black"
@@ -147,16 +148,17 @@
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="2">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="GenderMaleFemale"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Gender"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 HorizontalAlignment="Left"
-                                                Margin="10,0,0,0"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
@@ -165,7 +167,7 @@
                                                 materialDesign:HintAssist.Hint="Select customer gender"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
-                                                Height="50"
+                                                Height="auto"
                                                 FontSize="15"
                                                   >
                                                 <ComboBoxItem>Nam</ComboBoxItem>
@@ -182,18 +184,19 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="Phone"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Phone"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <TextBox
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Height="50"
+                                                Height="auto"
                                                 FontSize="15"
-                                                Margin="10,0,0,0"
                                                 Background="{StaticResource TextBoxColor}"
                                                 BorderBrush="Black"
                                                 CaretBrush="Black"
@@ -203,20 +206,21 @@
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
-                                                MaxLength="12"/>
+                                                MaxLength="10"/>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="AddressMarker"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Province"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 HorizontalAlignment="Left"
-                                                Margin="10,0,0,0"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
@@ -232,16 +236,17 @@
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="2">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="AddressMarker"
-                                                Margin="20,0,0,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="District"/>
+                                                <Label Content="*"
+                                                       Foreground="Red"
+                                                       Margin="-5,0,0,0"/>
+                                            </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 HorizontalAlignment="Left"
-                                                Margin="10,0,0,0"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"

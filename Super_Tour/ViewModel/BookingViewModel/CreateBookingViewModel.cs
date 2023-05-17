@@ -130,7 +130,6 @@ namespace Super_Tour.ViewModel
             _customer.Id_Customer = 0;
             _listGender = new ObservableCollection<string>();
             _tourists = new ObservableCollection<TOURIST>();
-            OpenSelectTravelForBookingViewCommand = new RelayCommand(ExecuteOpenSelectTravelForBookingViewCommand);
             SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
             _listDistrict = new ObservableCollection<District>();
             OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
@@ -215,7 +214,7 @@ namespace Super_Tour.ViewModel
                     db.TOURISTs.Add(tourist);
                 }
                 await db.SaveChangesAsync();
-                CreateBookingView view = null;
+                /*CreateBookingView view = null;
                 foreach (Window window in Application.Current.Windows)
                 {
                     if (window is CreateBookingView)
@@ -224,7 +223,7 @@ namespace Super_Tour.ViewModel
                         break;
                     }
                 }
-                view.Close();
+                view.Close();*/
             }
             catch(Exception ex)
             {
@@ -258,13 +257,6 @@ namespace Super_Tour.ViewModel
             view.DataContext = new AddTouristViewModel(Tourists);
             view.ShowDialog();
         }
-        private void ExecuteOpenSelectTravelForBookingViewCommand(object obj)
-        {
-            _travel = new TRAVEL();
-            SelectTravelForBookingView selectTravelForBookingView = new SelectTravelForBookingView();
-            selectTravelForBookingView.DataContext = new SelectTravelForBookingViewModel(_travel);
-            selectTravelForBookingView.ShowDialog();
-            Travel = db.TRAVELs.Find(_travel.Id_Travel);
-        }
+        
     }
 }

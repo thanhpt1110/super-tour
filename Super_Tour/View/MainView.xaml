@@ -36,6 +36,9 @@
         <DataTemplate DataType="{x:Type viewModel:MainBookingViewModel}">
             <local:MainBookingView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CreateBookingViewModel}">
+            <local:CreateBookingView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:MainCustomerViewModel}">
             <local:MainCustomerView/>
         </DataTemplate>

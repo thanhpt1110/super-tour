@@ -21,6 +21,7 @@ namespace Super_Tour.ViewModel
     internal class MainBookingViewModel: ObservableObject
     {
         #region Declare variable
+        private MainViewModel mainViewModel;
         private SUPER_TOUR db = null;
         private List<BOOKING> _listOriginalBooking;
         private DispatcherTimer _timer = null;
@@ -75,8 +76,9 @@ namespace Super_Tour.ViewModel
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
-        public MainBookingViewModel() 
+        public MainBookingViewModel(MainViewModel mainViewModel) 
         {
+            this.mainViewModel = mainViewModel;
             db = SUPER_TOUR.db;
             OpenCreateBookingViewCommand = new RelayCommand(ExecuteOpenCreateBookingViewCommand);
             _listObservableBooking = new ObservableCollection<BOOKING>();
@@ -128,7 +130,7 @@ namespace Super_Tour.ViewModel
             UpdateBookingView view = new UpdateBookingView();
             view.DataContext = new UpdateBookingViewModel(booking);
             _timer.Stop();
-            view.ShowDialog();
+            //view.ShowDialog();
             LoadBookingDataAsync();
         }
         private async void ExecuteDeleteBooking(object obj)
@@ -184,12 +186,8 @@ namespace Super_Tour.ViewModel
 
         private void ExecuteOpenCreateBookingViewCommand(object obj)
         {
-            {
-                CreateBookingView createBookingView = new CreateBookingView();
-                
-                createBookingView.ShowDialog();
-
-            }
+           CreateBookingViewModel createBookingViewModel = new CreateBookingViewModel();
+            mainViewModel.CurrentChildView = createBookingViewModel;
         }
     }   
 }

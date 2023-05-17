@@ -245,7 +245,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowBookingViewCommand(object obj)
         {
             if (_mainBookingViewModel == null)
-                _mainBookingViewModel= new MainBookingViewModel();
+                _mainBookingViewModel= new MainBookingViewModel(this);
             CurrentChildView = _mainBookingViewModel;
             Caption = "Booking";
             Icon = IconChar.Hand;

@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="550" Width="500"
+        Height="580" Width="500"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -37,7 +37,7 @@
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel x:Name="pnlControlBar" 
@@ -68,9 +68,11 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <fa:IconImage Margin="0,0,10,0" 
-                                          Icon="AddressBook" 
-                                          Height="30"/>
+                            <materialDesign:PackIcon Kind="Account"
+                                                     Height="30"
+                                                     Width="30"
+                                                     VerticalAlignment="Center"
+                                                     Margin="0,0,5,0"/>
                             <TextBlock
                                         FontSize="25"
                                         FontWeight="Medium"
@@ -85,132 +87,142 @@
                                     Background="{StaticResource BackgroundDataGridRowHover}">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="15"/>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <StackPanel Orientation="Horizontal" 
+                                    <StackPanel Orientation="Vertical" 
+                                                VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="Rename"
-                                                Margin="0,0,10,0"
-                                                VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Name"/>
+                                            <Label Content="*"
+                                                   Foreground="Red"
+                                                   Margin="-5,0,0,0"/>
+                                        </StackPanel>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                             BorderThickness="0"
-                                             Background="{StaticResource TextBoxColor}"
-                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                             Foreground="Black"
-                                             materialDesign:HintAssist.Foreground="Black"
-                                             FontSize="15"
-                                             materialDesign:HintAssist.Hint="Enter account name"
-                                             Height="50"
-                                             Width="300"
-                                             CaretBrush="Black"
-                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                            Background="{StaticResource TextBoxColor}"
+                                            BorderBrush="Black"
+                                            CaretBrush="Black"
+                                            Foreground="Black"
+                                            FontSize="15"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Hint="Enter account name"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            Height="50"
+                                            Width="300"
+                                            Text="{Binding AccountName}"
                                              />
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Vertical"
+                                                VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon 
-                                                    Height="40"
-                                                    Width="40"
-                                                    Kind="Email"
-                                                    Margin="0,0,12,0"
-                                                    VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Email"/>
+                                            <Label Content="*"
+                                                   Foreground="Red"
+                                                   Margin="-5,0,0,0"/>
+                                        </StackPanel>
                                         <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                             BorderThickness="0"
-                                             Background="{StaticResource TextBoxColor}"
-                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                             Foreground="Black"
-                                             materialDesign:HintAssist.Foreground="Black"
-                                             FontSize="15"
-                                             materialDesign:HintAssist.Hint="Enter account email"
-                                             Height="50"
-                                             Width="300"
-                                             CaretBrush="Black"
-                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                                 Text="{Binding Email}"
+                                            Background="{StaticResource TextBoxColor}"
+                                            FontSize="15"
+                                            Height="50"
+                                            Width="300"
+                                            BorderBrush="Black"
+                                            CaretBrush="Black"
+                                            Foreground="Black"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Hint="Enter account email"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            Text="{Binding Email}"
                                              />
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <StackPanel Orientation="Horizontal" 
+                                    <StackPanel Orientation="Vertical"
+                                                VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon 
-                                                Height="40"
-                                                Width="40"
-                                                Kind="User"
-                                                Margin="0,0,10,0"
-                                                VerticalAlignment="Center"/>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                             BorderThickness="0"
-                                             Background="{StaticResource TextBoxColor}"
-                                             materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
-                                             Foreground="Black"
-                                             materialDesign:HintAssist.Foreground="Black"
-                                             FontSize="15"
-                                             materialDesign:HintAssist.Hint="Enter account username"
-                                             Height="50"
-                                             Width="300"
-                                             CaretBrush="Black"
-                                             Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                             />
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Username"/>
+                                            <Label Content="*"
+                                                   Foreground="Red"
+                                                   Margin="-5,0,0,0"/>
+                                        </StackPanel>
+                                        <TextBox 
+                                            Text="{Binding Username}"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            Background="{StaticResource TextBoxColor}"
+                                            BorderBrush="Black"
+                                            CaretBrush="Black"
+                                            Foreground="Black"
+                                            FontSize="15"
+                                            Height="50"
+                                            Width="300"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Hint="Enter account username"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            />
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="3">
-                                    <StackPanel Orientation="Horizontal" 
+                                    <StackPanel Orientation="Vertical"
+                                                VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon 
-                                                Height="35"
-                                                Width="35"
-                                                Kind="Password"
-                                                Margin="0,0,10,0"
-                                                VerticalAlignment="Center"/>
-                                        <PasswordBox
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Password"/>
+                                            <Label Content="*"
+                                                   Foreground="Red"
+                                                   Margin="-5,0,0,0"/>
+                                        </StackPanel>
+                                        <PasswordBox 
                                             Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
-                                            BorderThickness="0"
                                             Background="{StaticResource TextBoxColor}"
-                                            materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                            BorderBrush="Black"
+                                            CaretBrush="Black"
                                             Foreground="Black"
-                                            materialDesign:HintAssist.Foreground="Black"
                                             FontSize="15"
-                                            materialDesign:HintAssist.Hint="Enter account password"
                                             Height="50"
                                             Width="300"
-                                            Margin="5,0,0,0"
-                                            CaretBrush="Black"
-                                            Effect="{StaticResource MaterialDesignElevationShadow6}"
-                                             />
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Hint="Enter account password"
+                                            />
                                     </StackPanel>
                                 </Grid>
-                                <Grid Grid.Row="4">
-                                    <StackPanel Orientation="Horizontal"
+                                <Grid Grid.Row="4"
+                                      Height="auto">
+                                    <StackPanel Orientation="Vertical"
+                                                VerticalAlignment="Center"
                                                 HorizontalAlignment="Center">
-                                        <materialDesign:PackIcon 
-                                                    Height="40"
-                                                    Width="40"
-                                                    Kind="ServiceToolbox"
-                                                    Margin="0,0,12,0"
-                                                    VerticalAlignment="Center"/>
-                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  Foreground="Black"
-                                                  materialDesign:HintAssist.Foreground="Black"
-                                                  Background="{StaticResource ComboBoxColor}"
-                                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                  Height="50"
-                                                  Width="300"
-                                                  BorderThickness="0"
-                                                  BorderBrush="DarkGray"
-                                                  Margin="0"
-                                                  materialDesign:HintAssist.Hint="Select account service"
-                                                  Effect="{StaticResource MaterialDesignElevationShadow6}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Service"/>
+                                            <Label Content="*"
+                                                   Foreground="Red"
+                                                   Margin="-5,0,0,0"/>
+                                        </StackPanel>
+                                        <ComboBox 
+                                            ItemsSource="{Binding ListServices}"
+                                            SelectedItem="{Binding SelectedService}"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                            BorderBrush="Black"
+                                            Foreground="Black"
+                                            Background="{StaticResource ComboBoxColor}"
+                                            FontSize="15"
+                                            Width="300"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Hint="Select account service"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            >
 
                                         </ComboBox>
                                     </StackPanel>
@@ -219,7 +231,9 @@
                         </Border>
                     </Grid>
                     <Grid Grid.Row="3">
-                        <Button Content="Save"
+                        <Button 
+                                Command="{Binding CreateAccountCommand}"
+                                Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="140"

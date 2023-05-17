@@ -73,25 +73,11 @@ namespace Super_Tour.ViewModel
             timer.Interval = TimeSpan.FromSeconds(3);
             timer.Tick += Timer_Tick; ;
             this._listObservableTravel = new ObservableCollection<TRAVEL>();
-            SelectTravelForBookingCommand = new RelayCommand(ExecuteSelectTravelForBookingCommand);
+            
             LoadFilter();
             LoadTourDataAsync();
         }
-        private void ExecuteSelectTravelForBookingCommand(object obj)
-        {
-            TRAVEL pickedTravel = obj as TRAVEL;
-            _travel.Id_Travel = pickedTravel.Id_Travel;
-            SelectTravelForBookingView selectTravelForBookingView = null;
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window is SelectTravelForBookingView)
-                {
-                    selectTravelForBookingView = window as SelectTravelForBookingView;
-                    break;
-                }
-            }
-            selectTravelForBookingView.Close();
-        }
+        
         private void LoadGrid(List<TRAVEL> listTravel)
         {
             _listObservableTravel.Clear();

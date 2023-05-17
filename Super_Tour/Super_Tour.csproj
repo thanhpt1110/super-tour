@@ -396,9 +396,6 @@
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookingView\SelectTravelForBookingView.xaml.cs">
-      <DependentUpon>SelectTravelForBookingView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\BookingView\UpdateBookingView.xaml.cs">
       <DependentUpon>UpdateBookingView.xaml</DependentUpon>
     </Compile>
@@ -551,10 +548,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookingView\MainBookingView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BookingView\SelectTravelForBookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
