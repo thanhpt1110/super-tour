@@ -1,4 +1,7 @@
-﻿using Student_wpf_application.ViewModels.Command;
+﻿using FireSharp;
+using FireSharp.Interfaces;
+using MySqlX.XDevAPI;
+using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
@@ -14,6 +17,7 @@ namespace Super_Tour.ViewModel
         #region Declare variale 
         private SUPER_TOUR db = null;
         private TYPE_PACKAGE temp = null;
+        private string table = "UPDATE_TYPEPACKAGE";
         private bool _isDataModified = false;
         private string _description = null;
         private string _packageTypeName = null;
@@ -81,8 +85,8 @@ namespace Super_Tour.ViewModel
                 db.TYPE_PACKAGEs.Add(temp);
                 db.SaveChanges();
                 temp.Id_Type_Package = db.TYPE_PACKAGEs.Max(p=>p.Id_Type_Package);
+                UPDATE_CHECK.NotifyChange(table);
                 MyMessageBox.ShowDialog("Add type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-
                 // Find view to close
                 CreatePackageTypeView createPackageTypeView = null;
                 foreach (Window window in Application.Current.Windows)

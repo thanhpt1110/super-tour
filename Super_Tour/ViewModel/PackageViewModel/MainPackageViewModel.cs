@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Firebase.Storage;
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using MySqlX.XDevAPI;
 using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
@@ -149,7 +152,7 @@ namespace Super_Tour.ViewModel
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             LoadDataAsync();
             /*Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += Timer_Tick;*/
         }
         #endregion
@@ -194,8 +197,8 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-
-        /* #region Check data per second 
+/*
+        #region Check data per second 
         private async void Timer_Tick(object sender, EventArgs e)
         {
             try
@@ -204,26 +207,7 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        if (db != null)
-                        {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();
-                        var updatePackage = await db.PACKAGEs.ToListAsync();
-                        if (!updatePackage.SequenceEqual(listOriginalPackage))
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                listOriginalPackage = updatePackage;
-                                if (_onSearching)
-                                {
-                                    listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                                    ReloadData(listPackagesSearching);
-                                }
-                                else
-                                    ReloadData(listOriginalPackage);
-                            });
-                        }
+
 
                     }
                     catch (Exception ex)
@@ -237,8 +221,8 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
-        #endregion
-        */
+        #endregion*/
+
 
         #region Insert
         private void ExecuteOpenCreatePackageViewCommand(object obj)

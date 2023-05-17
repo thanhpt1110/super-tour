@@ -19,6 +19,9 @@ using Org.BouncyCastle.Crypto.Tls;
 using System.IO.Packaging;
 using Org.BouncyCastle.Asn1.Cms;
 using System.Diagnostics;
+using MySqlX.XDevAPI;
+using FireSharp.Config;
+using FireSharp.Interfaces;
 
 namespace Super_Tour.ViewModel
 {
@@ -26,6 +29,7 @@ namespace Super_Tour.ViewModel
     {
         #region Declare variable
         private SUPER_TOUR db = null;
+        private DateTime _timeLoadForm;
         private List<TYPE_PACKAGE> _listTypePackageOriginal = null; // Data gốc
         private List<TYPE_PACKAGE> _listTypePackageSearching = null; // Data lúc mà có người search
         private List<TYPE_PACKAGE> _listTypePackageDatagrid = null; // Data để đổ vào datagrid 
@@ -44,6 +48,7 @@ namespace Super_Tour.ViewModel
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
+        private string table= "UPDATE_TYPEPACKAGE";
         #endregion
 
         #region Declare binding
@@ -151,10 +156,12 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            LoadDataAsync(); 
-            /*_timer = new DispatcherTimer();
+            _timeLoadForm = DateTime.Now;
+
+            LoadDataAsync();
+            _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;*/
+            _timer.Tick += Timer_Tick;
         }
         #endregion
 
@@ -199,7 +206,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        /* #region Check data per second
+        #region Check data per second
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await ReloadDataAsync();
@@ -211,13 +218,16 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
-                    if (db.REFERENCEs.FirstOrDefault().Update_TYPEPACKAGE)
+                    var res = UPDATE_CHECK.Client.Get(@"Update/"+table);
+                    UPDATE_CHECK check = res.ResultAs<UPDATE_CHECK>();
+
+                    if (DateTime.Parse(check.DateTimeUpdate) > _timeLoadForm)
                     {
+                        _timeLoadForm = DateTime.Now;
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                             ReloadData();
-                            db.REFERENCEs.FirstOrDefault().Update_TYPEPACKAGE = false;
                         });
                     }
 
@@ -229,7 +239,7 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-        */
+
 
         #region Insert 
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
@@ -272,9 +282,8 @@ namespace Super_Tour.ViewModel
                     // Save data on database
                     db.TYPE_PACKAGEs.Remove(SelectedItem);
                     db.SaveChanges();
-
-                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    
+                    UPDATE_CHECK.NotifyChange(table);
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);                    
                     // Process UI event
                     _listTypePackageOriginal.Remove(SelectedItem);
                     ReloadData();

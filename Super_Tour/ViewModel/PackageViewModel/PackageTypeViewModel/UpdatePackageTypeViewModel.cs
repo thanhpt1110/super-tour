@@ -1,4 +1,5 @@
-﻿using Student_wpf_application.ViewModels.Command;
+﻿using MySqlX.XDevAPI;
+using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
@@ -19,6 +20,7 @@ namespace Super_Tour.ViewModel
         private bool _isDataModified = false;
         private string _description = null;
         private string _packageTypeName = null;
+        private string table = "UPDATE_TYPEPACKAGE";
         #endregion
 
         #region Declare binding
@@ -91,6 +93,7 @@ namespace Super_Tour.ViewModel
                     temp.Name_Type = _packageTypeName;
                     db.TYPE_PACKAGEs.AddOrUpdate(temp);
                     db.SaveChanges();
+                    UPDATE_CHECK.NotifyChange(table);
                     MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
 
                     // Find view to close
