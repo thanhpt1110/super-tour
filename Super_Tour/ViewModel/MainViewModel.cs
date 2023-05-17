@@ -272,7 +272,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowTourViewCommand(object obj)
         {
             if (_mainTourViewModel == null)
-                _mainTourViewModel = new MainTourViewModel();
+                _mainTourViewModel = new MainTourViewModel(this);
             CurrentChildView = _mainTourViewModel;
             Caption = "Tour";
             Icon = IconChar.CalendarPlus;

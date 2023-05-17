@@ -41,6 +41,7 @@ namespace Super_Tour.ViewModel
     internal class MainTourViewModel: ObservableObject
     {
         #region Declare variable
+        private MainViewModel mainViewModel;
         private List<TOUR> _listSearchTour;
         private List<TOUR> _listToursOriginal;
         private CancellationTokenSource _cancellationTokenSource;
@@ -139,8 +140,9 @@ namespace Super_Tour.ViewModel
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
-        public MainTourViewModel() 
+        public MainTourViewModel(MainViewModel mainViewModel) 
         {
+            this.mainViewModel = mainViewModel;
             db = new SUPER_TOUR();
             _listDataGridTour = new ObservableCollection<DataGridTour>();
             _listSearchFilterBy= new ObservableCollection<string>();
@@ -305,8 +307,8 @@ namespace Super_Tour.ViewModel
 
         private void ExecuteOpenCreateTourViewCommand(object obj)
         {
-            CreateTourView createTourView = new CreateTourView();
-            createTourView.ShowDialog();
+            CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+            mainViewModel.CurrentChildView = createTourViewModel;
         }
         public async Task LoadTourDataAsync()
         {
