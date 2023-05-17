@@ -9,6 +9,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="HeadersVisibility" Value="Column" />

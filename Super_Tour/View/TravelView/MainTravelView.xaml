@@ -76,7 +76,7 @@
                         </ComboBox>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="2">
+                <Grid Grid.Column="1">
                     <Button x:Name="btnAddNewTravel"
                             Background="{StaticResource btnAdd}"
                             BorderThickness="0"
