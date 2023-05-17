@@ -333,7 +333,7 @@
     <Compile Include="Model\TRAVEL.cs" />
     <Compile Include="Model\TYPE_PACKAGE.cs" />
     <Compile Include="Ultis\Api_Address\Get_Api_Address.cs" />
-    <Compile Include="Ultis\Api_Address\City.cs" />
+    <Compile Include="Ultis\Api_Address\Province.cs" />
     <Compile Include="Ultis\Api_Address\Country.cs" />
     <Compile Include="Ultis\Api_Address\District.cs" />
     <Compile Include="Ultis\Api_Address\Ward.cs" />

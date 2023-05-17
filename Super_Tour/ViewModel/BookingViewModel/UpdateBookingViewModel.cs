@@ -19,9 +19,9 @@ namespace Super_Tour.ViewModel
         private TRAVEL _travel;
         private ObservableCollection<TOURIST> _tourists;
         private string _searchTravel;
-        private City _selectedCity;
+        private Province _selectedCity;
         private District _selectedDistrict;
-        private ObservableCollection<City> _listCities;
+        private ObservableCollection<Province> _listCities;
         private ObservableCollection<District> _listDistricts;
         private BOOKING _booking;
         private ObservableCollection<string> _listGender;
@@ -30,9 +30,9 @@ namespace Super_Tour.ViewModel
         public TRAVEL Travel { get => _travel; set { _travel = value; OnPropertyChanged(nameof(Travel)); } }
         public ObservableCollection<TOURIST> Tourists { get => _tourists; set { _tourists = value; OnPropertyChanged(nameof(Tourists)); } }
         public string SearchTravel { get => _searchTravel; set { _searchTravel = value; OnPropertyChanged(nameof(SearchTravel)); } }
-        public City SelectedCity { get => _selectedCity; set { _selectedCity = value; OnPropertyChanged(nameof(SelectedCity)); } }
+        public Province SelectedCity { get => _selectedCity; set { _selectedCity = value; OnPropertyChanged(nameof(SelectedCity)); } }
         public District SelectedDistrict { get => _selectedDistrict; set { _selectedDistrict = value; OnPropertyChanged(nameof(SelectedDistrict)); } }
-        public ObservableCollection<City> ListCities { get => _listCities; set { _listCities = value; OnPropertyChanged(nameof(ListCities)); } }
+        public ObservableCollection<Province> ListCities { get => _listCities; set { _listCities = value; OnPropertyChanged(nameof(ListCities)); } }
         public ObservableCollection<District> ListDistricts { get => _listDistricts; set { _listDistricts = value;  OnPropertyChanged(nameof(ListDistricts)); } }
         public ICommand UpdateBookingCommand { get; }
         public ICommand AutoFillInformationCommand { get; }
@@ -77,9 +77,9 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                List<City> cities = Get_Api_Address.getCities();
+                List<Province> cities = Get_Api_Address.getProvinces();
                 cities = cities.OrderBy(p => p.name).ToList();
-                _listCities = new ObservableCollection<City>(cities);
+                _listCities = new ObservableCollection<Province>(cities);
 
             }
             catch (Exception ex)

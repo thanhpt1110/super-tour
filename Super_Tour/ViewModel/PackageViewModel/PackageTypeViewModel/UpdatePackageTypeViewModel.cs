@@ -59,6 +59,7 @@ namespace Super_Tour.ViewModel
         public RelayCommand UpdatePackageCommand { get; }
         #endregion
 
+        #region Constructor
         public UpdatePackageTypeViewModel(TYPE_PACKAGE tmp)
         {
             UpdatePackageCommand = new RelayCommand(ExecuteUpdateNewCommand);
@@ -67,7 +68,9 @@ namespace Super_Tour.ViewModel
             _description = tmp.Description;
             _packageTypeName = tmp.Name_Type;
         }
+        #endregion
 
+        #region Check data modified
         private void checkDataModified()
         {
             if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(PackageTypeName) || (Description == temp.Description && PackageTypeName == temp.Name_Type))
@@ -75,6 +78,7 @@ namespace Super_Tour.ViewModel
             else
                 IsDataModified = true;
         }
+        #endregion
 
         private void ExecuteUpdateNewCommand(object obj)
         {

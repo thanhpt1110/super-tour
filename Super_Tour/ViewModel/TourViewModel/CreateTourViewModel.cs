@@ -137,10 +137,10 @@ namespace Super_Tour.ViewModel
         private int _totalDay;
         private int _totalNight;
         private string _selectedProvinces;
-        private City _selectedCity;
+        private Province _selectedCity;
         public ICommand CreateTourCommnand { get; }
 
-        private ObservableCollection<City> _listCities;
+        private ObservableCollection<Province> _listCities;
 
         public int TotalDay
         {
@@ -184,7 +184,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(NameTour));
             }
         }
-        public ObservableCollection<City> ListCities
+        public ObservableCollection<Province> ListCities
         {
             get
             {
@@ -196,7 +196,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListCities));
             }
         }
-        public City SelectedCity
+        public Province SelectedCity
         {
             get
             {
@@ -210,10 +210,10 @@ namespace Super_Tour.ViewModel
         }
         private void LoadCities()
         {
-            ListCities = new ObservableCollection<City>();
-            foreach(City city in Get_Api_Address.getCities())
+            ListCities = new ObservableCollection<Province>();
+            foreach(Province Province in Get_Api_Address.getProvinces())
             {
-                ListCities.Add(city);
+                ListCities.Add(Province);
             }
         }
         public string SelectedProvinces
