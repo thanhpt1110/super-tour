@@ -105,9 +105,9 @@
                                                            Margin="-5,0,0,0"/>
                                                 </StackPanel>
                                                 <ComboBox
-                                                    ItemsSource="{Binding ListCity}"
+                                                    ItemsSource="{Binding ListProvince}"
                                                     DisplayMemberPath="name"
-                                                    SelectedItem="{Binding SelectedCity}"
+                                                    SelectedItem="{Binding SelectedProvince}"
                                                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                     FontSize="15"
                                                     Width="auto"
@@ -121,7 +121,7 @@
                                                     >
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding SelectedCityCommand}" />
+                                                        <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </ComboBox>
@@ -222,7 +222,7 @@
                                                            Margin="-5,0,0,0"/>
                                                 </StackPanel>
                                                 <TextBox 
-                                                    Text="{Binding NamePackage}"
+                                                    Text="{Binding PackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Foreground="Black"
                                                     BorderBrush="Black"
                                                     Background="{StaticResource TextBoxColor}"
@@ -254,7 +254,7 @@
                                                      FontSize="15"
                                                    CaretBrush="Black"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                    Text="{Binding Description}"
+                                                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 ></TextBox>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Vertical"
@@ -266,7 +266,7 @@
                                                            Margin="-5,0,0,0"/>
                                                     </StackPanel>
                                                     <TextBox 
-                                                        Text="{Binding Price}"
+                                                        Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Foreground="Black"
                                                         BorderBrush="Black"
                                                         Background="{StaticResource TextBoxColor}"
@@ -296,6 +296,7 @@
                     </Grid>
                     <Grid Grid.Row="3">
                         <Button
+                            IsEnabled="{Binding IsDataModified}"
                             HorizontalAlignment="Center"
                             Width="120"
                             BorderThickness="0"

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.Ultis.Api_Address
 {
-    internal class City
+    internal class Province
     {
         public string name { get; set; }
         public int code { get; set; }

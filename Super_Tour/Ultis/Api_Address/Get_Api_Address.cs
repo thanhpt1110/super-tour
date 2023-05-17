@@ -12,11 +12,11 @@ namespace Super_Tour.Ultis.Api_Address
     internal class Get_Api_Address
     {
         string link = "city_province.json";
-        public static List<District> getDistrict(City city_name)
+        public static List<District> getDistrict(Province ProvinceName)
         {
-                return city_name.districts;            
+            return ProvinceName.districts.OrderBy(p => p.name).ToList();            
         }
-        public static List<City> getCities()
+        public static List<Province> getProvinces()
         {
             //string url = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())), @"\Ultis", "City_province.json");
             //Console.WriteLine(url);
@@ -28,9 +28,8 @@ namespace Super_Tour.Ultis.Api_Address
             {
                 StreamReader reader = new StreamReader(dataStream);
                 string responeFromServer = reader.ReadToEnd();
-                // Console.WriteLine(responeFromServer);
                 Country country = JsonConvert.DeserializeObject<Country>(responeFromServer);
-                return country.city;
+                return country.Province.OrderBy(p => p.name).ToList();
             }
         }
     }

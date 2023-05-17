@@ -20,12 +20,12 @@ namespace Super_Tour.ViewModel
     {
         private TRAVEL _travel;
         private SUPER_TOUR db = new SUPER_TOUR();
-        private ObservableCollection<City> _listCities;
+        private ObservableCollection<Province> _listCities;
         private ObservableCollection<TOURIST> _tourists;
         private string _selectedGender;
         private District _selectedDistrict;
         private ObservableCollection<District> _listDistrict;
-        private City _selectedCity;
+        private Province _selectedCity;
         private CUSTOMER _customer;
         private bool _execute = true;
         private ObservableCollection<string> _listGender=new ObservableCollection<string>();
@@ -51,7 +51,7 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SelectedDistrict));
             }
         }
-        public City SelectedCity
+        public Province SelectedCity
         {
             get
             {
@@ -76,7 +76,7 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public ObservableCollection<City> ListCities
+        public ObservableCollection<Province> ListCities
         {
             get
             {
@@ -158,9 +158,9 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                List<City> cities = Get_Api_Address.getCities();
+                List<Province> cities = Get_Api_Address.getProvinces();
                 cities = cities.OrderBy(p => p.name).ToList();
-                _listCities = new ObservableCollection<City>(cities);
+                _listCities = new ObservableCollection<Province>(cities);
 
             }
             catch (Exception ex)

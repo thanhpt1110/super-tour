@@ -8,6 +8,6 @@ namespace Super_Tour.Ultis.Api_Address
 {
     internal class Country
     {
-        public List<City> city { get; set; }
+        public List<Province> Province { get; set; }
     }
 }

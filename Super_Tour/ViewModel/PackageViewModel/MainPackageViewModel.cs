@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Firebase.Storage;
-using MaterialDesignThemes.Wpf;
-using Org.BouncyCastle.Asn1.Mozilla;
 using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
@@ -22,13 +19,16 @@ namespace Super_Tour.ViewModel
     internal class MainPackageViewModel : ObservableObject
     {
         #region Declare variable 
-        private string _searchPackageName="";
-        private FirebaseStorage firebaseStorage;
-        private ObservableCollection<PACKAGE> _listPackages;
+        private SUPER_TOUR db = null;
+        private List<PACKAGE> _listOriginalPackage = null;
+        private List<PACKAGE> _listPackagesSearching = null;
+        private List<PACKAGE> _listPackageDatagrid = null;
+        private ObservableCollection<PACKAGE> _listPackages = null;
+        private PACKAGE _selectedItem = null;
+        private PACKAGE temp = null;
         private DispatcherTimer _timer = null;
-        private List<PACKAGE> listOriginalPackage;
-        private List<PACKAGE> listPackagesSearching;
-        private SUPER_TOUR db = new SUPER_TOUR();
+        private FirebaseStorage firebaseStorage = null;
+        private string _searchPackageName = "";
         private int _currentPage = 1;
         private int _totalPage;
         private string _pageNumberText;
@@ -101,6 +101,16 @@ namespace Super_Tour.ViewModel
             }
         }
 
+        public PACKAGE SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
         public ObservableCollection<PACKAGE> ListPackages
         {
             get
@@ -115,107 +125,50 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        // Command 
-        public ICommand OnSearchTextChangedCommand { get; }
+        #region Command 
         public ICommand OpenCreatePackageViewCommand { get; }
-        public ICommand DeletePackageCommand { get; }
         public ICommand UpdatePackageViewCommand { get; }
+        public ICommand DeletePackageCommand { get; }
+        public ICommand OnSearchTextChangedCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        #endregion
 
+        #region Constructor
         public MainPackageViewModel()
         {
+            db = SUPER_TOUR.db;
+            _listPackages = new ObservableCollection<PACKAGE>();
             OpenCreatePackageViewCommand = new RelayCommand(ExecuteOpenCreatePackageViewCommand);
-            DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             UpdatePackageViewCommand = new RelayCommand(ExecuteUpdatePackage);
+            DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             OnSearchTextChangedCommand = new RelayCommand(SearchPackage);
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
-            _listPackages = new ObservableCollection<PACKAGE>();
-            LoadPackageDataAsync();
-            Timer = new DispatcherTimer();
+            LoadDataAsync();
+            /*Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
-            Timer.Tick += Timer_Tick;
+            Timer.Tick += Timer_Tick;*/
         }
+        #endregion
 
-        /* void LoadGrid(List<PACKAGE> listPackage)
+        #region Update on data on datagrid event
+        private void RefreshDatagrid()
         {
-            _listPackages.Clear();
-            foreach(PACKAGE packgage in listPackage)
+            int index = ListPackages.IndexOf(SelectedItem);
+            temp = SelectedItem;
+            if (index != -1)
             {
-                _listPackages.Add(packgage);
-            }    
-        }*/
-        private async void ExecuteDeletePackage(object obj)
-        {
-            try
-            {
-                PACKAGE package = obj as PACKAGE;
-                Timer.Stop();
-                PACKAGE packageFind = await db.PACKAGEs.FindAsync(package.Id_Package);
-                if (db.TOUR_DETAILs.Where(p => p.Id_Package == packageFind.Id_Package).ToList().Count > 0)
-                {
-                    MyMessageBox.ShowDialog("The package could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                    return;
-                }
-                if (packageFind != null)
-                {
-                    MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
-                    if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
-                    {
-                        await firebaseStorage.Child("Images").Child("Package" + packageFind.Id_Package.ToString()).DeleteAsync();
-                        db.PACKAGEs.Remove(packageFind);
-                        await db.SaveChangesAsync();
-                        MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                        /*listOriginalPackage = db.PACKAGEs.ToList();
-                        ReloadData(listOriginalPackage);*/
-                        LoadPackageDataAsync();
-                    }
-                }
-                else
-                {
-                    MyMessageBox.ShowDialog("The package could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-            finally
-            {
-                Timer.Start();
+                ListPackages.RemoveAt(index);
+                ListPackages.Insert(index, temp);
             }
         }
+        #endregion
 
-        private void ExecuteUpdatePackage(object obj)
-        {
-            Timer.Stop();
-            PACKAGE package = obj as PACKAGE;
-            UpdatePackageView view = new UpdatePackageView();
-            view.DataContext = new UpdatePackageViewModel(package);
-            view.ShowDialog();
-            LoadPackageDataAsync();
-        }
-
-        private void SearchPackage(object obj)
-        {
-            if (string.IsNullOrEmpty(_searchPackageName))
-            {
-                _onSearching = false;
-                ReloadData(listOriginalPackage);
-            }
-            else
-            {
-                _onSearching = true;
-                this._currentPage = 1;
-                listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                ReloadData(listPackagesSearching);
-            }
-        }
-
-        private async void Timer_Tick(object sender, EventArgs e)
+        #region Load data async
+        private async Task LoadDataAsync()
         {
             try
             {
@@ -223,27 +176,11 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                            if (db != null)
-                            {
-                                db.Dispose();
-                            }
-                            db = new SUPER_TOUR();
-                            var updatePackage = await db.PACKAGEs.ToListAsync();
-                            if (!updatePackage.SequenceEqual(listOriginalPackage))
-                            {
-                                Application.Current.Dispatcher.Invoke(() =>
-                                {
-                                    listOriginalPackage = updatePackage;
-                                    if (_onSearching)
-                                    {
-                                        listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                                        ReloadData(listPackagesSearching);
-                                    }
-                                    else
-                                        ReloadData(listOriginalPackage);
-                                });
-                           }
-                        
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listOriginalPackage = db.PACKAGEs.ToList();
+                            ReloadData();
+                        });
                     }
                     catch (Exception ex)
                     {
@@ -256,12 +193,13 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+        #endregion
 
-        private async Task LoadPackageDataAsync()
+        /* #region Check data per second 
+        private async void Timer_Tick(object sender, EventArgs e)
         {
             try
             {
-                int flag = 0;
                 await Task.Run(async () =>
                 {
                     try
@@ -271,52 +209,127 @@ namespace Super_Tour.ViewModel
                             db.Dispose();
                         }
                         db = new SUPER_TOUR();
-                        listOriginalPackage = db.PACKAGEs.ToList();
-                        listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
-                        Application.Current.Dispatcher.Invoke(() =>
+                        var updatePackage = await db.PACKAGEs.ToListAsync();
+                        if (!updatePackage.SequenceEqual(listOriginalPackage))
                         {
-                            if (_onSearching)
-                                ReloadData(listPackagesSearching);
-                            else
-                                ReloadData(listOriginalPackage);
-                        });
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                listOriginalPackage = updatePackage;
+                                if (_onSearching)
+                                {
+                                    listPackagesSearching = listOriginalPackage.Where(p => p.Name_Package.StartsWith(_searchPackageName)).ToList();
+                                    ReloadData(listPackagesSearching);
+                                }
+                                else
+                                    ReloadData(listOriginalPackage);
+                            });
+                        }
+
                     }
                     catch (Exception ex)
                     {
-                        flag = 1;
                         MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
                     }
                 });
-                if (flag == 0)
-                    Timer.Start();
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+        #endregion
+        */
 
+        #region Insert
         private void ExecuteOpenCreatePackageViewCommand(object obj)
         {
             try
             {
+                if (temp == null)
+                    temp = new PACKAGE();
                 CreatePackageView createPackageView = new CreatePackageView();
+                createPackageView.DataContext = new CreatePackageViewModel(temp);
                 createPackageView.ShowDialog();
-                LoadPackageDataAsync();
+                _listOriginalPackage = db.PACKAGEs.ToList();
+                ReloadData();
             }
             catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
+        #endregion
+
+        #region Update
+        private void ExecuteUpdatePackage(object obj)
+        {
+            try
+            {
+                UpdatePackageView updateView = new UpdatePackageView();
+                updateView.DataContext = new UpdatePackageViewModel(SelectedItem);
+                updateView.ShowDialog();
+                RefreshDatagrid();
+            }
+            catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Delete
+        private void ExecuteDeletePackage(object obj)
+        {
+            try
+            {
+                MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                {
+                    // Save data on database
+                    firebaseStorage.Child("Images").Child("Package" + _selectedItem.Id_Package.ToString()).DeleteAsync();
+                    db.PACKAGEs.Remove(SelectedItem);
+                    db.SaveChanges();
+
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+
+                    // Process UI event
+                    _listOriginalPackage.Remove(SelectedItem);
+                    ReloadData();
+                }
+            }
+            catch (Exception)
+            {
+                MyMessageBox.ShowDialog("The package could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+            finally
+            {
+            }
+        }
+        #endregion
+
+        #region Search
+        private void SearchPackage(object obj)
+        {
+            if (string.IsNullOrEmpty(_searchPackageName))
+            {
+                _onSearching = false;
+                ReloadData();
+            }
+            else
+            {
+                _onSearching = true;
+                this._currentPage = 1;
+                ReloadData();
+            }
+        }
+        #endregion
 
         #region Custom datagrid by page
         private List<PACKAGE> GetData(List<PACKAGE> ListPackage, int startIndex, int endIndex)
         {
             try
             {
-                return ListPackage.OrderBy(m => m.Id_Type_Package).Skip(startIndex).Take(endIndex - startIndex).ToList();
+                return ListPackage.OrderBy(m => m.Id_Package).Skip(startIndex).Take(endIndex - startIndex).ToList();
             }
             catch (Exception ex)
             {
@@ -325,11 +338,11 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        private void LoadDataByPage(List<PACKAGE> packages)
+        private void LoadDataByPage(List<PACKAGE> ListPackages)
         {
             try
             {
-                this._totalResult = packages.Count();
+                this._totalResult = ListPackages.Count();
                 if (_totalResult == 0)
                 {
                     _startIndex = -1;
@@ -346,9 +359,9 @@ namespace Super_Tour.ViewModel
                     this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
                 }
 
-                List<PACKAGE> ListPackage = GetData(packages, this._startIndex, this._endIndex);
+                _listPackageDatagrid = GetData(ListPackages, this._startIndex, this._endIndex);
                 _listPackages.Clear();
-                foreach (PACKAGE package in ListPackage)
+                foreach (PACKAGE package in _listPackageDatagrid)
                 {
                     _listPackages.Add(package);
                 }
@@ -395,9 +408,9 @@ namespace Super_Tour.ViewModel
             if (this._currentPage > 1)
                 --this._currentPage;
             if (_onSearching)
-                LoadDataByPage(listPackagesSearching);
+                LoadDataByPage(_listPackagesSearching);
             else
-                LoadDataByPage(listOriginalPackage);
+                LoadDataByPage(_listOriginalPackage);
 
             setButtonAndPage();
             setResultNumber();
@@ -408,17 +421,23 @@ namespace Super_Tour.ViewModel
             if (this._currentPage < this._totalPage)
                 ++this._currentPage;
             if (_onSearching)
-                LoadDataByPage(listPackagesSearching);
+                LoadDataByPage(_listPackagesSearching);
             else
-                LoadDataByPage(listOriginalPackage);
+                LoadDataByPage(_listOriginalPackage);
 
             setButtonAndPage();
             setResultNumber();
         }
 
-        private void ReloadData(List<PACKAGE> packages)
+        private void ReloadData()
         {
-            LoadDataByPage(packages);
+            if (_onSearching)
+            {
+                _listPackagesSearching = _listOriginalPackage.Where(p => p.Name_Package.ToLower().Contains(_searchPackageName.ToLower())).ToList();
+                LoadDataByPage(_listPackagesSearching);
+            }
+            else
+                LoadDataByPage(_listOriginalPackage);
             setButtonAndPage();
             setResultNumber();
         }
