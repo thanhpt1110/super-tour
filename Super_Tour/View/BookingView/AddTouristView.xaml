@@ -84,7 +84,7 @@
                     <Grid Grid.Row="2">
                         <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListTourist}"
-                              RowStyle="{DynamicResource DataGridRowStyle1}" 
+                              RowStyle="{DynamicResource editableDataGridRowStyle}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource editableDataGridStyle}" 
