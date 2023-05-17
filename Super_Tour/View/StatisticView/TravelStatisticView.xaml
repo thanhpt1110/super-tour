@@ -16,36 +16,42 @@
             d:DesignHeight="788" d:DesignWidth="1138">
     <Grid Background="{StaticResource BackgroundChildContent}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
-                <DatePicker
-                    Width="200"
-                    Margin="30,0,0,0"
-                    materialDesign:HintAssist.Hint="From Date"
-                    Foreground="Black"
-                    materialDesign:HintAssist.Foreground="Black"
-                    Background="White"
-                    materialDesign:HintAssist.Background="White"
-                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="0"
-                    materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="0"
-                    Effect="{StaticResource MaterialDesignElevationShadow6}"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                <DatePicker
-                    Width="200"
-                    Margin="60,0,0,0"
-                    materialDesign:HintAssist.Hint="To Date"
-                    Foreground="Black"
-                    materialDesign:HintAssist.Foreground="Black"
-                    Background="White"
-                    materialDesign:HintAssist.Background="White"
-                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="0"
-                    materialDesign:DatePickerAssist.OutlinedBorderActiveThickness="0"
-                    Effect="{StaticResource MaterialDesignElevationShadow6}"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <StackPanel Orientation="Vertical"
+                            Margin="30,0,0,0">
+                    <Label Content="From date"/>
+                    <DatePicker
+                        Width="200"
+                        BorderBrush="Black"
+                        Foreground="Black"
+                        Background="White"
+                        materialDesign:HintAssist.Background="Transparent"
+                        materialDesign:HintAssist.Foreground="Black"
+                        materialDesign:HintAssist.Hint="From Date"
+                        materialDesign:HintAssist.IsFloating="False"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical"
+                            Margin="60,0,0,0">
+                        <Label Content="To date"/>
+                        <DatePicker
+                            Width="200"
+                            BorderBrush="Black"
+                            Foreground="Black"
+                            Background="White"
+                            materialDesign:HintAssist.Background="White"
+                            materialDesign:HintAssist.Foreground="Black"
+                            materialDesign:HintAssist.Hint="To Date"
+                            materialDesign:HintAssist.IsFloating="False"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">

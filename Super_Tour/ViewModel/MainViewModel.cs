@@ -31,6 +31,9 @@ namespace Super_Tour.ViewModel
         private MainPackageViewModel _mainPackageViewModel = null;
         private MainPackageTypeViewModel _mainPackageTypeViewModel = null;
         private MainAccountViewModel _mainAccountViewModel = null;
+        private CustomerStatisticViewModel _customerStatisticViewModel = null;
+        private RevenueStatisticViewModel _revenueStatisticViewModel = null;
+        private TravelStatisticViewModel _travelStatisticViewModel = null;
         private DispatcherTimer _timer = null;
 
         #region Declare property
@@ -292,6 +295,9 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteShowCustomerStatisticViewCommand(object obj)
         {
+            if(_customerStatisticViewModel == null)
+                _customerStatisticViewModel = new CustomerStatisticViewModel();
+            CurrentChildView = _customerStatisticViewModel;
             Caption = "Customer Statistic";
             Icon = IconChar.Database;
         }
