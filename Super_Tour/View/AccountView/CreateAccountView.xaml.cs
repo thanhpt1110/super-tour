@@ -23,7 +23,6 @@ namespace Super_Tour.View
         public CreateAccountView()
         {
             InitializeComponent();
-            DataContext = new CreateAccountViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

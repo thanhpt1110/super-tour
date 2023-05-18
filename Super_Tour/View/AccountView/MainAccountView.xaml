@@ -19,11 +19,12 @@
     <Border Background="{StaticResource BackgroundChildContent}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0"
+                  Margin="0,20,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
@@ -31,20 +32,19 @@
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 
-                                Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SearchUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
                                  Width="300"
-                                 Height="50"
-                                 FontSize="15"
+                                 Height="auto"
+                                 FontSize="18"
                                  BorderBrush="Black"
-                                 BorderThickness="0"
                                  Background="{StaticResource TextBoxColor}"
-                                 Effect="{StaticResource MaterialDesignElevationShadow6}"   
                                  CaretBrush="Black"
-                                 materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                 materialDesign:HintAssist.IsFloating="False"
+                                 materialDesign:HintAssist.Background="Transparent"
                                  materialDesign:HintAssist.Foreground="Black"
-                                 materialDesign:HintAssist.Hint="Enter account name"
+                                 materialDesign:HintAssist.Hint="🔎 Enter username"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 >
                             <i:Interaction.Triggers>
@@ -57,27 +57,27 @@
                 </Grid>
                 <Grid Grid.Column="2">
                     <Button x:Name="btnAddNewType"
-                                Background="{StaticResource btnAdd}"
-                                BorderThickness="0"
-                                Effect="{StaticResource MaterialDesignElevationShadow5}"
-                                Width="200"
-                                Margin="0,10,55,0"
-                                HorizontalAlignment="Right"
-                                HorizontalContentAlignment="Center"
-                                Content="+ Adding New Account"
-                                FontSize="16"
-                                FontWeight="Medium"
-                                FontFamily="Segoe UI"
-                                Foreground="{StaticResource plainTextColor1}"
-                                Height="40"
+                            Background="{StaticResource btnAdd}"
+                            BorderThickness="0"
+                            materialDesign:ButtonAssist.CornerRadius="10"
+                            Height="auto"
+                            Width="260"
+                            Margin="0,11,55,0"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center"
+                            Content="➕   Adding New Account"
+                            FontSize="18"
+                            FontWeight="Medium"
+                            FontFamily="Segoe UI"
+                            Foreground="{StaticResource plainTextColor1}"
                                 Command="{Binding OpenCreateAccountViewCommand}"/>
-
                 </Grid>
             </Grid>
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListObservableAccount}"
+                              ItemsSource="{Binding ListAccounts}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -113,11 +113,12 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource iconButton}" 
-                                                Command="{Binding DataContext.UpdatePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                Command="{Binding DataContext.UpdateAccountCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}">
                                             <fa:IconImage Icon="Edit" Foreground="#32C948"/>
                                         </Button>
-                                        <Button Margin="15 0 0 5" Style="{StaticResource iconButton}" Command="{Binding DataContext.DeletePackageInDataGridView, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        <Button Margin="15 0 0 5" Style="{StaticResource iconButton}" 
+                                                Command="{Binding DataContext.DeleteAccountInDataGridView, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                     CommandParameter="{Binding}" >
                                             <fa:IconImage Margin="0 0 0 0" Icon="DeleteLeft" Foreground="#FF4A4F"/>
                                         </Button>
