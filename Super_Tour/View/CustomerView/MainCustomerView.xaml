@@ -65,7 +65,7 @@
                             Margin="0,11,55,1"
                             HorizontalAlignment="Right"
                             HorizontalContentAlignment="Center"
-                            Content="➕   Adding New Customer"
+                            Content="➕   Add New Customer"
                             FontSize="18"
                             FontWeight="Medium"
                             FontFamily="Segoe UI"
