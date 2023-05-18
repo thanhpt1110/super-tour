@@ -147,8 +147,8 @@ namespace Super_Tour.ViewModel
             UpdatePackageViewCommand = new RelayCommand(ExecuteUpdatePackage);
             DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             OnSearchTextChangedCommand = new RelayCommand(SearchPackage);
-            GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
-            GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
+            GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
+            GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             LoadDataAsync();
             /*Timer = new DispatcherTimer();
@@ -197,8 +197,8 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-/*
-        #region Check data per second 
+        
+        /*#region Check data per second 
         private async void Timer_Tick(object sender, EventArgs e)
         {
             try
@@ -221,8 +221,8 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
-        #endregion*/
-
+        #endregion
+        */
 
         #region Insert
         private void ExecuteOpenCreatePackageViewCommand(object obj)
@@ -387,7 +387,7 @@ namespace Super_Tour.ViewModel
             PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
         }
 
-        private void ExcecuteGoToPreviousPageCommand(object obj)
+        private void ExecuteGoToPreviousPageCommand(object obj)
         {
             if (this._currentPage > 1)
                 --this._currentPage;
@@ -400,7 +400,7 @@ namespace Super_Tour.ViewModel
             setResultNumber();
         }
 
-        private void ExcecuteGoToNextPageCommand(object obj)
+        private void ExecuteGoToNextPageCommand(object obj)
         {
             if (this._currentPage < this._totalPage)
                 ++this._currentPage;

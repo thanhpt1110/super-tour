@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Student_wpf_application.ViewModels.Command;
@@ -10,18 +9,9 @@ using Super_Tour.Ultis;
 using Super_Tour.View;
 using Super_Tour.Model;
 using System.Windows;
-using System.Threading;
 using System.Data.Entity;
 using System.Windows.Threading;
 using Super_Tour.CustomControls;
-using System.Windows.Markup;
-using Org.BouncyCastle.Crypto.Tls;
-using System.IO.Packaging;
-using Org.BouncyCastle.Asn1.Cms;
-using System.Diagnostics;
-using MySqlX.XDevAPI;
-using FireSharp.Config;
-using FireSharp.Interfaces;
 
 namespace Super_Tour.ViewModel
 {
@@ -154,8 +144,8 @@ namespace Super_Tour.ViewModel
             OpenCreatePackageTypeViewCommand = new RelayCommand(ExecuteOpenCreatePackageTypeViewCommand);
             DeletePackageInDataGridView = new RelayCommand(ExecuteDeletePackageCommand);
             UpdatePackageCommand = new RelayCommand(UpdatePackage);
-            GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
-            GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
+            GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
+            GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
             TimePackageType = DateTime.Now;
             LoadDataAsync();
@@ -395,7 +385,7 @@ namespace Super_Tour.ViewModel
             PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
         }
 
-        private void ExcecuteGoToPreviousPageCommand(object obj)
+        private void ExecuteGoToPreviousPageCommand(object obj)
         {
             if (this._currentPage > 1)
                 --this._currentPage;
@@ -408,7 +398,7 @@ namespace Super_Tour.ViewModel
             setResultNumber();
         }
 
-        private void ExcecuteGoToNextPageCommand(object obj)
+        private void ExecuteGoToNextPageCommand(object obj)
         {
             if (this._currentPage < this._totalPage)
                 ++this._currentPage;
@@ -423,9 +413,11 @@ namespace Super_Tour.ViewModel
 
         private void ReloadData()
         {
-            _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.ToLower().Contains(_searchType.ToLower())).ToList();
             if (_onSearching)
+            {
+                _listTypePackageSearching = _listTypePackageOriginal.Where(p => p.Name_Type.ToLower().Contains(_searchType.ToLower())).ToList();
                 LoadDataByPage(_listTypePackageSearching);
+            }
             else
                 LoadDataByPage(_listTypePackageOriginal);
             setButtonAndPage();
