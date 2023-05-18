@@ -89,13 +89,18 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
+                    // Save to DB
                     temp.Description = _description;
                     temp.Name_Type = _packageTypeName;
                     db.TYPE_PACKAGEs.AddOrUpdate(temp);
                     db.SaveChanges();
-                    UPDATE_CHECK.NotifyChange(table);
-                    MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
 
+                    // Synchronize data to real time DB
+                    MainPackageTypeViewModel.TimePackageType = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, MainPackageTypeViewModel.TimePackageType);
+
+                    // Process UI event
+                    MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                     // Find view to close
                     UpdatePackageTypeView updatePackageTypeView = null;
                     foreach (Window window in System.Windows.Application.Current.Windows)

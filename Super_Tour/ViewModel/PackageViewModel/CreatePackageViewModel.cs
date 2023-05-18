@@ -309,22 +309,22 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-
+                // Save data to DB
                 _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
                 _selectedItem.Name_Package = _packageName;
                 _selectedItem.Id_Province = _selectedProvince.codename;
                 _selectedItem.Id_District = _selectedDistrict.codename;
                 _selectedItem.Description_Package = _description;
                 _selectedItem.Price = decimal.Parse(_price);
+                _selectedItem.Image_Package = await UploadImg();
                 db.PACKAGEs.Add(_selectedItem);
                  db.SaveChanges();
                 _selectedItem.Id_Package = db.PACKAGEs.Max(p => p.Id_Package);
-                _selectedItem.Image_Package = await UploadImg();
-                db.PACKAGEs.AddOrUpdate(_selectedItem);
-                db.SaveChanges();
 
+                // Synchronize data to real-time database
+
+                // Process UI Event
                 MyMessageBox.ShowDialog("Add new package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                
                 // Find view to close
                 CreatePackageView createPackageView = null;
                 foreach (Window window in Application.Current.Windows)

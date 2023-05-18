@@ -27,9 +27,10 @@ namespace Super_Tour.ViewModel
 {
     internal class MainPackageTypeViewModel : ObservableObject
     {
-        #region Declare variable
+        #region Declare variable 
         private SUPER_TOUR db = null;
-        private DateTime _timeLoadForm;
+        public static DateTime TimePackageType;
+        private UPDATE_CHECK _tracker = null;  
         private List<TYPE_PACKAGE> _listTypePackageOriginal = null; // Data gốc
         private List<TYPE_PACKAGE> _listTypePackageSearching = null; // Data lúc mà có người search
         private List<TYPE_PACKAGE> _listTypePackageDatagrid = null; // Data để đổ vào datagrid 
@@ -156,8 +157,7 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExcecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExcecuteGoToNextPageCommand);
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
-            _timeLoadForm = DateTime.Now;
-
+            TimePackageType = DateTime.Now;
             LoadDataAsync();
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -218,19 +218,16 @@ namespace Super_Tour.ViewModel
             {
                 await Task.Run(async () =>
                 {
-                    var res = UPDATE_CHECK.Client.Get(@"Update/"+table);
-                    UPDATE_CHECK check = res.ResultAs<UPDATE_CHECK>();
-
-                    if (DateTime.Parse(check.DateTimeUpdate) > _timeLoadForm)
+                    _tracker = UPDATE_CHECK.getTracker(table);
+                    if (DateTime.Parse(_tracker.DateTimeUpdate) > TimePackageType)
                     {
-                        _timeLoadForm = DateTime.Now;
+                        TimePackageType = (DateTime.Parse(_tracker.DateTimeUpdate));
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                             ReloadData();
                         });
-                    }
-
+                    }   
                 });
             }
             catch (Exception ex)
@@ -239,7 +236,6 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-
 
         #region Insert 
         private void ExecuteOpenCreatePackageTypeViewCommand(object obj)
@@ -282,9 +278,13 @@ namespace Super_Tour.ViewModel
                     // Save data on database
                     db.TYPE_PACKAGEs.Remove(SelectedItem);
                     db.SaveChanges();
-                    UPDATE_CHECK.NotifyChange(table);
-                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);                    
+
+                    // Synchronize data to real-time database 
+                    TimePackageType = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimePackageType);
+
                     // Process UI event
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);    
                     _listTypePackageOriginal.Remove(SelectedItem);
                     ReloadData();
                 }

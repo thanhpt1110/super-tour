@@ -80,12 +80,18 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                // Save data to DB
                 temp.Name_Type = _packageTypeName;
                 temp.Description = _description;
                 db.TYPE_PACKAGEs.Add(temp);
                 db.SaveChanges();
                 temp.Id_Type_Package = db.TYPE_PACKAGEs.Max(p=>p.Id_Type_Package);
-                UPDATE_CHECK.NotifyChange(table);
+
+                // // Synchronize data to real time DB
+                MainPackageTypeViewModel.TimePackageType = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainPackageTypeViewModel.TimePackageType);
+
+                // Process UI event
                 MyMessageBox.ShowDialog("Add type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 // Find view to close
                 CreatePackageTypeView createPackageTypeView = null;
