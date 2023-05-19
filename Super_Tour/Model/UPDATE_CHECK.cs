@@ -18,8 +18,8 @@ namespace Super_Tour.Model
 
         public static FirebaseConfig Firebaseconfig = new FirebaseConfig()
         {
-            AuthSecret = "zV6tTqw9fzIYfyeqMpOGdBkpY1Cf9OMaoeRCP5nv",
-                BasePath = "https://supertour-30e53-default-rtdb.firebaseio.com/"
+            AuthSecret = "35egc5rk4B2jnq73OVN9mDxt9v9tl51N6uTMKkJ0",
+            BasePath = "https://supertour-75495-default-rtdb.firebaseio.com/"
         };
 
         public static FireSharp.FirebaseClient Client = new FireSharp.FirebaseClient(Firebaseconfig);
