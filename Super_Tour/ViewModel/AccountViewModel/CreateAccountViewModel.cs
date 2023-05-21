@@ -82,7 +82,7 @@ namespace Super_Tour.ViewModel
             }
         }
         public ICommand CreateAccountCommand { get; }
-        public CreateAccountViewModel()
+        public CreateAccountViewModel(ACCOUNT temp)
         {
             _listPriority = new List<int>();
             _listServices = new List<string>();

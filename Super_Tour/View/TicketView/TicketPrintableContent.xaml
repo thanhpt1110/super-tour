@@ -15,187 +15,176 @@
             FontFamily="{DynamicResource MaterialDesignFont}"
             Background="Transparent"
             Height="350" Width="1100">
-    <Border CornerRadius="10"
-                BorderThickness="2">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
-                <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
-                <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-        <Border CornerRadius="10,10,10,10"
-                    Background="White">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    
-                </Grid>
-                <Grid Grid.Row="1">
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Border Margin="0,0,0,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="750"/>
-                                <ColumnDefinition Width="5"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <!--Mã vạch-->
-                                <Border BorderBrush="Black"
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <Grid Grid.Row="1">
+        </Grid>
+        <Grid Grid.Row="2">
+            <Border Margin="0,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="750"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <!--Mã vạch-->
+                        <Border BorderBrush="Black"
                             BorderThickness="1"
                             Margin="20"
                             CornerRadius="15">
-                                    <Image Margin="20"
+                            <Image Margin="20"
                                            Source="{Binding BarcodeImage2}"
                                            Stretch="Fill"/>
-                                </Border>
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <Border BorderBrush="Black"
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Border BorderBrush="Black"
                             BorderThickness="1"
                             Margin="20"
                             CornerRadius="15"
                             Opacity="1">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition Height="70"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="500"/>
-                                                <ColumnDefinition/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Grid.Column="0">
-                                                <Border
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="500"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Border
                                                 BorderBrush="Black"
                                                 BorderThickness="2"
                                                 Opacity="0.6"
                                                 Margin="20,45,20,10">
-                                                </Border>
-                                                <StackPanel VerticalAlignment="Center" 
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center" 
                                                             Margin="25,5,25,25">
-                                                    <StackPanel Orientation="Horizontal"
+                                            <StackPanel Orientation="Horizontal"
                                                                 HorizontalAlignment="Left"
                                                                 Margin="0,5">
-                                                        <TextBlock FontSize="20" 
+                                                <TextBlock FontSize="20" 
                                                                    VerticalAlignment="Bottom" 
                                                                    Text="Customer: "
 />
-                                                        <TextBlock FontSize="25" 
+                                                <TextBlock FontSize="25" 
                                                                    VerticalAlignment="Bottom" 
                                                                    Margin="5,0,0,0"
                                                                    Text="NGUYỄN TẤN TOÀN"/>
-                                                    </StackPanel>
-                                                    <TextBlock Text="DU LỊCH NHA TRANG - ĐÀ LẠT"
+                                            </StackPanel>
+                                            <TextBlock Text="DU LỊCH NHA TRANG - ĐÀ LẠT"
                                                     FontSize="40"
                                                     TextWrapping="Wrap"
                                                     TextAlignment="Center"
                                                     FontWeight="SemiBold"
                                                     Margin="20,5,20,0"/>
-                                                    <Rectangle Width="250"
+                                            <Rectangle Width="250"
                                                     Height="1" 
                                                     Stroke="Black" 
                                                     StrokeThickness="1"
                                                     Margin="0,10,0,10"/>
-                                                    <TextBlock Text="5 NGÀY - 4 ĐÊM"
+                                            <TextBlock Text="5 NGÀY - 4 ĐÊM"
                                                     FontSize="25"
                                                     TextWrapping="Wrap"
                                                     TextAlignment="Center"
                                                     VerticalAlignment="Center"
                                                     Margin="20,0,20,0"/>
-                                                </StackPanel>
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <StackPanel Orientation="Vertical">
-                                                    <Image Margin="30,20,30,5" Source="/Images/logo.png"></Image>
-                                                    <TextBlock Text="Price:"
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <Image Margin="30,20,30,5" Source="/Images/logo.png"></Image>
+                                            <TextBlock Text="Price:"
                                                        FontSize="22"
                                                        FontWeight="Medium"
                                                        Margin="20,0,0,0"/>
 
-                                                    <TextBlock Text="5,000,000 VND"
+                                            <TextBlock Text="5,000,000 VND"
                                                        FontSize="25"
                                                        TextAlignment="Center"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Grid>
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition Width="410"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Grid.Column="0">
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Text="DATE:"
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="410"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="DATE:"
                                                        Margin="30,0,0,0"
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
-                                                    <TextBlock Text="05/05/2023"
+                                            <TextBlock Text="05/05/2023"
                                                        FontSize="22"
                                                        FontWeight="Medium"
                                                        Margin="30,5,0,0"/>
-                                                </StackPanel>
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Text="TIME:"
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="TIME:"
                                                        Margin="20,0,0,0"
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
-                                                    <TextBlock Text="09:30 AM"
+                                            <TextBlock Text="09:30 AM"
                                                        FontSize="22"
                                                        FontWeight="Medium"
                                                        Margin="20,5,0,0"/>
-                                                </StackPanel>
-                                            </Grid>
-                                            <Grid Grid.Column="2">
-                                                <StackPanel>
-                                                    <TextBlock Text="START LOCATION:"
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <StackPanel>
+                                            <TextBlock Text="START LOCATION:"
                                                        Margin="0,0,0,0"
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
-                                                    <StackPanel>
-                                                        <TextBlock Text="khu phố 6, Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh"
+                                            <StackPanel>
+                                                <TextBlock Text="khu phố 6, Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh"
                                                            Margin="0,0,20,0"
                                                            FontSize="18"
                                                            FontWeight="Medium"
                                                            TextWrapping="Wrap"
                                                            VerticalAlignment="Center"/>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Grid>
+                                            </StackPanel>
+                                        </StackPanel>
                                     </Grid>
-                                </Border>
+                                </Grid>
                             </Grid>
-                            <Grid Grid.Column="2">
-                                <Rectangle Width="1" 
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Rectangle Width="1" 
                                Height="350" 
                                Stroke="Black" 
                                StrokeThickness="1" 
                                StrokeDashArray="2 4"/>
-                            </Grid>
-                            <Grid Grid.Column="3">
-                                <Border BorderBrush="Black"
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <Border BorderBrush="Black"
                             BorderThickness="1"
                             Margin="20"
                             CornerRadius="15">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0">
-                                            <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal">
 
-                                                <TextBlock Text="BOOKING ID: " 
+                                        <TextBlock Text="BOOKING ID: " 
                                                RenderTransformOrigin="0.5,0.5" 
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
@@ -203,11 +192,11 @@
                                                FontSize="22" Height="50" 
                                                Margin="-120,0,-200,0"
                                                Width="300">
-                                                    <TextBlock.RenderTransform>
-                                                        <RotateTransform Angle="270"/>
-                                                    </TextBlock.RenderTransform>
-                                                </TextBlock>
-                                                <TextBlock Text="BK001234568" 
+                                            <TextBlock.RenderTransform>
+                                                <RotateTransform Angle="270"/>
+                                            </TextBlock.RenderTransform>
+                                        </TextBlock>
+                                        <TextBlock Text="BK001234568" 
                                                RenderTransformOrigin="0.5,0.5" 
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
@@ -215,24 +204,22 @@
                                                FontSize="25" Height="50" 
                                                Margin="-75,0,-150,0"
                                                Width="300">
-                                                    <TextBlock.RenderTransform>
-                                                        <RotateTransform Angle="270"/>
-                                                    </TextBlock.RenderTransform>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                        <Grid Grid.Column="1">
-                                            <Image Source="{Binding BarcodeImage}"
+                                            <TextBlock.RenderTransform>
+                                                <RotateTransform Angle="270"/>
+                                            </TextBlock.RenderTransform>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Image Source="{Binding BarcodeImage}"
                                                    Margin="20"
                                                    Stretch="Fill"/>
-                                        </Grid>
-                                    </Grid>
-                                </Border>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Border>
+                        </Border>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Border>
-    </Border>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>
