@@ -19,11 +19,7 @@
     <Border Background="{StaticResource BackgroundChildContent}">
         <Grid>
             <Grid.RowDefinitions>
-<<<<<<< HEAD
-                <RowDefinition Height="Auto"/>
-=======
                 <RowDefinition Height="auto"/>
->>>>>>> 09a219235ac3594f61ad192bdfade68adf7b7082
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
@@ -36,22 +32,6 @@
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 
-<<<<<<< HEAD
-                            Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            x:Name="txtBoxSearchType" 
-                            Margin="55, 10, 0, 0"
-                            Width="300"
-                            Height="50"
-                            FontSize="15"
-                            BorderBrush="Black"
-                            CaretBrush="Black"
-                            Background="{StaticResource TextBoxColor}"
-                            materialDesign:HintAssist.Background="Transparent"
-                            materialDesign:HintAssist.Foreground="Black"
-                            materialDesign:HintAssist.Hint="Enter account name"
-                            materialDesign:HintAssist.IsFloating="False"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
-=======
                                 Text="{Binding SearchUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
@@ -66,7 +46,6 @@
                                  materialDesign:HintAssist.Foreground="Black"
                                  materialDesign:HintAssist.Hint="🔎 Enter username"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
->>>>>>> 09a219235ac3594f61ad192bdfade68adf7b7082
                                 >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
