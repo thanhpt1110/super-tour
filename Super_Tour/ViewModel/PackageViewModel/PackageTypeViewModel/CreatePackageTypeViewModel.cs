@@ -61,20 +61,24 @@ namespace Super_Tour.ViewModel
         public RelayCommand CreateNewPackageCommand { get; }
         #endregion
 
+        #region Check data modified
         private void checkDataModified()
         {
-            if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(PackageTypeName))
+            if (string.IsNullOrEmpty(PackageTypeName))
                 IsDataModified = false;
             else
                 IsDataModified = true;
         }
+        #endregion
 
+        #region Constructor
         public CreatePackageTypeViewModel(TYPE_PACKAGE tmp)
         {
             CreateNewPackageCommand = new RelayCommand(execute_CreateNewType_Package);
             db = SUPER_TOUR.db;
             this.temp = tmp;
         }
+        #endregion
 
         public void execute_CreateNewType_Package(object obj)
         {

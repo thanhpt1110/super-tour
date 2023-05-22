@@ -75,7 +75,7 @@ namespace Super_Tour.ViewModel
         #region Check data modified
         private void checkDataModified()
         {
-            if (string.IsNullOrEmpty(Description) || string.IsNullOrEmpty(PackageTypeName) || (Description == temp.Description && PackageTypeName == temp.Name_Type))
+            if (string.IsNullOrEmpty(PackageTypeName) || (Description == temp.Description && PackageTypeName == temp.Name_Type))
                 IsDataModified = false;
             else
                 IsDataModified = true;
@@ -86,33 +86,29 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
-                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                // Save to DB
+                temp.Description = _description;
+                temp.Name_Type = _packageTypeName;
+                db.TYPE_PACKAGEs.AddOrUpdate(temp);
+                db.SaveChanges();
+
+                // Synchronize data to real time DB
+                MainPackageTypeViewModel.TimePackageType = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainPackageTypeViewModel.TimePackageType);
+
+                // Process UI event
+                MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                // Find view to close
+                UpdatePackageTypeView updatePackageTypeView = null;
+                foreach (Window window in System.Windows.Application.Current.Windows)
                 {
-                    // Save to DB
-                    temp.Description = _description;
-                    temp.Name_Type = _packageTypeName;
-                    db.TYPE_PACKAGEs.AddOrUpdate(temp);
-                    db.SaveChanges();
-
-                    // Synchronize data to real time DB
-                    MainPackageTypeViewModel.TimePackageType = DateTime.Now;
-                    UPDATE_CHECK.NotifyChange(table, MainPackageTypeViewModel.TimePackageType);
-
-                    // Process UI event
-                    MyMessageBox.ShowDialog("Update type package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    // Find view to close
-                    UpdatePackageTypeView updatePackageTypeView = null;
-                    foreach (Window window in System.Windows.Application.Current.Windows)
+                    if (window is UpdatePackageTypeView)
                     {
-                        if (window is UpdatePackageTypeView)
-                        {
-                            updatePackageTypeView = window as UpdatePackageTypeView;
-                            break;
-                        }
+                        updatePackageTypeView = window as UpdatePackageTypeView;
+                        break;
                     }
-                    updatePackageTypeView.Close();
                 }
+                updatePackageTypeView.Close();
             }
             catch (Exception ex)
             {

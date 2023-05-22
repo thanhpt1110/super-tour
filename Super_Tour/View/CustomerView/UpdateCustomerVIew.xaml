@@ -108,13 +108,14 @@
                                             </StackPanel>
                                             <TextBox
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Height="auto"
                                                 FontSize="15"
                                                 CaretBrush="Black"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
                                                 Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Hint="Enter customer ID number"
+                                                materialDesign:HintAssist.Hint="Ex: 075203002869"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
@@ -134,6 +135,7 @@
                                             </StackPanel>
                                             <TextBox
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Height="auto"
                                                 FontSize="15"
                                                 BorderBrush="Black"
@@ -141,7 +143,7 @@
                                                 Foreground="Black"
                                                 Background="{StaticResource TextBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Enter customer name"
+                                                materialDesign:HintAssist.Hint="Ex: Nguyen Van A"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"/>
@@ -152,26 +154,26 @@
                                                     HorizontalAlignment="Center"
                                                 Margin="10,10,0,0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Content="Gender"/>
+                                                <Label Content="Province"/>
                                                 <Label Content="*"
                                                        Foreground="Red"
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                ItemsSource="{Binding ListProvince}"
+                                                DisplayMemberPath="name"
+                                                SelectedItem="{Binding SelectedProvince}"
                                                 HorizontalAlignment="Left"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select customer gender"
+                                                materialDesign:HintAssist.Hint="Select Province"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="auto"
-                                                FontSize="15"
-                                                  >
-                                                <ComboBoxItem>Nam</ComboBoxItem>
-                                                <ComboBoxItem>Nữ</ComboBoxItem>
+                                                FontSize="15">
                                             </ComboBox>
                                         </StackPanel>
 
@@ -195,13 +197,14 @@
                                             </StackPanel>
                                             <TextBox
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Height="auto"
                                                 FontSize="15"
                                                 Background="{StaticResource TextBoxColor}"
                                                 BorderBrush="Black"
                                                 CaretBrush="Black"
                                                 Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Enter customer phone number"
+                                                materialDesign:HintAssist.Hint="Ex: 2152045519"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
@@ -214,24 +217,26 @@
                                                     HorizontalAlignment="Center"
                                                 Margin="10,10,0,0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Content="Province"/>
+                                                <Label Content="Gender"/>
                                                 <Label Content="*"
                                                        Foreground="Red"
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                SelectedItem="{Binding SelectedGender}"
                                                 HorizontalAlignment="Left"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Hint="Select province"
+                                                materialDesign:HintAssist.Hint="Select Gender"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="50"
                                                 FontSize="15"
-                                                BorderBrush="Black"
-                                                  >
+                                                BorderBrush="Black">
+                                                <ComboBoxItem>Male</ComboBoxItem>
+                                                <ComboBoxItem>Female</ComboBoxItem>
                                             </ComboBox>
                                         </StackPanel>
                                     </Grid>
@@ -246,12 +251,15 @@
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                ItemsSource="{Binding ListDistrict}"
+                                                DisplayMemberPath="name"
+                                                SelectedItem="{Binding SelectedDistrict}"
                                                 HorizontalAlignment="Left"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Hint="Select district"
+                                                materialDesign:HintAssist.Hint="Select District"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="50"
