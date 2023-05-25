@@ -21,7 +21,7 @@ namespace Super_Tour.CustomControls
     public partial class AccountPasswordBox : UserControl
     {
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(string), typeof(BindablePasswordBox));
+            DependencyProperty.Register("Password", typeof(string), typeof(AccountPasswordBox));
         public string Password
         {
             get { return (string)GetValue(PasswordProperty); }
