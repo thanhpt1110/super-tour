@@ -334,6 +334,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\AccountPasswordBox.xaml.cs">
+      <DependentUpon>AccountPasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
@@ -504,6 +507,10 @@
     <Compile Include="View\TravelView\UpdateTravelView.xaml.cs">
       <DependentUpon>UpdateTravelView.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\AccountPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

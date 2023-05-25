@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        xmlns:customControls="clr-namespace:Super_Tour.CustomControls"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -182,19 +183,9 @@
                                                    Foreground="Red"
                                                    Margin="-5,0,0,0"/>
                                         </StackPanel>
-                                        <PasswordBox 
-                                            Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
-                                            Background="{StaticResource TextBoxColor}"
-                                            BorderBrush="Black"
-                                            CaretBrush="Black"
-                                            Foreground="Black"
-                                            FontSize="15"
-                                            Height="50"
-                                            Width="300"
-                                            materialDesign:HintAssist.Background="Transparent"
-                                            materialDesign:HintAssist.Foreground="Black"
-                                            materialDesign:HintAssist.Hint="Enter account password"
-                                            />
+                                        <customControls:AccountPasswordBox>
+                                            
+                                        </customControls:AccountPasswordBox>
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="4"

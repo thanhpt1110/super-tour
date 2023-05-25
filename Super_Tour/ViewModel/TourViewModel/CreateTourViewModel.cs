@@ -130,6 +130,7 @@ namespace Super_Tour.ViewModel
 
 
         // End test
+        private ObservableCollection<string> _selectedProvinceList;
         private bool _executeSave=true;
         private SUPER_TOUR db = new SUPER_TOUR();
         private string _nameTour;
@@ -227,6 +228,16 @@ namespace Super_Tour.ViewModel
         }
         // End test
         public ICommand AddADayCommand { get; }
+        public ObservableCollection<string> SelectedProvinceList
+        {
+            get => _selectedProvinceList;
+            set
+            {
+                _selectedProvinceList = value;
+                OnPropertyChanged(nameof(SelectedProvinceList));
+            }
+        }
+
         public CreateTourViewModel()
         {
             // Test 
@@ -239,6 +250,16 @@ namespace Super_Tour.ViewModel
             TotalDay = DateActivityList.Count;
             CreateTourCommnand = new RelayCommand(ExecuteCreateTourCommand, checkExecuteSave);
             // End Test
+            // Test Province List
+            SelectedProvinceList = new ObservableCollection<string>();
+            SelectedProvinceList.Add("Thành phố Hồ Chí Minh");
+            SelectedProvinceList.Add("Quảng Nam");
+            SelectedProvinceList.Add("Bình Dương");
+            SelectedProvinceList.Add("Thành phố Đà Nẵng");
+            SelectedProvinceList.Add("Thành phố Đà Nẵng");
+            SelectedProvinceList.Add("Thành phố Đà Nẵng");
+            SelectedProvinceList.Add("Thành phố Đà Nẵng");
+            // End test
             AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
         }
         private bool checkExecuteSave(object obj)
