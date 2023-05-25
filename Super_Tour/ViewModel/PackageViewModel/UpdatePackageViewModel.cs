@@ -339,7 +339,7 @@ namespace Super_Tour.ViewModel
                 string.IsNullOrEmpty(_packageName) || string.IsNullOrEmpty(_price)
                 || (_selectedProvince.codename == _selectedItem.Id_Province && _selectedDistrict.codename == _selectedItem.Id_District &&
                     _selectedTypePackage.Id_Type_Package == _selectedItem.Id_Type_Package && _packageName == _selectedItem.Name_Package &&
-                    _price == _selectedItem.Price.ToString() && _isNewImage == false))
+                    _price == _selectedItem.Price.ToString() && _isNewImage == false && _description == _selectedItem.Description_Package.ToString()))
                 IsDataModified = false;
             else
                 IsDataModified = true;
@@ -351,34 +351,30 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                MyMessageBox.ShowDialog("Are you sure about the information this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
-                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
+                _selectedItem.Name_Package = _packageName;
+                _selectedItem.Id_Province = _selectedProvince.codename;
+                _selectedItem.Id_District = _selectedDistrict.codename;
+                _selectedItem.Description_Package = _description;
+                _selectedItem.Price = decimal.Parse(_price);
+                _selectedItem.Image_Package = await UploadImg();
+                db.PACKAGEs.AddOrUpdate(_selectedItem);
+                await db.SaveChangesAsync();
+
+                MyMessageBox.ShowDialog("Update package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+
+                // Find view to close 
+                UpdatePackageView createPackageView = null;
+                foreach (Window window in Application.Current.Windows)
                 {
-                    _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
-                    _selectedItem.Name_Package = _packageName;
-                    _selectedItem.Id_Province = _selectedProvince.codename;
-                    _selectedItem.Id_District = _selectedDistrict.codename;
-                    _selectedItem.Description_Package = _description;
-                    _selectedItem.Price = decimal.Parse(_price);
-                    _selectedItem.Image_Package = await UploadImg();
-                    db.PACKAGEs.AddOrUpdate(_selectedItem);
-                    await db.SaveChangesAsync();
-
-                    MyMessageBox.ShowDialog("Update package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-
-                    // Find view to close 
-                    UpdatePackageView createPackageView = null;
-                    foreach (Window window in Application.Current.Windows)
+                    Console.WriteLine(window.ToString());
+                    if (window is UpdatePackageView)
                     {
-                        Console.WriteLine(window.ToString());
-                        if (window is UpdatePackageView)
-                        {
-                            createPackageView = window as UpdatePackageView;
-                            break;
-                        }
+                        createPackageView = window as UpdatePackageView;
+                        break;
                     }
-                    createPackageView.Close();
                 }
+                createPackageView.Close();
             }
             catch (Exception ex)
             {

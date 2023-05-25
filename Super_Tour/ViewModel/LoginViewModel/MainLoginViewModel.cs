@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Super_Tour.ViewModel
     internal class MainLoginViewModel: ObservableObject
     {
         #region Declare variable
+        private bool _isInternetConnectionError = false;
         private bool _isViewVisible = true;
         private string _username = null;
         private string _password = null;
@@ -87,10 +89,6 @@ namespace Super_Tour.ViewModel
         }
         public async void Login(object a)
         {
-            // Thực hiện đăng nhập và kiểm tra thông tin người dùng
-            // Sử dụng Entity Framework để truy vấn cơ sở dữ liệu
-            // Nếu thông tin đăng nhập hợp lệ, chuyển đến trang chính
-            // Nếu không, hiển thị thông báo lỗi
             if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
             {
                 MyMessageBox.ShowDialog("Please enter username and password.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
@@ -102,16 +100,24 @@ namespace Super_Tour.ViewModel
                 // Thực hiện truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng
                 ConvertPassToMD5();
                 ACCOUNT user = null;
-                await Task.Run(()=> {
+                await Task.Run(()=> 
+                {
                    try
                    {
                        user = db.ACCOUNTs.FirstOrDefault(u => u.Username == Username && u.Password == converted_password);
                    }
                    catch (Exception ex)
                    {
-                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        if (ex.Message.Equals("The provider did not return a ProviderManifestToken string."))
+                        {
+                            MyMessageBox.ShowDialog("Please check your internet connection again!", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                            _isInternetConnectionError = true;
+                        }
                    }
-               });
+                });
+
+                if (_isInternetConnectionError)
+                    return;
 
                 // Nếu thông tin đăng nhập hợp lệ
                 if (user != null)
@@ -135,25 +141,10 @@ namespace Super_Tour.ViewModel
                 executeButton = true;
             }
         }
-        private bool checkLogin()
-        {
-/*            try
-            {*/
-                ConvertPassToMD5();
-                ACCOUNT a = db.ACCOUNTs.Where(p => p.Username == Username && p.Password == converted_password).SingleOrDefault();
-                if (a != null)
-                    return true;
-/*            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }*/
-            return false;
-        }
+
         private void ConvertPassToMD5()
         {
             converted_password = Constant.convertPassToMD5(Password);
         }
-
     }
 }
