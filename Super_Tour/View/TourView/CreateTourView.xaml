@@ -168,33 +168,54 @@
                                             <fa:IconImage Icon="Add" Foreground="White" Width="15"/>
                                         </Button>
                                     </StackPanel>
-                                    <ItemsControl ItemsSource="{Binding SelectedProvinceList}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                    <Grid Background="#A7DCF5"
-                                                          Margin="5"
-                                                          Width="300"
-                                                          Height="40">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="auto"/>
-                                                            <ColumnDefinition Width="40"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid Grid.Column="0">
-                                                            <TextBlock Text="{Binding}"
-                                                                    FontSize="15"
-                                                                    Margin="5,2"/>
-                                                        </Grid>
-                                                        <Grid Grid.Column="1"
-                                                              HorizontalAlignment="Right">
-                                                            <materialDesign:PackIcon Kind="Close"
-                                                                    Width="20"
-                                                                    Height="20"
-                                                                    Margin="10,0,0,0"/>
-                                                        </Grid>
-                                                    </Grid>
+                                    <ScrollViewer CanContentScroll="True"
+                                                  VerticalScrollBarVisibility="Visible" 
+                                                  Height="210"
+                                                  >
+                                        <ItemsControl ItemsSource="{Binding SelectedProvinceList}"
+                                                      Margin="0 20 0 0"
+                                                        Height="auto"
+                                                      ScrollViewer.CanContentScroll="True">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <WrapPanel Orientation="Horizontal">
+                                                        <Border CornerRadius="5"
+                                                                Background="#39BDFD"
+                                                                Height="45"
+                                                                Width="280"
+                                                                Margin="0 5">
+                                                            <Grid VerticalAlignment="Center">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition Width="60"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid Grid.Column="0">
+                                                                    <TextBlock
+                                                                    Padding="20 0 0 0"
+                                                                    Text="{Binding}" 
+                                                                        FontSize="15"
+                                                                        VerticalAlignment="Center"/>
+                                                                </Grid>
+                                                                <Grid Grid.Column="1">
+                                                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                                        HorizontalAlignment="Right"
+                                                                            Height="auto"
+                                                                            Width="auto"
+                                                                            Margin="5">
+                                                                        <materialDesign:PackIcon Kind="Remove"
+                                                                            Height="25"
+                                                                            Width="25"  
+                                                                            Margin="5"
+                                                                            Foreground="Black"/>
+                                                                    </Button>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Border>
+                                                    </WrapPanel>
                                                 </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
                                 </StackPanel>
                             </Grid>
                         </Grid>
