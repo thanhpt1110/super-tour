@@ -309,6 +309,7 @@ namespace Super_Tour.ViewModel
         {
             CreateTourViewModel createTourViewModel = new CreateTourViewModel();
             mainViewModel.CurrentChildView = createTourViewModel;
+            mainViewModel.setFirstChild("Add Tour");
         }
         public async Task LoadTourDataAsync()
         {

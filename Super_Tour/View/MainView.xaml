@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mainNamespace="clr-namespace:Super_Tour"
         xmlns:local="clr-namespace:Super_Tour.View"
         xmlns:viewModel="clr-namespace:Super_Tour.ViewModel"
         mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -21,6 +23,8 @@
         MouseDown="Window_MouseDown"
         Height="900" Width="1440" Icon="/Images/logo.ico">
     <Window.Resources>
+        <mainNamespace:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <mainNamespace:BooleanToCursorConverter x:Key="BooleanToCursorConverter" />
         <DataTemplate DataType="{x:Type viewModel:DashBoardViewModel}">
             <local:DashBoardView/>
         </DataTemplate>
@@ -263,22 +267,31 @@
                         <StackPanel Grid.Column="0"
                                     Orientation="Horizontal"
                                     VerticalAlignment="Center">
-                            <fa:IconImage Icon="{Binding Icon}"
-                                          Height="27"
-                                          Width="27"
-                                          Foreground="{StaticResource TitleTextNotFocus}"
-                                          Margin="35,0,10,0"
-                                          />
-                            <TextBlock Text="{Binding Caption}"
-                                       Foreground="{StaticResource TitleTextNotFocus}"
-                                       FontSize="27"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal"
+                                        Cursor="{Binding HaveOneChild, Converter={StaticResource BooleanToCursorConverter}}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding BackToPreviousChildCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <fa:IconImage Icon="{Binding Icon}"
+                                              Height="27"
+                                              Width="27"
+                                              Foreground="{Binding ChildCaptionColor}"
+                                              Margin="35,0,10,0"
+                                              />
+                                <TextBlock Text="{Binding Caption}"
+                                           Foreground="{Binding ChildCaptionColor}"
+                                           FontSize="27"
+                                           FontWeight="Bold"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
                             <fa:IconImage Icon="ChevronRight" Height="10"
-                                          Foreground="{StaticResource TitleText}"
-                                          Margin="8,0,15,0"/>
+                                          Foreground="{Binding NextChildCaption1Color}"
+                                          Margin="8,0,15,0"
+                                          Visibility="{Binding HaveOneChild, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                             <TextBlock Text="{Binding NextChildCaption1}"
-                                       Foreground="{StaticResource TitleText}"
+                                       Foreground="{Binding NextChildCaption1Color}"
                                        FontSize="27"
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"

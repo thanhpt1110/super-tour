@@ -25,7 +25,7 @@
                 <ResourceDictionary Source="./Styles/SmallerDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/EditableDataGridStyles.xaml"/>
                 <ResourceDictionary Source="./Styles/MyTimePicker.xaml"/>
-                
+               
                 <!--Material Toolkit-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

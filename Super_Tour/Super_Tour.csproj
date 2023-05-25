@@ -361,6 +361,8 @@
     <Compile Include="Ultis\Api_Address\Country.cs" />
     <Compile Include="Ultis\Api_Address\District.cs" />
     <Compile Include="Ultis\Api_Address\Ward.cs" />
+    <Compile Include="Ultis\BooleanToCursorConverter.cs" />
+    <Compile Include="Ultis\BooleanToVisibilityConverter.cs" />
     <Compile Include="Ultis\Constant.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />

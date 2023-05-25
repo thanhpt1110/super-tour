@@ -197,6 +197,7 @@ namespace Super_Tour.ViewModel
         {
             CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel);
             mainViewModel.CurrentChildView = createTravelViewModel;
+            mainViewModel.setFirstChild("Add Travel");
         }
 
         private void ExecuteSearchTravel(object obj)

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Super_Tour.Ultis;
 using Microsoft.Extensions.Caching.Memory;
 using System.Windows.Threading;
+using System.Windows.Media;
+using System.Windows.Input;
 
 namespace Super_Tour.ViewModel
 {
@@ -17,10 +19,12 @@ namespace Super_Tour.ViewModel
     {
         //Fields
         public static ObservableObject _currentChildView;
-        private ObservableObject _nextChildView1;
         private string _nextChildCaption1;
+        private bool _haveOneChild = false;
         private string _caption;
         private IconChar _icon;
+        private Brush childCaptionColor;
+        private Brush nextChildCaption1Color;
         private TechnicalHelpViewModel _technicalHelpViewModel = null;
         private DashBoardViewModel _dashBoardViewModel = null;
         private MainTravelViewModel _mainTravelViewModel = null;
@@ -47,18 +51,6 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
-        public ObservableObject NextChildView1
-        {
-            get
-            {
-                return _nextChildView1;
-            }
-            set
-            {
-                _nextChildView1 = value;
-                OnPropertyChanged(nameof(NextChildView1));
-            }
-        }
         public string NextChildCaption1
         {
             get
@@ -69,6 +61,15 @@ namespace Super_Tour.ViewModel
             {
                 _nextChildCaption1 = value;
                 OnPropertyChanged(nameof(NextChildCaption1));
+            }
+        }
+        public bool HaveOneChild
+        {
+            get => _haveOneChild;
+            set
+            {
+                _haveOneChild = value;
+                OnPropertyChanged(nameof(HaveOneChild));
             }
         }
         public string Caption
@@ -107,6 +108,26 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTravelStatisticViewCommand { get; }
         public RelayCommand ShowAccountViewCommand { get; }
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
+        public ICommand BackToPreviousChildCommand { get; }
+        public Brush ChildCaptionColor 
+        { 
+            get => childCaptionColor;
+            set
+            {
+                childCaptionColor = value;
+                OnPropertyChanged(nameof(ChildCaptionColor));
+            }
+        }
+        public Brush NextChildCaption1Color 
+        { 
+            get => nextChildCaption1Color;
+            set
+            {
+                nextChildCaption1Color = value;
+                OnPropertyChanged(nameof(NextChildCaption1Color));
+            }
+        }
+
         #endregion
 
         public MainViewModel()
@@ -124,16 +145,45 @@ namespace Super_Tour.ViewModel
             ShowTravelStatisticViewCommand = new RelayCommand(ExecuteShowTravelStatisticViewCommand);
             ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
+            BackToPreviousChildCommand = new RelayCommand(ExecuteBackToPreviousChildCommand);
             _dashBoardViewModel = new DashBoardViewModel();
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
-            NextChildCaption1 = "Add Travel";
-            Icon = IconChar.Home;
             /*_timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += Timer_Tick;*/
         }
 
+        private void ExecuteBackToPreviousChildCommand(object obj)
+        {
+            removeFirstChild();
+            if (Caption == "Travel")
+            {
+                CurrentChildView = _mainTravelViewModel;
+            }
+            else if(Caption == "Booking")
+            {
+                CurrentChildView = _mainBookingViewModel;
+            }
+            else if(Caption == "Tour")
+            {
+                CurrentChildView = _mainTourViewModel;
+            }
+        }
+
+        public void setFirstChild(string nextChildCaption1)
+        {
+            HaveOneChild = true;
+            this.NextChildCaption1 = nextChildCaption1;
+            ChildCaptionColor = new SolidColorBrush(Color.FromRgb(130, 136, 143));
+            NextChildCaption1Color = new SolidColorBrush(Color.FromRgb(29, 36, 46));
+        }
+        public void removeFirstChild()
+        {
+            HaveOneChild = false;
+            this.NextChildCaption1 = "";
+            ChildCaptionColor = new SolidColorBrush(Color.FromRgb(29, 36, 46));
+        }
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Dashboard
@@ -225,6 +275,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _technicalHelpViewModel;
             Caption = "Technical Help";
             Icon = IconChar.QuestionCircle;
+            removeFirstChild();
         }
 
         private void ExecuteShowDashboardViewCommand(object obj)
@@ -234,6 +285,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
+            removeFirstChild();
         }
 
         private void ExecuteShowTravelViewCommand(object obj)
@@ -243,6 +295,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainTravelViewModel;
             Caption = "Travel";
             Icon = IconChar.Plane;
+            removeFirstChild();
         }
 
         private void ExecuteShowBookingViewCommand(object obj)
@@ -252,6 +305,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainBookingViewModel;
             Caption = "Booking";
             Icon = IconChar.Hand;
+            removeFirstChild();
         }
         private void ExecuteShowCustomerViewCommand(object obj)
         {
@@ -260,6 +314,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainCustomerViewModel;
             Caption = "Customer";
             Icon = IconChar.AddressBook;
+            removeFirstChild();
         }
         private void ExecuteShowTicketViewCommand(object obj)
         {
@@ -268,6 +323,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainTicketViewModel;
             Caption = "Ticket";
             Icon = IconChar.Ticket;
+            removeFirstChild();
         }
         private void ExecuteShowTourViewCommand(object obj)
         {
@@ -276,6 +332,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainTourViewModel;
             Caption = "Tour";
             Icon = IconChar.CalendarPlus;
+            removeFirstChild();
         }
         private void ExecuteShowPackageViewCommand(object obj)
         {
@@ -284,6 +341,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainPackageViewModel;
             Caption = "Package";
             Icon = IconChar.BagShopping;
+            removeFirstChild();
         }
         private void ExecuteShowPackageTypeViewCommand(object obj)
         {
@@ -292,6 +350,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainPackageTypeViewModel;
             Caption = "Package Type";
             Icon = IconChar.BagShopping;
+            removeFirstChild();
         }
         private void ExecuteShowCustomerStatisticViewCommand(object obj)
         {
@@ -300,16 +359,19 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _customerStatisticViewModel;
             Caption = "Customer Statistic";
             Icon = IconChar.Database;
+            removeFirstChild();
         }
         private void ExecuteShowRevenueStatisticViewCommand(object obj)
         {
             Caption = "Revenue Statistic";
             Icon = IconChar.Database;
+            removeFirstChild();
         }
         private void ExecuteShowTravelStatisticViewCommand(object obj)
         {
             Caption = "Travel Statistic";
             Icon = IconChar.Database;
+            removeFirstChild();
         }
         private void ExecuteShowAccountViewCommand(object obj)
         {
@@ -318,6 +380,7 @@ namespace Super_Tour.ViewModel
             CurrentChildView = _mainAccountViewModel;
             Caption = "Manage Account";
             Icon = IconChar.AddressCard;
+            removeFirstChild();
         }
     }
 }

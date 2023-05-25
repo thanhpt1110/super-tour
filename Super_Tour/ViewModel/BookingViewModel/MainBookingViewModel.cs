@@ -188,6 +188,7 @@ namespace Super_Tour.ViewModel
         {
            CreateBookingViewModel createBookingViewModel = new CreateBookingViewModel();
             mainViewModel.CurrentChildView = createBookingViewModel;
+            mainViewModel.setFirstChild("Add Booking");
         }
     }   
 }
