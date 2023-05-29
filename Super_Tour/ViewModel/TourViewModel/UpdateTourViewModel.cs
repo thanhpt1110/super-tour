@@ -2,6 +2,7 @@
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,25 @@ namespace Super_Tour.ViewModel
 {
     internal class UpdateTourViewModel: ObservableObject
     {
+        #region declare variable
         private TOUR _tour;
         private ObservableCollection<DateActivity> _listDateActitvities;
+        private ObservableCollection<string> _selectedProvinceList;
+        private ObservableCollection<Province> _listProvinces;
         private SUPER_TOUR db = new SUPER_TOUR();
         private string _nameTour;
+        private string _price;
         private int _totalDay;
         private int _totalNight;
+        private Province _selectedProvinces;
         private bool _executeSave = true;
+        private int _priceInt;
+        private bool _isDataModified = false;
+        private List<Province> _listselectedProvinces;
+        private MainTourViewModel _mainTourViewModel;
+        private MainViewModel _mainViewModel;
+        #endregion
+        #region Declare binding
         public int TotalDay
         {
             get
@@ -35,6 +48,48 @@ namespace Super_Tour.ViewModel
             {
                 _totalDay = value;
                 OnPropertyChanged(nameof(TotalDay));
+            }
+        }
+        public Province SelectedProvinces
+        {
+            get => _selectedProvinces;
+            set
+            {
+                _selectedProvinces = value;
+                CheckDataModified();
+                OnPropertyChanged(nameof(SelectedProvinces));
+            }
+        }
+        // End test
+        public ObservableCollection<string> SelectedProvinceList
+        {
+            get => _selectedProvinceList;
+            set
+            {
+                _selectedProvinceList = value;
+                OnPropertyChanged(nameof(SelectedProvinceList));
+            }
+        }
+        public ObservableCollection<Province> ListProvinces
+        {
+            get
+            {
+                return _listProvinces;
+            }
+            set
+            {
+                _listProvinces = value;
+                CheckDataModified();
+                OnPropertyChanged(nameof(ListProvinces));
+            }
+        }
+        public bool IsDataModified
+        {
+            get { return _isDataModified; }
+            set
+            {
+                _isDataModified = value;
+                OnPropertyChanged(nameof(IsDataModified));
             }
         }
         public int TotalNight
@@ -49,12 +104,34 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(TotalNight));
             }
         }
+        public string Price
+        {
+            get { return _price; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    _price = value;
+                else
+                {
+                    if (int.TryParse(value, out _priceInt))
+                    {
+                        _price = value;
+                        CheckDataModified();
+                    }
+                    else
+                        Price = _price;
+                }
+                OnPropertyChanged(nameof(Price));
+
+            }
+        }
         public string NameTour
         {
             get { return _nameTour; }
             set
             {
                 _nameTour = value;
+                CheckDataModified();
                 OnPropertyChanged(nameof(NameTour));
             }
         }
@@ -68,37 +145,65 @@ namespace Super_Tour.ViewModel
             set
             {
                 _listDateActitvities = value;
+                CheckDataModified();
                 OnPropertyChanged(nameof(ListDateAcitivities));
             }
         }
+        #endregion
+        #region Command
         public ICommand SaveUpdateTourCommand { get; }
         public ICommand AddADayCommand { get; }
-
+        public ICommand AddProvinceCommand { get; }
+        public ICommand RemoveSelectedProvinceCommand { get; }
+        #endregion
+        #region Constructor
         public UpdateTourViewModel() 
         {
 
         }
-        public UpdateTourViewModel(TOUR tour)
+        public UpdateTourViewModel(TOUR tour, MainTourViewModel mainTourViewModel, MainViewModel mainViewModel)
         {
             _tour = tour;
-            NameTour = tour.Name_Tour;
-            _listDateActitvities = new ObservableCollection<DateActivity>();
-            AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
+            _mainViewModel = mainViewModel;
+            _mainTourViewModel = mainTourViewModel;
+            AddProvinceCommand = new RelayCommand(ExecuteAddProvince);
+            RemoveSelectedProvinceCommand = new RelayCommand(ExecuteRemoveProvince);
             SaveUpdateTourCommand= new RelayCommand(ExecuteCreateTourCommand);
+            AddADayCommand = new RelayCommand(ExecuteAddADayCommand);
+            _selectedProvinceList = new ObservableCollection<string>();
+            _listProvinces = new ObservableCollection<Province>();
+            _listselectedProvinces = new List<Province>();
+            _listDateActitvities = new ObservableCollection<DateActivity>();
+            initPage();
             LoadPage();
         }
-        
+        #endregion
+        #region init page
+        private void initPage()
+        {
+            _selectedProvinceList =  new ObservableCollection<string>(_tour.PlaceOfTour.Split('|').ToList());
+            SelectedProvinceList.RemoveAt(_selectedProvinceList.Count - 1);
+            _listProvinces = new ObservableCollection<Province>(Get_Api_Address.getProvinces());
+            foreach(string nameProvince in _selectedProvinceList)
+            {
+                Province province = _listProvinces.Where(p => p.name == nameProvince).SingleOrDefault();
+                _listselectedProvinces.Add(province);
+                ListProvinces.Remove(province);                    
+            }
+            NameTour = _tour.Name_Tour;
+            Price = _tour.PriceTour.ToString();
+        }
         private async Task LoadPage()
         {
             await Task.Run(() => {
                 List<TOUR_DETAILS> listTourDetail = db.TOUR_DETAILs.Where(p => p.Id_Tour == _tour.Id_Tour).ToList();
                 Application.Current.Dispatcher.Invoke(() => {
                     int i = 1;
-                    while(listTourDetail.Where(p=>p.Date_Order_Package==i).ToList().Count>0)
+                    while (listTourDetail.Where(p => p.Date_Order_Package == i).ToList().Count > 0)
                     {
                         List<TOUR_DETAILS>
                         dateNum = listTourDetail.Where(p => p.Date_Order_Package == i).ToList();
-                        DateActivity dateActivity = new DateActivity(i,true,_tour);
+                        DateActivity dateActivity = new DateActivity(i, true, _tour);
                         foreach (TOUR_DETAILS date in dateNum)
                         {
                             GridActivity gridActivity = new GridActivity() { Tour_detail = date, TimeOfPackage = DateTime.Now.Date.Add(date.Start_Time_Package), PackageName = db.PACKAGEs.Find(date.Id_Package).Name_Package };
@@ -115,15 +220,43 @@ namespace Super_Tour.ViewModel
                             {
                                 dateActivity.EveningActivities.Add(gridActivity);
                             }
-                        }    
-                            _listDateActitvities.Add(dateActivity);
+                        }
+                        _listDateActitvities.Add(dateActivity);
                         i++;
                     }
                     TotalDay = _listDateActitvities.Count;
                     TotalNight = _listDateActitvities.Count - 1;
                 });
-                });
+            });
         }
+        #endregion
+        #region Execute province
+        private void ExecuteAddProvince(object obj)
+        {
+            if (SelectedProvinces != null)
+            {
+                SelectedProvinceList.Add(SelectedProvinces.name);
+                _listselectedProvinces.Add(SelectedProvinces);
+                ListProvinces.Remove(SelectedProvinces);
+                SelectedProvinces = null;
+            }
+        }
+        private void ExecuteRemoveProvince(object obj)
+        {
+            string removedProvinceName = obj as string;
+            Province removedProvince = _listselectedProvinces.SingleOrDefault(p => p.name == removedProvinceName);
+            SelectedProvinceList.Remove(removedProvinceName);
+            _listselectedProvinces.Remove(removedProvince);
+            ListProvinces.Add(removedProvince);
+            List<Province> newList = ListProvinces.OrderBy(p => p.name).ToList();
+            ListProvinces.Clear();
+            foreach (Province province in newList)
+            {
+                ListProvinces.Add(province);
+            }
+        }
+        #endregion
+        #region Execute Update Tour
         private async void ExecuteCreateTourCommand(object obj)
         {
             if (string.IsNullOrEmpty(_nameTour) || _listDateActitvities.Count == 0)
@@ -138,6 +271,11 @@ namespace Super_Tour.ViewModel
                 int i = 1;
                 int IdTour = _tour.Id_Tour;
                 _tour.PriceTour = 0;
+                _tour.PlaceOfTour = "";
+                foreach (string province in _selectedProvinceList)
+                {
+                    _tour.PlaceOfTour = _tour.PlaceOfTour + province + "|";
+                }
                 foreach (DateActivity dateActivity in _listDateActitvities)
                 {
                     if (listTourDetail.Where(p => p.Date_Order_Package == i).ToList().Count == 0)
@@ -233,6 +371,9 @@ namespace Super_Tour.ViewModel
                 db.TOURs.AddOrUpdate(_tour);
                 await db.SaveChangesAsync();
                 MyMessageBox.ShowDialog("Update tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                await _mainTourViewModel.ReloadDataAsync();
+                _mainViewModel.CurrentChildView = _mainTourViewModel;
+                _mainViewModel.setFirstChild("");
                 /*UpdateTourView updateTourView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
@@ -255,6 +396,8 @@ namespace Super_Tour.ViewModel
             }
 
         }
+        #endregion
+        #region Add new Day
         private void ExecuteAddADayCommand(object obj)
         {
             DateActivity dateActivity = new DateActivity(ListDateAcitivities.Count + 1);
@@ -262,5 +405,16 @@ namespace Super_Tour.ViewModel
             TotalNight = (ListDateAcitivities.Count - 1);
             TotalDay = ListDateAcitivities.Count;
         }
+        #endregion
+        #region CheckDataModified
+        private void CheckDataModified()
+        {
+            if (string.IsNullOrEmpty(_nameTour) || string.IsNullOrEmpty(_price) || SelectedProvinceList.Count == 0
+                || _listDateActitvities.Count == 0)
+                IsDataModified = false;
+            else
+                IsDataModified = true;
+        }
+        #endregion
     }
 }

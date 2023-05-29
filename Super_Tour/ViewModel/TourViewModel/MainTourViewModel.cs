@@ -41,17 +41,33 @@ namespace Super_Tour.ViewModel
     internal class MainTourViewModel: ObservableObject
     {
         #region Declare variable
+        private SUPER_TOUR db = null;
         private MainViewModel mainViewModel;
-        private List<TOUR> _listSearchTour;
-        private List<TOUR> _listToursOriginal;
+        public static DateTime TimeTour;
+        private UPDATE_CHECK _tracker = null;
+        private List<TOUR> _listToursSearching = null;
+        private List<TOUR> _listToursOriginal = null;
+        private List<TOUR> _listTourDatagrid = null;
         private CancellationTokenSource _cancellationTokenSource;
         private ObservableCollection<DataGridTour> _listDataGridTour;
-        private string _searchTour = null;
-        private SUPER_TOUR db = null;
         private ObservableCollection<string> _listSearchFilterBy;
         private DispatcherTimer _timer = null;
-        private string _selectedFilter = "Name";
+        private DataGridTour _selectedItem = null;
+        private DataGridTour temp = null;
         private Visibility _isLoading = Visibility.Hidden;
+        private string _searchType = "";
+        private string _selectedFilter = "Name";
+        private int _currentPage = 1;
+        private int _totalPage;
+        private string _pageNumberText = null;
+        private bool _enableButtonNext;
+        private bool _enableButtonPrevious;
+        private bool _onSearching = false;
+        private string _resultNumberText = null;
+        private int _startIndex;
+        private int _endIndex;
+        private int _totalResult;
+        private string table = "UPDATE_TOUR";
         #endregion
 
         #region Declare binding
@@ -88,16 +104,63 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListSearchFilterBy));
             }
         }
-        
-        public string SearchTour
+        public string ResultNumberText
+        {
+            get { return _resultNumberText; }
+            set
+            {
+                _resultNumberText = value;
+                OnPropertyChanged(nameof(ResultNumberText));
+            }
+        }
+
+        public string PageNumberText
         {
             get
             {
-                return _searchTour;
+                return _pageNumberText;
             }
             set
             {
-                _searchTour = value;
+                _pageNumberText = value;
+                OnPropertyChanged(nameof(PageNumberText));
+            }
+        }
+
+        public bool EnableButtonNext
+        {
+            get
+            {
+                return _enableButtonNext;
+            }
+            set
+            {
+                _enableButtonNext = value;
+                OnPropertyChanged(nameof(EnableButtonNext));
+            }
+        }
+
+        public bool EnableButtonPrevious
+        {
+            get
+            {
+                return _enableButtonPrevious;
+            }
+            set
+            {
+                _enableButtonPrevious = value;
+                OnPropertyChanged(nameof(EnableButtonPrevious));
+            }
+        }
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
                 if (_cancellationTokenSource != null)
                 {
                     _cancellationTokenSource.Cancel();
@@ -113,6 +176,16 @@ namespace Super_Tour.ViewModel
                             SearchByPlace();
                     }
                 }, TaskScheduler.FromCurrentSynchronizationContext());
+                OnPropertyChanged(nameof(SearchType));
+            }
+        }
+        public DataGridTour SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -137,13 +210,15 @@ namespace Super_Tour.ViewModel
         public ICommand SelectedFilterCommand { get; }
         public ICommand DeleteTourCommnand { get; }
         public ICommand UpdateTourCommand { get; }
+        public ICommand GoToPreviousPageCommand { get; private set; }
+        public ICommand GoToNextPageCommand { get; private set; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
-
+        #region Constructor
         public MainTourViewModel(MainViewModel mainViewModel) 
         {
             this.mainViewModel = mainViewModel;
-            db = new SUPER_TOUR();
+            db = SUPER_TOUR.db;
             _listDataGridTour = new ObservableCollection<DataGridTour>();
             _listSearchFilterBy= new ObservableCollection<string>();
             OpenCreateTourViewCommand = new RelayCommand(ExecuteOpenCreateTourViewCommand);
@@ -151,107 +226,205 @@ namespace Super_Tour.ViewModel
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             DeleteTourCommnand = new RelayCommand(ExecuteDeleteTour);
             UpdateTourCommand = new RelayCommand(ExecuteUpdateTourCommand);
-            //LoadTourDataAsync();
+            GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
+            GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
+            LoadDataAsync();
             generateFilterItem();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
             Timer.Tick += Timer_Tick;
         }
+        #endregion
 
+        #region Execute Command
         private void ExecuteUpdateTourCommand(object obj)
         {
-            Timer.Stop();
             DataGridTour dataGridTour = (DataGridTour)obj;
             TOUR tour = dataGridTour.Tour;
-            /*UpdateTourView view = new UpdateTourView();
-            view.DataContext = new UpdateTourViewModel(tour);
-            view.ShowDialog();*/
-            LoadTourDataAsync();
+            UpdateTourViewModel updateTourViewModel = new UpdateTourViewModel(tour, this, mainViewModel);
+            mainViewModel.CurrentChildView = updateTourViewModel;
+            mainViewModel.setFirstChild("Update Tour");
+            
         }
-
-        private void ExecuteSelectFilter(object obj)
+        #region Load data async
+        private async Task LoadDataAsync()
         {
-            SearchTour = "";
-        }
-
-        private void ExecuteSearchTour(object obj)
-        {
-            switch(_selectedFilter)
+            try
             {
-                default:
-                    return;
-            }    
-        }
-
-        private void LoadGrid(List<TOUR> listTour)
-        {
-            _listDataGridTour.Clear();
-            foreach (TOUR tour in listTour)
-            {
-                decimal SumPrice = tour.TOUR_DETAILs
-                .Where(p => p.Id_Tour == tour.Id_Tour)
-                .Sum(p => p.PACKAGE.Price);
-                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listToursOriginal = db.TOURs.ToList();
+                            ReloadData();
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
+                });
             }
-
-
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
+        #endregion
 
-        private void generateFilterItem()
-        {
-            _listSearchFilterBy.Add("Name");
-            _listSearchFilterBy.Add("Place");
-        }
-
-        private void SearchByName()
-        {
-            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
-                return;
-            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchTour)).ToList();
-            LoadGrid(_listSearchTour);
-        }
-
-        private void SearchByPlace()
-        {
-            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
-                return;
-            this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
-            LoadGrid(_listSearchTour);
-        }
-
+        #region Check data per second
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            await Task.Run(() =>
-            {
-                try
-                {
-
-/*                        if (db != null)
-                        {
-                            db.Dispose();
-                        }
-                        db = new SUPER_TOUR();*/
-                        List<TOUR> Updatetours = db.TOURs.ToList();
-                        db.Entry(Updatetours).Reload();
-
-                        if (!Updatetours.SequenceEqual(_listToursOriginal))
-                        {
-                            _listToursOriginal = Updatetours;
-                            Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            LoadGrid(_listToursOriginal);
-
-                        });
-                        }
-                    
-                }
-                catch (Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                }
-            });
+            await ReloadDataAsync();
         }
 
+        public async Task ReloadDataAsync()
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    _tracker = UPDATE_CHECK.getTracker(table);
+                    if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeTour)
+                    {
+                        TimeTour = (DateTime.Parse(_tracker.DateTimeUpdate));
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listToursOriginal = db.TOURs.ToList();
+                            ReloadData();
+                        });
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+        #region Custom display data grid
+        private List<TOUR> GetData(List<TOUR> ListTours, int startIndex, int endIndex)
+        {
+            try
+            {
+                return ListTours.OrderBy(m => m.Id_Tour).Skip(startIndex).Take(endIndex - startIndex).ToList();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        private void LoadDataByPage(List<TOUR> ListTours)
+        {
+            try
+            {
+                this._totalResult = ListTours.Count();
+                if (_totalResult == 0)
+                {
+                    _startIndex = -1;
+                    _endIndex = 0;
+                    _totalPage = 1;
+                    _currentPage = 1;
+                }
+                else
+                {
+                    this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+                    if (this._totalPage < _currentPage)
+                        _currentPage = this._totalPage;
+                    this._startIndex = (this._currentPage - 1) * 13;
+                    this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+                }
+
+                _listTourDatagrid = GetData(ListTours, this._startIndex, this._endIndex);
+                _listDataGridTour.Clear();
+                foreach (TOUR tour in _listTourDatagrid)
+                {
+                    decimal SumPrice = tour.TOUR_DETAILs
+                .Where(p => p.Id_Tour == tour.Id_Tour)
+                .Sum(p => p.PACKAGE.Price);
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+
+        private void setResultNumber()
+        {
+            ResultNumberText = $"Showing {this._startIndex + 1} - {this._endIndex} of {this._totalResult} results";
+        }
+
+        private void setButtonAndPage()
+        {
+            if (this._currentPage < this._totalPage)
+            {
+                EnableButtonNext = true;
+                if (this._currentPage == 1)
+                    EnableButtonPrevious = false;
+                else
+                    EnableButtonPrevious = true;
+            }
+            if (this._currentPage == this._totalPage)
+            {
+                if (this._currentPage == 1)
+                {
+                    EnableButtonPrevious = false;
+                    EnableButtonNext = false;
+                }
+                else
+                {
+                    EnableButtonPrevious = true;
+                    EnableButtonNext = false;
+                }
+            }
+            PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
+        }
+
+        private void ExecuteGoToPreviousPageCommand(object obj)
+        {
+            if (this._currentPage > 1)
+                --this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listToursSearching);
+            else
+                LoadDataByPage(_listToursOriginal);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ExecuteGoToNextPageCommand(object obj)
+        {
+            if (this._currentPage < this._totalPage)
+                ++this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listToursSearching);
+            else
+                LoadDataByPage(_listToursOriginal);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ReloadData()
+        {
+            if (_onSearching)
+            {
+                _listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
+                LoadDataByPage(_listToursSearching);
+            }
+            else
+                LoadDataByPage(_listToursOriginal);
+            setButtonAndPage();
+            setResultNumber();
+        }
+        #endregion
         private async void ExecuteDeleteTour(object obj)
         {
 
@@ -294,7 +467,7 @@ namespace Super_Tour.ViewModel
                     MyMessageBox.ShowDialog("The tour could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Console.WriteLine("Lỗi: " + ex.InnerException.Message);
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
@@ -307,34 +480,56 @@ namespace Super_Tour.ViewModel
 
         private void ExecuteOpenCreateTourViewCommand(object obj)
         {
-            CreateTourViewModel createTourViewModel = new CreateTourViewModel();
+            CreateTourViewModel createTourViewModel = new CreateTourViewModel(this,mainViewModel);
             mainViewModel.CurrentChildView = createTourViewModel;
             mainViewModel.setFirstChild("Add Tour");
         }
-        public async Task LoadTourDataAsync()
+        private void ExecuteSelectFilter(object obj)
         {
-            await Task.Run(async () =>
-            {
-                try
-                {
-                    if (db != null)
-                    {
-                        db.Dispose();
-                    }
-                    db = new SUPER_TOUR();
-                    _listToursOriginal = await db.TOURs.ToListAsync();
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        LoadGrid(_listToursOriginal);
-                    });
-                    Timer.Start();
-                }
-                catch (Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
-                }
-            });
+            SearchType = "";
         }
+
+        private void ExecuteSearchTour(object obj)
+        {
+/*            switch(_selectedFilter)
+            {
+                default:
+                    return;
+            }    */
+        }
+        private void SearchByName()
+        {
+/*            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchTour)).ToList();
+            LoadGrid(_listSearchTour);*/
+        }
+
+        private void SearchByPlace()
+        {
+/*            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
+            LoadGrid(_listSearchTour);*/
+        }
+        private void generateFilterItem()
+        {
+            _listSearchFilterBy.Add("Name");
+            _listSearchFilterBy.Add("Place");
+        }
+        #endregion
+        #region Load đata
+        private void LoadGrid(List<TOUR> listTour)
+        {
+            _listDataGridTour.Clear();
+            foreach (TOUR tour in listTour)
+            {
+                decimal SumPrice = tour.TOUR_DETAILs
+                .Where(p => p.Id_Tour == tour.Id_Tour)
+                .Sum(p => p.PACKAGE.Price);
+                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+            }
+        }       
+        #endregion
     }
 }

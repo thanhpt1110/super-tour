@@ -70,7 +70,9 @@
                                                    Margin="-5,0,0,0"
                                                    FontSize="15"/>
                                         </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox
+                                                Text="{Binding NameTour}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
                                                  CaretBrush="Black"
@@ -93,7 +95,9 @@
                                                    Margin="-5,0,0,0"
                                                    FontSize="15"/>
                                         </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox 
+                                                Text = "{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
                                                  CaretBrush="Black"
@@ -115,7 +119,7 @@
                                                        FontWeight="Medium"
                                                        FontSize="18"
                                                        HorizontalAlignment="Center"/>
-                                                <TextBlock Text="0"
+                                                <TextBlock Text="{Binding TotalDay}"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -128,7 +132,8 @@
                                                        FontWeight="Medium"
                                                        FontSize="18"
                                                        HorizontalAlignment="Center"/>
-                                                <TextBlock Text="0"
+                                                <TextBlock 
+                                                    Text="{Binding TotalNight}"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -148,6 +153,9 @@
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="0,10,0,0">
                                         <ComboBox 
+                                            ItemsSource="{Binding ListProvinces}"
+                                            SelectedItem="{Binding SelectedProvinces}"
+                                            DisplayMemberPath="name"
                                             FontSize="18"
                                             Height="auto"
                                             Width="250"
@@ -159,7 +167,9 @@
                                             BorderBrush="Black"
                                             Foreground="Black">
                                         </ComboBox>
-                                        <Button Margin="10,0,0,0"
+                                        <Button 
+                                            Command="{Binding AddProvinceCommand}"
+                                            Margin="10,0,0,0"
                                             Height="40"
                                             Width="40"
                                             Style="{StaticResource MaterialDesignIconButton}"
@@ -197,7 +207,11 @@
                                                                         VerticalAlignment="Center"/>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
-                                                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                                    <Button
+                                                                         
+                                                                        Command="{Binding DataContext.RemoveSelectedProvinceCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Style="{StaticResource MaterialDesignIconButton}"
                                                                         HorizontalAlignment="Right"
                                                                             Height="auto"
                                                                             Width="auto"
@@ -541,7 +555,7 @@
         <Grid Grid.Row="2">
             <Button
                 Margin="0,20,0,0"
-                Command="{Binding SaveTourCommand}"
+                Command="{Binding SaveUpdateTourCommand}"
                 Content="Save"
                 Background="{StaticResource btnAdd}"
                 BorderThickness="0"

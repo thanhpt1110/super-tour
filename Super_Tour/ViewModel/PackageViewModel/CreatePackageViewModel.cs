@@ -42,6 +42,7 @@ namespace Super_Tour.ViewModel
         private bool _isDataModified = false;
         private string _imagePath = null;
         private bool _isNewImage = false;
+        private int _priceInt;
         #endregion
 
         #region Declare binding
@@ -60,9 +61,20 @@ namespace Super_Tour.ViewModel
             get { return _price; }
             set
             {
-                _price = value;
+                if (string.IsNullOrEmpty(value))
+                    _price = value;
+                else
+                {
+                    if (int.TryParse(value, out _priceInt))
+                    {
+                        _price = value;
+                        CheckDataModified();
+                    }
+                    else
+                        Price = _price;
+                }
                 OnPropertyChanged(nameof(Price));
-                CheckDataModified();
+
             }
         }
 
@@ -177,7 +189,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        #region Commnad 
+        #region Commnand 
         public ICommand SelectedProvinceCommand { get; }
         public ICommand CreateNewPackageCommand { get; }
         public ICommand OpenPictureCommand { get; }

@@ -19,6 +19,7 @@ namespace Super_Tour.ViewModel
 
     internal class AddPackageToTourViewModel: ObservableObject
     {
+        #region declare variable
         private TYPE_PACKAGE _selectedTypePackage;
         private List<PACKAGE> _listAvailablePackage;
         private bool _executeSave=true;
@@ -28,7 +29,8 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<GridActivity> _listTourDetail;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private TOUR _tour;
-
+        #endregion
+        #region Declare binding
         public ObservableCollection<TYPE_PACKAGE> ListTypePackage
         {
             get { return _listTypePackage; }
@@ -71,11 +73,15 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ObservableListPickedPackage));
             }
         }
+        #endregion
+        #region Command
         public ICommand AddAvailablePackageCommand { get; }
         public ICommand DeletePickedPackageCommand { get; }
         public ICommand SavePackageCommand { get; }
         public ICommand CreateNewPacakgeCommand { get; }
         public ICommand SearchCommand { get; }
+        #endregion
+        #region Constructor
         public AddPackageToTourViewModel() 
         {
             AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
@@ -84,20 +90,28 @@ namespace Super_Tour.ViewModel
             CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
             SearchCommand = new RelayCommand(ExecuteSearchCommand);
         }
+        public AddPackageToTourViewModel(ObservableCollection<GridActivity> listTourDetail, bool isUpdate, TOUR tour = null)
+        {
+            _tour = tour;
+            _listTourDetail = listTourDetail;
+            _observableListPickedPackage = new ObservableCollection<PACKAGE>();
+            AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
+            if (isUpdate)
+                SavePackageCommand = new RelayCommand(ExecuteUpdatePackage, CanExecuteSavePackage);
+            else
+                SavePackageCommand = new RelayCommand(ExecuteSavePackage, CanExecuteSavePackage);
+            DeletePickedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
+            CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
+            SearchCommand = new RelayCommand(ExecuteSearchCommand);
+            LoadTypePackage();
+            LoadAvailablePackage();
+        }
+        #endregion
+        #region loadPage
         private void LoadTypePackage()
         {
             List<TYPE_PACKAGE> package =  db.TYPE_PACKAGEs.ToList();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>(package);
-        }
-        private void ExecuteSearchCommand(object obj)
-        {
-            /*            List<PACKAGE> listPackageSearch = _listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
-                        _listAvailablePackage.Clear();
-                        foreach(PACKAGE package in listPackageSearch)
-                        {
-                            _listAvailablePackage.Add(package);
-                        }    */
-            LoadWithSearch();
         }
         private void LoadWithSearch()
         {
@@ -112,12 +126,35 @@ namespace Super_Tour.ViewModel
                 ObservableListAvailablePackage.Remove(package);
             }
         }
+        #endregion
+        #region Search
+        private void ExecuteSearchCommand(object obj)
+        {
+            /*            List<PACKAGE> listPackageSearch = _listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+                        _listAvailablePackage.Clear();
+                        foreach(PACKAGE package in listPackageSearch)
+                        {
+                            _listAvailablePackage.Add(package);
+                        }    */
+            LoadWithSearch();
+        }
+        #endregion
+        #region Add Packgage
+
         private void ExecuteCreatePackgeCommand(object obj)
         {
             CreatePackageView view = new CreatePackageView();
             view.ShowDialog();
             ReloadPackage(); 
         }
+        public void ExecuteAddNewPacakge(object obj)
+        {
+            PACKAGE package = obj as PACKAGE;
+            ObservableListAvailablePackage.Remove(package);
+            ObservableListPickedPackage.Add(package);
+        }
+        #endregion
+        #region Update package
         public void ExecuteUpdatePackage(object obj)
         {
             try
@@ -186,6 +223,8 @@ namespace Super_Tour.ViewModel
                 _executeSave = true;
             }
         }
+        #endregion
+        #region Save Package
         public void ExecuteSavePackage(object obj)
         {
             try
@@ -228,34 +267,16 @@ namespace Super_Tour.ViewModel
         {
             return _executeSave;
         }
-        public AddPackageToTourViewModel(ObservableCollection<GridActivity> listTourDetail,bool isUpdate,TOUR tour=null)
-        {
-            _tour = tour;
-            _listTourDetail = listTourDetail;
-            _observableListPickedPackage = new ObservableCollection<PACKAGE>();
-            AddAvailablePackageCommand = new RelayCommand(ExecuteAddNewPacakge);
-            if(isUpdate)
-                SavePackageCommand = new RelayCommand(ExecuteUpdatePackage, CanExecuteSavePackage);
-            else
-            SavePackageCommand = new RelayCommand(ExecuteSavePackage, CanExecuteSavePackage);
-            DeletePickedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
-            CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
-            SearchCommand = new RelayCommand(ExecuteSearchCommand);
-            LoadTypePackage();
-            LoadAvailablePackage();
-        }
+        #endregion
+        #region Delette package
         public void ExecuteDeletePickedPackage(object obj)
         {
             PACKAGE package = obj as PACKAGE;
             ObservableListPickedPackage.Remove(package);
             ObservableListAvailablePackage.Add(package);
         }
-        public void ExecuteAddNewPacakge(object obj)
-        {
-            PACKAGE package = obj as PACKAGE;
-            ObservableListAvailablePackage.Remove(package);
-            ObservableListPickedPackage.Add(package);
-        }
+        #endregion
+        #region Load Package
         private async Task LoadAvailablePackage()
         {
             await Task.Run(() =>
@@ -312,5 +333,6 @@ namespace Super_Tour.ViewModel
                 }
             });
         }
+        #endregion
     }
 }
