@@ -196,7 +196,7 @@ namespace Super_Tour.ViewModel
             this._selectedItem = Package;
 
             // Create object
-            SelectedProvinceCommand = new RelayCommand(ExecuteSelectedCityComboBox);
+            SelectedProvinceCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
             CreateNewPackageCommand = new RelayCommand(ExecuteCreatePackageCommand);
             _listProvince = new ObservableCollection<Province>();
@@ -227,7 +227,7 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region District
-        private void ExecuteSelectedCityComboBox(object obj)
+        private void ExecuteSelectedProvinceComboBox(object obj)
         {
             _selectedDistrict = null;
             LoadDistrict();
@@ -329,7 +329,6 @@ namespace Super_Tour.ViewModel
                 CreatePackageView createPackageView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
-                    Console.WriteLine(window.ToString());
                     if (window is CreatePackageView)
                     {
                         createPackageView = window as CreatePackageView;

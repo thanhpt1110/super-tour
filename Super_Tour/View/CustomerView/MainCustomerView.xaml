@@ -32,7 +32,7 @@
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 
-                                Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding SearchCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 x:Name="txtBoxSearchType" 
                                 Margin="55, 10, 0, 0"
                                 Width="300"
@@ -76,27 +76,32 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListTypePackages}"
+                              ItemsSource="{Binding ListCustomers}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource DataGridStyle1}" Margin="55,30,55,10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Customer ID"
+                                            Binding="{Binding Id_Customer}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.7*"
                                                 x:Name="Id_Type_Package_Column"/>
 
                         <DataGridTextColumn Header="Customer name" 
+                                            Binding="{Binding Name_Customer}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.4*"/>
                         <DataGridTextColumn Header="ID Number" 
+                                            Binding="{Binding IdNumber}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.2*"/>
                         <DataGridTextColumn Header="Phone number" 
+                                            Binding="{Binding PhoneNumber}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.2*"/>
@@ -108,11 +113,11 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource iconButton}" 
-                                                Command="{Binding DataContext.UpdatePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                Command="{Binding DataContext.UpdateCustomerCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}">
                                             <fa:IconImage Icon="Edit" Foreground="#32C948"/>
                                         </Button>
-                                        <Button Margin="15 0 0 5" Style="{StaticResource iconButton}" Command="{Binding DataContext.DeletePackageInDataGridView, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                        <Button Margin="15 0 0 5" Style="{StaticResource iconButton}" Command="{Binding DataContext.DeleteCustomerCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                     CommandParameter="{Binding}" >
                                             <fa:IconImage Margin="0 0 0 0" Icon="DeleteLeft" Foreground="#FF4A4F"/>
                                         </Button>
