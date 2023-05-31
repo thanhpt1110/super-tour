@@ -130,7 +130,7 @@ namespace Super_Tour.ViewModel
             _customer.Id_Customer = 0;
             _listGender = new ObservableCollection<string>();
             _tourists = new ObservableCollection<TOURIST>();
-            SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
+            SelectedCityCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             _listDistrict = new ObservableCollection<District>();
             OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
             AutoFillInformationCommand = new RelayCommand(ExecuteAutoFillInformationCommand);
@@ -144,14 +144,14 @@ namespace Super_Tour.ViewModel
             if(customer!=null)
             {
                 Customer = customer;
-                SelectedCity = _listCities.Where(p=>p.codename== customer.Province).First();
+                SelectedCity = _listCities.Where(p=>p.codename== customer.Id_Province).First();
                 SelectedGender = customer.Gender;
                 List<District> districts = Get_Api_Address.getDistrict(_selectedCity).OrderBy(p => p.name).ToList();
                 foreach (District district in districts)
                 {
                     _listDistrict.Add(district);
                 }
-                SelectedDistrict = _selectedCity.districts.Where(p => p.codename == customer.District).FirstOrDefault();
+                SelectedDistrict = _selectedCity.districts.Where(p => p.codename == customer.Id_District).FirstOrDefault();
             }    
         }
         private void LoadProvinces()
@@ -193,8 +193,8 @@ namespace Super_Tour.ViewModel
                     MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                     return;
                 }
-                Customer.Province = _selectedCity.codename;
-                Customer.District = _selectedDistrict.codename;
+                Customer.Id_Province = _selectedCity.codename;
+                Customer.Id_District = _selectedDistrict.codename;
                 Customer.Gender = _selectedGender;
                 db.CUSTOMERs.AddOrUpdate(_customer);
                 await db.SaveChangesAsync();
@@ -234,7 +234,7 @@ namespace Super_Tour.ViewModel
                 _execute = true;
             }
         }
-        private void ExecuteSelectedCityComboBox(object obj)
+        private void ExecuteSelectedProvinceComboBox(object obj)
         {
             try
             {

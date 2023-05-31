@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -107,20 +108,21 @@
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <TextBox
-                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Height="auto"
-                                                FontSize="15"
-                                                CaretBrush="Black"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Hint="Ex: 075203002869"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                MaxLength="12"
-                                                Width="300"/>
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                    Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="auto"
+                                                    FontSize="15"
+                                                    CaretBrush="Black"
+                                                    BorderBrush="Black"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource TextBoxColor}"
+                                                    materialDesign:HintAssist.Hint="Ex: 075203002869"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    MaxLength="12"  
+                                                    Width="300">
+                                            </TextBox>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
@@ -173,8 +175,12 @@
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="auto"
-                                                FontSize="15"
-                                                  >
+                                                FontSize="15">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectionChanged">
+                                                        <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
                                             </ComboBox>
                                         </StackPanel>
                                         
@@ -205,7 +211,7 @@
                                                 BorderBrush="Black"
                                                 CaretBrush="Black"
                                                 Foreground="Black"
-                                                materialDesign:HintAssist.Hint="2152045519"
+                                                materialDesign:HintAssist.Hint="Ex: 2152045519"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
@@ -224,7 +230,8 @@
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                SelectedItem="{Binding SelectedGender}"
+                                                SelectedValue="{Binding SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValuePath="Content"
                                                 HorizontalAlignment="Left"
                                                 Foreground="Black"
                                                 Background="{StaticResource ComboBoxColor}"
@@ -237,8 +244,8 @@
                                                 FontSize="15"
                                                 BorderBrush="Black"
                                                   >
-                                                <ComboBoxItem>Nam</ComboBoxItem>
-                                                <ComboBoxItem>Nữ</ComboBoxItem>
+                                                <ComboBoxItem>Male</ComboBoxItem>
+                                                <ComboBoxItem>Female</ComboBoxItem>
                                             </ComboBox>
                                         </StackPanel>
                                     </Grid>
@@ -277,12 +284,15 @@
                     </Grid>
                     <Grid Grid.Row="5">
                         <Button Content="Save"
+                                IsEnabled="{Binding IsDataModified}"
+                                Command="{Binding SaveCommand}"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                 Width="140"
                                 FontSize="20"
-                                Height="40"></Button>
+                                Height="40">
+                        </Button>
                     </Grid>
                 </Grid>
             </Border>

@@ -147,8 +147,10 @@ namespace Super_Tour.ViewModel
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             BackToPreviousChildCommand = new RelayCommand(ExecuteBackToPreviousChildCommand);
             _dashBoardViewModel = new DashBoardViewModel();
+            removeFirstChild();
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
+            Icon = IconChar.Home;
             /*_timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += Timer_Tick;*/

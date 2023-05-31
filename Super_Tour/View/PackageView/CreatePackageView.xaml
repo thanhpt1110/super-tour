@@ -119,7 +119,7 @@
                                                     materialDesign:HintAssist.Foreground="Black"
                                                     materialDesign:HintAssist.Background="Transparent"
                                                     >
-                                                <i:Interaction.Triggers>
+                                                    <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="SelectionChanged">
                                                         <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
                                                     </i:EventTrigger>
@@ -273,7 +273,7 @@
                                                         VerticalContentAlignment="Top"
                                                         VerticalAlignment="Top"
                                                         materialDesign:HintAssist.IsFloating="False"
-                                                        materialDesign:HintAssist.Hint="50.000"
+                                                        materialDesign:HintAssist.Hint="Ex: 50.000"
                                                         materialDesign:HintAssist.Foreground="Black"
                                                         materialDesign:HintAssist.Background="Transparent"
                                                         Height="auto"

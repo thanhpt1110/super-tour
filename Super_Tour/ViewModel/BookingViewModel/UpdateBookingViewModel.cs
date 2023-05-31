@@ -43,7 +43,7 @@ namespace Super_Tour.ViewModel
         public UpdateBookingViewModel(BOOKING booking)
         {
             _booking = booking;
-            SelectedCityCommand = new RelayCommand(ExecuteSelectedCityComboBox);
+            SelectedCityCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             LoadData();
 
         }
@@ -56,7 +56,7 @@ namespace Super_Tour.ViewModel
             loadGender();
             LoadProvinces();
         }
-        private void ExecuteSelectedCityComboBox(object obj)
+        private void ExecuteSelectedProvinceComboBox(object obj)
         {
             try
             {
