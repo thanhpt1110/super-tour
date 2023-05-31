@@ -67,13 +67,29 @@
                      />
             <Button Background="{StaticResource btnAdd}"
                     BorderThickness="0"
-                    Content="Submit"
                     HorizontalAlignment="Right"
                     Margin="0 30 0 0"
-                    FontSize="20"
-                    Height="50"
+                    FontSize="22"
+                    Height="45"
                     Width="150"
                     >
+                <StackPanel Orientation="Horizontal"
+                            Margin="10 0 0 0"
+                            HorizontalAlignment="Center"
+                            >
+                    <TextBlock Text="Submit"
+                               VerticalAlignment="Center"/>
+                    <materialDesign:PackIcon
+                        Margin="15 15 0 0"
+                        Kind="Send"
+                        Height="20"
+                        Width="20"
+                        VerticalAlignment="Center">
+                        <materialDesign:PackIcon.RenderTransform>
+                            <RotateTransform Angle="-50" />
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+                </StackPanel>
             </Button>
         </StackPanel>
     </Grid>
