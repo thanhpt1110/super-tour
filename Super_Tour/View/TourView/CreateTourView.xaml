@@ -162,6 +162,7 @@
                                             materialDesign:HintAssist.Hint="Select Province List"
                                             materialDesign:HintAssist.Background="Transparent"
                                             materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.IsFloating="False"
                                             Background="{StaticResource ComboBoxColor}"
                                             BorderBrush="Black"
                                             Foreground="Black">
