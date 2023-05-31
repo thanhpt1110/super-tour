@@ -108,20 +108,21 @@
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <TextBox
-                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Height="auto"
-                                                FontSize="15"
-                                                CaretBrush="Black"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Hint="Ex: 075203002869"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                MaxLength="12"
-                                                Width="300"/>
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                    Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="auto"
+                                                    FontSize="15"
+                                                    CaretBrush="Black"
+                                                    BorderBrush="Black"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource TextBoxColor}"
+                                                    materialDesign:HintAssist.Hint="Ex: 075203002869"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    MaxLength="12"  
+                                                    Width="300">
+                                            </TextBox>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">

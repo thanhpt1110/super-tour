@@ -59,9 +59,12 @@ namespace Super_Tour.ViewModel
             get { return _price; }
             set
             {
-                _price = value;
-                OnPropertyChanged(nameof(Price));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                {
+                    _price = value;
+                    OnPropertyChanged(nameof(Price));
+                    CheckDataModified();
+                } 
             }
         }
 
@@ -339,7 +342,7 @@ namespace Super_Tour.ViewModel
                 string.IsNullOrEmpty(_packageName) || string.IsNullOrEmpty(_price)
                 || (_selectedProvince.codename == _selectedItem.Id_Province && _selectedDistrict.codename == _selectedItem.Id_District &&
                     _selectedTypePackage.Id_Type_Package == _selectedItem.Id_Type_Package && _packageName == _selectedItem.Name_Package &&
-                    _price == _selectedItem.Price.ToString() && _isNewImage == false && _description == _selectedItem.Description_Package.ToString()))
+                    _price == _selectedItem.Price.ToString() && _isNewImage == false))
                 IsDataModified = false;
             else
                 IsDataModified = true;

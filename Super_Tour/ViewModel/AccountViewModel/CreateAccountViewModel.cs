@@ -40,9 +40,12 @@ namespace Super_Tour.ViewModel
             get { return _accountName; }
             set
             {
-                _accountName = value;
-                OnPropertyChanged(nameof(_accountName));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+                {
+                    _accountName = value;
+                    OnPropertyChanged(nameof(_accountName));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -51,9 +54,12 @@ namespace Super_Tour.ViewModel
             get { return _email; }
             set
             {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetterOrDigit(c)))
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -62,9 +68,12 @@ namespace Super_Tour.ViewModel
             get { return _username; }
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetterOrDigit(c)))
+                {
+                    _username = value;
+                    OnPropertyChanged(nameof(Username));
+                    CheckDataModified();
+                }
             }
         }
 

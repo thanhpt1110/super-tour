@@ -51,9 +51,12 @@ namespace Super_Tour.ViewModel
             get { return _idNumber; }
             set
             {
-                _idNumber = value;
-                OnPropertyChanged(nameof(IdNumber));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                {
+                    _idNumber = value;
+                    OnPropertyChanged(nameof(IdNumber));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -62,9 +65,12 @@ namespace Super_Tour.ViewModel
             get { return _phoneNumber; }
             set
             {
-                _phoneNumber = value;
-                OnPropertyChanged(nameof(PhoneNumber));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                {
+                    _phoneNumber = value;
+                    OnPropertyChanged(nameof(PhoneNumber));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -73,9 +79,12 @@ namespace Super_Tour.ViewModel
             get { return _name; }
             set
             {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                    CheckDataModified();
+                }
             }
         }
 
