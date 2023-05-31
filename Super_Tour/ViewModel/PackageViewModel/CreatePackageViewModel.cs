@@ -61,20 +61,12 @@ namespace Super_Tour.ViewModel
             get { return _price; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    _price = value;
-                else
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
                 {
-                    if (int.TryParse(value, out _priceInt))
-                    {
-                        _price = value;
-                        CheckDataModified();
-                    }
-                    else
-                        Price = _price;
+                    _price = value;
+                    OnPropertyChanged(nameof(Price));
+                    CheckDataModified();
                 }
-                OnPropertyChanged(nameof(Price));
-
             }
         }
 

@@ -12,6 +12,8 @@ using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static Org.BouncyCastle.Crypto.Digests.SkeinEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Super_Tour.ViewModel
 {
@@ -48,10 +50,13 @@ namespace Super_Tour.ViewModel
         {
             get { return _idNumber; }
             set
-            {
-                _idNumber = value;
-                OnPropertyChanged(nameof(IdNumber));
-                CheckDataModified();
+            {   
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                { 
+                    _idNumber = value;
+                    OnPropertyChanged(nameof(IdNumber));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -60,9 +65,12 @@ namespace Super_Tour.ViewModel
             get { return _phoneNumber; }
             set
             {
-                _phoneNumber = value;
-                OnPropertyChanged(nameof(PhoneNumber));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit)) 
+                { 
+                    _phoneNumber = value;
+                    OnPropertyChanged(nameof(PhoneNumber));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -71,9 +79,12 @@ namespace Super_Tour.ViewModel
             get { return _name; }
             set
             {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-                CheckDataModified();
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                    CheckDataModified();
+                }
             }
         }
 
@@ -134,12 +145,13 @@ namespace Super_Tour.ViewModel
         #region Command
         public ICommand SaveCommand { get; }
         public ICommand SelectedProvinceCommand { get; }
+        public ICommand PreviewTextInputCommand { get; set; }
         #endregion        
 
         #region Constructor
         public CreateCustomerViewModel()
         {
-
+                
         }
 
         public CreateCustomerViewModel(CUSTOMER customer)
@@ -150,7 +162,7 @@ namespace Super_Tour.ViewModel
             // Create object
             SaveCommand = new RelayCommand(AddNewCustomer);
             SelectedProvinceCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
-            _listProvince = new ObservableCollection<Province>();
+            _listProvince = new ObservableCollection<Province>(); 
             _listDistrict = new ObservableCollection<District>();   
             LoadProvinces();
         }
@@ -232,7 +244,7 @@ namespace Super_Tour.ViewModel
                 // Process UI events
                 MyMessageBox.ShowDialog("Add new customer successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 CreateCustomerView createCustomerView = null; ;
-                foreach (Window window in Application.Current.Windows)
+                foreach (Window window in System.Windows.Application.Current.Windows)
                 {
                     if (window is CreateCustomerView)
                     {
