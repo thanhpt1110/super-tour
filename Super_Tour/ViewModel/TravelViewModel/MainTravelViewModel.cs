@@ -18,15 +18,31 @@ namespace Super_Tour.ViewModel
 
     internal class MainTravelViewModel: ObservableObject
     {
-        private MainViewModel mainViewModel;
         private SUPER_TOUR db;
-        private ObservableCollection<TRAVEL> _listObservableTravel;
-        private DispatcherTimer _timer = null;  
-        private List<TRAVEL> _listOriginalTravel;
-        private string _searchItem;
-        private string _selectedFilter;
+        private MainViewModel mainViewModel;
+        public static DateTime TimeTravel;
+        private UPDATE_CHECK _tracker = null;
         private ObservableCollection<string> _listFilter;
-
+        private List<TRAVEL> _listTravelOriginal = null; // Data gốc
+        private List<TRAVEL> _listTravelSearching = null; // Data lúc mà có người search
+        private List<TRAVEL> _listTravelDataGrid = null; // Data để đổ vào datagrid 
+        private ObservableCollection<TRAVEL> _listTravels = null; // Data binding của Datagrid
+        private TRAVEL _selectedItem = null;
+        private TRAVEL temp = null;
+        private DispatcherTimer _timer = null;
+        private string _selectedFilter = "";
+        private string _searchType = "";
+        private int _currentPage = 1;
+        private int _totalPage;
+        private string _pageNumberText = null;
+        private bool _enableButtonNext;
+        private bool _enableButtonPrevious;
+        private bool _onSearching = false;
+        private string _resultNumberText = null;
+        private int _startIndex;
+        private int _endIndex;
+        private int _totalResult;
+        private string table = "UPDATE_TRAVEL";
         #region Declare binding
         public ObservableCollection<string> ListFilter
         {
@@ -49,20 +65,85 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public string SearchItem
+        public string ResultNumberText
         {
-            get { return _searchItem; }
-            set { _searchItem = value;
-                OnPropertyChanged(nameof(SearchItem));
+            get { return _resultNumberText; }
+            set
+            {
+                _resultNumberText = value;
+                OnPropertyChanged(nameof(ResultNumberText));
             }
         }
 
-        public ObservableCollection<TRAVEL> ListObservableTravel
-        { get { return _listObservableTravel; }
-           set
+        public string PageNumberText
+        {
+            get
             {
-                _listObservableTravel = value;
-                OnPropertyChanged(nameof(ListObservableTravel));
+                return _pageNumberText;
+            }
+            set
+            {
+                _pageNumberText = value;
+                OnPropertyChanged(nameof(PageNumberText));
+            }
+        }
+
+        public bool EnableButtonNext
+        {
+            get
+            {
+                return _enableButtonNext;
+            }
+            set
+            {
+                _enableButtonNext = value;
+                OnPropertyChanged(nameof(EnableButtonNext));
+            }
+        }
+
+        public bool EnableButtonPrevious
+        {
+            get
+            {
+                return _enableButtonPrevious;
+            }
+            set
+            {
+                _enableButtonPrevious = value;
+                OnPropertyChanged(nameof(EnableButtonPrevious));
+            }
+        }
+
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
+                OnPropertyChanged(nameof(SearchType));
+            }
+        }
+
+        public TRAVEL SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
+        public ObservableCollection<TRAVEL> ListTravels
+        {
+            get { return _listTravels ; }
+            set
+            {
+                _listTravels = value;
+                OnPropertyChanged(nameof(ListTravels));
             }
         }
         #endregion
@@ -79,56 +160,84 @@ namespace Super_Tour.ViewModel
         {
             this.mainViewModel = mainViewModel;
             LoadFilter();
+            db = SUPER_TOUR.db;
             OpenCreateTravelViewCommand = new RelayCommand(ExecuteOpenCreateTravelViewCommand);
-            this._listObservableTravel = new ObservableCollection<TRAVEL>();
+            this._listTravels = new ObservableCollection<TRAVEL>();
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
             DeleteTravelCommand = new RelayCommand(ExecuteDeleteTravel);
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
-            LoadTourDataAsync();
+            LoadDataAsync();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
             Timer.Tick += Timer_Tick; 
         }
+        #region Load data async
+        private async Task LoadDataAsync()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listTravelOriginal = db.TRAVELs.ToList();
+                            ReloadData();
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+        #region Check data per second
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await ReloadDataAsync();
+        }
+
+        public async Task ReloadDataAsync()
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    _tracker = UPDATE_CHECK.getTracker(table);
+                    if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeTravel)
+                    {
+                        TimeTravel = (DateTime.Parse(_tracker.DateTimeUpdate));
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listTravelOriginal = db.TRAVELs.ToList();
+                            ReloadData();
+                        });
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+        #region Update
         private async void ExecuteUpdateCommand(object obj)
         {
             TRAVEL travel = obj as TRAVEL;
-            UpdateTravelViewModel updateTravelViewModel = new UpdateTravelViewModel(travel);
-            Timer.Stop();
+            UpdateTravelViewModel updateTravelViewModel = new UpdateTravelViewModel(travel,this,mainViewModel);
             mainViewModel.CurrentChildView = updateTravelViewModel;
-            LoadTourDataAsync();
+            mainViewModel.setFirstChild("Update Travel");
         }
-        private void LoadGrid(List<TRAVEL> listTravel)
-        {
-            _listObservableTravel.Clear();
-            foreach (TRAVEL travel in _listOriginalTravel)
-            {
-                _listObservableTravel.Add(travel);
-            }
-        }
-        private async void Timer_Tick(object sender, EventArgs e)
-        {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    db.Dispose();
-                    db = new SUPER_TOUR();
-                    List<TRAVEL> Updatetours = db.TRAVELs.ToList();
-                    if (!Updatetours.SequenceEqual(_listOriginalTravel))
-                    {
-                        _listOriginalTravel = Updatetours;
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            LoadGrid(_listOriginalTravel);
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                }
-            });
-        }
+        #endregion
+        #region Delete
         private async void ExecuteDeleteTravel(object obj)
         {
 
@@ -153,9 +262,11 @@ namespace Super_Tour.ViewModel
 
                     db.TRAVELs.Remove(TravelFind);
                     await db.SaveChangesAsync();
+                    TimeTravel = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeTravel);
                     MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    _listObservableTravel.Remove(TravelFind);
-                    _listOriginalTravel.Remove(TravelFind);
+                    _listTravels.Remove(TravelFind);
+                    _listTravelOriginal.Remove(TravelFind);
                 }
             }
             catch (Exception ex)
@@ -168,38 +279,16 @@ namespace Super_Tour.ViewModel
                 Timer.Start();
             }
         }
-        public async Task LoadTourDataAsync()
-        {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    if (db != null)
-                    {
-                        db.Dispose();                       
-                    }
-                    db = new SUPER_TOUR();
-                    _listOriginalTravel = db.TRAVELs.ToList();
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        LoadGrid(_listOriginalTravel);
-                    });
-                    Timer.Start();
-                }
-                catch (Exception ex)
-                {
-                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-
-                }
-            });
-        }
+        #endregion
+        #region Insert
         private void ExecuteOpenCreateTravelViewCommand(object obj)
         {
-            CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel);
+            CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel,this);
             mainViewModel.CurrentChildView = createTravelViewModel;
             mainViewModel.setFirstChild("Add Travel");
         }
-
+        #endregion
+        #region Search
         private void ExecuteSearchTravel(object obj)
         {
             switch(_selectedFilter)
@@ -213,5 +302,124 @@ namespace Super_Tour.ViewModel
             _listFilter.Add("Tour name");
             _listFilter.Add("Place");
         }
+        #endregion
+        #region Custom display data grid
+        private List<TRAVEL> GetData(List<TRAVEL> ListTravel, int startIndex, int endIndex)
+        {
+            try
+            {
+                return ListTravel.OrderBy(m => m.Id_Travel).Skip(startIndex).Take(endIndex - startIndex).ToList();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        private void LoadDataByPage(List<TRAVEL> ListTravels)
+        {
+            try
+            {
+                this._totalResult = ListTravels.Count();
+                if (_totalResult == 0)
+                {
+                    _startIndex = -1;
+                    _endIndex = 0;
+                    _totalPage = 1;
+                    _currentPage = 1;
+                }
+                else
+                {
+                    this._totalPage = (int)Math.Ceiling((double)_totalResult / 13);
+                    if (this._totalPage < _currentPage)
+                        _currentPage = this._totalPage;
+                    this._startIndex = (this._currentPage - 1) * 13;
+                    this._endIndex = Math.Min(this._startIndex + 13, _totalResult);
+                }
+
+                _listTravelDataGrid = GetData(ListTravels, this._startIndex, this._endIndex);
+                _listTravels.Clear();
+                foreach (TRAVEL travel in _listTravelDataGrid)
+                {
+                    _listTravels.Add(travel);
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+
+        private void setResultNumber()
+        {
+            ResultNumberText = $"Showing {this._startIndex + 1} - {this._endIndex} of {this._totalResult} results";
+        }
+
+        private void setButtonAndPage()
+        {
+            if (this._currentPage < this._totalPage)
+            {
+                EnableButtonNext = true;
+                if (this._currentPage == 1)
+                    EnableButtonPrevious = false;
+                else
+                    EnableButtonPrevious = true;
+            }
+            if (this._currentPage == this._totalPage)
+            {
+                if (this._currentPage == 1)
+                {
+                    EnableButtonPrevious = false;
+                    EnableButtonNext = false;
+                }
+                else
+                {
+                    EnableButtonPrevious = true;
+                    EnableButtonNext = false;
+                }
+            }
+            PageNumberText = $"Page {this._currentPage} of {this._totalPage}";
+        }
+
+        private void ExecuteGoToPreviousPageCommand(object obj)
+        {
+            if (this._currentPage > 1)
+                --this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listTravelSearching);
+            else
+                LoadDataByPage(_listTravelOriginal);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ExecuteGoToNextPageCommand(object obj)
+        {
+            if (this._currentPage < this._totalPage)
+                ++this._currentPage;
+            if (_onSearching)
+                LoadDataByPage(_listTravelSearching);
+            else
+                LoadDataByPage(_listTravelOriginal);
+
+            setButtonAndPage();
+            setResultNumber();
+        }
+
+        private void ReloadData()
+        {
+            if (_onSearching)
+            {
+                _listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
+                LoadDataByPage(_listTravelSearching);
+            }
+            else
+                LoadDataByPage(_listTravelOriginal);
+            setButtonAndPage();
+            setResultNumber();
+        }
+        #endregion
     }
 }

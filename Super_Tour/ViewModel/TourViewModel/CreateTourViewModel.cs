@@ -166,6 +166,8 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<Province> _listProvinces;
         private string _selectRemoveProvince = null;
         private MainViewModel _mainViewModel;
+        private string table = "UPDATE_TOUR";
+
         #endregion
         #region Declare binding
         public string SelectRemoveProvince
@@ -424,11 +426,14 @@ namespace Super_Tour.ViewModel
                 }
                 db.TOURs.AddOrUpdate(tour);
                 await db.SaveChangesAsync();
+                MainTourViewModel.TimeTour = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainTourViewModel.TimeTour);
                 await mainTourViewModel.ReloadDataAsync();
                 MyMessageBox.ShowDialog("Add new tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 _mainViewModel.setFirstChild("");
                 _mainViewModel.Caption = "Tour";
                 _mainViewModel.CurrentChildView = mainTourViewModel;
+                await  mainTourViewModel.ReloadDataAsync();
                 /* CreateTourView createTourView = null;
                  foreach (Window window in Application.Current.Windows)
                  {

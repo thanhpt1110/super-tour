@@ -56,7 +56,7 @@ namespace Super_Tour.ViewModel
         private DataGridTour temp = null;
         private Visibility _isLoading = Visibility.Hidden;
         private string _searchType = "";
-        private string _selectedFilter = "Name";
+        private string _selectedFilter = "Tour Name";
         private int _currentPage = 1;
         private int _totalPage;
         private string _pageNumberText = null;
@@ -416,7 +416,15 @@ namespace Super_Tour.ViewModel
         {
             if (_onSearching)
             {
-                _listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
+                switch (_selectedFilter)
+                {
+                    case "Tour Name":
+                        SearchByName();
+                        break;
+                    case "Tour Place":
+                        SearchByPlace();
+                        break;
+                }
                 LoadDataByPage(_listToursSearching);
             }
             else
@@ -459,6 +467,9 @@ namespace Super_Tour.ViewModel
                             MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                             //_listToursOriginal = db.TOURs.AsNoTracking().ToList();
                             _listDataGridTour.Remove(dataGridTour);
+                            TimeTour = DateTime.Now;
+                            UPDATE_CHECK.NotifyChange(table, TimeTour);
+
                         }
                     }
                 }
@@ -484,52 +495,40 @@ namespace Super_Tour.ViewModel
             mainViewModel.CurrentChildView = createTourViewModel;
             mainViewModel.setFirstChild("Add Tour");
         }
+
+        #endregion
+        #region Searching
         private void ExecuteSelectFilter(object obj)
         {
             SearchType = "";
+            _onSearching = false;
+            ReloadData();
         }
-
         private void ExecuteSearchTour(object obj)
         {
-/*            switch(_selectedFilter)
-            {
-                default:
-                    return;
-            }    */
+            _onSearching = true;
+            ReloadData();
         }
         private void SearchByName()
         {
-/*            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
                 return;
-            this._listSearchTour = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchTour)).ToList();
-            LoadGrid(_listSearchTour);*/
+            this._listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchType)).ToList();
         }
 
         private void SearchByPlace()
         {
-/*            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
                 return;
-            this._listSearchTour = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(SearchTour)).ToList();
-            LoadGrid(_listSearchTour);*/
+            this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(_searchType)).ToList();
+
         }
         private void generateFilterItem()
         {
-            _listSearchFilterBy.Add("Name");
-            _listSearchFilterBy.Add("Place");
+            _listSearchFilterBy.Add("Tour Name");
+            _listSearchFilterBy.Add("Tour Place");
+            SelectedFilter = "Tour Name";
         }
-        #endregion
-        #region Load đata
-        private void LoadGrid(List<TOUR> listTour)
-        {
-            _listDataGridTour.Clear();
-            foreach (TOUR tour in listTour)
-            {
-                decimal SumPrice = tour.TOUR_DETAILs
-                .Where(p => p.Id_Tour == tour.Id_Tour)
-                .Sum(p => p.PACKAGE.Price);
-                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
-            }
-        }       
         #endregion
     }
 }
