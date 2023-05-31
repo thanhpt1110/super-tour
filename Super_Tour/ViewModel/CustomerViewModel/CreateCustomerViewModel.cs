@@ -217,7 +217,6 @@ namespace Super_Tour.ViewModel
             try
             {
                 // Save data to DB
-                _selectedItem.Id_Customer = 1;
                 _selectedItem.IdNumber = _idNumber;
                 _selectedItem.Name_Customer = _name;
                 _selectedItem.PhoneNumber = _phoneNumber;

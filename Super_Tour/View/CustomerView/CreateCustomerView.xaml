@@ -243,8 +243,8 @@
                                                 FontSize="15"
                                                 BorderBrush="Black"
                                                   >
-                                                <ComboBoxItem>Nam</ComboBoxItem>
-                                                <ComboBoxItem>Nữ</ComboBoxItem>
+                                                <ComboBoxItem>Male</ComboBoxItem>
+                                                <ComboBoxItem>Female</ComboBoxItem>
                                             </ComboBox>
                                         </StackPanel>
                                     </Grid>

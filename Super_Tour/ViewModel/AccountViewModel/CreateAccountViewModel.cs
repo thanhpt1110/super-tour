@@ -6,43 +6,35 @@ using Super_Tour.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Super_Tour.ViewModel
 {
-    internal class CreateAccountViewModel:ObservableObject
+    internal class CreateAccountViewModel : ObservableObject
     {
-        private string _username;
-        private string _password;
-        private string _accountName;
-        private int _selectedPriority=0;
+        #region Declare variable
+        private SUPER_TOUR db = null;
+        private ACCOUNT _selectedItem = null;
+        private string _accountName = null; 
+        private string _email = null;
+        private string _username = null;
+        private string _password = null;
         private string _selectedService;
-        private List<int> _listPriority;
-        private List<string> _listServices;
-        private SUPER_TOUR db = new SUPER_TOUR();
-        private bool _executeSave = true;
-        private string _email;
-        public int SelectedPriority
+        private bool _isDataModified = false;
+        #endregion
+
+        #region Declare binding
+        public bool IsDataModified
         {
-            get { return _selectedPriority; }
-            set
-            {
-                _selectedPriority=value;
-                OnPropertyChanged(nameof(SelectedPriority));
+            get { return _isDataModified; }
+            set 
+            { 
+                _isDataModified = value; 
+                OnPropertyChanged(nameof(IsDataModified));      
             }
         }
-        public string SelectedService
-        {
-            get { return _selectedService; }
-            set
-            {
-                _selectedService = value;
-                OnPropertyChanged(nameof(SelectedService));
-            }
-        }
+
         public string AccountName
         {
             get { return _accountName; }
@@ -50,73 +42,115 @@ namespace Super_Tour.ViewModel
             {
                 _accountName = value;
                 OnPropertyChanged(nameof(_accountName));
+                CheckDataModified();
             }
         }
+
         public string Email
         {
             get { return _email; }
-            set { _email = value;
+            set
+            {
+                _email = value;
                 OnPropertyChanged(nameof(Email));
+                CheckDataModified();
             }
         }
-        public List<int> ListPriority
-        {
-            get { return _listPriority; }
-        }
-        public List<string> ListServices
-        {
-            get { return _listServices; }
-        }
+
         public string Username
         {
             get { return _username; }
-            set { _username = value;
+            set
+            {
+                _username = value;
                 OnPropertyChanged(nameof(Username));
+                CheckDataModified();
             }
         }
+
         public string Password
         {
             get { return _password; }
-            set { _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
-        public ICommand CreateAccountCommand { get; }
-        public CreateAccountViewModel(ACCOUNT temp)
-        {
-            _listPriority = new List<int>();
-            _listServices = new List<string>();
-            generatePriority();
-            generateService();
-            CreateAccountCommand = new RelayCommand(ExecuteCreateAccountCommand, canExecuteCreateAccountCommand);
-        }
-        private bool canExecuteCreateAccountCommand(object obj)
-        {
-            return _executeSave;
-        }
-        private async void ExecuteCreateAccountCommand(object obj)
-        {
-            if(string.IsNullOrEmpty(_password)||string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_selectedService) || _selectedPriority==0)
+            set
             {
-                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+                CheckDataModified();
             }
+        }
+        
+        public string SelectedService
+        {
+            get { return _selectedService; }
+            set
+            {
+                _selectedService = value;
+                OnPropertyChanged(nameof(SelectedService));
+                CheckDataModified();    
+            }
+        }
+        #endregion
+
+        #region Command
+        public ICommand SaveCommand { get; }
+        #endregion
+
+        #region Constructor
+        public CreateAccountViewModel()
+        {
+            
+        }
+
+        public CreateAccountViewModel(ACCOUNT account)
+        {
+            db = SUPER_TOUR.db;
+            this._selectedItem = account; 
+
+            //Create object
+            SaveCommand = new RelayCommand(ExecuteCreateAccountCommand);
+        }
+        #endregion
+
+        #region Check data is modified
+        private void CheckDataModified()
+        {
+            if (string.IsNullOrEmpty(_accountName) || string.IsNullOrEmpty(_email) || string.IsNullOrEmpty(_username)
+                || string.IsNullOrEmpty(_password) || string.IsNullOrEmpty(_selectedService))
+                IsDataModified = false;
+            else
+                IsDataModified = true;
+        }
+        #endregion
+
+        #region Perform add new account
+        private void ExecuteCreateAccountCommand(object obj)
+        {
             try
             {
-                _executeSave = false;
-                ACCOUNT account = new ACCOUNT();
-                account.Email = "a@gmail.com";
-                account.Service = _selectedService;
-                account.Priority = _selectedPriority;
-                account.Id_Account = 1;
-                account.Password = Constant.convertPassToMD5(_password);
-                account.Username = _username;
-                db.ACCOUNTs.Add(account);
-                await db.SaveChangesAsync();
+                // Check email data format 
+                if (!ValidateDataFormat.CheckGmailFormat(_email))
+                {
+                    MyMessageBox.ShowDialog("Please write the correct email format!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return;
+                }
+
+                // Save data to DB
+                _selectedItem.Account_Name = _accountName;
+                _selectedItem.Email = _email;
+                _selectedItem.Username = _username;
+                _selectedItem.Password = Constant.convertPassToMD5(_password);
+                _selectedItem.Service = _selectedService;   
+                db.ACCOUNTs.Add(_selectedItem);
+                db.SaveChanges();
+                _selectedItem.Id_Account = db.ACCOUNTs.Max(p => p.Id_Account);
+
+                // Synchronize data to real-time database
+
+                // Process UI events
+                MyMessageBox.ShowDialog("Add new account successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 CreateAccountView createAccountView = null;
                 foreach (Window window in Application.Current.Windows)
                 {
-                    //Console.WriteLine(window.ToString());
                     if (window is CreateAccountView)
                     {
                         createAccountView = window as CreateAccountView;
@@ -131,20 +165,8 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                _executeSave = true;
             }
         }
-        private void generatePriority()
-        {
-            _listPriority.Add(1);
-            _listPriority.Add(2);
-            _listPriority.Add(3);
-        }
-        private void generateService()
-        {
-            _listServices.Add("Admin");
-            _listServices.Add("Manager");
-            _listServices.Add("Employee");
-        }
+        #endregion
     }
 }

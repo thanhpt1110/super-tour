@@ -366,6 +366,7 @@
     <Compile Include="Ultis\Constant.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
+    <Compile Include="Ultis\ValidateDataFormat.cs" />
     <Compile Include="ViewModel\AccountViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\AddTouristViewModel.cs" />

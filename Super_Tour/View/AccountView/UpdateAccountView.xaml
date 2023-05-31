@@ -142,7 +142,7 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             materialDesign:HintAssist.Hint="Ex: nguyenvana@gmail.com"
                                             materialDesign:HintAssist.IsFloating="False"
-                                            Text="{Binding Email}"
+                                            Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              />
                                     </StackPanel>
                                 </Grid>
@@ -157,7 +157,7 @@
                                                    Margin="-5,0,0,0"/>
                                         </StackPanel>
                                         <TextBox 
-                                            Text="{Binding Username}"
+                                            Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             Background="{StaticResource TextBoxColor}"
                                             BorderBrush="Black"
@@ -183,7 +183,9 @@
                                                    Foreground="Red"
                                                    Margin="-5,0,0,0"/>
                                         </StackPanel>
-                                        <customControls:AccountPasswordBox>
+                                        <customControls:AccountPasswordBox
+                                            Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            >
                                         </customControls:AccountPasswordBox>
                                     </StackPanel>
                                 </Grid>
@@ -199,8 +201,8 @@
                                                    Margin="-5,0,0,0"/>
                                         </StackPanel>
                                         <ComboBox 
-                                            ItemsSource="{Binding ListServices}"
-                                            SelectedItem="{Binding SelectedService}"
+                                            SelectedValue="{Binding SelectedService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedValuePath="Content"
                                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                             BorderBrush="Black"
                                             Foreground="Black"
@@ -213,7 +215,9 @@
                                             materialDesign:HintAssist.Hint="Select Account Service"
                                             materialDesign:HintAssist.IsFloating="False"
                                             >
-
+                                            <ComboBoxItem>Admin</ComboBoxItem>
+                                            <ComboBoxItem>Manager</ComboBoxItem>
+                                            <ComboBoxItem>Employee</ComboBoxItem>
                                         </ComboBox>
                                     </StackPanel>
                                 </Grid>
@@ -222,7 +226,8 @@
                     </Grid>
                     <Grid Grid.Row="3">
                         <Button 
-                                Command="{Binding CreateAccountCommand}"
+                                Command="{Binding SaveCommand}"
+                                IsEnabled="{Binding IsDataModified}"
                                 Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"

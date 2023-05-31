@@ -23,7 +23,7 @@ namespace Super_Tour.ViewModel
         private List<ACCOUNT> _listAccountOriginal = null;
         private List<ACCOUNT> _listAccountSearching = null;
         private List<ACCOUNT> _listAccountDatagrid = null;
-        private ObservableCollection<ACCOUNT> _listAccounts;
+        private ObservableCollection<ACCOUNT> _listAccounts = null;
         private ACCOUNT _selectedItem = null;
         private ACCOUNT temp = null;
         private DispatcherTimer _timer = null;
@@ -127,7 +127,7 @@ namespace Super_Tour.ViewModel
 
         #region Command
         public ICommand OpenCreateAccountViewCommand { get; }
-        public ICommand DeleteAccountInDataGridView { get; private set; }
+        public ICommand DeleteAccountCommand { get; private set; }
         public ICommand OnSearchTextChangedCommand { get; private set; }
         public ICommand UpdateAccountCommand { get; private set; }
         public ICommand GoToPreviousPageCommand { get; private set; }
@@ -141,7 +141,7 @@ namespace Super_Tour.ViewModel
             db = SUPER_TOUR.db;
             _listAccounts = new ObservableCollection<ACCOUNT>();
             OpenCreateAccountViewCommand = new RelayCommand(ExecuteOpenCreateAccountViewCommand);
-            DeleteAccountInDataGridView = new RelayCommand(ExecuteDeleteAccountCommand);
+            DeleteAccountCommand = new RelayCommand(ExecuteDeleteAccountCommand);
             UpdateAccountCommand = new RelayCommand(ExecuteUpdateAccountCommand);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
@@ -272,18 +272,18 @@ namespace Super_Tour.ViewModel
                     db.SaveChanges();
 
                     // Synchronize data to real-time database 
-                    TimeAccount = DateTime.Now;
-                    UPDATE_CHECK.NotifyChange(table, TimeAccount);
+                    /*TimeAccount = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeAccount);*/
 
                     // Process UI event
                     MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    _listAccounts.Remove(SelectedItem);
+                    _listAccountOriginal.Remove(SelectedItem);
                     ReloadData();
                 }
             }
             catch (Exception)
             {
-                MyMessageBox.ShowDialog("The package type could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                MyMessageBox.ShowDialog("The account could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
             finally
             {
