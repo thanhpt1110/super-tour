@@ -281,15 +281,15 @@
                                               Height="27"
                                               Width="27"
                                               Foreground="{Binding ChildCaptionColor}"
-                                              Margin="35,0,10,0"
+                                              Margin="56,0,10,0"
                                               />
-                                <TextBlock Text="{Binding Caption}"
+                                <TextBlock Text="{Binding Caption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            Foreground="{Binding ChildCaptionColor}"
                                            FontSize="27"
                                            FontWeight="Bold"
                                            VerticalAlignment="Center"/>
                             </StackPanel>
-                            <fa:IconImage Icon="ChevronRight" Height="10"
+                            <fa:IconImage Icon="ChevronRight" Height="10"               
                                           Foreground="{Binding NextChildCaption1Color}"
                                           Margin="8,0,15,0"
                                           Visibility="{Binding HaveOneChild, Converter={StaticResource BooleanToVisibilityConverter}}"/>

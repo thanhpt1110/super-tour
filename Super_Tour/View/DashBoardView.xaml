@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" >
-                    <Button Margin="30,0,0,0"    
+                    <Button Margin="42,0,0,0"    
                             materialDesign:ButtonAssist.CornerRadius="10"
                             Height="50"
                             Background="{StaticResource TextBoxColor}"
