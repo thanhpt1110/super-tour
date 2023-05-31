@@ -67,11 +67,13 @@
                      />
             <Button Background="{StaticResource btnAdd}"
                     BorderThickness="0"
+                    materialDesign:ButtonAssist.CornerRadius="5"
                     HorizontalAlignment="Right"
                     Margin="0 30 0 0"
-                    FontSize="22"
+                    FontWeight="Medium"
+                    FontSize="18"
                     Height="45"
-                    Width="150"
+                    Width="160"
                     >
                 <StackPanel Orientation="Horizontal"
                             Margin="10 0 0 0"
