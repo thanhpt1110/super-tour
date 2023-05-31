@@ -70,7 +70,9 @@
                                                    Margin="-5,0,0,0"
                                                    FontSize="15"/>
                                         </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox 
+                                            Text="{Binding NameTour}"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
                                                  CaretBrush="Black"
@@ -93,7 +95,9 @@
                                                    Margin="-5,0,0,0"
                                                    FontSize="15"/>
                                         </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        <TextBox 
+                                                Text = "{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
                                                  CaretBrush="Black"
@@ -148,6 +152,9 @@
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="0,10,0,0">
                                         <ComboBox 
+                                            ItemsSource="{Binding ListProvinces}"
+                                            DisplayMemberPath="name"
+                                            SelectedItem="{Binding SelectedProvinces}"
                                             FontSize="18"
                                             Height="auto"
                                             Width="250"
@@ -159,7 +166,9 @@
                                             BorderBrush="Black"
                                             Foreground="Black">
                                         </ComboBox>
-                                        <Button Margin="10,0,0,0"
+                                        <Button 
+                                            Command="{Binding AddProvinceCommand}"
+                                            Margin="10,0,0,0"
                                             Height="40"
                                             Width="40"
                                             Style="{StaticResource MaterialDesignIconButton}"
@@ -172,7 +181,7 @@
                                                   VerticalScrollBarVisibility="Visible" 
                                                   Height="210"
                                                   >
-                                        <ItemsControl ItemsSource="{Binding SelectedProvinceList}"
+                                        <ItemsControl ItemsSource="{Binding SelectedProvinceList}"                                                      
                                                       Margin="0 20 0 0"
                                                         Height="auto"
                                                       ScrollViewer.CanContentScroll="True">
@@ -197,11 +206,15 @@
                                                                         VerticalAlignment="Center"/>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
-                                                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                                    <Button 
+                                                                        Command="{Binding DataContext.RemoveProvinceCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Style="{StaticResource MaterialDesignIconButton}"
                                                                         HorizontalAlignment="Right"
                                                                             Height="auto"
                                                                             Width="auto"
-                                                                            Margin="5">
+                                                                            Margin="5"
+                                                                            >
                                                                         <materialDesign:PackIcon Kind="Remove"
                                                                             Height="25"
                                                                             Width="25"  
@@ -242,7 +255,7 @@
                                 <ScrollViewer>
                                     <Grid Margin="5">
                                         <StackPanel Orientation="Vertical">
-                                            <ItemsControl ItemsSource="{Binding ListDateAcitivities}">
+                                            <ItemsControl ItemsSource="{Binding DateActivityList}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Vertical">
@@ -540,8 +553,9 @@
         </Grid>
         <Grid Grid.Row="2">
             <Button
+                IsEnabled="{Binding IsDataModified}"
                 Margin="0,20,0,0"
-                Command="{Binding SaveTourCommand}"
+                Command="{Binding CreateTourCommnand}"
                 Content="Save"
                 Background="{StaticResource btnAdd}"
                 BorderThickness="0"
