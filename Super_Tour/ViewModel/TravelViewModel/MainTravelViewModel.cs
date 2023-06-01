@@ -30,6 +30,7 @@ namespace Super_Tour.ViewModel
         private TRAVEL _selectedItem = null;
         private TRAVEL temp = null;
         private DispatcherTimer _timer = null;
+        private ObservableCollection<string> _listSearchFilterBy;
         private string _selectedFilter = "";
         private string _searchType = "";
         private int _currentPage = 1;
@@ -62,6 +63,18 @@ namespace Super_Tour.ViewModel
             {
                 _selectedFilter = value;
                 OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
+        public ObservableCollection<string> ListSearchFilterBy
+        {
+            get
+            {
+                return _listSearchFilterBy;
+            }
+            set
+            {
+                _listSearchFilterBy = value;
+                OnPropertyChanged(nameof(ListSearchFilterBy));
             }
         }
 
@@ -153,19 +166,25 @@ namespace Super_Tour.ViewModel
         public ICommand DeleteTravelCommand { get; }
         public ICommand SearchTravelCommand { get; }
         public ICommand UpdateTravelCommand { get; }
+        public ICommand SelectedFilterCommand { get; }
+        public ICommand GoToNextPageCommand { get; }
+        public ICommand GoToPreviousPageCommand { get; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
         public MainTravelViewModel(MainViewModel mainViewModel) 
         {
             this.mainViewModel = mainViewModel;
-            LoadFilter();
             db = SUPER_TOUR.db;
+            GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
+            GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
             OpenCreateTravelViewCommand = new RelayCommand(ExecuteOpenCreateTravelViewCommand);
-            this._listTravels = new ObservableCollection<TRAVEL>();
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
             DeleteTravelCommand = new RelayCommand(ExecuteDeleteTravel);
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
+            SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
+            this._listTravels = new ObservableCollection<TRAVEL>();
+            generateFilterItem();
             LoadDataAsync();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
@@ -288,19 +307,38 @@ namespace Super_Tour.ViewModel
             mainViewModel.setFirstChild("Add Travel");
         }
         #endregion
-        #region Search
+        #region Searching
+        private void ExecuteSelectFilter(object obj)
+        {
+            SearchType = "";
+            _onSearching = false;
+            ReloadData();
+        }
         private void ExecuteSearchTravel(object obj)
         {
-            switch(_selectedFilter)
-            {
-            }
+            _onSearching = true;
+            ReloadData();
         }
-        private void LoadFilter()
+        private void SearchByName()
         {
-            SelectedFilter = "Tour name";
-            _listFilter = new ObservableCollection<string>();
-            _listFilter.Add("Tour name");
-            _listFilter.Add("Place");
+            if (_listTravelOriginal == null || _listTravelOriginal.Count == 0)
+                return;
+                this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.Name_Tour.Contains(_searchType)).ToList();
+        }
+
+        private void SearchByPlace()
+        {
+            if (_listTravelOriginal == null || _listTravelOriginal.Count == 0)
+                return;
+            this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.PlaceOfTour.Contains(_searchType)).ToList();
+
+        }
+        private void generateFilterItem()
+        {
+            _listSearchFilterBy = new ObservableCollection<string>();
+            _listSearchFilterBy.Add("Tour Name");
+            _listSearchFilterBy.Add("Tour Place");
+            SelectedFilter = "Tour Name";
         }
         #endregion
         #region Custom display data grid
@@ -412,7 +450,15 @@ namespace Super_Tour.ViewModel
         {
             if (_onSearching)
             {
-                _listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
+                switch (_selectedFilter)
+                {
+                    case "Tour Name":
+                        SearchByName();
+                        break;
+                    case "Tour Place":
+                        SearchByPlace();
+                        break;
+                }
                 LoadDataByPage(_listTravelSearching);
             }
             else

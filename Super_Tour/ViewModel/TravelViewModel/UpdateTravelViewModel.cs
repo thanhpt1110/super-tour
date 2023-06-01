@@ -19,6 +19,7 @@ namespace Super_Tour.ViewModel
 {
     internal class UpdateTravelViewModel:ObservableObject
     {
+        #region Declare variable
         private MainViewModel _mainViewModel;
         private MainTravelViewModel _mainTravelViewModel;
         private List<TOUR> _listToursSearching = null;
@@ -36,6 +37,23 @@ namespace Super_Tour.ViewModel
         private string _selctedDiscount;
         private ObservableCollection<string> _listDiscount;
         private TRAVEL _selectedTravel=null;
+        private string _searchType = "";
+        private bool _onSearching = false;
+        private string _selectedFilter;
+        #endregion
+        #region Declare binding
+        public string SelectedFilter
+        {
+            get
+            {
+                return _selectedFilter;
+            }
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
         public string SelectedDiscount
         {
             get
@@ -82,6 +100,18 @@ namespace Super_Tour.ViewModel
             {
                 _listDataGridTour = value;
                 OnPropertyChanged(nameof(ListDataGridTour));
+            }
+        }
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
+                OnPropertyChanged(nameof(SearchType));
             }
         }
         public ObservableCollection<string> ListSearchFilterBy
@@ -134,8 +164,11 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(StartLocation));
             }
         }
+        #endregion
         #region Command
         public ICommand SaveUpdateCommand { get; }
+        public ICommand OnSearchTextChangedCommand { get; }
+        public ICommand SelectedFilterCommand { get; }
         #endregion
         #region Constructor
         public UpdateTravelViewModel(TRAVEL travel,MainTravelViewModel mainTravelViewModel, MainViewModel mainViewModel)
@@ -147,9 +180,12 @@ namespace Super_Tour.ViewModel
             _listDataGridTour = new ObservableCollection<DataGridTour>();
             MaxTicket = travel.MaxTicket.ToString();
             SaveUpdateCommand = new RelayCommand(ExecuteSave, canExecuteSave);
+            SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
+            OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
             InitTour();
             InitDiscount();
             InitPage();
+            generateFilterItem();
         }
         #endregion
         #region Init page
@@ -183,7 +219,6 @@ namespace Super_Tour.ViewModel
             _listDiscount.Add("50%");
         }
         #endregion
-
         #region init list tour
 
         private async void InitTour()
@@ -213,12 +248,37 @@ namespace Super_Tour.ViewModel
         }
         private void LoadData()
         {
-            foreach (TOUR tour in _listToursOriginal)
+            _listDataGridTour.Clear();
+            if (_onSearching)
             {
-                decimal SumPrice = tour.TOUR_DETAILs
-              .Where(p => p.Id_Tour == tour.Id_Tour)
-              .Sum(p => p.PACKAGE.Price);
-                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                switch (_selectedFilter)
+                {
+                    case "Tour Name":
+                        SearchByName();
+                        break;
+                    case "Tour Place":
+                        SearchByPlace();
+                        break;
+
+                }
+                if(_listToursSearching.Count != 0)
+                foreach (TOUR tour in _listToursSearching)
+                {
+                    decimal SumPrice = tour.TOUR_DETAILs
+                  .Where(p => p.Id_Tour == tour.Id_Tour)
+                  .Sum(p => p.PACKAGE.Price);
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                }
+            }
+            else
+            {
+                foreach (TOUR tour in _listToursOriginal)
+                {
+                    decimal SumPrice = tour.TOUR_DETAILs
+                  .Where(p => p.Id_Tour == tour.Id_Tour)
+                  .Sum(p => p.PACKAGE.Price);
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                }
             }
         }
         #endregion
@@ -271,11 +331,39 @@ namespace Super_Tour.ViewModel
             return _executeCommand;
         }
         #endregion
-        /*private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
+        #region Searching
+        private void ExecuteSelectFilter(object obj)
         {
-            SelectTourForTravelView selectTourForTravelView = new SelectTourForTravelView();
-            selectTourForTravelView.DataContext = new SelectTourForTravelViewModel(Travel.TOUR);
-            selectTourForTravelView.ShowDialog();
-        }*/
+            SearchType = "";
+            _onSearching = false;
+            LoadData();
+        }
+        private void ExecuteSearchTour(object obj)
+        {
+            _onSearching = true;
+            LoadData();
+        }
+        private void SearchByName()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchType)).ToList();
+        }
+
+        private void SearchByPlace()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(_searchType)).ToList();
+
+        }
+        private void generateFilterItem()
+        {
+            _listSearchFilterBy = new ObservableCollection<string>();
+            _listSearchFilterBy.Add("Tour Name");
+            _listSearchFilterBy.Add("Tour Place");
+            SelectedFilter = "Tour Name";
+        }
+        #endregion
     }
 }

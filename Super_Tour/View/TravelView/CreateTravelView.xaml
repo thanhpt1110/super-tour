@@ -245,7 +245,7 @@
                                     <Label Content="Search"
                                                />
                                     <TextBox 
-                                            Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                              Height="58"
                                              Width="250"
@@ -284,11 +284,21 @@
                                             materialDesign:HintAssist.Hint="- Select Filter By -"
                                             materialDesign:HintAssist.Foreground="Black"
                                             materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"></ComboBox>
+                                                materialDesign:HintAssist.IsFloating="False">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
                                 </StackPanel>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65*"/>
+                                <ColumnDefinition Width="613*"/>
+                            </Grid.ColumnDefinitions>
                             <DataGrid x:Name="membersDataGrid" 
                                       SelectedItem="{Binding SelectedItem}"
                               ItemsSource="{Binding ListDataGridTour}"
@@ -297,7 +307,7 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource smallerDataGridStyle1}" 
                                               FontSize="16"
-                                              Margin="20,25,25,30">
+                                              Margin="20,25,25,30" Grid.ColumnSpan="2">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
