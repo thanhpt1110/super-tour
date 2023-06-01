@@ -98,135 +98,143 @@
                     Background="{StaticResource BackgroundTopNavMenu}"
                     BorderBrush="{StaticResource panelOverColor}">
             </Border>
-
-            <StackPanel>
-                <!--Logo-->
-                <StackPanel Margin="0,10,0,10" 
-                    Orientation="Horizontal"
-                            Height="40"
-                            Background="{StaticResource BackgroundTopNavMenu}">
-                    <Image Source="/Images/logo.png" Height="30" Margin="20,0,0,0"/>
-                    <TextBlock Text="SUPER TOUR"
-                               Foreground="#ffffff"
-                               FontSize="18"
-                               FontWeight="Medium"
-                               VerticalAlignment="Center"
-                               Margin="25,0,0,0"/>
-                </StackPanel>
-                <!--Menu Buttons-->
-                <StackPanel Background="{StaticResource BackgroundNavMenuButton}">
-                    <RadioButton Style="{StaticResource menuButton}"
-                             Tag="{StaticResource color1}"
-                             Command="{Binding ShowDashboardViewCommand}"
-                             IsChecked="True">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                             Tag="{StaticResource color2}"
-                            Visibility="{Binding VisibilityTravel, Converter={StaticResource BooleanToVisibilityConverter}}"
-                             Command="{Binding ShowTravelViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Travel" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                             Tag="{StaticResource color3}"
-                             Command="{Binding ShowBookingViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                            Tag="{StaticResource color4}"
-                             Command="{Binding ShowCustomerViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color5}"
-                             Command="{Binding ShowTicketViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Ticket" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Ticket" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color6}"
-                            Visibility="{Binding VisibilityTour, Converter={StaticResource BooleanToVisibilityConverter}}"
-                             Command="{Binding ShowTourViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Tour" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color3}"
-                    Visibility="{Binding VisibilityPackageType, Converter={StaticResource BooleanToVisibilityConverter}}"
-                             Command="{Binding ShowPackageTypeViewCommand}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <!--Logo-->
+                    <StackPanel Margin="0,10,0,10" 
+                        Orientation="Horizontal"
+                                Height="40"
+                                Background="{StaticResource BackgroundTopNavMenu}">
+                        <Image Source="/Images/logo.png" Height="30" Margin="20,0,0,0"/>
+                        <TextBlock Text="SUPER TOUR"
+                                   Foreground="#ffffff"
+                                   FontSize="18"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Margin="25,0,0,0"/>
+                    </StackPanel>
+                    <!--Menu Buttons-->
+                    <StackPanel Grid.Row="0" Background="{StaticResource BackgroundNavMenuButton}">
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color1}"
+                                     Command="{Binding ShowDashboardViewCommand}"
+                                     IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color2}"
+                                    Visibility="{Binding VisibilityTravel, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Command="{Binding ShowTravelViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Travel" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color3}"
+                                     Command="{Binding ShowBookingViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                                    Tag="{StaticResource color4}"
+                                     Command="{Binding ShowCustomerViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color5}"
+                                     Command="{Binding ShowTicketViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Ticket" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Ticket" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color6}"
+                                    Visibility="{Binding VisibilityTour, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Command="{Binding ShowTourViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Tour" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color3}"
+                            Visibility="{Binding VisibilityPackageType, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Command="{Binding ShowPackageTypeViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Package Type" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color7}"
-                            Visibility="{Binding VisibilityPackage, Converter={StaticResource BooleanToVisibilityConverter}}"
-                             Command="{Binding ShowPackageViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color8}"
-                             Command="{Binding ShowCustomerStatisticViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <RadioButton Style="{StaticResource menuButton}"
-                            Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Tag="{StaticResource color9}"
-                             Command="{Binding ShowAccountViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-                    <Grid Margin="0 10" Background="{StaticResource BackgroundNavMenuButton}">
-                        <Border BorderBrush="White" BorderThickness="0,1,0,0"></Border>
-                    </Grid>
-                    <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color10}"
-                             Command="{Binding ShowTechnicalHelpViewCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
-                            <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>
-                        </StackPanel>
-                    </RadioButton>
-            </StackPanel>
-                <StackPanel>
-                        <StackPanel Height="120" Background="{StaticResource BackgroundNavMenuButton}"></StackPanel>
-                    
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color7}"
+                                    Visibility="{Binding VisibilityPackage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     Command="{Binding ShowPackageViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Package" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color8}"
+                                     Command="{Binding ShowCustomerStatisticViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuButton}"
+                                    Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Tag="{StaticResource color9}"
+                                     Command="{Binding ShowAccountViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <Grid Margin="0 10" Background="{StaticResource BackgroundNavMenuButton}">
+                            <Border BorderBrush="White" BorderThickness="0,1,0,0"></Border>
+                        </Grid>
+                        <RadioButton Style="{StaticResource menuButton}"
+                        Tag="{StaticResource color10}"
+                                 Command="{Binding ShowTechnicalHelpViewCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
                     </StackPanel>
-                <TextBlock Text="Power by SuperTeam 2023" 
-                           Margin="0,5,0,0"
-                           VerticalAlignment="Center"
-                           TextAlignment="Center"
-                           Padding="0,5,0,0"
-                               HorizontalAlignment="Center"
-                               Foreground="{StaticResource plainTextColor3}"
-                               Height="28"
-                               FontSize="14"/>
                 </StackPanel>
+                <StackPanel 
+                    Grid.Row="1"
+                    Background="{StaticResource BackgroundNavMenuButton}">
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Power by SuperTeam 2023" 
+                        VerticalAlignment="Center"
+                        TextAlignment="Center"
+                        Margin="0, 10, 0, 0"
+                        Padding="0,0,0,0"
+                        HorizontalAlignment="Center"
+                        Foreground="{StaticResource plainTextColor3}"
+                        Height="28"
+                        FontSize="14"/>
+                </StackPanel>
+            </Grid>
             <!--Main Section-->
             <Border CornerRadius="0,10,10,0"
                     Grid.Column="1"
