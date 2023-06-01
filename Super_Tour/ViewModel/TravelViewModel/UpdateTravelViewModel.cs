@@ -13,94 +13,249 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
+
 namespace Super_Tour.ViewModel
 {
     internal class UpdateTravelViewModel:ObservableObject
     {
-        private TRAVEL _travel;
-        private bool _executeSave=true;
+        private MainViewModel _mainViewModel;
+        private MainTravelViewModel _mainTravelViewModel;
+        private List<TOUR> _listToursSearching = null;
+        private List<TOUR> _listToursOriginal = null;
+        private ObservableCollection<DataGridTour> _listDataGridTour;
+        private ObservableCollection<string> _listSearchFilterBy;
+        private DataGridTour _selectedItem = null;
+        private int maxTicketInt;
+        private SUPER_TOUR db = null;
+        private TOUR _tour = null;
+        private string _startLocation;
+        private DateTime _selectedDateTime = DateTime.Now.Date;
         private string _maxTicket;
-        private string _discount;
-        private SUPER_TOUR db = new SUPER_TOUR();
+        private bool _executeCommand = true;
+        private string _selctedDiscount;
+        private ObservableCollection<string> _listDiscount;
+        private TRAVEL _selectedTravel=null;
+        public string SelectedDiscount
+        {
+            get
+            {
+                return _selctedDiscount;
+            }
+            set
+            {
+                _selctedDiscount = value;
+                OnPropertyChanged(nameof(SelectedDiscount));
+            }
+        }
+        public ObservableCollection<string> ListDiscount
+        {
+            get
+            {
+                return _listDiscount;
+            }
+            set
+            {
+                _listDiscount = value;
+                OnPropertyChanged(nameof(ListDiscount));
+            }
+        }
+        public DataGridTour SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+        public ObservableCollection<DataGridTour> ListDataGridTour
+        {
+            get
+            {
+                return _listDataGridTour;
+            }
+            set
+            {
+                _listDataGridTour = value;
+                OnPropertyChanged(nameof(ListDataGridTour));
+            }
+        }
+        public ObservableCollection<string> ListSearchFilterBy
+        {
+            get
+            {
+                return _listSearchFilterBy;
+            }
+            set
+            {
+                _listSearchFilterBy = value;
+                OnPropertyChanged(nameof(ListDataGridTour));
+            }
+        }
         public string MaxTicket
         {
             get { return _maxTicket; }
             set
             {
-                _maxTicket = value;
+                if (string.IsNullOrEmpty(value))
+                    _maxTicket = value;
+                else
+                {
+                    if (int.TryParse(value, out maxTicketInt))
+                    {
+                        _maxTicket = value;
+                        //CheckDataModified();
+                    }
+                    else
+                        MaxTicket = _maxTicket;
+                }
                 OnPropertyChanged(nameof(MaxTicket));
             }
         }
-        public string Discount
+        public DateTime SelectedDateTime
         {
-            get { return _discount; }
+            get { return _selectedDateTime; }
             set
             {
-                _discount = value;
-                OnPropertyChanged(nameof(Discount));
+                _selectedDateTime = value;
+                OnPropertyChanged(nameof(SelectedDateTime));
             }
         }
-        public TRAVEL Travel
+        public string StartLocation
         {
-            get { return _travel; }
-            set { _travel = value;
-                OnPropertyChanged(nameof(Travel));
+            get { return _startLocation; }
+            set
+            {
+                _startLocation = value;
+                OnPropertyChanged(nameof(StartLocation));
             }
         }
+        #region Command
         public ICommand SaveUpdateCommand { get; }
-        public ICommand OpenSelectTourForTravelViewCommand { get; }
-        public UpdateTravelViewModel(TRAVEL travel)
+        #endregion
+        #region Constructor
+        public UpdateTravelViewModel(TRAVEL travel,MainTravelViewModel mainTravelViewModel, MainViewModel mainViewModel)
         {
-            Travel = new TRAVEL(travel);
+            db = SUPER_TOUR.db;
+            _selectedTravel = travel;
+            _mainTravelViewModel = mainTravelViewModel;
+            _mainViewModel = mainViewModel;
+            _listDataGridTour = new ObservableCollection<DataGridTour>();
             MaxTicket = travel.MaxTicket.ToString();
-            Discount = travel.Discount.ToString();
             SaveUpdateCommand = new RelayCommand(ExecuteSave, canExecuteSave);
+            InitTour();
+            InitDiscount();
+            InitPage();
         }
+        #endregion
+        #region Init page
+       
+        private void InitPage()
+        {
+            TOUR tour = _selectedTravel.TOUR;
+            decimal SumPrice = tour.TOUR_DETAILs
+              .Where(p => p.Id_Tour == tour.Id_Tour)
+              .Sum(p => p.PACKAGE.Price);
+            _selectedItem =  new DataGridTour() { Tour = tour, TotalPrice = SumPrice };
+            StartLocation = _selectedTravel.StartLocation;
+            SelectedDateTime = _selectedTravel.StartDateTimeTravel;
+            MaxTicket = _selectedTravel.MaxTicket.ToString();
+            SelectedDiscount = _selectedTravel.Discount.ToString() + "%";
+        }
+        #endregion
+        #region Init discount
+        private void InitDiscount()
+        {
+            _listDiscount = new ObservableCollection<string>();
+            _listDiscount.Add("5%");
+            _listDiscount.Add("10%");
+            _listDiscount.Add("15%");
+            _listDiscount.Add("20%");
+            _listDiscount.Add("25%");
+            _listDiscount.Add("30%");
+            _listDiscount.Add("35%");
+            _listDiscount.Add("40%");
+            _listDiscount.Add("45%");
+            _listDiscount.Add("50%");
+        }
+        #endregion
+
+        #region init list tour
+
+        private async void InitTour()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _listToursOriginal = db.TOURs.ToList();
+                            LoadData();
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        private void LoadData()
+        {
+            foreach (TOUR tour in _listToursOriginal)
+            {
+                decimal SumPrice = tour.TOUR_DETAILs
+              .Where(p => p.Id_Tour == tour.Id_Tour)
+              .Sum(p => p.PACKAGE.Price);
+                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+            }
+        }
+        #endregion
+        #region Save Command
         private async void ExecuteSave(object obj)
         {
-            if ( string.IsNullOrEmpty(_maxTicket) || string.IsNullOrEmpty(_discount) || string.IsNullOrEmpty(_travel.StartLocation))
+            if ( string.IsNullOrEmpty(_maxTicket) || string.IsNullOrEmpty(_selctedDiscount) || string.IsNullOrEmpty(_selectedTravel.StartLocation))
             {
                 MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 return;
             }
-            int maxTicket;
-            int discount;
-            if (!int.TryParse(_maxTicket, out maxTicket))
+
+            int numberOfTourists = db.BOOKINGs
+            .Where(b => b.Id_Travel == _selectedTravel.Id_Travel)
+            .SelectMany(b => b.TOURISTs) // Kết hợp tất cả các danh sách du khách trong các booking thành một danh sách du khách duy nhất
+            .Count(); // Đếm số lượng du khách
+
+            if (int.Parse(_maxTicket) < numberOfTourists)
             {
-                MyMessageBox.ShowDialog("Max ticket must be in number.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-            if (!int.TryParse(_discount, out discount))
-            {
-                MyMessageBox.ShowDialog("Discount must be in number.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-            else if (discount > 100)
-            {
-                MyMessageBox.ShowDialog("Discount must be under 80 percents.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                MyMessageBox.ShowDialog("Couldn't set booking max ticket lower than number of tourists", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                 return;
             }
             try
             {
-                _executeSave = false;
-                _travel.Discount = discount;
-                _travel.MaxTicket = maxTicket;
-                _travel.RemainingTicket = maxTicket;
-                db.TRAVELs.AddOrUpdate(_travel);
+                _executeCommand = false;
+                _selectedTravel.Id_Tour = _selectedItem.Tour.Id_Tour;
+                _selectedTravel.Discount = int.Parse(_selctedDiscount.Remove(_selctedDiscount.Length - 1));
+                _selectedTravel.MaxTicket = int.Parse(_maxTicket);
+                _selectedTravel.StartLocation = _startLocation;
+                _selectedTravel.StartDateTimeTravel = _selectedDateTime;
+                db.TRAVELs.AddOrUpdate(_selectedTravel);
                 await db.SaveChangesAsync();
-            
-                MyMessageBox.ShowDialog("Update travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                /*UpdateTravelView updateTravelView = null;
-                foreach (Window window in Application.Current.Windows)
-                {
-                    Console.WriteLine(window.ToString());
-                    if (window is UpdateTravelView)
-                    {
-                        updateTravelView = window as UpdateTravelView;
-                        break;
-                    }
-                }
-                updateTravelView.Close();*/
+                MyMessageBox.ShowDialog("Add new travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                await _mainTravelViewModel.ReloadDataAsync();
+                _mainViewModel.setFirstChild("");
+                _mainViewModel.Caption = "Travel";
+                _mainViewModel.CurrentChildView = _mainTravelViewModel;
             }
             catch (Exception ex)
             {
@@ -108,13 +263,14 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                _executeSave = true;
+                _executeCommand = true;
             }
         }
         private bool canExecuteSave(object obj)
         {
-            return _executeSave;
+            return _executeCommand;
         }
+        #endregion
         /*private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
         {
             SelectTourForTravelView selectTourForTravelView = new SelectTourForTravelView();

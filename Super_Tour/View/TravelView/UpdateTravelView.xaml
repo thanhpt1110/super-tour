@@ -50,13 +50,14 @@
                                            FontSize="15"
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
-                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        <TextBox
+                                    Text="{Binding SelectedItem.Tour.Name_Tour}"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Select from list on the left"
                                     Width="auto"
                                     Height="auto"
                                     FontSize="20"
                                     IsReadOnly="True"
-                                    Text="{Binding Tour.Name_Tour}"
                                     Background="LightGray"
                                     BorderBrush="Black"
                                     Foreground="Black"
@@ -184,7 +185,7 @@
                                                     Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <ComboBox
-                                                ItemsSource="{Binding ListSearchDiscount}"
+                                                ItemsSource="{Binding ListDiscount}"
                                                 SelectedItem="{Binding SelectedDiscount}"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 FontSize="18"
@@ -202,7 +203,7 @@
                         </Grid>
                         <Button
                                     Margin="0,100,0,0"
-                                    Command="{Binding SaveTourCommand}"
+                                    Command="{Binding SaveUpdateCommand}"
                                     Content="Save"
                                     Background="{StaticResource btnAdd}"
                                     BorderThickness="0"
@@ -290,6 +291,7 @@
                         <Grid Grid.Row="2">
                             <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListDataGridTour}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 

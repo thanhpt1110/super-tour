@@ -36,6 +36,8 @@ namespace Super_Tour.ViewModel
         private List<Province> _listselectedProvinces;
         private MainTourViewModel _mainTourViewModel;
         private MainViewModel _mainViewModel;
+        private string table = "UPDATE_TOUR";
+
         #endregion
         #region Declare binding
         public int TotalDay
@@ -370,6 +372,8 @@ namespace Super_Tour.ViewModel
                 _tour.TotalNight=_totalNight;
                 db.TOURs.AddOrUpdate(_tour);
                 await db.SaveChangesAsync();
+                MainTourViewModel.TimeTour=DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainTourViewModel.TimeTour);
                 MyMessageBox.ShowDialog("Update tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 await _mainTourViewModel.ReloadDataAsync();
                 _mainViewModel.CurrentChildView = _mainTourViewModel;

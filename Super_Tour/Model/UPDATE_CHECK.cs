@@ -34,6 +34,7 @@ namespace Super_Tour.Model
         {
             _tracker = getTracker(table);
             _tracker.DateTimeUpdate = timeUpdate.ToString();
+            var set = Client.Update(@"Update/" + table, _tracker);
         }
     }
 }

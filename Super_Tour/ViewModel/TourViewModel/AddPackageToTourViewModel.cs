@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using static Super_Tour.ViewModel.CreateTourViewModel;
-using static Super_Tour.ViewModel.SelectTourForTravelViewModel;
 
 namespace Super_Tour.ViewModel
 {

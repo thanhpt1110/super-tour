@@ -403,7 +403,6 @@
     <Compile Include="ViewModel\TourViewModel\UpdateTourViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\CreateTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
-    <Compile Include="ViewModel\TravelViewModel\SelectTourForTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
     <Compile Include="View\AccountView\CreateAccountView.xaml.cs">
       <DependentUpon>CreateAccountView.xaml</DependentUpon>

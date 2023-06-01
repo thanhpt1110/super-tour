@@ -50,13 +50,14 @@
                                            FontSize="15"
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
-                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        <TextBox 
+                                    Text="{Binding SelectedItem.Tour.Name_Tour}"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Select from list on the left"
                                     Width="auto"
                                     Height="auto"
                                     FontSize="20"
                                     IsReadOnly="True"
-                                    Text="{Binding Tour.Name_Tour}"
                                     Background="LightGray"
                                     BorderBrush="Black"
                                     Foreground="Black"
@@ -184,7 +185,8 @@
                                                     Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <ComboBox
-                                                ItemsSource="{Binding ListSearchDiscount}"
+                                                ItemsSource="{Binding ListDiscount}"
+                                           
                                                 SelectedItem="{Binding SelectedDiscount}"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 FontSize="18"
@@ -288,6 +290,7 @@
                         </Grid>
                         <Grid Grid.Row="2">
                             <DataGrid x:Name="membersDataGrid" 
+                                      SelectedItem="{Binding SelectedItem}"
                               ItemsSource="{Binding ListDataGridTour}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
