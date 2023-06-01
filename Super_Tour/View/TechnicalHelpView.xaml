@@ -63,7 +63,7 @@
                     materialDesign:HintAssist.Background="Transparent"
                     Height="300"
                     VerticalContentAlignment="Top"
-                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
                     CaretBrush="Black"
                      />
             <Button Background="{StaticResource btnAdd}"
