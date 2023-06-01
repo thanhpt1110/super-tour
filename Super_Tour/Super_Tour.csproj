@@ -364,6 +364,7 @@
     <Compile Include="Ultis\BooleanToCursorConverter.cs" />
     <Compile Include="Ultis\BooleanToVisibilityConverter.cs" />
     <Compile Include="Ultis\Constant.cs" />
+    <Compile Include="Ultis\MyApp.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
     <Compile Include="Ultis\ValidateDataFormat.cs" />
@@ -749,6 +750,9 @@
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\password_resize.png" />
     <Resource Include="Images\username_resize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\officer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

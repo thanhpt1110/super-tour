@@ -25,7 +25,7 @@ namespace Super_Tour.View
         public MainView()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
+            //this.DataContext = new MainViewModel();
             /*SUPER_TOUR db = new SUPER_TOUR();
             List < TYPE_PACKAGE>  PACKAGEs= db.TYPE_PACKAGEs.ToList();
             foreach(TYPE_PACKAGE typePackage in PACKAGEs)

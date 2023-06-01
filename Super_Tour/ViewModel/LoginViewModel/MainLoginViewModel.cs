@@ -26,6 +26,8 @@ namespace Super_Tour.ViewModel
         private bool executeButton = true;
         private string converted_password;
         private SUPER_TOUR db = null;
+        private MainView _mainView = null;
+        private MainViewModel _mainViewModel = null;
         #endregion
 
         #region Declare binding
@@ -70,23 +72,30 @@ namespace Super_Tour.ViewModel
         public RelayCommand CommandForgotPassword { get;private set; }
         #endregion
 
+        #region Constructor 
         public MainLoginViewModel()
         {
             db = SUPER_TOUR.db;
             LoginCommand = new RelayCommand(Login, canExecute);
             CommandForgotPassword = new RelayCommand(MoveToForgotPass);
         }
+        #endregion
 
+        #region Forgot password
         public void MoveToForgotPass(object a)
         {
             ForgotPass_EmailView view = new ForgotPass_EmailView();
             view.Show();
             Application.Current.MainWindow.Hide();
         }
+        #endregion
+
+        #region Login event
         public bool canExecute(object a)
         {
             return executeButton;
         }
+
         public async void Login(object a)
         {
             if(string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
@@ -124,7 +133,26 @@ namespace Super_Tour.ViewModel
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        IsViewVisible = false;
+                        MyApp.CurrentUser = user;
+                        
+                        // Check if exist MainViewModel in current launching
+                        if (MyApp.MainViewModel == null)
+                        {
+                            _mainViewModel = new MainViewModel();
+                            MyApp.MainViewModel = _mainViewModel;
+                        }
+                        else
+                            _mainViewModel = MyApp.MainViewModel;
+
+                        // Set the current user for MainView and its Data Context
+                        _mainViewModel.CurrentUser = user;
+                        _mainView = new MainView();
+                        _mainView.DataContext = _mainViewModel;
+                        _mainView.Show(); 
+
+                        // Close LoginView and display MainView
+                        Application.Current.MainWindow.Close();
+                        Application.Current.MainWindow = _mainView;
                     });
                 }
                 else
@@ -146,5 +174,6 @@ namespace Super_Tour.ViewModel
         {
             converted_password = Constant.convertPassToMD5(Password);
         }
+        #endregion
     }
 }

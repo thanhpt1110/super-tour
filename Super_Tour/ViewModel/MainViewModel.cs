@@ -12,16 +12,26 @@ using Microsoft.Extensions.Caching.Memory;
 using System.Windows.Threading;
 using System.Windows.Media;
 using System.Windows.Input;
+using System.Data.Entity.Migrations.Builders;
+using Super_Tour.View;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using Super_Tour.CustomControls;
 
 namespace Super_Tour.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        //Fields
+        #region Declare variable
         public static ObservableObject _currentChildView;
         private string _nextChildCaption1;
         private bool _haveOneChild = false;
         private string _caption;
+        private bool _visibilityAccount = false;
+        private bool _visibilityTour = false;
+        private bool _visibilityTravel = false;
+        private bool _visibilityPackage = false;
+        private bool _visibilityPackageType = false;
         private IconChar _icon;
         private Brush childCaptionColor;
         private Brush nextChildCaption1Color;
@@ -39,8 +49,70 @@ namespace Super_Tour.ViewModel
         private RevenueStatisticViewModel _revenueStatisticViewModel = null;
         private TravelStatisticViewModel _travelStatisticViewModel = null;
         private DispatcherTimer _timer = null;
+        private ACCOUNT _currentUser = null;
+        #endregion
 
-        #region Declare property
+        #region Declare binding
+        public bool VisibilityTour
+        {
+            get { return _visibilityTour; }
+            set
+            {
+                _visibilityTour = value;
+                OnPropertyChanged(nameof(VisibilityTour));  
+            }
+        }
+        
+        public bool VisibilityTravel
+        {
+            get { return _visibilityTravel; }
+            set
+            {
+                _visibilityTravel = value;
+                OnPropertyChanged(nameof(VisibilityTravel));
+            }
+        }
+
+        public bool VisibilityPackage
+        {
+            get { return _visibilityPackage; }
+            set
+            {
+                _visibilityPackage = value;
+                OnPropertyChanged(nameof(VisibilityPackage));
+            }
+        }
+
+        public bool VisibilityPackageType
+        {
+            get { return _visibilityPackageType; }
+            set
+            {
+                _visibilityPackage = value;
+                OnPropertyChanged(nameof(VisibilityPackageType));
+            }
+        }
+
+        public bool VisibilityAccount
+        {
+            get { return _visibilityAccount; }
+            set 
+            { 
+                _visibilityAccount = value; 
+                OnPropertyChanged(nameof(VisibilityAccount));   
+            }
+        }
+
+        public ACCOUNT CurrentUser
+        {
+            get { return _currentUser; }
+            set 
+            { 
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+                ReloadNewLogin();
+            }
+        }
 
         public ObservableObject CurrentChildView
         {
@@ -91,6 +163,25 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(Icon));
             }
         }
+
+        public Brush ChildCaptionColor
+        {
+            get => childCaptionColor;
+            set
+            {
+                childCaptionColor = value;
+                OnPropertyChanged(nameof(ChildCaptionColor));
+            }
+        }
+        public Brush NextChildCaption1Color
+        {
+            get => nextChildCaption1Color;
+            set
+            {
+                nextChildCaption1Color = value;
+                OnPropertyChanged(nameof(NextChildCaption1Color));
+            }
+        }
         #endregion
 
         #region Command
@@ -109,27 +200,10 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowAccountViewCommand { get; }
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public ICommand BackToPreviousChildCommand { get; }
-        public Brush ChildCaptionColor 
-        { 
-            get => childCaptionColor;
-            set
-            {
-                childCaptionColor = value;
-                OnPropertyChanged(nameof(ChildCaptionColor));
-            }
-        }
-        public Brush NextChildCaption1Color 
-        { 
-            get => nextChildCaption1Color;
-            set
-            {
-                nextChildCaption1Color = value;
-                OnPropertyChanged(nameof(NextChildCaption1Color));
-            }
-        }
-
+        public ICommand SignOutCommand { get; }
         #endregion
 
+        #region Constructor
         public MainViewModel()
         {
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
@@ -146,6 +220,7 @@ namespace Super_Tour.ViewModel
             ShowAccountViewCommand = new RelayCommand(ExecuteShowAccountViewCommand);
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             BackToPreviousChildCommand = new RelayCommand(ExecuteBackToPreviousChildCommand);
+            SignOutCommand = new RelayCommand(ExecuteSignOutCommand);
             _dashBoardViewModel = new DashBoardViewModel();
             removeFirstChild();
             CurrentChildView = _dashBoardViewModel;
@@ -155,6 +230,7 @@ namespace Super_Tour.ViewModel
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += Timer_Tick;*/
         }
+        #endregion
 
         private void ExecuteBackToPreviousChildCommand(object obj)
         {
@@ -180,12 +256,15 @@ namespace Super_Tour.ViewModel
             ChildCaptionColor = new SolidColorBrush(Color.FromRgb(130, 136, 143));
             NextChildCaption1Color = new SolidColorBrush(Color.FromRgb(29, 36, 46));
         }
+
         public void removeFirstChild()
         {
             HaveOneChild = false;
             this.NextChildCaption1 = "";
             ChildCaptionColor = new SolidColorBrush(Color.FromRgb(29, 36, 46));
         }
+
+        #region Check timer tick
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Dashboard
@@ -269,7 +348,9 @@ namespace Super_Tour.ViewModel
                     _mainAccountViewModel.Timer.Stop();
             }
         }
+        #endregion
 
+        #region Execute command to set CurrentChildView
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
         {
             if (_technicalHelpViewModel == null)
@@ -384,5 +465,63 @@ namespace Super_Tour.ViewModel
             Icon = IconChar.AddressCard;
             removeFirstChild();
         }
+        #endregion
+
+        #region Log out 
+        private void ExecuteSignOutCommand(object obj)
+        {
+            MyMessageBox.ShowDialog("Are you sure you want to sign out?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+            if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+            {
+                MyApp.CurrentUser = null;
+
+                // Close MainView and display LoginView
+                var loginView = new LoginView();
+                loginView.Show();
+                Application.Current.MainWindow.Close();
+                BitmapSource icon = new BitmapImage(new Uri("pack://application:,,,/Super_Tour;component/Images/Logo.ico"));
+                Application.Current.MainWindow = loginView;
+                Application.Current.MainWindow.Icon = icon;
+            }
+        }
+
+        private void ReloadNewLogin()
+        {
+            // Set Dashboard UI as Initial view when login new account
+            CurrentChildView = _dashBoardViewModel;
+            Caption = "Dashboard";
+            Icon = IconChar.Home;
+            removeFirstChild();
+            SetPriority();
+        }
+
+        private void SetPriority()
+        {
+            if (CurrentUser.Service == "Admin")
+            {
+                VisibilityAccount = true;
+                _visibilityPackageType = true;
+                VisibilityPackage = true;
+                VisibilityTour = true;
+                VisibilityTravel = true;
+            }
+            if (CurrentUser.Service == "Manager")
+            {
+                VisibilityAccount = false;
+                _visibilityPackageType = true;
+                VisibilityPackage = true;
+                VisibilityTour = true;
+                VisibilityTravel = true;
+            }
+            if (CurrentUser.Service == "Employee")
+            {
+                VisibilityAccount = false;
+                _visibilityPackageType = false;
+                VisibilityPackage = false;
+                VisibilityTour = false;
+                VisibilityTravel = false;
+            }
+        }
+        #endregion
     }
 }

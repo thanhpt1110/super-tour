@@ -14,6 +14,13 @@ namespace Super_Tour.Ultis
             string pattern = @"@gmail\.com$";
             Regex regex = new Regex(pattern);
             return regex.IsMatch(email);
+        }   
+        
+        public static bool IsAllowSymbol(char c)
+        {
+            // Define the allowed symbols
+            char[] allowedSymbols = { '@', '.' };
+            return allowedSymbols.Contains(c);
         }
     }
 }

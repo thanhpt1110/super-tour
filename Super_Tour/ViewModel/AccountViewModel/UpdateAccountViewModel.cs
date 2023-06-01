@@ -57,7 +57,7 @@ namespace Super_Tour.ViewModel
             get { return _email; }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetterOrDigit(c)))
+                if (string.IsNullOrEmpty(value) || value.All(c => char.IsLetterOrDigit(c) || ValidateDataFormat.IsAllowSymbol(c)))
                 {
                     _email = value;
                     OnPropertyChanged(nameof(Email));

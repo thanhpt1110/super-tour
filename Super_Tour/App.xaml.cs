@@ -27,7 +27,7 @@ namespace Super_Tour
         }
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            var loginView = new LoginView();
+            /*var loginView = new LoginView();
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
             {
@@ -36,9 +36,9 @@ namespace Super_Tour
                     var mainView = new MainView();
                     mainView.Show();
                 }
-            };
-            /*var Login = new CreatePackageView();
-            Login.Show();*/
+            };*/
+            var loginView = new LoginView();
+            loginView.Show();
         }
     }
 }

@@ -126,6 +126,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                              Tag="{StaticResource color2}"
+                            Visibility="{Binding VisibilityTravel, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Command="{Binding ShowTravelViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
@@ -158,6 +159,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color6}"
+                            Visibility="{Binding VisibilityTour, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Command="{Binding ShowTourViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="CalendarPlus" Style="{StaticResource menuButtonIcon}"/>
@@ -166,6 +168,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color3}"
+                    Visibility="{Binding VisibilityPackageType, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Command="{Binding ShowPackageTypeViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
@@ -174,6 +177,7 @@
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
                     Tag="{StaticResource color7}"
+                            Visibility="{Binding VisibilityPackage, Converter={StaticResource BooleanToVisibilityConverter}}"
                              Command="{Binding ShowPackageViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BagShopping" Style="{StaticResource menuButtonIcon}"/>
@@ -189,7 +193,8 @@
                         </StackPanel>
                     </RadioButton>
                     <RadioButton Style="{StaticResource menuButton}"
-                    Tag="{StaticResource color9}"
+                            Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Tag="{StaticResource color9}"
                              Command="{Binding ShowAccountViewCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
@@ -305,25 +310,37 @@
                                         Orientation="Horizontal"
                                         FlowDirection="RightToLeft"
                                         VerticalAlignment="Center"
-                                        Margin="0,0,10,0">
+                                        Margin="0,0,40,0">
                             <Button Style="{StaticResource iconButton}"
-                                        Tag="{StaticResource TitleText}">
-                                <fa:IconImage Icon="AngleDown" Style="{StaticResource iconButtonIcon}"/>
+                                        Tag="{StaticResource TitleText}"
+                                        Command="{Binding SignOutCommand}">
+                                <fa:IconImage Icon="SignOut" 
+                                              Style="{StaticResource iconButtonIcon}">
+                                    <fa:IconImage.RenderTransform>
+                                        <ScaleTransform ScaleX="-1" />
+                                    </fa:IconImage.RenderTransform>
+                                </fa:IconImage>
                             </Button>
-                            <TextBlock Text="Current Account"
-                                            Foreground="{StaticResource TitleText}"
-                                            FontFamily="Segoe UI"
-                                            FontSize="15"
-                                            VerticalAlignment="Center"
-                                           Margin="15,0,0,0"
-                                    />
-                            <Ellipse Height="30"
-                                     Width="30"
-                                     Stroke="{StaticResource TitleText}"
-                                     StrokeThickness="2"
-                                     Margin="10,0,10,0">
-
-                            </Ellipse>
+                            <StackPanel FlowDirection="LeftToRight"
+                                        Margin="-5, 0,-10,0">
+                                <TextBlock Text="{Binding CurrentUser.Account_Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Foreground="{StaticResource TitleText}"
+                                                FontFamily="Segoe UI"
+                                                FontSize="15"
+                                                VerticalAlignment="Center"
+                                        />
+                                <TextBlock Text="{Binding CurrentUser.Service, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Foreground="Red"
+                                                FontFamily="Segoe UI"
+                                                FontSize="15"
+                                                VerticalAlignment="Center"
+                                                
+                                        />
+                            </StackPanel>
+                            <Image Source="/Images/officer.png" 
+                                   Height="40" 
+                                   Width="40"
+                                   Margin="30, 0, 0, 0"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
