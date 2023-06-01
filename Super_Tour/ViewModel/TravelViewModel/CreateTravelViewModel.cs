@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ namespace Super_Tour.ViewModel
 {
     internal class CreateTravelViewModel : ObservableObject
     {
+        #region Declare variable
         private MainViewModel _mainViewModel;
         private MainTravelViewModel _mainTravelViewModel;
         private List<TOUR> _listToursSearching = null;
@@ -22,16 +24,34 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<DataGridTour> _listDataGridTour;
         private ObservableCollection<string> _listSearchFilterBy;
         private DataGridTour _selectedItem = null;
+        private CancellationTokenSource _cancellationTokenSource;
         private SUPER_TOUR db = null;
+        private string _searchType = "";
+        private int maxTicketInt;
         private TOUR _tour = null;
-        private string _startLocation;
+        private ObservableCollection<string> _listDiscount;
         private DateTime _selectedDateTime = DateTime.Now.Date;
+        private string _startLocation;
         private string _maxTicket;
         private bool _executeCommand = true;
         private string _selctedDiscount;
-        private ObservableCollection<string> _listDiscount;
+        private string _selectedFilter;
+        private bool _onSearching = false;
+        #endregion
         #region Declare binding
 
+        public string SelectedFilter
+        {
+            get
+            {
+                return _selectedFilter;
+            }
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
         public string SelectedDiscount
         {
             get
@@ -80,6 +100,18 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListDataGridTour));
             }
         }
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
+                OnPropertyChanged(nameof(SearchType));
+            }
+        }
         public ObservableCollection<string> ListSearchFilterBy
         {
             get
@@ -97,8 +129,19 @@ namespace Super_Tour.ViewModel
             get { return _maxTicket; }
             set
             {
-                _maxTicket = value;
-                OnPropertyChanged(nameof(_maxTicket));
+                if (string.IsNullOrEmpty(value))
+                    _maxTicket = value;
+                else
+                {
+                    if (int.TryParse(value, out maxTicketInt))
+                    {
+                        _maxTicket = value;
+                        //CheckDataModified();
+                    }
+                    else
+                        MaxTicket = _maxTicket;
+                }
+                OnPropertyChanged(nameof(MaxTicket));
             }
         }
         public DateTime SelectedDateTime
@@ -122,20 +165,23 @@ namespace Super_Tour.ViewModel
 
         #endregion
         #region Command
-        public ICommand OpenSelectTourForTravelViewCommand { get; }
         public ICommand SaveTourCommand { get; }
+        public ICommand OnSearchTextChangedCommand { get; }
+        public ICommand SelectedFilterCommand { get; }
         #endregion
         #region Constructor
         public CreateTravelViewModel(MainViewModel mainViewModel, MainTravelViewModel mainTravelViewModel)
         {
             db = SUPER_TOUR.db;
             _listDataGridTour = new ObservableCollection<DataGridTour>();
-            TOUR tour;
+            _mainTravelViewModel = mainTravelViewModel;
             this._mainViewModel = mainViewModel;
             LoadDiscount();
             InitTour();
             SaveTourCommand = new RelayCommand(ExecuteSaveCommand, CanExecuteSaveCommnad);
-            _mainTravelViewModel = mainTravelViewModel;
+            SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
+            OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
+            generateFilterItem();
         }
         #endregion
         #region Init discount
@@ -154,7 +200,6 @@ namespace Super_Tour.ViewModel
             _listDiscount.Add("50%");
         }
         #endregion
-
         #region init list tour
 
         private async void InitTour()
@@ -184,12 +229,36 @@ namespace Super_Tour.ViewModel
         }
         private void LoadData()
         {
-            foreach(TOUR tour in _listToursOriginal)
+            _listDataGridTour.Clear();
+            if (_onSearching)
             {
-                decimal SumPrice = tour.TOUR_DETAILs
-              .Where(p => p.Id_Tour == tour.Id_Tour)
-              .Sum(p => p.PACKAGE.Price);
-                _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                switch(_selectedFilter)
+                {
+                    case "Tour Name":
+                        SearchByName();
+                        break;
+                    case "Tour Place":
+                        SearchByPlace();
+                        break;
+
+                }    
+                foreach (TOUR tour in _listToursSearching)
+                {
+                    decimal SumPrice = tour.TOUR_DETAILs
+                  .Where(p => p.Id_Tour == tour.Id_Tour)
+                  .Sum(p => p.PACKAGE.Price);
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                }
+            }
+            else
+            {
+                foreach (TOUR tour in _listToursOriginal)
+                {
+                    decimal SumPrice = tour.TOUR_DETAILs
+                  .Where(p => p.Id_Tour == tour.Id_Tour)
+                  .Sum(p => p.PACKAGE.Price);
+                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                }
             }
         }
         #endregion
@@ -264,15 +333,39 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-
-        
-        /*private void ExecuteOpenSelectTourForTravelViewCommand(object obj)
+        #region Searching
+        private void ExecuteSelectFilter(object obj)
         {
-            SelectTourForTravelView selectTourForTravelView = new SelectTourForTravelView();
-            _tour = new TOUR();
-            selectTourForTravelView.DataContext = new SelectTourForTravelViewModel(_tour);
-            selectTourForTravelView.ShowDialog();
-            Tour = db.TOURs.Find(Tour.Id_Tour);
-        }*/
+            SearchType = "";
+            _onSearching = false;
+            LoadData();
+        }
+        private void ExecuteSearchTour(object obj)
+        {
+            _onSearching = true;
+            LoadData();
+        }
+        private void SearchByName()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchType)).ToList();
+        }
+
+        private void SearchByPlace()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(_searchType)).ToList();
+
+        }
+        private void generateFilterItem()
+        {
+            _listSearchFilterBy = new ObservableCollection<string>();
+            _listSearchFilterBy.Add("Tour Name");
+            _listSearchFilterBy.Add("Tour Place");
+            SelectedFilter = "Tour Name";
+        }
+        #endregion
     }
 }

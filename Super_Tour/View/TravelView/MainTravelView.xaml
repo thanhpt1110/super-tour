@@ -31,7 +31,9 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="txtBoxSearchType" 
+                        <TextBox 
+                            Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
                                 Width="300"
                                 Height="auto"
@@ -57,6 +59,8 @@
                             FontSize="20"
                             Effect="{StaticResource MaterialDesignElevationShadow2}"/>
                         <ComboBox
+                            ItemsSource="{Binding ListSearchFilterBy}"
+                            SelectedItem="{Binding SelectedFilter, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                             FontSize="15"
                             Width="180"
@@ -67,12 +71,12 @@
                             materialDesign:HintAssist.Hint="- Select Filter By -"
                             materialDesign:HintAssist.Foreground="Black"
                             materialDesign:HintAssist.Background="Transparent"
-                            materialDesign:HintAssist.IsFloating="False"
-                                                    >
-                            <ComboBoxItem>Tour Place</ComboBoxItem>
-                            <ComboBoxItem>Tour Price</ComboBoxItem>
-                            <ComboBoxItem>Total Day</ComboBoxItem>
-                            <ComboBoxItem>Total Night</ComboBoxItem>
+                            materialDesign:HintAssist.IsFloating="False">
+                            <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
+                            </i:EventTrigger>
+                            </i:Interaction.Triggers> 
                         </ComboBox>
                     </StackPanel>
                 </Grid>

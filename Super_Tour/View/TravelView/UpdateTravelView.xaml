@@ -245,7 +245,7 @@
                                     <Label Content="Search"
                                                />
                                     <TextBox 
-                                            Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                              Height="58"
                                              Width="250"
@@ -289,6 +289,11 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="69*"/>
+                                <ColumnDefinition Width="143*"/>
+                                <ColumnDefinition Width="466*"/>
+                            </Grid.ColumnDefinitions>
                             <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListDataGridTour}"
                               SelectedItem="{Binding SelectedItem}"
@@ -297,7 +302,7 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource smallerDataGridStyle1}" 
                                               FontSize="16"
-                                              Margin="20,25,25,30">
+                                              Margin="20,25,25,30" Grid.ColumnSpan="3">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
