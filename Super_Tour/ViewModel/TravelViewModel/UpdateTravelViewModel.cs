@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.Collections.ObjectModel;
+using static Super_Tour.ViewModel.MainTourViewModel;
 
 namespace Super_Tour.ViewModel
 {

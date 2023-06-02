@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static Super_Tour.ViewModel.MainTourViewModel;
 
 namespace Super_Tour.ViewModel
 {

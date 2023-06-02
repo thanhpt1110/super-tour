@@ -32,7 +32,7 @@
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBox 
-                            Text="{Binding SearchType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
                                 Width="300"
@@ -59,8 +59,8 @@
                             FontSize="20"
                             Effect="{StaticResource MaterialDesignElevationShadow2}"/>
                         <ComboBox
-                            ItemsSource="{Binding ListSearchFilterBy}"
-                            SelectedItem="{Binding SelectedFilter, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            SelectedValue="{Binding SelectedFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedValuePath="Content"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                             FontSize="15"
                             Width="180"
@@ -76,7 +76,9 @@
                             <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
                             </i:EventTrigger>
-                            </i:Interaction.Triggers> 
+                            </i:Interaction.Triggers>
+                            <ComboBoxItem>Tour Name</ComboBoxItem>
+                            <ComboBoxItem>Tour Place</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                 </Grid>
@@ -102,7 +104,8 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListDataGridTour}"
+                              ItemsSource="{Binding ListTours}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -112,28 +115,28 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
-                                                Binding="{Binding Tour.Id_Tour}"/>
+                                                Binding="{Binding Id_Tour}"/>
 
                         <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Tour.Name_Tour}"/>
+                                                Binding="{Binding Name_Tour}"/>
                         <DataGridTextColumn Header="Total Day" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Tour.TotalDay}"/>
+                                                Binding="{Binding TotalDay}"/>
                         <DataGridTextColumn Header="Total Night" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Tour.TotalNight}"/>
+                                                Binding="{Binding TotalNight}"/>
                         <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding Tour.PriceTour}"/>
+                                                Binding="{Binding PriceTour}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

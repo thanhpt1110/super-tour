@@ -187,7 +187,7 @@
                                            HorizontalAlignment="Center"
                                            Text="Selected Package"/>
                                 <DataGrid Margin="10" 
-                                          ItemsSource="{Binding ObservableListPickedPackage}"
+                                          ItemsSource="{Binding ObservableListSelectedPackage}"
                                     RowStyle="{DynamicResource DataGridRowStyle1}" 
                                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                                           CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -220,7 +220,7 @@
                                                                 Width="20"
                                                                 Height="20"
                                                                 Style="{StaticResource MaterialDesignIconButton}"
-                                                                    Command="{Binding DataContext.DeletePickedPackageCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                                    Command="{Binding DataContext.DeleteSelectedPackageCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                                 CommandParameter="{Binding}"
                                                                 >
                                                                 <fa:IconImage Width="10" Icon="Remove" Foreground="White"/>
@@ -243,6 +243,7 @@
                                 FontSize="18"
                                 BorderThickness="0"
                                 Background="{StaticResource btnAdd}"
+                                IsEnabled="{Binding IsDataModified}"
                                 Command="{Binding SavePackageCommand}" 
                                 Margin="0, 0, 0, 10"
                                 IsDefault="True"/>

@@ -71,7 +71,7 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox 
-                                            Text="{Binding NameTour}"
+                                            Text="{Binding TourName}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
@@ -96,7 +96,7 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox 
-                                                Text = "{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
@@ -119,7 +119,7 @@
                                                        FontWeight="Medium"
                                                        FontSize="18"
                                                        HorizontalAlignment="Center"/>
-                                                <TextBlock Text="0"
+                                                <TextBlock Text="{Binding TotalDay}"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -132,7 +132,7 @@
                                                        FontWeight="Medium"
                                                        FontSize="18"
                                                        HorizontalAlignment="Center"/>
-                                                <TextBlock Text="0"
+                                                <TextBlock Text="{Binding TotalNight}"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -154,7 +154,7 @@
                                         <ComboBox 
                                             ItemsSource="{Binding ListProvinces}"
                                             DisplayMemberPath="name"
-                                            SelectedItem="{Binding SelectedProvinces}"
+                                            SelectedItem="{Binding SelectedProvince}"
                                             FontSize="18"
                                             Height="auto"
                                             Width="250"
@@ -263,7 +263,7 @@
                                                             <TextBlock Margin="5,10,5,5"
                                                         FontWeight="Medium"
                                                         FontSize="18" 
-                                                        Text="{Binding DateID}"/>
+                                                        Text="{Binding DateOrder}"/>
                                                             <!--Lịch trình 1 ngày-->
                                                             <Grid Background="{StaticResource BackgroundChildContent}">
                                                                 <Grid.RowDefinitions>
@@ -556,7 +556,7 @@
             <Button
                 IsEnabled="{Binding IsDataModified}"
                 Margin="0,20,0,0"
-                Command="{Binding CreateTourCommnand}"
+                Command="{Binding SaveCommnand}"
                 Content="Save"
                 Background="{StaticResource btnAdd}"
                 BorderThickness="0"

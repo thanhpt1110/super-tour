@@ -71,7 +71,7 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox
-                                                Text="{Binding NameTour}"
+                                                Text="{Binding TourName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
@@ -96,7 +96,7 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox 
-                                                Text = "{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
@@ -154,7 +154,7 @@
                                                 Margin="0,10,0,0">
                                         <ComboBox 
                                             ItemsSource="{Binding ListProvinces}"
-                                            SelectedItem="{Binding SelectedProvinces}"
+                                            SelectedItem="{Binding SelectedProvince}"
                                             DisplayMemberPath="name"
                                             FontSize="18"
                                             Height="auto"
@@ -257,14 +257,14 @@
                                 <ScrollViewer>
                                     <Grid Margin="5">
                                         <StackPanel Orientation="Vertical">
-                                            <ItemsControl ItemsSource="{Binding ListDateAcitivities}">
+                                            <ItemsControl ItemsSource="{Binding DateActivityList}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Vertical">
                                                             <TextBlock Margin="5,10,5,5"
                                                         FontWeight="Medium"
                                                         FontSize="18" 
-                                                        Text="{Binding DateID}"/>
+                                                        Text="{Binding DateOrder}"/>
                                                             <!--Lịch trình 1 ngày-->
                                                             <Grid Background="{StaticResource BackgroundChildContent}">
                                                                 <Grid.RowDefinitions>
@@ -556,7 +556,8 @@
         <Grid Grid.Row="2">
             <Button
                 Margin="0,20,0,0"
-                Command="{Binding SaveUpdateTourCommand}"
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsDataModified}"
                 Content="Save"
                 Background="{StaticResource btnAdd}"
                 BorderThickness="0"
