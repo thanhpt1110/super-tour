@@ -144,6 +144,12 @@ namespace Super_Tour.ViewModel
         {
             List<TYPE_PACKAGE> package =  db.TYPE_PACKAGEs.ToList();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>(package);
+
+            // Add option load all Type package
+            TYPE_PACKAGE All = new TYPE_PACKAGE();
+            All.Name_Type = "All";
+            All.Id_Type_Package = -1;
+            _listTypePackage.Insert(0, All);
         }
 
         private async Task LoadAvailablePackage()
@@ -176,7 +182,12 @@ namespace Super_Tour.ViewModel
 
         private void LoadWithSearch()
         {
-            List<PACKAGE> listSearchType = this._listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+            List<PACKAGE> listSearchType = null;
+            if (_selectedTypePackage.Id_Type_Package != -1)
+                listSearchType = this._listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+            else
+                listSearchType = this._listAvailablePackage;
+
             ObservableListAvailablePackage.Clear();
             foreach (PACKAGE package in listSearchType)
             {
