@@ -23,6 +23,8 @@ namespace Super_Tour.ViewModel
     {
         #region Declare variable 
         private SUPER_TOUR db = null;
+        public static DateTime TimePackage;
+        private UPDATE_CHECK _tracker = null;
         private List<PACKAGE> _listOriginalPackage = null;
         private List<PACKAGE> _listPackagesSearching = null;
         private List<PACKAGE> _listPackageDatagrid = null;
@@ -42,6 +44,7 @@ namespace Super_Tour.ViewModel
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
+        private string table = "UPDATE_PACKAGE";
         #endregion
 
         #region Declare binding
@@ -151,9 +154,9 @@ namespace Super_Tour.ViewModel
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             LoadDataAsync();
-            /*Timer = new DispatcherTimer();
+            Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
-            Timer.Tick += Timer_Tick;*/
+            Timer.Tick += Timer_Tick;
         }
         #endregion
 
@@ -198,7 +201,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
         
-        /*#region Check data per second 
+        #region Check data per second 
         private async void Timer_Tick(object sender, EventArgs e)
         {
             try
@@ -207,8 +210,16 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-
-
+                        _tracker = UPDATE_CHECK.getTracker(table);
+                        if(DateTime.Parse(_tracker.DateTimeUpdate) > TimePackage)
+                        {
+                            TimePackage = (DateTime.Parse(_tracker.DateTimeUpdate));
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                _listOriginalPackage = db.PACKAGEs.ToList();
+                                ReloadData();
+                            });
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -222,7 +233,6 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-        */
 
         #region Insert
         private void ExecuteOpenCreatePackageViewCommand(object obj)
@@ -274,8 +284,11 @@ namespace Super_Tour.ViewModel
                     db.PACKAGEs.Remove(SelectedItem);
                     db.SaveChanges();
 
-                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    // Synchronize data to real-time database 
+                    TimePackage = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimePackage);
 
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                     // Process UI event
                     _listOriginalPackage.Remove(SelectedItem);
                     ReloadData();

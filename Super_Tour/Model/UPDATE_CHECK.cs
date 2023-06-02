@@ -33,8 +33,18 @@ namespace Super_Tour.Model
         public static void NotifyChange(string table, DateTime timeUpdate)
         {
             _tracker = getTracker(table);
-            _tracker.DateTimeUpdate = timeUpdate.ToString();
-            var set = Client.Update(@"Update/" + table, _tracker);
+            if(_tracker == null)
+            {
+                _tracker = new UPDATE_CHECK();
+                _tracker.DateTimeUpdate = timeUpdate.ToString();
+                _tracker.Type_Update = table;
+                Client.Set(@"Update/" + table, _tracker);
+            }
+            else
+            {
+                _tracker.DateTimeUpdate = timeUpdate.ToString();
+                Client.Update(@"Update/" + table, _tracker);
+            }
         }
     }
 }

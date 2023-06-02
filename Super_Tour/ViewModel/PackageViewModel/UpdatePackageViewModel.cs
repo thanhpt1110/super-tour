@@ -41,6 +41,7 @@ namespace Super_Tour.ViewModel
         private bool _isDataModified = false;
         private string _imagePath = null;
         private bool _isNewImage = false;
+        private string table = "UPDATE_PACKAGE";
         #endregion
 
         #region Declare binding
@@ -364,8 +365,11 @@ namespace Super_Tour.ViewModel
                 db.PACKAGEs.AddOrUpdate(_selectedItem);
                 await db.SaveChangesAsync();
 
-                MyMessageBox.ShowDialog("Update package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                // Synchronize data to real time DB
+                MainPackageViewModel.TimePackage = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainPackageViewModel.TimePackage);
 
+                MyMessageBox.ShowDialog("Update package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 // Find view to close 
                 UpdatePackageView createPackageView = null;
                 foreach (Window window in Application.Current.Windows)

@@ -20,6 +20,8 @@ namespace Super_Tour.ViewModel
     {
         #region Declare variable 
         private SUPER_TOUR db = null;
+        public static DateTime TimeCustomer;
+        private UPDATE_CHECK _tracker = null;
         private List<CUSTOMER> _listOriginalCustomer = null;
         private List<CUSTOMER> _ListCustomerSearching = null;
         private List<CUSTOMER> _listCustomerDatagrid = null;
@@ -38,6 +40,7 @@ namespace Super_Tour.ViewModel
         private int _startIndex;
         private int _endIndex;
         private int _totalResult;
+        private string table = "UPDATE_CUSTOMER";
         #endregion
 
         #region Declare binding
@@ -146,9 +149,9 @@ namespace Super_Tour.ViewModel
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             LoadDataAsync();
-            /*_timer = new DispatcherTimer();
+            _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(3);
-            _timer.Tick += _timer_Tick;*/
+            _timer.Tick += _timer_Tick;
         }
         #endregion
 
@@ -194,9 +197,35 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Check data per second
-        private void _timer_Tick(object sender, EventArgs e)
+        private async void _timer_Tick(object sender, EventArgs e)
         {
-            // Write function
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        _tracker = UPDATE_CHECK.getTracker(table);
+                        if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeCustomer)
+                        {
+                            TimeCustomer = (DateTime.Parse(_tracker.DateTimeUpdate));
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                _listOriginalCustomer = db.CUSTOMERs.ToList();
+                                ReloadData();
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -249,8 +278,11 @@ namespace Super_Tour.ViewModel
                     db.CUSTOMERs.Remove(SelectedItem);
                     db.SaveChanges();
 
-                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    // Synchronize data to real-time database 
+                    TimeCustomer = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeCustomer);
 
+                    MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                     // Process UI event
                     _listOriginalCustomer.Remove(SelectedItem);
                     ReloadData();

@@ -25,6 +25,7 @@ namespace Super_Tour.ViewModel
         private string _password = null;
         private string _selectedService;
         private bool _isDataModified = false;
+        private string table = "UPDATE_ACCOUNT";
         #endregion
 
         #region Declare binding
@@ -167,6 +168,8 @@ namespace Super_Tour.ViewModel
                 _selectedItem.Id_Account = db.ACCOUNTs.Max(p => p.Id_Account);
 
                 // Synchronize data to real-time database
+                MainAccountViewModel.TimeAccount = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainAccountViewModel.TimeAccount);
 
                 // Process UI events
                 MyMessageBox.ShowDialog("Update account successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);

@@ -148,9 +148,9 @@ namespace Super_Tour.ViewModel
             OnSearchTextChangedCommand = new RelayCommand(SearchCommand);
             TimeAccount = DateTime.Now;
             LoadDataAsync();
-            /*Timer = new DispatcherTimer();
+            Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
-            Timer.Tick += Timer_Tick;*/
+            Timer.Tick += Timer_Tick;
         }
         #endregion
 
@@ -197,7 +197,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        /* #region Check data per second
+        #region Check data per second
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await ReloadDataAsync();
@@ -227,7 +227,6 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
-        */
 
         #region Insert
         private void ExecuteOpenCreateAccountViewCommand(object obj)
@@ -272,8 +271,8 @@ namespace Super_Tour.ViewModel
                     db.SaveChanges();
 
                     // Synchronize data to real-time database 
-                    /*TimeAccount = DateTime.Now;
-                    UPDATE_CHECK.NotifyChange(table, TimeAccount);*/
+                    TimeAccount = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeAccount);
 
                     // Process UI event
                     MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);

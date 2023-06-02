@@ -43,6 +43,7 @@ namespace Super_Tour.ViewModel
         private string _imagePath = null;
         private bool _isNewImage = false;
         private int _priceInt;
+        private string table = "UPDATE_PACKAGE";
         #endregion
 
         #region Declare binding
@@ -325,8 +326,10 @@ namespace Super_Tour.ViewModel
                  db.SaveChanges();
                 _selectedItem.Id_Package = db.PACKAGEs.Max(p => p.Id_Package);
 
-                // Synchronize data to real-time database
-
+                // Synchronize data to real time DB
+                MainPackageViewModel.TimePackage = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainPackageViewModel.TimePackage);
+               
                 // Process UI Event
                 MyMessageBox.ShowDialog("Add new package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 // Find view to close

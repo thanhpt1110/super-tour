@@ -33,6 +33,7 @@ namespace Super_Tour.ViewModel
         private District _selectedDistrict = null;
         private List<Province> ListProvinces = null;
         private List<District> ListDistricts = null;
+        private string table = "UPDATE_CUSTOMER";
         #endregion
 
         #region Declare binding
@@ -249,7 +250,9 @@ namespace Super_Tour.ViewModel
                 db.CUSTOMERs.AddOrUpdate(_selectedItem);
                 db.SaveChanges();
 
-                // Synchronize data to real-time database
+                // Synchronize data to real time DB
+                MainCustomerViewModel.TimeCustomer = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainCustomerViewModel.TimeCustomer);
 
                 // Process UI events
                 MyMessageBox.ShowDialog("Update customer successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
