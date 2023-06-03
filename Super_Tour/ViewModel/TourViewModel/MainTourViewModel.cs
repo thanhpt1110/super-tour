@@ -25,14 +25,13 @@ namespace Super_Tour.ViewModel
     {
         // Mai xóa
         public class DataGridTour
-        {
+        {       
             private TOUR _tour;
-
-            public TOUR Tour
+            public TOUR Tour    
             {
                 get { return _tour; }
                 set { _tour = value; }
-            }
+            }       
             private decimal _totalPrice;
             public decimal TotalPrice
             {
@@ -295,7 +294,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        #region Update
+        #region Update      
         private void ExecuteUpdateTourCommand(object obj)
         {
             try
@@ -312,7 +311,7 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Delete
-        private void ExecuteDeleteTour(object obj)
+        private async void ExecuteDeleteTour(object obj)
         {
             try
             {
@@ -325,9 +324,10 @@ namespace Super_Tour.ViewModel
                     {
                         db.TOUR_DETAILs.Remove(tour_detail);
                     }
+
                     // Delete that tour and Save to data
                     db.TOURs.Remove(db.TOURs.Find(SelectedItem.Id_Tour));
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
 
                     // Synchronize real-time data
                     UPDATE_CHECK.NotifyChange(table, TimeTour);
@@ -384,7 +384,6 @@ namespace Super_Tour.ViewModel
             if (_listTourOriginal == null || _listTourOriginal.Count == 0)
                 return;
             this._listTourSearching = _listTourOriginal.Where(p => p.PlaceOfTour.ToLower().Contains(_searchTour.ToLower())).ToList();
-
         }
         #endregion
 

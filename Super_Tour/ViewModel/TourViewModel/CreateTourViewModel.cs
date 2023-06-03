@@ -511,7 +511,6 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog("Add new tour successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 _mainViewModel.removeFirstChild();
                 _mainViewModel.CurrentChildView = _mainTourViewModel;
-                
                 _mainTourViewModel.ReloadAfterCreateNewTour(tour);
             }
             catch (Exception ex)

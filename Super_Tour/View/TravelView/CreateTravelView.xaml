@@ -51,7 +51,7 @@
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
                         <TextBox 
-                                    Text="{Binding SelectedItem.Tour.Name_Tour}"
+                                    Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Select from list on the left"
                                     Width="auto"
@@ -74,7 +74,7 @@
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
                         <TextBox
-                                    Text="{Binding StartLocation}"
+                                    Text="{Binding StartLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     materialDesign:HintAssist.Hint="Ex: Bến xe Miền Đông mới"
                                     materialDesign:HintAssist.IsFloating="false"
@@ -103,7 +103,7 @@
                                            Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <DatePicker
-                                                SelectedDate="{Binding SelectedDateTime, Mode=TwoWay}"
+                                                SelectedDate="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                 Foreground="Black"
                                                 BorderBrush="Black"
@@ -128,7 +128,7 @@
                                                    Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <materialDesign:TimePicker
-                                                SelectedTime="{Binding SelectedDateTime, Mode=TwoWay}"
+                                                SelectedTime="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                 Foreground="Black"
                                                 BorderBrush="Black"
@@ -158,7 +158,7 @@
                                                     Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <TextBox
-                                            Text="{Binding MaxTicket}"
+                                            Text="{Binding MaxTicket, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                             materialDesign:HintAssist.Hint="Ex: 50"
                                             Height="auto"
@@ -186,8 +186,7 @@
                                     </StackPanel>
                                     <ComboBox
                                                 ItemsSource="{Binding ListDiscount}"
-                                           
-                                                SelectedItem="{Binding SelectedDiscount}"
+                                                SelectedItem="{Binding SelectedDiscount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 FontSize="18"
                                                 Height="58"
@@ -204,7 +203,8 @@
                         </Grid>
                         <Button
                                     Margin="0,100,0,0"
-                                    Command="{Binding SaveTourCommand}"
+                                    Command="{Binding SaveCommand}"
+                                    IsEnabled="{Binding IsDataModified}"
                                     Content="Save"
                                     Background="{StaticResource btnAdd}"
                                     BorderThickness="0"
@@ -272,8 +272,8 @@
                                 <StackPanel Orientation="Vertical">
                                     <Label Content="Filter"/>
                                     <ComboBox
-                                            ItemsSource="{Binding ListSearchFilterBy}"
-                                            SelectedItem="{Binding SelectedFilter}"
+                                            SelectedValue="{Binding SelectedFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedValuePath="Content"
                                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                             FontSize="18"
                                             Height="58"
@@ -290,6 +290,8 @@
                                                 <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
+                                        <ComboBoxItem>Tour Name</ComboBoxItem>
+                                        <ComboBoxItem>Tour Place</ComboBoxItem>
                                     </ComboBox>
                                 </StackPanel>
                             </Grid>
@@ -300,8 +302,8 @@
                                 <ColumnDefinition Width="613*"/>
                             </Grid.ColumnDefinitions>
                             <DataGrid x:Name="membersDataGrid" 
-                                      SelectedItem="{Binding SelectedItem}"
-                              ItemsSource="{Binding ListDataGridTour}"
+                              SelectedItem="{Binding SelectedItem}"
+                              ItemsSource="{Binding ListTours}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -313,22 +315,22 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.4*"
-                                                Binding="{Binding Tour.Name_Tour}"/>
+                                                Binding="{Binding Name_Tour}"/>
                                     <DataGridTextColumn Header="Day" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
-                                                Binding="{Binding Tour.TotalDay}"/>
+                                                Binding="{Binding TotalDay}"/>
                                     <DataGridTextColumn Header="Night" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
-                                                Binding="{Binding Tour.TotalNight}"/>
+                                                Binding="{Binding TotalNight}"/>
                                     <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.8*"
-                                                Binding="{Binding TotalPrice}"/>
+                                                Binding="{Binding PriceTour}"/>
                                     <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
