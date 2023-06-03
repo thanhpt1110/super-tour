@@ -15,23 +15,20 @@ using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
-
     internal class MainTravelViewModel: ObservableObject
     {
+        #region Declare varialbe
         private SUPER_TOUR db;
         private MainViewModel mainViewModel;
         public static DateTime TimeTravel;
         private UPDATE_CHECK _tracker = null;
-        private ObservableCollection<string> _listFilter;
         private List<TRAVEL> _listTravelOriginal = null; // Data gốc
         private List<TRAVEL> _listTravelSearching = null; // Data lúc mà có người search
         private List<TRAVEL> _listTravelDataGrid = null; // Data để đổ vào datagrid 
         private ObservableCollection<TRAVEL> _listTravels = null; // Data binding của Datagrid
         private TRAVEL _selectedItem = null;
-        private TRAVEL temp = null;
         private DispatcherTimer _timer = null;
-        private ObservableCollection<string> _listSearchFilterBy;
-        private string _selectedFilter = "";
+        private string _selectedFilter = "Tour Name";
         private string _searchType = "";
         private int _currentPage = 1;
         private int _totalPage;
@@ -44,15 +41,9 @@ namespace Super_Tour.ViewModel
         private int _endIndex;
         private int _totalResult;
         private string table = "UPDATE_TRAVEL";
-        #region Declare binding
-        public ObservableCollection<string> ListFilter
-        {
-            get { return _listFilter; }
-            set { _listFilter = value;
-                OnPropertyChanged(nameof(ListFilter));
-            }
-        }
+        #endregion
 
+        #region Declare binding
         public string SelectedFilter
         {
             get
@@ -65,19 +56,6 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(SelectedFilter));
             }
         }
-        public ObservableCollection<string> ListSearchFilterBy
-        {
-            get
-            {
-                return _listSearchFilterBy;
-            }
-            set
-            {
-                _listSearchFilterBy = value;
-                OnPropertyChanged(nameof(ListSearchFilterBy));
-            }
-        }
-
         public string ResultNumberText
         {
             get { return _resultNumberText; }
@@ -172,6 +150,7 @@ namespace Super_Tour.ViewModel
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
+        #region Constructor
         public MainTravelViewModel(MainViewModel mainViewModel) 
         {
             this.mainViewModel = mainViewModel;
@@ -184,12 +163,13 @@ namespace Super_Tour.ViewModel
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             this._listTravels = new ObservableCollection<TRAVEL>();
-            generateFilterItem();
             LoadDataAsync();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(3);
             Timer.Tick += Timer_Tick; 
         }
+        #endregion
+
         #region Load data async
         private async Task LoadDataAsync()
         {
@@ -217,10 +197,24 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
+
         #region Check data per second
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await ReloadDataAsync();
+        }
+
+        public void ReloadAfterCreateTravel(TRAVEL travel)
+        {
+            try
+            {
+                _listTravelOriginal.Add(travel);
+                ListTravels.Add(travel);    
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
 
         public async Task ReloadDataAsync()
@@ -247,67 +241,79 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
+
+        #region Insert
+        private void ExecuteOpenCreateTravelViewCommand(object obj)
+        {
+            try
+            {
+                CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel, this);
+                mainViewModel.CurrentChildView = createTravelViewModel;
+                mainViewModel.setFirstChild("Add Travel");
+            }
+            catch(Exception ex)
+            {
+                        
+            }
+        }
+        #endregion
+
         #region Update
         private async void ExecuteUpdateCommand(object obj)
         {
-            TRAVEL travel = obj as TRAVEL;
-            UpdateTravelViewModel updateTravelViewModel = new UpdateTravelViewModel(travel,this,mainViewModel);
-            mainViewModel.CurrentChildView = updateTravelViewModel;
-            mainViewModel.setFirstChild("Update Travel");
+            try
+            {
+                UpdateTravelViewModel updateTravelViewModel = new UpdateTravelViewModel(_selectedItem, this, mainViewModel);
+                mainViewModel.CurrentChildView = updateTravelViewModel;
+                mainViewModel.setFirstChild("Update Travel");
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }           
         }
         #endregion
+
         #region Delete
         private async void ExecuteDeleteTravel(object obj)
         {
-
             try
             {
                 MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
-                    TRAVEL travel = obj as TRAVEL;
-                    Timer.Stop();
-                    TRAVEL TravelFind = await db.TRAVELs.FindAsync(travel.Id_Travel);
-                    if (TravelFind == null)
+                    // If this travel has been existed in Booking -> We cannot delete it 
+                    if (db.BOOKINGs.Where(p => p.Id_Travel == SelectedItem.Id_Travel).ToList().Count > 0)
                     {
-                        MyMessageBox.ShowDialog("The tour could not be found.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                        return;
-                    }
-                    if (db.BOOKINGs.Where(p => p.Id_Travel == TravelFind.Id_Travel).ToList().Count > 0)
-                    {
-                        MyMessageBox.ShowDialog("The tour could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        MyMessageBox.ShowDialog("The travel could not be deleted.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                         return;
                     }
 
-                    db.TRAVELs.Remove(TravelFind);
+                    // Delete that travel and Save to DB
+                    db.TRAVELs.Remove(SelectedItem);
                     await db.SaveChangesAsync();
+
+                    // Synchronize real-time data
                     TimeTravel = DateTime.Now;
                     UPDATE_CHECK.NotifyChange(table, TimeTravel);
+
+                    // Process UI event
                     MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                    _listTravels.Remove(TravelFind);
-                    _listTravelOriginal.Remove(TravelFind);
+                    _listTravelOriginal.Remove(SelectedItem);
+                    ReloadData();
                 }
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Lỗi: " + ex.InnerException.Message);
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
             finally
             {
-                Timer.Start();
             }
         }
         #endregion
-        #region Insert
-        private void ExecuteOpenCreateTravelViewCommand(object obj)
-        {
-            CreateTravelViewModel createTravelViewModel = new CreateTravelViewModel(mainViewModel,this);
-            mainViewModel.CurrentChildView = createTravelViewModel;
-            mainViewModel.setFirstChild("Add Travel");
-        }
-        #endregion
-        #region Searching
+
+        #region Search
         private void ExecuteSelectFilter(object obj)
         {
             SearchType = "";
@@ -316,31 +322,34 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteSearchTravel(object obj)
         {
-            _onSearching = true;
-            ReloadData();
+            if (string.IsNullOrEmpty(_searchType))
+            {
+                _onSearching = false;
+                ReloadData();
+            }
+            else
+            {
+                _onSearching = true;
+                this._currentPage = 1;
+                ReloadData();
+            }
         }
         private void SearchByName()
         {
             if (_listTravelOriginal == null || _listTravelOriginal.Count == 0)
                 return;
-                this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.Name_Tour.Contains(_searchType)).ToList();
+            this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
         }
 
         private void SearchByPlace()
         {
             if (_listTravelOriginal == null || _listTravelOriginal.Count == 0)
                 return;
-            this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.PlaceOfTour.Contains(_searchType)).ToList();
+            this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.PlaceOfTour.ToLower().Contains(_searchType.ToLower())).ToList();
 
         }
-        private void generateFilterItem()
-        {
-            _listSearchFilterBy = new ObservableCollection<string>();
-            _listSearchFilterBy.Add("Tour Name");
-            _listSearchFilterBy.Add("Tour Place");
-            SelectedFilter = "Tour Name";
-        }
         #endregion
+
         #region Custom display data grid
         private List<TRAVEL> GetData(List<TRAVEL> ListTravel, int startIndex, int endIndex)
         {

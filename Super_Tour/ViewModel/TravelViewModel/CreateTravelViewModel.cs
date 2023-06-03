@@ -18,41 +18,36 @@ namespace Super_Tour.ViewModel
     internal class CreateTravelViewModel : ObservableObject
     {
         #region Declare variable
+        private SUPER_TOUR db = null;
         private MainViewModel _mainViewModel;
         private MainTravelViewModel _mainTravelViewModel;
+        private string _searchType = "";
+        private string _selectedFilter = "Tour Name";
         private List<TOUR> _listToursSearching = null;
         private List<TOUR> _listToursOriginal = null;
-        private ObservableCollection<DataGridTour> _listDataGridTour;
-        private ObservableCollection<string> _listSearchFilterBy;
-        private DataGridTour _selectedItem = null;
-        private CancellationTokenSource _cancellationTokenSource;
-        private SUPER_TOUR db = null;
-        private string _searchType = "";
-        private int maxTicketInt;
-        private TOUR _tour = null;
-        private ObservableCollection<string> _listDiscount;
+        private ObservableCollection<TOUR> _listTours = null;
+        private TOUR _selectedItem = null;
+        private string _startLocation = null;
         private DateTime _selectedDateTime = DateTime.Now.Date;
-        private string _startLocation;
         private string _maxTicket;
-        private bool _executeCommand = true;
+        private ObservableCollection<string> _listDiscount;
         private string _selctedDiscount;
-        private string _selectedFilter;
+        private bool _isDataModified = false;
         private bool _onSearching = false;
+        private string table = "UPDATE_TRAVEL";
         #endregion
-        #region Declare binding
 
-        public string SelectedFilter
+        #region Declare binding
+        public bool IsDataModified
         {
-            get
-            {
-                return _selectedFilter;
-            }
+            get { return _isDataModified; }
             set
             {
-                _selectedFilter = value;
-                OnPropertyChanged(nameof(SelectedFilter));
+                _isDataModified = value;
+                OnPropertyChanged(nameof(IsDataModified));
             }
         }
+
         public string SelectedDiscount
         {
             get
@@ -63,8 +58,10 @@ namespace Super_Tour.ViewModel
             {
                 _selctedDiscount = value;
                 OnPropertyChanged(nameof(SelectedDiscount));
+                CheckDataModified();
             }
         }
+
         public ObservableCollection<string> ListDiscount
         {
             get
@@ -77,74 +74,21 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(ListDiscount));
             }
         }
-        public DataGridTour SelectedItem
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                _selectedItem = value;
-                OnPropertyChanged(nameof(SelectedItem));
-            }
-        }
-        public ObservableCollection<DataGridTour> ListDataGridTour
-        {
-            get
-            {
-                return _listDataGridTour;
-            }
-            set
-            {
-                _listDataGridTour = value;
-                OnPropertyChanged(nameof(ListDataGridTour));
-            }
-        }
-        public string SearchType
-        {
-            get
-            {
-                return _searchType;
-            }
-            set
-            {
-                _searchType = value;
-                OnPropertyChanged(nameof(SearchType));
-            }
-        }
-        public ObservableCollection<string> ListSearchFilterBy
-        {
-            get
-            {
-                return _listSearchFilterBy;
-            }
-            set
-            {
-                _listSearchFilterBy = value;
-                OnPropertyChanged(nameof(ListDataGridTour));
-            }
-        }
+
         public string MaxTicket
         {
             get { return _maxTicket; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    _maxTicket = value;
-                else
+                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
                 {
-                    if (int.TryParse(value, out maxTicketInt))
-                    {
-                        _maxTicket = value;
-                        //CheckDataModified();
-                    }
-                    else
-                        MaxTicket = _maxTicket;
+                    _maxTicket = value;
+                    OnPropertyChanged(nameof(MaxTicket));
+                    CheckDataModified();
                 }
-                OnPropertyChanged(nameof(MaxTicket));
             }
         }
+
         public DateTime SelectedDateTime
         {
             get { return _selectedDateTime; }
@@ -161,49 +105,106 @@ namespace Super_Tour.ViewModel
             {
                 _startLocation = value;
                 OnPropertyChanged(nameof(StartLocation));
+                CheckDataModified();
             }
         }
 
+        public TOUR SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                CheckDataModified();
+            }
+        }
+
+        public ObservableCollection<TOUR> ListTours
+        {
+            get { return _listTours; }
+            set
+            {
+                _listTours = value;
+                OnPropertyChanged(nameof(ListTours));
+            }
+        }
+
+        public string SelectedFilter
+        {
+            get
+            {
+                return _selectedFilter;
+            }
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
+
+        public string SearchType
+        {
+            get
+            {
+                return _searchType;
+            }
+            set
+            {
+                _searchType = value;
+                OnPropertyChanged(nameof(SearchType));
+            }
+        }
         #endregion
+
         #region Command
-        public ICommand SaveTourCommand { get; }
+        public ICommand SaveCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand SelectedFilterCommand { get; }
         #endregion
+
         #region Constructor
         public CreateTravelViewModel(MainViewModel mainViewModel, MainTravelViewModel mainTravelViewModel)
         {
+            // Create objects
             db = SUPER_TOUR.db;
-            _listDataGridTour = new ObservableCollection<DataGridTour>();
+            _listTours = new ObservableCollection<TOUR>();
             _mainTravelViewModel = mainTravelViewModel;
             this._mainViewModel = mainViewModel;
+
+            // Load UI
             LoadDiscount();
-            InitTour();
-            SaveTourCommand = new RelayCommand(ExecuteSaveCommand, CanExecuteSaveCommnad);
+            LoadTour();
+                
+            // Create command
+            SaveCommand = new RelayCommand(ExecuteSaveCommand);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
-            generateFilterItem();
         }
         #endregion
-        #region Init discount
+
+        #region Load window
         private void LoadDiscount()
         {
-            _listDiscount = new ObservableCollection<string>();
-            _listDiscount.Add("5%");
-            _listDiscount.Add("10%");
-            _listDiscount.Add("15%");
-            _listDiscount.Add("20%");
-            _listDiscount.Add("25%");
-            _listDiscount.Add("30%");
-            _listDiscount.Add("35%");
-            _listDiscount.Add("40%");
-            _listDiscount.Add("45%");
-            _listDiscount.Add("50%");
+            _listDiscount = new ObservableCollection<string>
+            {
+                "5%",
+                "10%",
+                "15%",
+                "20%",
+                "25%",
+                "30%",
+                "35%",
+                "40%",
+                "45%",
+                "50%"
+            };
         }
-        #endregion
-        #region init list tour
 
-        private async void InitTour()
+        private async void LoadTour()
         {
             try
             {
@@ -214,7 +215,7 @@ namespace Super_Tour.ViewModel
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _listToursOriginal = db.TOURs.ToList();
-                            LoadData();
+                            ReloadData();
                         });
                     }
                     catch (Exception ex)
@@ -228,9 +229,10 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
-        private void LoadData()
+
+        private void ReloadData()
         {
-            _listDataGridTour.Clear();
+            _listTours.Clear();
             if (_onSearching)
             {
                 switch(_selectedFilter)
@@ -241,88 +243,86 @@ namespace Super_Tour.ViewModel
                     case "Tour Place":
                         SearchByPlace();
                         break;
-
                 }    
-                foreach (TOUR tour in _listToursSearching)
+                foreach(TOUR tour in _listToursSearching)
                 {
-                    decimal SumPrice = tour.TOUR_DETAILs
-                  .Where(p => p.Id_Tour == tour.Id_Tour)
-                  .Sum(p => p.PACKAGE.Price);
-                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                    ListTours.Add(tour);
                 }
             }
             else
             {
-                foreach (TOUR tour in _listToursOriginal)
+                foreach(TOUR tour in _listToursOriginal)
                 {
-                    decimal SumPrice = tour.TOUR_DETAILs
-                  .Where(p => p.Id_Tour == tour.Id_Tour)
-                  .Sum(p => p.PACKAGE.Price);
-                    _listDataGridTour.Add(new DataGridTour() { Tour = tour, TotalPrice = SumPrice });
+                    ListTours.Add(tour);
                 }
             }
         }
         #endregion
-        #region Save Travel
-        private bool CanExecuteSaveCommnad(object obj)
+
+        #region Search
+        private void ExecuteSelectFilter(object obj)
         {
-            return _executeCommand;
+            SearchType = "";
+            _onSearching = false;
+            ReloadData();
         }
+
+        private void ExecuteSearchTour(object obj)
+        {
+            if (string.IsNullOrEmpty(_searchType))
+            {
+                _onSearching = false;
+                ReloadData();
+            }
+            else
+            {
+                _onSearching = true;
+                ReloadData();
+            }
+        }
+
+        private void SearchByName()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.ToLower().Contains(_searchType.ToLower())).ToList();
+        }
+
+        private void SearchByPlace()
+        {
+            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
+                return;
+            this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.ToLower().Contains(_searchType.ToLower())).ToList();
+
+        }
+        #endregion
+
+        #region Perform add new Travel
         private async void ExecuteSaveCommand(object obj)
         {
-
-            if (SelectedItem == null || string.IsNullOrEmpty(_maxTicket) || string.IsNullOrEmpty(_selctedDiscount) || string.IsNullOrEmpty(StartLocation))
-            {
-                MyMessageBox.ShowDialog("Please fill all information.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-            int maxTicket;
-            int discount;
-            if (!int.TryParse(_maxTicket, out maxTicket))
-            {
-                MyMessageBox.ShowDialog("Max ticket must be in number.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }
-/*            if (!int.TryParse(_selctedDiscount, out discount))
-            {
-                MyMessageBox.ShowDialog("Discount must be in number.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }*/
-/*            else if (discount > 100)
-            {
-                MyMessageBox.ShowDialog("Discount must be under 80 percents.", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
-            }*/
+            int maxTicket = int.Parse(_maxTicket);
             try
             {
-                _executeCommand = false;
+                // Save data to DB in TRAVEL table
                 TRAVEL travel = new TRAVEL();
-                travel.Id_Travel = 1;
-                travel.Id_Tour = _selectedItem.Tour.Id_Tour;
-                travel.Discount = int.Parse(_selctedDiscount.Remove(_selctedDiscount.Length-1));
-                travel.MaxTicket = maxTicket;
+                travel.Id_Tour = _selectedItem.Id_Tour;
                 travel.StartLocation = _startLocation;
-                travel.RemainingTicket = maxTicket;
                 travel.StartDateTimeTravel = _selectedDateTime;
+                travel.MaxTicket = maxTicket;
+                travel.Discount = int.Parse(_selctedDiscount.Remove(_selctedDiscount.Length-1));
+                travel.RemainingTicket = maxTicket;
                 db.TRAVELs.Add(travel);
                 await db.SaveChangesAsync();
+
+                // Synchronyze real-time DB
+                MainTravelViewModel.TimeTravel = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, MainTravelViewModel.TimeTravel);
+
+                // Process UI event
                 MyMessageBox.ShowDialog("Add new travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                await _mainTravelViewModel.ReloadDataAsync();
-                _mainViewModel.setFirstChild("");
-                _mainViewModel.Caption = "Travel";
+                _mainViewModel.removeFirstChild();
                 _mainViewModel.CurrentChildView = _mainTravelViewModel;
-                /*foreach (Window window in Application.Current.Windows)
-                {
-                    Console.WriteLine(window.ToString());
-                    if (window is CreateTourView)
-                    {
-                        createTravelView = window as CreateTravelView;
-                        break;
-                    }
-                }
-                createTravelView.Close();*/
-
-
+                _mainTravelViewModel.ReloadAfterCreateTravel(travel);
             }
             catch (Exception ex)
             {
@@ -330,42 +330,18 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
-                _executeCommand = true;
             }
         }
         #endregion
-        #region Searching
-        private void ExecuteSelectFilter(object obj)
-        {
-            SearchType = "";
-            _onSearching = false;
-            LoadData();
-        }
-        private void ExecuteSearchTour(object obj)
-        {
-            _onSearching = true;
-            LoadData();
-        }
-        private void SearchByName()
-        {
-            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
-                return;
-            this._listToursSearching = _listToursOriginal.Where(p => p.Name_Tour.Contains(_searchType)).ToList();
-        }
 
-        private void SearchByPlace()
+        #region Check data modified
+        private void CheckDataModified()
         {
-            if (_listToursOriginal == null || _listToursOriginal.Count == 0)
-                return;
-            this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(_searchType)).ToList();
-
-        }
-        private void generateFilterItem()
-        {
-            _listSearchFilterBy = new ObservableCollection<string>();
-            _listSearchFilterBy.Add("Tour Name");
-            _listSearchFilterBy.Add("Tour Place");
-            SelectedFilter = "Tour Name";
+            if (SelectedItem == null || string.IsNullOrEmpty(_maxTicket)
+                || string.IsNullOrEmpty(_selctedDiscount) || string.IsNullOrEmpty(StartLocation))
+                IsDataModified = false;
+            else 
+                IsDataModified = true;
         }
         #endregion
     }
