@@ -22,14 +22,15 @@ namespace Super_Tour.ViewModel
         private SUPER_TOUR db = new SUPER_TOUR();
         private ObservableCollection<Province> _listCities;
         private ObservableCollection<TOURIST> _tourists;
-        private string _selectedGender;
-        private District _selectedDistrict;
         private ObservableCollection<District> _listDistrict;
+        private ObservableCollection<string> _listGender=null;
         private Province _selectedCity;
+        private District _selectedDistrict;
         private CUSTOMER _customer;
-        private bool _execute = true;
-        private ObservableCollection<string> _listGender=new ObservableCollection<string>();
 
+        private string _selectedGender;
+        private bool _execute = true;
+        private string _searchString;
         public ObservableCollection<string> ListGender { 
             get
             { return _listGender; 
@@ -121,17 +122,15 @@ namespace Super_Tour.ViewModel
         public ICommand OpenAddTouristForBookingViewCommand { get; }
         public ICommand CreateNewBookingCommand { get; }
         public ICommand AutoFillInformationCommand { get; }
-
+        
 
         public CreateBookingViewModel()
         {
             //Tourists = new ObservableCollection<TOURIST>();
-            _customer = new CUSTOMER();
-            _customer.Id_Customer = 0;
             _listGender = new ObservableCollection<string>();
             _tourists = new ObservableCollection<TOURIST>();
-            SelectedCityCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             _listDistrict = new ObservableCollection<District>();
+            SelectedCityCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
             AutoFillInformationCommand = new RelayCommand(ExecuteAutoFillInformationCommand);
             CreateNewBookingCommand = new RelayCommand(ExecuteCreateNewBookingCommand, CanExecuteCreateNewBooking);

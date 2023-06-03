@@ -16,6 +16,8 @@ namespace Super_Tour.ViewModel
     internal class UpdateBookingViewModel: ObservableObject
     {
         private CUSTOMER _customer;
+        private MainViewModel _mainViewModel;
+        private MainBookingViewModel mainBookingViewModel;
         private TRAVEL _travel;
         private ObservableCollection<TOURIST> _tourists;
         private string _searchTravel;
@@ -40,12 +42,13 @@ namespace Super_Tour.ViewModel
         public ICommand SelectedCityCommand { get; }
         public ObservableCollection<string> ListGender { get => _listGender; set { _listGender = value; OnPropertyChanged(nameof(ListGender)); } }
 
-        public UpdateBookingViewModel(BOOKING booking)
+        public UpdateBookingViewModel(BOOKING booking, MainViewModel mainViewModel, MainBookingViewModel mainBookingViewModel)
         {
             _booking = booking;
             SelectedCityCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             LoadData();
-
+            _mainViewModel = mainViewModel;
+            this.mainBookingViewModel = mainBookingViewModel;
         }
         private void LoadData()
         {
