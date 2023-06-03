@@ -23,23 +23,6 @@ namespace Super_Tour.ViewModel
 {
     internal class MainTourViewModel: ObservableObject
     {
-        // Mai xóa
-        public class DataGridTour
-        {       
-            private TOUR _tour;
-            public TOUR Tour    
-            {
-                get { return _tour; }
-                set { _tour = value; }
-            }       
-            private decimal _totalPrice;
-            public decimal TotalPrice
-            {
-                get { return _totalPrice; }
-                set { _totalPrice = value; }
-            }
-        }
-
         #region Declare variable
         private SUPER_TOUR db = null;
         public static DateTime TimeTour;
