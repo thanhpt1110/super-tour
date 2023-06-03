@@ -253,7 +253,7 @@ namespace Super_Tour.ViewModel
             }
             catch(Exception ex)
             {
-                        
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         #endregion

@@ -46,7 +46,7 @@
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchTravelCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -57,6 +57,8 @@
                             FontSize="20"
                             Effect="{StaticResource MaterialDesignElevationShadow2}"/>
                         <ComboBox
+                            SelectedValue="{Binding SelectedFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedValuePath="Content"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}"
                             FontSize="15"
                             Width="180"
@@ -67,12 +69,14 @@
                             materialDesign:HintAssist.Hint="- Select Filter By -"
                             materialDesign:HintAssist.Foreground="Black"
                             materialDesign:HintAssist.Background="Transparent"
-                            materialDesign:HintAssist.IsFloating="False"
-                                                    >
-                            <ComboBoxItem>Tour Place</ComboBoxItem>
-                            <ComboBoxItem>Tour Price</ComboBoxItem>
-                            <ComboBoxItem>Total Day</ComboBoxItem>
-                            <ComboBoxItem>Total Night</ComboBoxItem>
+                            materialDesign:HintAssist.IsFloating="False">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBoxItem>ID Number</ComboBoxItem>
+                            <ComboBoxItem>Phone Number</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                 </Grid>
@@ -97,7 +101,8 @@
             <Grid Grid.Row="1"
                   Margin="0,0,0,0">
                 <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListOriginalBooking}"
+                              ItemsSource="{Binding ListBookings}"
+                              SelectedItem="{Binding SelectedItem}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -108,7 +113,6 @@
                                                 CanUserResize="False" 
                                                 Width="0.6*"
                                                 Binding="{Binding Id_Booking}"/>
-
                         <DataGridTextColumn Header="Customer Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 

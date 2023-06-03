@@ -18,7 +18,7 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="500" Width="500"
+        Height="600" Width="500"
         ShowInTaskbar="False">
     <Grid>
         <Border CornerRadius="10"
@@ -35,7 +35,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="80"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
@@ -82,22 +83,62 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="2">
+                        <StackPanel Orientation="Horizontal"
+                                    FlowDirection="LeftToRight"
+                                    Margin="20, 0, 0, 0">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Tourist Name"
+                                                   FontSize="13"/>
+                                    <Label Content="*"
+                                            Foreground="Red"
+                                            Margin="-5,0,0,0"
+                                            FontSize="15"/>
+                                </StackPanel>
+                                <TextBox
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    Text="{Binding TouristName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="auto"
+                                    Width="300"
+                                    FontSize="15"
+                                    CaretBrush="Black"
+                                    BorderBrush="Black"
+                                    Foreground="Black"
+                                    Background="{StaticResource TextBoxColor}"
+                                    materialDesign:HintAssist.Hint="Ex: 075203002689"
+                                    materialDesign:HintAssist.Foreground="Black"
+                                    materialDesign:HintAssist.Background="Transparent"
+                                    materialDesign:HintAssist.IsFloating="False"/>
+                            </StackPanel>
+                            <Button Content="Add"
+                                IsEnabled="{Binding EnterName}"
+                                Background="{StaticResource btnAdd}"    
+                                BorderThickness="0"
+                                Width="120"
+                                Height="40"
+                                Command="{Binding AddTouristCommand}"
+                                Margin="35, 23, 0, 0">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
                         <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListTourist}"
+                              ItemsSource="{Binding ListTourists}"
+                              SelectedItem="{Binding SelectedTourist}"
                               RowStyle="{DynamicResource editableDataGridRowStyle}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource editableDataGridStyle}" 
                                       FontSize="15"
-                                  Margin="20,0">
+                                  Margin="20,20,20,0">
                     <DataGrid.Columns>
                                     <DataGridTextColumn Header="Order"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.7*"
-                                                Binding="{Binding Id_Tourist}"/>
+                                                Binding="{Binding DataContext.Order}"/>
                                     <DataGridTextColumn Header="Tourist Name" 
-                                                IsReadOnly="False" 
+                                                IsReadOnly="True" 
                                                 CanUserResize="False"
                                                 Width="3*"
                                                 Binding="{Binding Name_Tourist}"/>
@@ -107,37 +148,22 @@
                                                 Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
+                                            <StackPanel Orientation="Horizontal">
                                                 <Button 
-                                                        Margin="5,0,0,0"
-                                                        Height="25"
-                                                        Width="25"
-                                                        Background="{StaticResource btnAdd}"
-                                                        Style="{StaticResource MaterialDesignIconButton}"
-                                                        Command="{Binding DataContext.DeleteTourCommnand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                        CommandParameter="{Binding}">
-                                                    <materialDesign:PackIcon Kind="Add"
-                                                                             Margin="2"
-                                                            Foreground="White"
-                                                            VerticalAlignment="Center"
-                                                            Height="auto"
-                                                            Width="auto"/>
+                                                    Margin="10,0,0,0"
+                                                    Height="25"
+                                                    Width="25"
+                                                    Background="{StaticResource btnDelete}"
+                                                    Style="{StaticResource MaterialDesignIconButton}"
+                                                    Command="{Binding DataContext.DeleteTouristCommnand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                    CommandParameter="{Binding}">
+                                                    <materialDesign:PackIcon Kind="Remove"
+                                                        Margin="2"
+                                                        Foreground="White"
+                                                        VerticalAlignment="Center"
+                                                        Height="auto"
+                                                        Width="auto"/>
                                                 </Button>
-                                                <Button 
-                                                        Margin="10,0,0,0"
-                                                        Height="25"
-                                                        Width="25"
-                                                        Background="{StaticResource btnDelete}"
-                                                        Style="{StaticResource MaterialDesignIconButton}"
-                                                        Command="{Binding DataContext.DeleteTourCommnand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                        CommandParameter="{Binding}">
-                                                        <materialDesign:PackIcon Kind="Remove"
-                                                            Margin="2"
-                                                            Foreground="White"
-                                                            VerticalAlignment="Center"
-                                                            Height="auto"
-                                                            Width="auto"/>
-                                                    </Button>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
@@ -145,7 +171,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                     </Grid>
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="4">
                         <Button Content="Save"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
