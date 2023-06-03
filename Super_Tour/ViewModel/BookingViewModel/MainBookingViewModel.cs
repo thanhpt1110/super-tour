@@ -202,6 +202,18 @@ namespace Super_Tour.ViewModel
         }
         #endregion
         #region Check data per second 
+        public void ReloadAfterCreateBooking(BOOKING booking)
+        {
+            try
+            {
+                _listOriginalBooking.Add(booking);
+                ListBookings.Add(booking);
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
         private async void Timer_Tick(object sender, EventArgs e)
         {
             try

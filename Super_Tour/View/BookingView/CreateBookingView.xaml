@@ -1,392 +1,123 @@
-﻿<UserControl x:Class="Super_Tour.View.CreateBookingView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:Super_Tour.View"
-    mc:Ignorable="d" 
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    TextElement.FontWeight="Regular"
-    TextElement.FontSize="13"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto"
-    FontFamily="{DynamicResource MaterialDesignFont}"
-    Background="White"
-    Height="788" Width="1138">
+﻿ ﻿<Window x:Class="Super_Tour.View.AddTouristView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Height="250" Width="500"
+        ShowInTaskbar="False">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="70"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Border Margin="0,20,0,0"
-                    CornerRadius="10"
+        <Border CornerRadius="10"
+                BorderThickness="2">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border CornerRadius="10,10,10,10"
                     Background="{StaticResource BackgroundChildContent}">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="400"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Border BorderBrush="Black"
-                                BorderThickness="0,0,2,0">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <TextBlock
-                                        Margin="20,20,20,10"
-                                        FontSize="30"
-                                        FontWeight="Bold"
-                                        TextAlignment="Left"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                            <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="Red"
+                                Click="btnClose_Click">
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Green">
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Orange"
+                                Click="btnMinimize_Click">
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0" 
+                                          Icon="Person" 
+                                          Height="20"/>
+                            <TextBlock
+                                        FontSize="20"
+                                        FontWeight="Medium"
+                                        TextAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Text="Select Travel for Booking"/>
-                                </Grid>
-                                <Grid Grid.Row="1">
-                                    <StackPanel Orientation="Vertical"
-                                                Margin="20,0,20,0">
-                                        <StackPanel Orientation="Horizontal"
-                                            >
-                                            <Label Content="Travel name"
-                                                FontSize="15"/>
-                                            <Label Content="*"
-                                               Foreground="Red"
-                                               FontSize="15"
-                                               Margin="-5,0,0,0"/>
-                                        </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    materialDesign:HintAssist.Hint="Select from list below"
-                                    Width="auto"
-                                    Height="auto"
-                                    FontSize="18"
-                                    IsReadOnly="True"
-                                    Text="{Binding Tour.Name_Tour}"
-                                    Background="LightGray"
-                                    BorderBrush="Black"
-                                    Foreground="Black"
-                                    materialDesign:HintAssist.IsFloating="False"
-                                    materialDesign:HintAssist.Foreground="Black"
-                                    materialDesign:HintAssist.Background="Transparent"/>
-                                    </StackPanel>
-                                </Grid>
-                                <Grid Grid.Row="2"
-                                      Margin="0,10,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <StackPanel Orientation="Vertical"
-                                                            Margin="20,0,0,0">
-
-                                            <Label Content="Search"
-                                                   FontSize="15"
-                                                       />
-                                            <TextBox 
-                                                    Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="Add Tourist"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Border Margin="20,0,20,0"
+                                CornerRadius="10"
+                                Background="{StaticResource BackgroundBorderMainContent}">
+                            <StackPanel Orientation="Horizontal"
+                                                        Margin="20,0,0,0">
+                                <materialDesign:PackIcon 
+                                                    Height="40"
+                                                    Width="40"
+                                                    Kind="Account"
+                                                    Margin="20,0,0,0"
+                                                    VerticalAlignment="Center"/>
+                                <TextBox
+                                                    Text="{Binding Tourist.Name_Tourist}"
+                                                    materialDesign:HintAssist.Hint="Enter tourist name"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                     Height="auto"
-                                                     Width="250"
-                                                     Background="{StaticResource TextBoxColor}"
-                                                     BorderBrush="Black"
-                                                     CaretBrush="Black"
-                                                     Foreground="Black"
-                                                     HorizontalAlignment="Left"
-                                                     materialDesign:HintAssist.Background="Transparent"
-                                                     materialDesign:HintAssist.Foreground="Black"
-                                                     materialDesign:HintAssist.Hint="Search..."
-                                                        materialDesign:HintAssist.IsFloating="False"
-                                                     FontSize="16">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="TextChanged">
-                                                        <i:InvokeCommandAction Command="{Binding OnSearchTextChangedCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </TextBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Column="1" HorizontalAlignment="Right"
-                                                  Margin="0,0,20,0">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Content="Filter"
-                                                   FontSize="15"/>
-                                            <ComboBox
-                                                    ItemsSource="{Binding ListSearchFilterBy}"
-                                                    SelectedItem="{Binding SelectedFilter}"
-                                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                    FontSize="16"
-                                                    Height="auto"
-                                                    Width="220"
-                                                    BorderBrush="Black"
+                                                    Height="50"
+                                                    Margin="10,0,0,0"
                                                     Foreground="Black"
-                                                    Background="{StaticResource ComboBoxColor}"
-                                                    materialDesign:HintAssist.Hint="- Select Filter By -"
                                                     materialDesign:HintAssist.Foreground="Black"
-                                                    materialDesign:HintAssist.Background="Transparent"
-                                                        materialDesign:HintAssist.IsFloating="False"></ComboBox>
-                                        </StackPanel>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Row="3">
-                                    <DataGrid x:Name="membersDataGrid" 
-                                        ItemsSource="{Binding ListDataGridTour}"
-                                        RowStyle="{DynamicResource DataGridRowStyle1}" 
-                                        ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                                        CellStyle="{DynamicResource DataGridCellStyle1}" 
-                                        Style="{DynamicResource smallerDataGridStyle1}" 
-                                        FontSize="15"
-                                        Margin="20,25,20,30">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Travel Name" 
-                                                    IsReadOnly="True" 
-                                                    CanUserResize="False" 
-                                                    Width="1.2*"
-                                                    Binding="{Binding Tour.Name_Tour}"/>
-                                            <DataGridTextColumn Header="Start location" 
-                                                    IsReadOnly="True" 
-                                                    CanUserResize="False" 
-                                                    Width="1*"
-                                                    Binding="{Binding Tour.TotalDay}"/>
-                                            <DataGridTextColumn Header="Start day" 
-                                                    IsReadOnly="True" 
-                                                    CanUserResize="False" 
-                                                    Width="0.8*"
-                                                    Binding="{Binding Tour.TotalNight}"/>
-                                            <DataGridTextColumn Header="Remain ticket"
-                                                    IsReadOnly="True" 
-                                                    CanUserResize="False" 
-                                                    Width="0.8*"
-                                                    Binding="{Binding TotalPrice}"/>
-                                            <DataGridTemplateColumn Header="Operations"
-                                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
-                                                    IsReadOnly="True" 
-                                                    Width="0.6*">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
-                                                            Height="25"
-                                                            Width="25"
-                                                            Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                            Background="#2196F3">
-                                                                <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
-                                                            </Button>
-                                                            <Button 
-                                                            Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                    CommandParameter="{Binding}"
-                                                            Margin="15 0 0 0"
-                                                            Width="Auto"
-                                                            Background="{StaticResource btnAdd}"
-                                                            BorderThickness="0"
-                                                            Foreground="White"
-                                                            Content="Select this tour"
-                                                       >
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </Grid>
+                                                    Background="{StaticResource TextBoxColor}"
+                                                    BorderThickness="0"
+                                                    materialDesign:HintAssist.Background="{StaticResource TextBoxColor}"
+                                                    Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                                    Width="280"
+                                                    CaretBrush="Black"/>
+                            </StackPanel>
                         </Border>
                     </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <TextBlock
-                                        Margin="20,20,20,10"
-                                        FontSize="30"
-                                        FontWeight="Bold"
-                                        TextAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Text="Customer Booking"/>
-                        </Grid>
-                        <Grid Grid.Row="1"
-                              Margin="20,0">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="ID Number"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                               Foreground="Red"
-                                               Margin="-5,0,0,0"
-                                               FontSize="15"/>
-                                    </StackPanel>
-                                    <TextBox
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="auto"
-                                        FontSize="18"
-                                        CaretBrush="Black"
-                                        BorderBrush="Black"
-                                        Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Ex: 075203002689"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        materialDesign:HintAssist.Background="Transparent"
-                                        materialDesign:HintAssist.IsFloating="False"
-                                        MaxLength="12"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical"
-                                            Margin="0,10,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Name"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                               Foreground="Red"
-                                               Margin="-5,0,0,0"
-                                               FontSize="15"/>
-                                    </StackPanel>
-                                    <TextBox
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="auto"
-                                        FontSize="18"
-                                        CaretBrush="Black"
-                                        BorderBrush="Black"
-                                        Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Ex: Nguyen Van A"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        materialDesign:HintAssist.Background="Transparent"
-                                        materialDesign:HintAssist.IsFloating="False"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical"
-                                            Margin="0,10,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Phone number"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                               Foreground="Red"
-                                               Margin="-5,0,0,0"
-                                               FontSize="15"/>
-                                    </StackPanel>
-                                    <TextBox
-                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Height="auto"
-                                        FontSize="18"
-                                        CaretBrush="Black"
-                                        BorderBrush="Black"
-                                        Foreground="Black"
-                                        Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Ex: 2152045519"
-                                        materialDesign:HintAssist.Foreground="Black"
-                                        materialDesign:HintAssist.Background="Transparent"
-                                        materialDesign:HintAssist.IsFloating="False"
-                                        MaxLength="10"/>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Left"
-                                    Margin="0,10,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Gender"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                            FontSize="15"
-                                            Foreground="Red"
-                                            Margin="-5,0,0,0"/>
-                                    </StackPanel>
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                HorizontalAlignment="Left"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select Gender"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="360"
-                                                Height="auto"
-                                                FontSize="18">
-                                        <ComboBoxItem>Nam</ComboBoxItem>
-                                        <ComboBoxItem>Nữ</ComboBoxItem>
-                                    </ComboBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Left"
-                                    Margin="0,10,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Province"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                            FontSize="15"
-                                            Foreground="Red"
-                                            Margin="-5,0,0,0"/>
-                                    </StackPanel>
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                HorizontalAlignment="Left"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select Province"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="360"
-                                                Height="auto"
-                                                FontSize="18">
-                                    </ComboBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Left"
-                                    Margin="0,10,0,0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="District"
-                                               FontSize="15"/>
-                                        <Label Content="*"
-                                            FontSize="15"
-                                            Foreground="Red"
-                                            Margin="-5,0,0,0"/>
-                                    </StackPanel>
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                HorizontalAlignment="Left"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select District"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="360"
-                                                Height="auto"
-                                                FontSize="18">
-                                    </ComboBox>
-                                </StackPanel>
-                                <Button Content="Add more tourists"
-                                        Height="45"
-                                        Margin="0,20,0,0"
-                                        materialDesign:ButtonAssist.CornerRadius="5"
-                                        FontSize="20"
-                                        Command="{Binding OpenAddTouristForBookingViewCommand}"/>
-                            </StackPanel>
-                        </Grid>
+                    <Grid Grid.Row="3">
+                        <Button Content="Save"
+                                Background="{StaticResource btnAdd}"
+                                BorderThickness="0"
+                                Width="140"
+                                Height="40"
+                                Command="{Binding SaveTouristCommand}"></Button>
                     </Grid>
                 </Grid>
             </Border>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Button Content="Save"
-                    HorizontalAlignment="Center"
-                    Background="{StaticResource btnAdd}"
-                    FontSize="20"
-                    Height="45"
-                    Width="150"
-                    Margin="0,10,0,0"
-                    materialDesign:ButtonAssist.CornerRadius="10"
-                    BorderThickness="0"
-                    />
-        </Grid>
+        </Border>
     </Grid>
-</UserControl>
+</Window>
