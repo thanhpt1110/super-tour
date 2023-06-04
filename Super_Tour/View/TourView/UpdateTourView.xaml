@@ -314,7 +314,7 @@
                                                                                             </Grid.ColumnDefinitions>
                                                                                             <Grid Grid.Column="0" VerticalAlignment="Center">
                                                                                                 <TextBlock Text="{Binding PackageName}" 
-                                                                                                           FontSize="14"/>
+                                                                                                           FontSize="16"/>
                                                                                             </Grid>
                                                                                             <Grid Grid.Column="1">
                                                                                                 <Border BorderBrush="DarkGray"
@@ -322,7 +322,7 @@
                                                                                                     VerticalAlignment="Center">
                                                                                                     <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
                                                                                                             Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                                                                                                           FontSize="14"
+                                                                                                                           FontSize="15"
                                                                                                                            Foreground="Black"
                                                                                                                            materialDesign:HintAssist.Foreground="Black"
                                                                                                                            BorderBrush="Black"
@@ -333,22 +333,6 @@
                                                                                                                            Height="40">
 
                                                                                                     </materialDesign:TimePicker>
-                                                                                                </Border>
-                                                                                            </Grid>
-                                                                                            <Grid Grid.Column="2">
-                                                                                                <Border BorderBrush="DarkGray"
-                                                                                                    HorizontalAlignment="Center"
-                                                                                                    VerticalAlignment="Center">
-                                                                                                    <Button Margin="20,0,0,0"
-                                                                                                    Width="25"
-                                                                                                    Height="25"
-                                                                                                    Background="{StaticResource ThemeColor}"
-                                                                                                    Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                    >
-                                                                                                        <fa:IconImage Icon="Info" 
-                                                                                                            Height="12" 
-                                                                                                            Foreground="White"/>
-                                                                                                    </Button>
                                                                                                 </Border>
                                                                                             </Grid>
                                                                                         </Grid>
@@ -399,7 +383,7 @@
                                                                                             </Grid.ColumnDefinitions>
                                                                                             <Grid Grid.Column="0" VerticalAlignment="Center">
                                                                                                 <TextBlock Text="{Binding PackageName}" 
-                                                                                                           FontSize="14"/>
+                                                                                                           FontSize="16"/>
                                                                                             </Grid>
                                                                                             <Grid Grid.Column="1">
                                                                                                 <Border BorderBrush="DarkGray"
@@ -407,7 +391,7 @@
                                                                                                     VerticalAlignment="Center">
                                                                                                     <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
                                                                                                             Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                                                                                                           FontSize="14"
+                                                                                                                           FontSize="15"
                                                                                                                            Foreground="Black"
                                                                                                                            materialDesign:HintAssist.Foreground="Black"
                                                                                                                            BorderBrush="Black"
@@ -419,22 +403,6 @@
 
 
                                                                                                     </materialDesign:TimePicker>
-                                                                                                </Border>
-                                                                                            </Grid>
-                                                                                            <Grid Grid.Column="2">
-                                                                                                <Border BorderBrush="DarkGray"
-                                                                                                    HorizontalAlignment="Center"
-                                                                                                    VerticalAlignment="Center">
-                                                                                                    <Button Margin="20,0,0,0"
-                                                                                                    Width="25"
-                                                                                                    Height="25"
-                                                                                                    Background="{StaticResource ThemeColor}"
-                                                                                                    Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                    >
-                                                                                                        <fa:IconImage Icon="Info" 
-                                                                                                            Height="12" 
-                                                                                                            Foreground="White"/>
-                                                                                                    </Button>
                                                                                                 </Border>
                                                                                             </Grid>
                                                                                         </Grid>
@@ -485,7 +453,7 @@
                                                                                             </Grid.ColumnDefinitions>
                                                                                             <Grid Grid.Column="0" VerticalAlignment="Center">
                                                                                                 <TextBlock Text="{Binding PackageName}" 
-                                                                                                           FontSize="14"/>
+                                                                                                           FontSize="16"/>
                                                                                             </Grid>
                                                                                             <Grid Grid.Column="1">
                                                                                                 <Border BorderBrush="DarkGray"
@@ -493,7 +461,7 @@
                                                                                                     VerticalAlignment="Center">
                                                                                                     <materialDesign:TimePicker materialDesign:HintAssist.Hint="Start Time"
                                                                                                             Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
-                                                                                                                           FontSize="14"
+                                                                                                                           FontSize="15"
                                                                                                                            Foreground="Black"
                                                                                                                            materialDesign:HintAssist.Foreground="Black"
                                                                                                                            BorderBrush="Black"
@@ -502,25 +470,7 @@
                                                                                                                            Width="100"
                                                                                                                            SelectedTime="{Binding TimeOfPackage}"
                                                                                                                            Height="40">
-
-
                                                                                                     </materialDesign:TimePicker>
-                                                                                                </Border>
-                                                                                            </Grid>
-                                                                                            <Grid Grid.Column="2">
-                                                                                                <Border BorderBrush="DarkGray"
-                                                                                                    HorizontalAlignment="Center"
-                                                                                                    VerticalAlignment="Center">
-                                                                                                    <Button Margin="20,0,0,0"
-                                                                                                    Width="25"
-                                                                                                    Height="25"
-                                                                                                    Background="{StaticResource ThemeColor}"
-                                                                                                    Style="{StaticResource MaterialDesignIconButton}"
-                                                                                                    >
-                                                                                                        <fa:IconImage Icon="Info" 
-                                                                                                            Height="12" 
-                                                                                                            Foreground="White"/>
-                                                                                                    </Button>
                                                                                                 </Border>
                                                                                             </Grid>
                                                                                         </Grid>

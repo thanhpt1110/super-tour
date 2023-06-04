@@ -340,23 +340,16 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                    <Button 
+                                                        Margin="20, 0, 0, 0"
+                                                        Style="{StaticResource MaterialDesignIconButton}"
                                                         Height="25"
                                                         Width="25"
                                                         Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                        Background="#2196F3">
-                                                        <fa:IconImage Icon="Info" Height="18" Foreground="White"/>
-                                                    </Button>
-                                                    <Button 
+                                                        Background="#2196F3"
                                                         Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"
-                                                        Margin="15 0 0 0"
-                                                        Width="Auto"
-                                                        Background="{StaticResource btnAdd}"
-                                                        BorderThickness="0"
-                                                        Foreground="White"
-                                                        Content="Select this tour"
-                                                   >
+                                                        CommandParameter="{Binding}">
+                                                        <fa:IconImage Icon="Check" Height="15" Foreground="White"/>
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
