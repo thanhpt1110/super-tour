@@ -135,7 +135,7 @@
                                                             Margin="25,5,25,25">
                                                     <StackPanel Orientation="Horizontal"
                                                                 HorizontalAlignment="Left"
-                                                                Margin="0,5">
+                                                                Margin="0, 0, 0, 50">
                                                         <TextBlock FontSize="20" 
                                                                    VerticalAlignment="Bottom" 
                                                                    Text="Customer: "
@@ -143,9 +143,10 @@
                                                         <TextBlock FontSize="25" 
                                                                    VerticalAlignment="Bottom" 
                                                                    Margin="5,0,0,0"
-                                                                   Text="NGUYỄN TẤN TOÀN"/>
+                                                                   Text="{Binding TouristName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                                     </StackPanel>
-                                                    <TextBlock Text="DU LỊCH NHA TRANG - ĐÀ LẠT"
+                                                    <TextBlock 
+                                                    Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     FontSize="40"
                                                     TextWrapping="Wrap"
                                                     TextAlignment="Center"
@@ -156,7 +157,7 @@
                                                     Stroke="Black" 
                                                     StrokeThickness="1"
                                                     Margin="0,10,0,10"/>
-                                                    <TextBlock Text="5 NGÀY - 4 ĐÊM"
+                                                    <TextBlock Text="{Binding TotalDayNight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     FontSize="25"
                                                     TextWrapping="Wrap"
                                                     TextAlignment="Center"
@@ -164,17 +165,17 @@
                                                     Margin="20,0,20,0"/>
                                                 </StackPanel>
                                             </Grid>
-                                            <Grid Grid.Column="1">
+                                            <Grid Grid.Column="1"
+                                                  Margin="0, 4, 0, 0">
                                                 <StackPanel Orientation="Vertical">
                                                     <Image Margin="30,20,30,5" Source="/Images/logo.png"></Image>
                                                     <TextBlock Text="Price:"
                                                        FontSize="22"
                                                        FontWeight="Medium"
                                                        Margin="20,0,0,0"/>
-
-                                                    <TextBlock Text="5,000,000 VND"
+                                                    <TextBlock Text="{Binding Price}"
                                                        FontSize="25"
-                                                       TextAlignment="Center"/>
+                                                       Margin="20, 0, 0, 0"/>
                                                 </StackPanel>
                                             </Grid>
                                         </Grid>
@@ -190,8 +191,8 @@
                                                        Margin="30,0,0,0"
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
-                                                    <TextBlock Text="05/05/2023"
-                                                       FontSize="22"
+                                                    <TextBlock Text="{Binding StartDate}"
+                                                       FontSize="18"
                                                        FontWeight="Medium"
                                                        Margin="30,5,0,0"/>
                                                 </StackPanel>
@@ -202,8 +203,8 @@
                                                        Margin="20,0,0,0"
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
-                                                    <TextBlock Text="09:30 AM"
-                                                       FontSize="22"
+                                                    <TextBlock Text="{Binding StartTime}"
+                                                       FontSize="18"
                                                        FontWeight="Medium"
                                                        Margin="20,5,0,0"/>
                                                 </StackPanel>
@@ -215,8 +216,8 @@
                                                        FontSize="18"
                                                        FontWeight="Medium"/>
                                                     <StackPanel>
-                                                        <TextBlock Text="khu phố 6, Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh"
-                                                           Margin="0,0,20,0"
+                                                        <TextBlock Text="{Binding StartLocation}"
+                                                           Margin="0,5,0,0"
                                                            FontSize="18"
                                                            FontWeight="Medium"
                                                            TextWrapping="Wrap"
@@ -248,7 +249,7 @@
                                         <Grid Grid.Column="0">
                                             <StackPanel Orientation="Horizontal">
 
-                                                <TextBlock Text="BOOKING ID: " 
+                                                <TextBlock Text="TICKET ID: " 
                                                RenderTransformOrigin="0.5,0.5" 
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
@@ -260,7 +261,7 @@
                                                         <RotateTransform Angle="270"/>
                                                     </TextBlock.RenderTransform>
                                                 </TextBlock>
-                                                <TextBlock Text="BK001234568" 
+                                                <TextBlock Text="{Binding BarcodeText}" 
                                                RenderTransformOrigin="0.5,0.5" 
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"

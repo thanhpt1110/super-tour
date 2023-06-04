@@ -33,6 +33,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="txtBoxSearchType" 
                                  Margin="55, 10, 0, 0"
+                                 Text="{Binding SearchBooking,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Width="300"
                                 Height="auto"
                                 FontSize="18"

@@ -24,7 +24,6 @@ namespace Super_Tour.View
         public ExportedTicketView()
         {
             InitializeComponent();
-            this.DataContext = new ExportedTicketViewModel();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
