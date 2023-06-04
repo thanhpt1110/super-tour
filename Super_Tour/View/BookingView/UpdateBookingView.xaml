@@ -67,7 +67,7 @@
                                     Height="auto"
                                     FontSize="18"
                                     IsReadOnly="True"
-                                    Text="{Binding Tour.Name_Tour}"
+                                    Text="{Binding SelectedTravel.TOUR.Name_Tour}"
                                     Background="LightGray"
                                     BorderBrush="Black"
                                     Foreground="Black"
@@ -90,7 +90,7 @@
                                                    FontSize="15"
                                                        />
                                             <TextBox 
-                                                    Text="{Binding SearchTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Text="{Binding SearchTravel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                      Height="auto"
                                                      Width="250"
@@ -118,8 +118,8 @@
                                             <Label Content="Filter"
                                                    FontSize="15"/>
                                             <ComboBox
-                                                    ItemsSource="{Binding ListSearchFilterBy}"
-                                                    SelectedItem="{Binding SelectedFilter}"
+                                                    SelectedValue="{Binding SelectedFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    SelectedValuePath="Content"
                                                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                     FontSize="16"
                                                     Height="auto"
@@ -130,13 +130,22 @@
                                                     materialDesign:HintAssist.Hint="- Select Filter By -"
                                                     materialDesign:HintAssist.Foreground="Black"
                                                     materialDesign:HintAssist.Background="Transparent"
-                                                        materialDesign:HintAssist.IsFloating="False"></ComboBox>
+                                                    materialDesign:HintAssist.IsFloating="False">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectionChanged">
+                                                        <i:InvokeCommandAction Command="{Binding SelectedFilterCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                <ComboBoxItem>Tour Name</ComboBoxItem>
+                                                <ComboBoxItem>Tour Place</ComboBoxItem>
+                                            </ComboBox>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
                                 <Grid Grid.Row="3">
                                     <DataGrid x:Name="membersDataGrid" 
-                                        ItemsSource="{Binding ListDataGridTour}"
+                                        ItemsSource="{Binding ListTravels}"
+                                        SelectedItem="{Binding SelectedTravel}"
                                         RowStyle="{DynamicResource DataGridRowStyle1}" 
                                         ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                                         CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -148,22 +157,22 @@
                                                     IsReadOnly="True" 
                                                     CanUserResize="False" 
                                                     Width="1.2*"
-                                                    Binding="{Binding Tour.Name_Tour}"/>
+                                                    Binding="{Binding TOUR.Name_Tour}"/>
                                             <DataGridTextColumn Header="Start location" 
                                                     IsReadOnly="True" 
                                                     CanUserResize="False" 
                                                     Width="1*"
-                                                    Binding="{Binding Tour.TotalDay}"/>
+                                                    Binding="{Binding StartLocation}"/>
                                             <DataGridTextColumn Header="Start day" 
                                                     IsReadOnly="True" 
                                                     CanUserResize="False" 
                                                     Width="0.8*"
-                                                    Binding="{Binding Tour.TotalNight}"/>
+                                                    Binding="{Binding StartDateTimeTravel,StringFormat='dd/MM/yyyy'}"/>
                                             <DataGridTextColumn Header="Remain ticket"
                                                     IsReadOnly="True" 
                                                     CanUserResize="False" 
                                                     Width="0.8*"
-                                                    Binding="{Binding TotalPrice}"/>
+                                                    Binding="{Binding RemainingTicket}"/>
                                             <DataGridTemplateColumn Header="Operations"
                                                     HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                     IsReadOnly="True" 
@@ -226,6 +235,7 @@
                                                FontSize="15"/>
                                     </StackPanel>
                                     <TextBox
+                                        Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                         Height="auto"
                                         FontSize="18"
@@ -250,6 +260,7 @@
                                                FontSize="15"/>
                                     </StackPanel>
                                     <TextBox
+                                        Text="{Binding CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                        
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                         Height="auto"
                                         FontSize="18"
@@ -274,6 +285,7 @@
                                     </StackPanel>
                                     <TextBox
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="auto"
                                         FontSize="18"
                                         CaretBrush="Black"
@@ -299,6 +311,8 @@
                                             Margin="-5,0,0,0"/>
                                     </StackPanel>
                                     <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                SelectedValue="{Binding SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValuePath="Content"
                                                 HorizontalAlignment="Left"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
@@ -325,7 +339,11 @@
                                             Foreground="Red"
                                             Margin="-5,0,0,0"/>
                                     </StackPanel>
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                    <ComboBox 
+                                         ItemsSource="{Binding ListProvinces}"
+                                        SelectedItem="{Binding SelectedProvince}"
+                                        DisplayMemberPath="name"
+                                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 HorizontalAlignment="Left"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
@@ -337,6 +355,11 @@
                                                 Width="360"
                                                 Height="auto"
                                                 FontSize="18">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                     </ComboBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical"
@@ -350,24 +373,29 @@
                                             Foreground="Red"
                                             Margin="-5,0,0,0"/>
                                     </StackPanel>
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                HorizontalAlignment="Left"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select District"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="360"
-                                                Height="auto"
-                                                FontSize="18">
+                                    <ComboBox 
+                                        ItemsSource="{Binding ListDistricts}"
+                                        SelectedItem="{Binding SelectedDistrict}"
+                                        DisplayMemberPath="name"
+                                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                        HorizontalAlignment="Left"
+                                        BorderBrush="Black"
+                                        Foreground="Black"
+                                        Background="{StaticResource ComboBoxColor}"
+                                        materialDesign:HintAssist.Background="Transparent"
+                                        materialDesign:HintAssist.Foreground="Black"
+                                        materialDesign:HintAssist.Hint="Select District"
+                                        materialDesign:HintAssist.IsFloating="False"
+                                        Width="360"
+                                        Height="auto"
+                                        FontSize="18">
                                     </ComboBox>
                                 </StackPanel>
                                 <Button Content="Add more tourists"
                                         Height="45"
                                         Margin="0,20,0,0"
                                         materialDesign:ButtonAssist.CornerRadius="5"
+                                        Command="{Binding OpenAddTouristForBookingViewCommand}"
                                         FontSize="20"/>
                             </StackPanel>
                         </Grid>
@@ -377,6 +405,8 @@
         </Grid>
         <Grid Grid.Row="1">
             <Button Content="Save"
+                    IsEnabled="{Binding IsDataModified}"
+                    Command="{Binding SaveCommand}"
                     HorizontalAlignment="Center"
                     Background="{StaticResource btnAdd}"
                     FontSize="20"

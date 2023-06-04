@@ -223,6 +223,7 @@ namespace Super_Tour.ViewModel
             set
             {
                 _selectedTravel = value;
+                CheckDataModified();    
                 OnPropertyChanged(nameof(SelectedTravel));
             }
         }

@@ -356,6 +356,11 @@
                                         Width="360"
                                         Height="auto"
                                         FontSize="18">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                     </ComboBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical"

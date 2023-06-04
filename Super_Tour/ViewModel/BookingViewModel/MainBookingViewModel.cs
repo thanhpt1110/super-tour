@@ -284,7 +284,7 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Update
-        private async void ExecuteUpdateBooking(object obj)
+        private void ExecuteUpdateBooking(object obj)
         {
             try
             {
