@@ -17,24 +17,52 @@ namespace Super_Tour.ViewModel
 {
     internal class AddTouristViewModel : ObservableObject
     {
+        public class DatagridTourist
+        {
+            #region Declare variable
+            private int _order;
+            private TOURIST _tourist;
+            #endregion
+
+            public int Order
+            {
+                get { return _order; }
+                set
+                {
+                    _order = value;
+                }
+            }
+
+            public TOURIST Tourist
+            {
+                get { return _tourist; }
+                set
+                {
+                    _tourist = value;
+                }
+            }
+        }
+
         #region Declare variable 
         private string _touristName = null;
         private bool _enterName = false;
+        private bool _isDataModified = false;
         private int _order = 0;
         private TOURIST _newTourist = null;
         private List<TOURIST> _listCurrentTourist = null;
-        private ObservableCollection<TOURIST> _listTourists;
-        private TOURIST _selectedTourist = null;
+        private List<TOURIST> _listUITourist = null;
+        private ObservableCollection<DatagridTourist> _listTourists;
+        private DatagridTourist _selectedTourist = null;
         #endregion
 
         #region Declare binding
-        public int Order
+        public bool IsDataModified
         {
-            get { return _order; }
+            get { return _isDataModified; }
             set
             {
-                _order = value;
-                OnPropertyChanged(nameof(Order));   
+                _isDataModified = value;
+                OnPropertyChanged(nameof(IsDataModified));  
             }
         }
 
@@ -57,12 +85,12 @@ namespace Super_Tour.ViewModel
                 {
                     _touristName = value;
                     OnPropertyChanged(nameof(TouristName));
-                    CheckDataModified();
+                    CheckEnterName();
                 }
             }
         }
 
-        public ObservableCollection<TOURIST> ListTourists
+        public ObservableCollection<DatagridTourist> ListTourists
         {
             get => _listTourists;
             set
@@ -72,7 +100,7 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public TOURIST SelectedTourist
+        public DatagridTourist SelectedTourist
         {
             get => _selectedTourist;
             set
@@ -84,12 +112,20 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Check data modified
-        private void CheckDataModified()
+        private void CheckEnterName()
         {
             if (string.IsNullOrEmpty(_touristName))
                 EnterName = false;
             else
                 EnterName = true;
+        }
+        
+        private void CheckDataModified()
+        {
+            if (_listCurrentTourist.SequenceEqual(_listUITourist.ToList()))
+                IsDataModified = false;
+            else 
+                IsDataModified = true;
         }
         #endregion
 
@@ -104,32 +140,54 @@ namespace Super_Tour.ViewModel
         {
             // Create objects
             this._listCurrentTourist = listTourist;
-            ListTourists = new ObservableCollection<TOURIST>(_listCurrentTourist);
+            _listUITourist = new List<TOURIST>(listTourist);
+            ListTourists = new ObservableCollection<DatagridTourist>();
 
             // Create command
             SaveTouristCommand = new RelayCommand(ExecuteSaveTouristCommand);
             DeleteTouristCommnand = new RelayCommand(ExecuteDeleteTouristCommand);
             AddTouristCommand = new RelayCommand(ExecuteAddTouristCommand);
+
+            // Load UI
+            GenerateOrder();
         }
         #endregion
+
+        private void GenerateOrder()
+        {
+            ListTourists.Clear();
+            for (int i = 0; i < _listUITourist.Count; i++)
+            {
+                ListTourists.Add(new DatagridTourist { Order = i + 1, Tourist = _listUITourist[i] });
+            }
+        }
 
         #region Execute add tourist 
         private void ExecuteAddTouristCommand(object obj)
         {
-            Order = ListTourists.Count;
+            // Add new tourist to UI
             _newTourist = new TOURIST();
             _newTourist.Name_Tourist = _touristName;
-            _newTourist.Id_Tourist = Order;
-            ListTourists.Add(_newTourist);
-            _touristName = null;
+            _listUITourist.Add(_newTourist);
+
+            // Reset textbox TouristName
+            TouristName = null;
+
+            // Process UI event
+            GenerateOrder();
+            CheckDataModified();
         }
         #endregion
 
         #region Execute delete tourist 
         private void ExecuteDeleteTouristCommand(object obj)
         {
-            ListTourists.Remove(_selectedTourist);
-            Order = ListTourists.Count;
+            // Remove tourist from UI
+            _listUITourist.Remove(_selectedTourist.Tourist);
+
+            // Process UI event
+            GenerateOrder();
+            CheckDataModified();
         }
         #endregion
 
@@ -137,7 +195,7 @@ namespace Super_Tour.ViewModel
         public void ExecuteSaveTouristCommand(object obj)
         {
             _listCurrentTourist.Clear();
-            foreach(TOURIST tourist in ListTourists)
+            foreach(TOURIST tourist in _listUITourist)
             {
                 _listCurrentTourist.Add(tourist);
             }

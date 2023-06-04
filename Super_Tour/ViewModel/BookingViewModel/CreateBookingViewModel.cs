@@ -396,7 +396,7 @@ namespace Super_Tour.ViewModel
             CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(p => p.IdNumber == this.IdNumber);
             if (customer != null)
             {
-                MyMessageBox.ShowDialog("These information will be auto generated from existed customer!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                //MyMessageBox.ShowDialog("These information will be auto generated from existed customer!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 CustomerName = customer.Name_Customer;
                 PhoneNumber = customer.PhoneNumber;
                 SelectedGender = customer.Gender;
@@ -443,20 +443,21 @@ namespace Super_Tour.ViewModel
                 db.BOOKINGs.Add(booking);
                 await db.SaveChangesAsync();
 
-                /*foreach (TOURIST tourist in _tourists)
+                // Save Tourists of BOOKING
+                int Id_Booking = db.BOOKINGs.Max(p => p.Id_Booking);
+                foreach (TOURIST tourist in _tourists)
                 {
-                    tourist.Id_Tourist = 1;
-                    tourist.Id_Booking = db.BOOKINGs.Max(p => p.Id_Booking);
+                    tourist.Id_Booking = Id_Booking;
                     db.TOURISTs.Add(tourist);
                 }
-                await db.SaveChangesAsync();*/
+                await db.SaveChangesAsync();
 
                 // Synchronyze real-time DB
                 MainTravelViewModel.TimeTravel = DateTime.Now;
                 UPDATE_CHECK.NotifyChange(table, MainTravelViewModel.TimeTravel);
 
                 // Process UI event
-                MyMessageBox.ShowDialog("Add new travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                MyMessageBox.ShowDialog("Add new booking successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 _mainViewModel.removeFirstChild();
                 _mainViewModel.CurrentChildView = _mainBookingViewModel;
                 _mainBookingViewModel.ReloadAfterCreateBooking(booking);

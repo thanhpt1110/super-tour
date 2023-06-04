@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,6 +43,7 @@ namespace Super_Tour.ViewModel
         private string _searchTravel;
         private string table = "UPDATE_BOOKING";
         #endregion
+
         #region Declare binding
         public ObservableCollection<TRAVEL> ListTravels
         {
@@ -225,6 +227,7 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
+
         #region Command
         public ICommand SelectedFilterCommand { get; }
         public ICommand OpenSelectTravelForBookingViewCommand { get; }
@@ -245,6 +248,7 @@ namespace Super_Tour.ViewModel
             _listTravels = new ObservableCollection<TRAVEL>();
             _listDistricts = new ObservableCollection<District>();
             _booking = booking;
+
             // Create command
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             SelectedProvinceCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
@@ -256,14 +260,21 @@ namespace Super_Tour.ViewModel
             LoadTravel();
             LoadProvinces();
             LoadBooking();
-
         }
         #endregion
+
         #region Perform update  Booking  
         private async void ExecuteSaveCommand(object obj)
         {
             try
             {
+                int oldRemainingTicket = _booking.TRAVEL.RemainingTicket;
+                if (oldRemainingTicket < _tourists.Count)
+                {
+                    MyMessageBox.ShowDialog("The remaining tickets are not enough!", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return; 
+                }
+
                 // Update customer information 
                 CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(p => p.IdNumber == this.IdNumber);
                 if (customer == null)
@@ -283,24 +294,45 @@ namespace Super_Tour.ViewModel
                 _booking.Id_Travel = _selectedTravel.Id_Travel;
                 _booking.Id_Customer_Booking = customer.Id_Customer;
                 _booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count;
+
+                // Process remaining TICKET
+                int numberOfOldTourist = _booking.TOURISTs.Count;
+                int numberOfNewTourist = _tourists.Count;
+                _booking.TRAVEL.RemainingTicket -= ((numberOfNewTourist - numberOfOldTourist));
                 db.BOOKINGs.AddOrUpdate(_booking);
                 await db.SaveChangesAsync();
 
+                // Remove old tickets in TICKET
+                List<TICKET> listTickets = db.TICKETs.Where(p => p.TOURIST.Id_Booking == _booking.Id_Booking).ToList();
+                if (listTickets.Count > 0)
+                {
+                    db.TICKETs.RemoveRange(listTickets);
+                    await db.SaveChangesAsync();
+                }
 
-                /*foreach (TOURIST tourist in _tourists)
-                    {
-                        tourist.Id_Tourist = 1;
-                        tourist.Id_Booking = db.BOOKINGs.Max(p => p.Id_Booking);
-                        db.TOURISTs.Add(tourist);
-                    }
-                    await db.SaveChangesAsync();*/
+                // Remove old data in List Tourist 
+                List<TOURIST> listTourist = db.TOURISTs.Where(p => p.Id_Booking == _booking.Id_Booking).ToList();
+                if (listTourist.Count > 0)
+                {
+                    db.TOURISTs.RemoveRange(listTourist);
+                    await db.SaveChangesAsync();
+                }
+
+                // Save Tourist of BOOKING
+                int Id_Booking = _booking.Id_Booking;
+                foreach (TOURIST tourist in _tourists)
+                {
+                    tourist.Id_Booking = Id_Booking;
+                    db.TOURISTs.Add(tourist);
+                }
+                await db.SaveChangesAsync();
 
                 // Synchronyze real-time DB
                 MainTravelViewModel.TimeTravel = DateTime.Now;
                 UPDATE_CHECK.NotifyChange(table, MainTravelViewModel.TimeTravel);
 
                 // Process UI event
-                MyMessageBox.ShowDialog("Add new travel successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                MyMessageBox.ShowDialog("Update booking successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 _mainViewModel.removeFirstChild();
                 _mainViewModel.CurrentChildView = _mainBookingViewModel;
             }
@@ -368,6 +400,7 @@ namespace Super_Tour.ViewModel
                 }
             }
         }
+
         #region Load Booking
         private void LoadBooking()
         {
@@ -376,6 +409,7 @@ namespace Super_Tour.ViewModel
             SelectedTravel = _booking.TRAVEL;
         }
         #endregion
+
         #region Province
         private void LoadDistrict()
         {
@@ -412,7 +446,9 @@ namespace Super_Tour.ViewModel
             LoadDistrict();
         }
         #endregion
+
         #endregion
+
         #region Search
         private void ExecuteSelectFilter(object obj)
         {
@@ -449,6 +485,7 @@ namespace Super_Tour.ViewModel
             this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.PlaceOfTour.ToLower().Contains(_searchTravel.ToLower())).ToList();
         }
         #endregion
+
         #region Auto fill Customer
         private void CheckAutoFillInformation()
         {
@@ -472,14 +509,17 @@ namespace Super_Tour.ViewModel
             }
         }
         #endregion
+
         #region Add new Tourist
         private void ExecuteOpenAddTouristForBookingViewCommand(object obj)
         {
             AddTouristView view = new AddTouristView();
             view.DataContext = new AddTouristViewModel(_tourists);
             view.ShowDialog();
+            CheckDataModified();
         }
         #endregion
+
         #region Check data modified
         private void CheckDataModified()
         {
@@ -497,6 +537,7 @@ namespace Super_Tour.ViewModel
                 && IdNumber == _booking.CUSTOMER.IdNumber
                 && PhoneNumber == _booking.CUSTOMER.PhoneNumber
                 && CustomerName == _booking.CUSTOMER.Name_Customer
+                && _tourists.SequenceEqual(_booking.TOURISTs.ToList())
                 )
                 )
                 IsDataModified = false;

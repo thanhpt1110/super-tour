@@ -125,23 +125,23 @@
                         <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListTourists}"
                               SelectedItem="{Binding SelectedTourist}"
-                              RowStyle="{DynamicResource editableDataGridRowStyle}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
-                              Style="{DynamicResource editableDataGridStyle}" 
+                              Style="{DynamicResource smallerDataGridStyle1}" 
                                       FontSize="15"
                                   Margin="20,20,20,0">
                     <DataGrid.Columns>
                                     <DataGridTextColumn Header="Order"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.7*"
-                                                Binding="{Binding DataContext.Order}"/>
+                                                Width="0.8*"
+                                                Binding="{Binding Order}"/>
                                     <DataGridTextColumn Header="Tourist Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False"
                                                 Width="3*"
-                                                Binding="{Binding Name_Tourist}"/>
+                                                Binding="{Binding Tourist.Name_Tourist}"/>
                                     <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
@@ -173,6 +173,7 @@
                     </Grid>
                     <Grid Grid.Row="4">
                         <Button Content="Save"
+                                IsEnabled="{Binding IsDataModified}"
                                 Background="{StaticResource btnAdd}"
                                 BorderThickness="0"
                                 Width="140"

@@ -153,6 +153,7 @@ namespace Super_Tour.ViewModel
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
+        public ICommand ExportTicketCommand { get; private set; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
@@ -170,6 +171,7 @@ namespace Super_Tour.ViewModel
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchBooking);
+            ExportTicketCommand = new RelayCommand(ExecuteExportTicket);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
 
@@ -375,6 +377,29 @@ namespace Super_Tour.ViewModel
             if (_listOriginalBooking == null || _listOriginalBooking.Count == 0)
                 return;
             this._listBookingSearching = _listOriginalBooking.Where(p => p.CUSTOMER.PhoneNumber.Contains(_searchBooking)).ToList();
+        }
+        #endregion
+
+        #region Export ticket
+        private async void ExecuteExportTicket(object obj)
+        {
+            // Tìm xem Ticket đã đc Export chưa
+            if (db.TICKETs.Where(p => p.TOURIST.Id_Booking == _selectedItem.Id_Booking).ToList().Count> 0)
+            {
+                // Nếu export rồi thì thông báo, xong ko tạo mới
+                MyMessageBox.ShowDialog("These tickets were exported!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                return;
+            }
+            // Chưa thì thêm data vào TICKET
+            foreach(TOURIST tourits in _selectedItem.TOURISTs)
+            {
+                TICKET ticket = new TICKET();
+                ticket.Id_Tourist = tourits.Id_Tourist;
+                ticket.Status = "Payed";
+                db.TICKETs.Add(ticket);
+            }
+            await db.SaveChangesAsync();
+            MyMessageBox.ShowDialog("Export tickets succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
         }
         #endregion
 
