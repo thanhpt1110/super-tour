@@ -81,22 +81,26 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource DataGridStyle1}" Margin="55,30,55,10">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Package ID"
-                                                IsReadOnly="True" 
-                                                CanUserResize="False" 
-                                                Width="*"
-                                                Binding="{Binding Id_Package}"/>
-
                         <DataGridTextColumn Header="Package Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="2*"
+                                                Width="1.5*"
                                                 Binding="{Binding Name_Package}"/>
-                        <DataGridTextColumn Header="Type Name" 
+                        <DataGridTextColumn Header="Type" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
+                                                Width="1*"
                                                 Binding="{Binding TYPEPACKAGE.Name_Type}"/>
+                        <DataGridTextColumn Header="Province" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1.3*"
+                                                Binding="{Binding ProvinceName}"/>
+                        <DataGridTextColumn Header="District" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="1.3*"
+                                                Binding="{Binding DistrictName}"/>
                         <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 

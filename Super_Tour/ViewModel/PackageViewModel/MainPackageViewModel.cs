@@ -15,6 +15,7 @@ using Student_wpf_application.ViewModels.Command;
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
@@ -360,6 +361,9 @@ namespace Super_Tour.ViewModel
                 _listPackages.Clear();
                 foreach (PACKAGE package in _listPackageDatagrid)
                 {
+                    Province province = Get_Api_Address.getProvinces().First(p => p.codename == package.Id_Province);
+                    package.ProvinceName = province.name;
+                    package.DistrictName = Get_Api_Address.getDistrict(province).First(p => p.codename == package.Id_District).name;
                     _listPackages.Add(package);
                 }
             }

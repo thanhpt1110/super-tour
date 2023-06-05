@@ -1,14 +1,14 @@
 {
   "province": [
     {
-      "name": "Thành phố Hà Nội",
+      "name": "TP. Hà Nội",
       "code": 1,
       "codename": "thanh_pho_ha_noi",
       "division_type": "thành phố trung ương",
       "phone_code": 24,
       "districts": [
         {
-          "name": "Quận Ba Đình",
+          "name": "Q. Ba Đình",
           "code": 1,
           "codename": "quan_ba_dinh",
           "division_type": "quận",
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "name": "Quận Hoàn Kiếm",
+          "name": "Q. Hoàn Kiếm",
           "code": 2,
           "codename": "quan_hoan_kiem",
           "division_type": "quận",
@@ -250,7 +250,7 @@
           ]
         },
         {
-          "name": "Quận Tây Hồ",
+          "name": "Q. Tây Hồ",
           "code": 3,
           "codename": "quan_tay_ho",
           "division_type": "quận",
@@ -315,7 +315,7 @@
           ]
         },
         {
-          "name": "Quận Long Biên",
+          "name": "Q. Long Biên",
           "code": 4,
           "codename": "quan_long_bien",
           "division_type": "quận",
@@ -422,7 +422,7 @@
           ]
         },
         {
-          "name": "Quận Cầu Giấy",
+          "name": "Q. Cầu Giấy",
           "code": 5,
           "codename": "quan_cau_giay",
           "division_type": "quận",
@@ -487,7 +487,7 @@
           ]
         },
         {
-          "name": "Quận Đống Đa",
+          "name": "Q. Đống Đa",
           "code": 6,
           "codename": "quan_dong_da",
           "division_type": "quận",
@@ -643,7 +643,7 @@
           ]
         },
         {
-          "name": "Quận Hai Bà Trưng",
+          "name": "Q. Hai Bà Trưng",
           "code": 7,
           "codename": "quan_hai_ba_trung",
           "division_type": "quận",
@@ -778,7 +778,7 @@
           ]
         },
         {
-          "name": "Quận Hoàng Mai",
+          "name": "Q. Hoàng Mai",
           "code": 8,
           "codename": "quan_hoang_mai",
           "division_type": "quận",
@@ -885,7 +885,7 @@
           ]
         },
         {
-          "name": "Quận Thanh Xuân",
+          "name": "Q. Thanh Xuân",
           "code": 9,
           "codename": "quan_thanh_xuan",
           "division_type": "quận",
@@ -971,7 +971,7 @@
           ]
         },
         {
-          "name": "Huyện Sóc Sơn",
+          "name": "H. Sóc Sơn",
           "code": 16,
           "codename": "huyen_soc_son",
           "division_type": "huyện",
@@ -1162,7 +1162,7 @@
           ]
         },
         {
-          "name": "Huyện Đông Anh",
+          "name": "H. Đông Anh",
           "code": 17,
           "codename": "huyen_dong_anh",
           "division_type": "huyện",
@@ -1339,7 +1339,7 @@
           ]
         },
         {
-          "name": "Huyện Gia Lâm",
+          "name": "H. Gia Lâm",
           "code": 18,
           "codename": "huyen_gia_lam",
           "division_type": "huyện",
@@ -1502,7 +1502,7 @@
           ]
         },
         {
-          "name": "Quận Nam Từ Liêm",
+          "name": "Q. Nam Từ Liêm",
           "code": 19,
           "codename": "quan_nam_tu_liem",
           "division_type": "quận",
@@ -1581,7 +1581,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Trì",
+          "name": "H. Thanh Trì",
           "code": 20,
           "codename": "huyen_thanh_tri",
           "division_type": "huyện",
@@ -1702,7 +1702,7 @@
           ]
         },
         {
-          "name": "Quận Bắc Từ Liêm",
+          "name": "Q. Bắc Từ Liêm",
           "code": 21,
           "codename": "quan_bac_tu_liem",
           "division_type": "quận",
@@ -1802,7 +1802,7 @@
           ]
         },
         {
-          "name": "Huyện Mê Linh",
+          "name": "H. Mê Linh",
           "code": 250,
           "codename": "huyen_me_linh",
           "division_type": "huyện",
@@ -1937,7 +1937,7 @@
           ]
         },
         {
-          "name": "Quận Hà Đông",
+          "name": "Q. Hà Đông",
           "code": 268,
           "codename": "quan_ha_dong",
           "division_type": "quận",
@@ -2179,7 +2179,7 @@
           ]
         },
         {
-          "name": "Huyện Ba Vì",
+          "name": "H. Ba Vì",
           "code": 271,
           "codename": "huyen_ba_vi",
           "division_type": "huyện",
@@ -2405,7 +2405,7 @@
           ]
         },
         {
-          "name": "Huyện Phúc Thọ",
+          "name": "H. Phúc Thọ",
           "code": 272,
           "codename": "huyen_phuc_tho",
           "division_type": "huyện",
@@ -2561,7 +2561,7 @@
           ]
         },
         {
-          "name": "Huyện Đan Phượng",
+          "name": "H. Đan Phượng",
           "code": 273,
           "codename": "huyen_dan_phuong",
           "division_type": "huyện",
@@ -2682,7 +2682,7 @@
           ]
         },
         {
-          "name": "Huyện Hoài Đức",
+          "name": "H. Hoài Đức",
           "code": 274,
           "codename": "huyen_hoai_duc",
           "division_type": "huyện",
@@ -2831,7 +2831,7 @@
           ]
         },
         {
-          "name": "Huyện Quốc Oai",
+          "name": "H. Quốc Oai",
           "code": 275,
           "codename": "huyen_quoc_oai",
           "division_type": "huyện",
@@ -2987,7 +2987,7 @@
           ]
         },
         {
-          "name": "Huyện Thạch Thất",
+          "name": "H. Thạch Thất",
           "code": 276,
           "codename": "huyen_thach_that",
           "division_type": "huyện",
@@ -3157,7 +3157,7 @@
           ]
         },
         {
-          "name": "Huyện Chương Mỹ",
+          "name": "H. Chương Mỹ",
           "code": 277,
           "codename": "huyen_chuong_my",
           "division_type": "huyện",
@@ -3390,7 +3390,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Oai",
+          "name": "H. Thanh Oai",
           "code": 278,
           "codename": "huyen_thanh_oai",
           "division_type": "huyện",
@@ -3546,7 +3546,7 @@
           ]
         },
         {
-          "name": "Huyện Thường Tín",
+          "name": "H. Thường Tín",
           "code": 279,
           "codename": "huyen_thuong_tin",
           "division_type": "huyện",
@@ -3758,7 +3758,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Xuyên",
+          "name": "H. Phú Xuyên",
           "code": 280,
           "codename": "huyen_phu_xuyen",
           "division_type": "huyện",
@@ -3956,7 +3956,7 @@
           ]
         },
         {
-          "name": "Huyện Ứng Hòa",
+          "name": "H. Ứng Hòa",
           "code": 281,
           "codename": "huyen_ung_hoa",
           "division_type": "huyện",
@@ -4168,7 +4168,7 @@
           ]
         },
         {
-          "name": "Huyện Mỹ Đức",
+          "name": "H. Mỹ Đức",
           "code": 282,
           "codename": "huyen_my_duc",
           "division_type": "huyện",
@@ -4333,14 +4333,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hà Giang",
+      "name": "T. Hà Giang",
       "code": 2,
       "codename": "tinh_ha_giang",
       "division_type": "tỉnh",
       "phone_code": 219,
       "districts": [
         {
-          "name": "Thành phố Hà Giang",
+          "name": "TP. Hà Giang",
           "code": 24,
           "codename": "thanh_pho_ha_giang",
           "division_type": "thành phố",
@@ -4405,7 +4405,7 @@
           ]
         },
         {
-          "name": "Huyện Đồng Văn",
+          "name": "H. Đồng Văn",
           "code": 26,
           "codename": "huyen_dong_van",
           "division_type": "huyện",
@@ -4547,7 +4547,7 @@
           ]
         },
         {
-          "name": "Huyện Mèo Vạc",
+          "name": "H. Mèo Vạc",
           "code": 27,
           "codename": "huyen_meo_vac",
           "division_type": "huyện",
@@ -4682,7 +4682,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Minh",
+          "name": "H. Yên Minh",
           "code": 28,
           "codename": "huyen_yen_minh",
           "division_type": "huyện",
@@ -4817,7 +4817,7 @@
           ]
         },
         {
-          "name": "Huyện Quản Bạ",
+          "name": "H. Quản Bạ",
           "code": 29,
           "codename": "huyen_quan_ba",
           "division_type": "huyện",
@@ -4917,7 +4917,7 @@
           ]
         },
         {
-          "name": "Huyện Vị Xuyên",
+          "name": "H. Vị Xuyên",
           "code": 30,
           "codename": "huyen_vi_xuyen",
           "division_type": "huyện",
@@ -5094,7 +5094,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Mê",
+          "name": "H. Bắc Mê",
           "code": 31,
           "codename": "huyen_bac_me",
           "division_type": "huyện",
@@ -5194,7 +5194,7 @@
           ]
         },
         {
-          "name": "Huyện Hoàng Su Phì",
+          "name": "H. Hoàng Su Phì",
           "code": 32,
           "codename": "huyen_hoang_su_phi",
           "division_type": "huyện",
@@ -5371,7 +5371,7 @@
           ]
         },
         {
-          "name": "Huyện Xín Mần",
+          "name": "H. Xín Mần",
           "code": 33,
           "codename": "huyen_xin_man",
           "division_type": "huyện",
@@ -5506,7 +5506,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Quang",
+          "name": "H. Bắc Quang",
           "code": 34,
           "codename": "huyen_bac_quang",
           "division_type": "huyện",
@@ -5676,7 +5676,7 @@
           ]
         },
         {
-          "name": "Huyện Quang Bình",
+          "name": "H. Quang Bình",
           "code": 35,
           "codename": "huyen_quang_binh",
           "division_type": "huyện",
@@ -5792,14 +5792,14 @@
       ]
     },
     {
-      "name": "Tỉnh Cao Bằng",
+      "name": "T. Cao Bằng",
       "code": 4,
       "codename": "tinh_cao_bang",
       "division_type": "tỉnh",
       "phone_code": 206,
       "districts": [
         {
-          "name": "Thành phố Cao Bằng",
+          "name": "TP. Cao Bằng",
           "code": 40,
           "codename": "thanh_pho_cao_bang",
           "division_type": "thành phố",
@@ -5885,7 +5885,7 @@
           ]
         },
         {
-          "name": "Huyện Bảo Lâm",
+          "name": "H. Bảo Lâm",
           "code": 42,
           "codename": "huyen_bao_lam",
           "division_type": "huyện",
@@ -5985,7 +5985,7 @@
           ]
         },
         {
-          "name": "Huyện Bảo Lạc",
+          "name": "H. Bảo Lạc",
           "code": 43,
           "codename": "huyen_bao_lac",
           "division_type": "huyện",
@@ -6113,7 +6113,7 @@
           ]
         },
         {
-          "name": "Huyện Hà Quảng",
+          "name": "H. Hà Quảng",
           "code": 45,
           "codename": "huyen_ha_quang",
           "division_type": "huyện",
@@ -6269,7 +6269,7 @@
           ]
         },
         {
-          "name": "Huyện Trùng Khánh",
+          "name": "H. Trùng Khánh",
           "code": 47,
           "codename": "huyen_trung_khanh",
           "division_type": "huyện",
@@ -6425,7 +6425,7 @@
           ]
         },
         {
-          "name": "Huyện Hạ Lang",
+          "name": "H. Hạ Lang",
           "code": 48,
           "codename": "huyen_ha_lang",
           "division_type": "huyện",
@@ -6525,7 +6525,7 @@
           ]
         },
         {
-          "name": "Huyện Quảng Hòa",
+          "name": "H. Quảng Hòa",
           "code": 49,
           "codename": "huyen_quang_hoa",
           "division_type": "huyện",
@@ -6667,7 +6667,7 @@
           ]
         },
         {
-          "name": "Huyện Hoà An",
+          "name": "H. Hoà An",
           "code": 51,
           "codename": "huyen_hoa_an",
           "division_type": "huyện",
@@ -6781,7 +6781,7 @@
           ]
         },
         {
-          "name": "Huyện Nguyên Bình",
+          "name": "H. Nguyên Bình",
           "code": 52,
           "codename": "huyen_nguyen_binh",
           "division_type": "huyện",
@@ -6909,7 +6909,7 @@
           ]
         },
         {
-          "name": "Huyện Thạch An",
+          "name": "H. Thạch An",
           "code": 53,
           "codename": "huyen_thach_an",
           "division_type": "huyện",
@@ -7018,7 +7018,7 @@
       ]
     },
     {
-      "name": "Tỉnh Bắc Kạn",
+      "name": "T. Bắc Kạn",
       "code": 6,
       "codename": "tinh_bac_kan",
       "division_type": "tỉnh",
@@ -7090,7 +7090,7 @@
           ]
         },
         {
-          "name": "Huyện Pác Nặm",
+          "name": "H. Pác Nặm",
           "code": 60,
           "codename": "huyen_pac_nam",
           "division_type": "huyện",
@@ -7169,7 +7169,7 @@
           ]
         },
         {
-          "name": "Huyện Ba Bể",
+          "name": "H. Ba Bể",
           "code": 61,
           "codename": "huyen_ba_be",
           "division_type": "huyện",
@@ -7283,7 +7283,7 @@
           ]
         },
         {
-          "name": "Huyện Ngân Sơn",
+          "name": "H. Ngân Sơn",
           "code": 62,
           "codename": "huyen_ngan_son",
           "division_type": "huyện",
@@ -7362,7 +7362,7 @@
           ]
         },
         {
-          "name": "Huyện Bạch Thông",
+          "name": "H. Bạch Thông",
           "code": 63,
           "codename": "huyen_bach_thong",
           "division_type": "huyện",
@@ -7469,7 +7469,7 @@
           ]
         },
         {
-          "name": "Huyện Chợ Đồn",
+          "name": "H. Chợ Đồn",
           "code": 64,
           "codename": "huyen_cho_don",
           "division_type": "huyện",
@@ -7618,7 +7618,7 @@
           ]
         },
         {
-          "name": "Huyện Chợ Mới",
+          "name": "H. Chợ Mới",
           "code": 65,
           "codename": "huyen_cho_moi",
           "division_type": "huyện",
@@ -7725,7 +7725,7 @@
           ]
         },
         {
-          "name": "Huyện Na Rì",
+          "name": "H. Na Rì",
           "code": 66,
           "codename": "huyen_na_ri",
           "division_type": "huyện",
@@ -7855,14 +7855,14 @@
       ]
     },
     {
-      "name": "Tỉnh Tuyên Quang",
+      "name": "T. Tuyên Quang",
       "code": 8,
       "codename": "tinh_tuyen_quang",
       "division_type": "tỉnh",
       "phone_code": 207,
       "districts": [
         {
-          "name": "Thành phố Tuyên Quang",
+          "name": "TP. Tuyên Quang",
           "code": 70,
           "codename": "thanh_pho_tuyen_quang",
           "division_type": "thành phố",
@@ -7976,7 +7976,7 @@
           ]
         },
         {
-          "name": "Huyện Lâm Bình",
+          "name": "H. Lâm Bình",
           "code": 71,
           "codename": "huyen_lam_binh",
           "division_type": "huyện",
@@ -8041,7 +8041,7 @@
           ]
         },
         {
-          "name": "Huyện Na Hang",
+          "name": "H. Na Hang",
           "code": 72,
           "codename": "huyen_na_hang",
           "division_type": "huyện",
@@ -8134,7 +8134,7 @@
           ]
         },
         {
-          "name": "Huyện Chiêm Hóa",
+          "name": "H. Chiêm Hóa",
           "code": 73,
           "codename": "huyen_chiem_hoa",
           "division_type": "huyện",
@@ -8325,7 +8325,7 @@
           ]
         },
         {
-          "name": "Huyện Hàm Yên",
+          "name": "H. Hàm Yên",
           "code": 74,
           "codename": "huyen_ham_yen",
           "division_type": "huyện",
@@ -8460,7 +8460,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Sơn",
+          "name": "H. Yên Sơn",
           "code": 75,
           "codename": "huyen_yen_son",
           "division_type": "huyện",
@@ -8544,7 +8544,7 @@
               "short_codename": "tan_tien"
             },
             {
-              "name": "Xã Tứ Quận",
+              "name": "Xã Tứ Q.",
               "code": 2464,
               "codename": "xa_tu_quan",
               "division_type": "xã",
@@ -8665,7 +8665,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Dương",
+          "name": "H. Sơn Dương",
           "code": 76,
           "codename": "huyen_son_duong",
           "division_type": "huyện",
@@ -8893,14 +8893,14 @@
       ]
     },
     {
-      "name": "Tỉnh Lào Cai",
+      "name": "T. Lào Cai",
       "code": 10,
       "codename": "tinh_lao_cai",
       "division_type": "tỉnh",
       "phone_code": 214,
       "districts": [
         {
-          "name": "Thành phố Lào Cai",
+          "name": "TP. Lào Cai",
           "code": 80,
           "codename": "thanh_pho_lao_cai",
           "division_type": "thành phố",
@@ -9028,7 +9028,7 @@
           ]
         },
         {
-          "name": "Huyện Bát Xát",
+          "name": "H. Bát Xát",
           "code": 82,
           "codename": "huyen_bat_xat",
           "division_type": "huyện",
@@ -9184,7 +9184,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Khương",
+          "name": "H. Mường Khương",
           "code": 83,
           "codename": "huyen_muong_khuong",
           "division_type": "huyện",
@@ -9305,7 +9305,7 @@
           ]
         },
         {
-          "name": "Huyện Si Ma Cai",
+          "name": "H. Si Ma Cai",
           "code": 84,
           "codename": "huyen_si_ma_cai",
           "division_type": "huyện",
@@ -9384,7 +9384,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Hà",
+          "name": "H. Bắc Hà",
           "code": 85,
           "codename": "huyen_bac_ha",
           "division_type": "huyện",
@@ -9526,7 +9526,7 @@
           ]
         },
         {
-          "name": "Huyện Bảo Thắng",
+          "name": "H. Bảo Thắng",
           "code": 86,
           "codename": "huyen_bao_thang",
           "division_type": "huyện",
@@ -9633,7 +9633,7 @@
           ]
         },
         {
-          "name": "Huyện Bảo Yên",
+          "name": "H. Bảo Yên",
           "code": 87,
           "codename": "huyen_bao_yen",
           "division_type": "huyện",
@@ -9882,7 +9882,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Bàn",
+          "name": "H. Văn Bàn",
           "code": 89,
           "codename": "huyen_van_ban",
           "division_type": "huyện",
@@ -10047,14 +10047,14 @@
       ]
     },
     {
-      "name": "Tỉnh Điện Biên",
+      "name": "T. Điện Biên",
       "code": 11,
       "codename": "tinh_dien_bien",
       "division_type": "tỉnh",
       "phone_code": 215,
       "districts": [
         {
-          "name": "Thành phố Điện Biên Phủ",
+          "name": "TP. Điện Biên Phủ",
           "code": 94,
           "codename": "thanh_pho_dien_bien_phu",
           "division_type": "thành phố",
@@ -10177,7 +10177,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Nhé",
+          "name": "H. Mường Nhé",
           "code": 96,
           "codename": "huyen_muong_nhe",
           "division_type": "huyện",
@@ -10263,7 +10263,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Chà",
+          "name": "H. Mường Chà",
           "code": 97,
           "codename": "huyen_muong_cha",
           "division_type": "huyện",
@@ -10356,7 +10356,7 @@
           ]
         },
         {
-          "name": "Huyện Tủa Chùa",
+          "name": "H. Tủa Chùa",
           "code": 98,
           "codename": "huyen_tua_chua",
           "division_type": "huyện",
@@ -10449,7 +10449,7 @@
           ]
         },
         {
-          "name": "Huyện Tuần Giáo",
+          "name": "H. Tuần Giáo",
           "code": 99,
           "codename": "huyen_tuan_giao",
           "division_type": "huyện",
@@ -10591,7 +10591,7 @@
           ]
         },
         {
-          "name": "Huyện Điện Biên",
+          "name": "H. Điện Biên",
           "code": 100,
           "codename": "huyen_dien_bien",
           "division_type": "huyện",
@@ -10747,7 +10747,7 @@
           ]
         },
         {
-          "name": "Huyện Điện Biên Đông",
+          "name": "H. Điện Biên Đông",
           "code": 101,
           "codename": "huyen_dien_bien_dong",
           "division_type": "huyện",
@@ -10854,7 +10854,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Ảng",
+          "name": "H. Mường Ảng",
           "code": 102,
           "codename": "huyen_muong_ang",
           "division_type": "huyện",
@@ -10933,7 +10933,7 @@
           ]
         },
         {
-          "name": "Huyện Nậm Pồ",
+          "name": "H. Nậm Pồ",
           "code": 103,
           "codename": "huyen_nam_po",
           "division_type": "huyện",
@@ -11049,14 +11049,14 @@
       ]
     },
     {
-      "name": "Tỉnh Lai Châu",
+      "name": "T. Lai Châu",
       "code": 12,
       "codename": "tinh_lai_chau",
       "division_type": "tỉnh",
       "phone_code": 213,
       "districts": [
         {
-          "name": "Thành phố Lai Châu",
+          "name": "TP. Lai Châu",
           "code": 105,
           "codename": "thanh_pho_lai_chau",
           "division_type": "thành phố",
@@ -11114,7 +11114,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Đường",
+          "name": "H. Tam Đường",
           "code": 106,
           "codename": "huyen_tam_duong",
           "division_type": "huyện",
@@ -11214,7 +11214,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Tè",
+          "name": "H. Mường Tè",
           "code": 107,
           "codename": "huyen_muong_te",
           "division_type": "huyện",
@@ -11321,7 +11321,7 @@
           ]
         },
         {
-          "name": "Huyện Sìn Hồ",
+          "name": "H. Sìn Hồ",
           "code": 108,
           "codename": "huyen_sin_ho",
           "division_type": "huyện",
@@ -11484,7 +11484,7 @@
           ]
         },
         {
-          "name": "Huyện Phong Thổ",
+          "name": "H. Phong Thổ",
           "code": 109,
           "codename": "huyen_phong_tho",
           "division_type": "huyện",
@@ -11612,7 +11612,7 @@
           ]
         },
         {
-          "name": "Huyện Than Uyên",
+          "name": "H. Than Uyên",
           "code": 110,
           "codename": "huyen_than_uyen",
           "division_type": "huyện",
@@ -11705,7 +11705,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Uyên",
+          "name": "H. Tân Uyên",
           "code": 111,
           "codename": "huyen_tan_uyen",
           "division_type": "huyện",
@@ -11784,7 +11784,7 @@
           ]
         },
         {
-          "name": "Huyện Nậm Nhùn",
+          "name": "H. Nậm Nhùn",
           "code": 112,
           "codename": "huyen_nam_nhun",
           "division_type": "huyện",
@@ -11872,14 +11872,14 @@
       ]
     },
     {
-      "name": "Tỉnh Sơn La",
+      "name": "T. Sơn La",
       "code": 14,
       "codename": "tinh_son_la",
       "division_type": "tỉnh",
       "phone_code": 212,
       "districts": [
         {
-          "name": "Thành phố Sơn La",
+          "name": "TP. Sơn La",
           "code": 116,
           "codename": "thanh_pho_son_la",
           "division_type": "thành phố",
@@ -11972,7 +11972,7 @@
           ]
         },
         {
-          "name": "Huyện Quỳnh Nhai",
+          "name": "H. Quỳnh Nhai",
           "code": 118,
           "codename": "huyen_quynh_nhai",
           "division_type": "huyện",
@@ -12058,7 +12058,7 @@
           ]
         },
         {
-          "name": "Huyện Thuận Châu",
+          "name": "H. Thuận Châu",
           "code": 119,
           "codename": "huyen_thuan_chau",
           "division_type": "huyện",
@@ -12270,7 +12270,7 @@
           ]
         },
         {
-          "name": "Huyện Mường La",
+          "name": "H. Mường La",
           "code": 120,
           "codename": "huyen_muong_la",
           "division_type": "huyện",
@@ -12391,7 +12391,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Yên",
+          "name": "H. Bắc Yên",
           "code": 121,
           "codename": "huyen_bac_yen",
           "division_type": "huyện",
@@ -12512,7 +12512,7 @@
           ]
         },
         {
-          "name": "Huyện Phù Yên",
+          "name": "H. Phù Yên",
           "code": 122,
           "codename": "huyen_phu_yen",
           "division_type": "huyện",
@@ -12710,7 +12710,7 @@
           ]
         },
         {
-          "name": "Huyện Mộc Châu",
+          "name": "H. Mộc Châu",
           "code": 123,
           "codename": "huyen_moc_chau",
           "division_type": "huyện",
@@ -12824,7 +12824,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Châu",
+          "name": "H. Yên Châu",
           "code": 124,
           "codename": "huyen_yen_chau",
           "division_type": "huyện",
@@ -12938,7 +12938,7 @@
           ]
         },
         {
-          "name": "Huyện Mai Sơn",
+          "name": "H. Mai Sơn",
           "code": 125,
           "codename": "huyen_mai_son",
           "division_type": "huyện",
@@ -13101,7 +13101,7 @@
           ]
         },
         {
-          "name": "Huyện Sông Mã",
+          "name": "H. Sông Mã",
           "code": 126,
           "codename": "huyen_song_ma",
           "division_type": "huyện",
@@ -13243,7 +13243,7 @@
           ]
         },
         {
-          "name": "Huyện Sốp Cộp",
+          "name": "H. Sốp Cộp",
           "code": 127,
           "codename": "huyen_sop_cop",
           "division_type": "huyện",
@@ -13308,7 +13308,7 @@
           ]
         },
         {
-          "name": "Huyện Vân Hồ",
+          "name": "H. Vân Hồ",
           "code": 128,
           "codename": "huyen_van_ho",
           "division_type": "huyện",
@@ -13417,14 +13417,14 @@
       ]
     },
     {
-      "name": "Tỉnh Yên Bái",
+      "name": "T. Yên Bái",
       "code": 15,
       "codename": "tinh_yen_bai",
       "division_type": "tỉnh",
       "phone_code": 216,
       "districts": [
         {
-          "name": "Thành phố Yên Bái",
+          "name": "TP. Yên Bái",
           "code": 132,
           "codename": "thanh_pho_yen_bai",
           "division_type": "thành phố",
@@ -13645,7 +13645,7 @@
           ]
         },
         {
-          "name": "Huyện Lục Yên",
+          "name": "H. Lục Yên",
           "code": 135,
           "codename": "huyen_luc_yen",
           "division_type": "huyện",
@@ -13822,7 +13822,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Yên",
+          "name": "H. Văn Yên",
           "code": 136,
           "codename": "huyen_van_yen",
           "division_type": "huyện",
@@ -14006,7 +14006,7 @@
           ]
         },
         {
-          "name": "Huyện Mù Căng Chải",
+          "name": "H. Mù Căng Chải",
           "code": 137,
           "codename": "huyen_mu_cang_chai",
           "division_type": "huyện",
@@ -14113,7 +14113,7 @@
           ]
         },
         {
-          "name": "Huyện Trấn Yên",
+          "name": "H. Trấn Yên",
           "code": 138,
           "codename": "huyen_tran_yen",
           "division_type": "huyện",
@@ -14269,7 +14269,7 @@
           ]
         },
         {
-          "name": "Huyện Trạm Tấu",
+          "name": "H. Trạm Tấu",
           "code": 139,
           "codename": "huyen_tram_tau",
           "division_type": "huyện",
@@ -14362,7 +14362,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Chấn",
+          "name": "H. Văn Chấn",
           "code": 140,
           "codename": "huyen_van_chan",
           "division_type": "huyện",
@@ -14539,7 +14539,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Bình",
+          "name": "H. Yên Bình",
           "code": 141,
           "codename": "huyen_yen_binh",
           "division_type": "huyện",
@@ -14718,14 +14718,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hoà Bình",
+      "name": "T. Hoà Bình",
       "code": 17,
       "codename": "tinh_hoa_binh",
       "division_type": "tỉnh",
       "phone_code": 218,
       "districts": [
         {
-          "name": "Thành phố Hòa Bình",
+          "name": "TP. Hòa Bình",
           "code": 148,
           "codename": "thanh_pho_hoa_binh",
           "division_type": "thành phố",
@@ -14867,7 +14867,7 @@
           ]
         },
         {
-          "name": "Huyện Đà Bắc",
+          "name": "H. Đà Bắc",
           "code": 150,
           "codename": "huyen_da_bac",
           "division_type": "huyện",
@@ -14995,7 +14995,7 @@
           ]
         },
         {
-          "name": "Huyện Lương Sơn",
+          "name": "H. Lương Sơn",
           "code": 152,
           "codename": "huyen_luong_son",
           "division_type": "huyện",
@@ -15081,7 +15081,7 @@
           ]
         },
         {
-          "name": "Huyện Kim Bôi",
+          "name": "H. Kim Bôi",
           "code": 153,
           "codename": "huyen_kim_boi",
           "division_type": "huyện",
@@ -15209,7 +15209,7 @@
           ]
         },
         {
-          "name": "Huyện Cao Phong",
+          "name": "H. Cao Phong",
           "code": 154,
           "codename": "huyen_cao_phong",
           "division_type": "huyện",
@@ -15288,7 +15288,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Lạc",
+          "name": "H. Tân Lạc",
           "code": 155,
           "codename": "huyen_tan_lac",
           "division_type": "huyện",
@@ -15409,7 +15409,7 @@
           ]
         },
         {
-          "name": "Huyện Mai Châu",
+          "name": "H. Mai Châu",
           "code": 156,
           "codename": "huyen_mai_chau",
           "division_type": "huyện",
@@ -15530,7 +15530,7 @@
           ]
         },
         {
-          "name": "Huyện Lạc Sơn",
+          "name": "H. Lạc Sơn",
           "code": 157,
           "codename": "huyen_lac_son",
           "division_type": "huyện",
@@ -15707,7 +15707,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Thủy",
+          "name": "H. Yên Thủy",
           "code": 158,
           "codename": "huyen_yen_thuy",
           "division_type": "huyện",
@@ -15793,7 +15793,7 @@
           ]
         },
         {
-          "name": "Huyện Lạc Thủy",
+          "name": "H. Lạc Thủy",
           "code": 159,
           "codename": "huyen_lac_thuy",
           "division_type": "huyện",
@@ -15874,14 +15874,14 @@
       ]
     },
     {
-      "name": "Tỉnh Thái Nguyên",
+      "name": "T. Thái Nguyên",
       "code": 19,
       "codename": "tinh_thai_nguyen",
       "division_type": "tỉnh",
       "phone_code": 208,
       "districts": [
         {
-          "name": "Thành phố Thái Nguyên",
+          "name": "TP. Thái Nguyên",
           "code": 164,
           "codename": "thanh_pho_thai_nguyen",
           "division_type": "thành phố",
@@ -16114,7 +16114,7 @@
           ]
         },
         {
-          "name": "Thành phố Sông Công",
+          "name": "TP. Sông Công",
           "code": 165,
           "codename": "thanh_pho_song_cong",
           "division_type": "thành phố",
@@ -16193,7 +16193,7 @@
           ]
         },
         {
-          "name": "Huyện Định Hóa",
+          "name": "H. Định Hóa",
           "code": 167,
           "codename": "huyen_dinh_hoa",
           "division_type": "huyện",
@@ -16363,7 +16363,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Lương",
+          "name": "H. Phú Lương",
           "code": 168,
           "codename": "huyen_phu_luong",
           "division_type": "huyện",
@@ -16477,7 +16477,7 @@
           ]
         },
         {
-          "name": "Huyện Đồng Hỷ",
+          "name": "H. Đồng Hỷ",
           "code": 169,
           "codename": "huyen_dong_hy",
           "division_type": "huyện",
@@ -16591,7 +16591,7 @@
           ]
         },
         {
-          "name": "Huyện Võ Nhai",
+          "name": "H. Võ Nhai",
           "code": 170,
           "codename": "huyen_vo_nhai",
           "division_type": "huyện",
@@ -16705,7 +16705,7 @@
           ]
         },
         {
-          "name": "Huyện Đại Từ",
+          "name": "H. Đại Từ",
           "code": 171,
           "codename": "huyen_dai_tu",
           "division_type": "huyện",
@@ -17059,7 +17059,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Bình",
+          "name": "H. Phú Bình",
           "code": 173,
           "codename": "huyen_phu_binh",
           "division_type": "huyện",
@@ -17210,14 +17210,14 @@
       ]
     },
     {
-      "name": "Tỉnh Lạng Sơn",
+      "name": "T. Lạng Sơn",
       "code": 20,
       "codename": "tinh_lang_son",
       "division_type": "tỉnh",
       "phone_code": 205,
       "districts": [
         {
-          "name": "Thành phố Lạng Sơn",
+          "name": "TP. Lạng Sơn",
           "code": 178,
           "codename": "thanh_pho_lang_son",
           "division_type": "thành phố",
@@ -17282,7 +17282,7 @@
           ]
         },
         {
-          "name": "Huyện Tràng Định",
+          "name": "H. Tràng Định",
           "code": 180,
           "codename": "huyen_trang_dinh",
           "division_type": "huyện",
@@ -17445,7 +17445,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Gia",
+          "name": "H. Bình Gia",
           "code": 181,
           "codename": "huyen_binh_gia",
           "division_type": "huyện",
@@ -17587,7 +17587,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Lãng",
+          "name": "H. Văn Lãng",
           "code": 182,
           "codename": "huyen_van_lang",
           "division_type": "huyện",
@@ -17715,7 +17715,7 @@
           ]
         },
         {
-          "name": "Huyện Cao Lộc",
+          "name": "H. Cao Lộc",
           "code": 183,
           "codename": "huyen_cao_loc",
           "division_type": "huyện",
@@ -17878,7 +17878,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Quan",
+          "name": "H. Văn Quan",
           "code": 184,
           "codename": "huyen_van_quan",
           "division_type": "huyện",
@@ -18006,7 +18006,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Sơn",
+          "name": "H. Bắc Sơn",
           "code": 185,
           "codename": "huyen_bac_son",
           "division_type": "huyện",
@@ -18141,7 +18141,7 @@
           ]
         },
         {
-          "name": "Huyện Hữu Lũng",
+          "name": "H. Hữu Lũng",
           "code": 186,
           "codename": "huyen_huu_lung",
           "division_type": "huyện",
@@ -18318,7 +18318,7 @@
           ]
         },
         {
-          "name": "Huyện Chi Lăng",
+          "name": "H. Chi Lăng",
           "code": 187,
           "codename": "huyen_chi_lang",
           "division_type": "huyện",
@@ -18467,7 +18467,7 @@
           ]
         },
         {
-          "name": "Huyện Lộc Bình",
+          "name": "H. Lộc Bình",
           "code": 188,
           "codename": "huyen_loc_binh",
           "division_type": "huyện",
@@ -18623,7 +18623,7 @@
           ]
         },
         {
-          "name": "Huyện Đình Lập",
+          "name": "H. Đình Lập",
           "code": 189,
           "codename": "huyen_dinh_lap",
           "division_type": "huyện",
@@ -18718,14 +18718,14 @@
       ]
     },
     {
-      "name": "Tỉnh Quảng Ninh",
+      "name": "T. Quảng Ninh",
       "code": 22,
       "codename": "tinh_quang_ninh",
       "division_type": "tỉnh",
       "phone_code": 203,
       "districts": [
         {
-          "name": "Thành phố Hạ Long",
+          "name": "TP. Hạ Long",
           "code": 193,
           "codename": "thanh_pho_ha_long",
           "division_type": "thành phố",
@@ -18965,7 +18965,7 @@
           ]
         },
         {
-          "name": "Thành phố Móng Cái",
+          "name": "TP. Móng Cái",
           "code": 194,
           "codename": "thanh_pho_mong_cai",
           "division_type": "thành phố",
@@ -19093,7 +19093,7 @@
           ]
         },
         {
-          "name": "Thành phố Cẩm Phả",
+          "name": "TP. Cẩm Phả",
           "code": 195,
           "codename": "thanh_pho_cam_pha",
           "division_type": "thành phố",
@@ -19214,7 +19214,7 @@
           ]
         },
         {
-          "name": "Thành phố Uông Bí",
+          "name": "TP. Uông Bí",
           "code": 196,
           "codename": "thanh_pho_uong_bi",
           "division_type": "thành phố",
@@ -19293,7 +19293,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Liêu",
+          "name": "H. Bình Liêu",
           "code": 198,
           "codename": "huyen_binh_lieu",
           "division_type": "huyện",
@@ -19351,7 +19351,7 @@
           ]
         },
         {
-          "name": "Huyện Tiên Yên",
+          "name": "H. Tiên Yên",
           "code": 199,
           "codename": "huyen_tien_yen",
           "division_type": "huyện",
@@ -19437,7 +19437,7 @@
           ]
         },
         {
-          "name": "Huyện Đầm Hà",
+          "name": "H. Đầm Hà",
           "code": 200,
           "codename": "huyen_dam_ha",
           "division_type": "huyện",
@@ -19509,7 +19509,7 @@
           ]
         },
         {
-          "name": "Huyện Hải Hà",
+          "name": "H. Hải Hà",
           "code": 201,
           "codename": "huyen_hai_ha",
           "division_type": "huyện",
@@ -19595,7 +19595,7 @@
           ]
         },
         {
-          "name": "Huyện Ba Chẽ",
+          "name": "H. Ba Chẽ",
           "code": 202,
           "codename": "huyen_ba_che",
           "division_type": "huyện",
@@ -19660,7 +19660,7 @@
           ]
         },
         {
-          "name": "Huyện Vân Đồn",
+          "name": "H. Vân Đồn",
           "code": 203,
           "codename": "huyen_van_don",
           "division_type": "huyện",
@@ -20051,7 +20051,7 @@
           ]
         },
         {
-          "name": "Huyện Cô Tô",
+          "name": "H. Cô Tô",
           "code": 207,
           "codename": "huyen_co_to",
           "division_type": "huyện",
@@ -20083,14 +20083,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bắc Giang",
+      "name": "T. Bắc Giang",
       "code": 24,
       "codename": "tinh_bac_giang",
       "division_type": "tỉnh",
       "phone_code": 204,
       "districts": [
         {
-          "name": "Thành phố Bắc Giang",
+          "name": "TP. Bắc Giang",
           "code": 213,
           "codename": "thanh_pho_bac_giang",
           "division_type": "thành phố",
@@ -20211,7 +20211,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Thế",
+          "name": "H. Yên Thế",
           "code": 215,
           "codename": "huyen_yen_the",
           "division_type": "huyện",
@@ -20353,7 +20353,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Yên",
+          "name": "H. Tân Yên",
           "code": 216,
           "codename": "huyen_tan_yen",
           "division_type": "huyện",
@@ -20516,7 +20516,7 @@
           ]
         },
         {
-          "name": "Huyện Lạng Giang",
+          "name": "H. Lạng Giang",
           "code": 217,
           "codename": "huyen_lang_giang",
           "division_type": "huyện",
@@ -20672,7 +20672,7 @@
           ]
         },
         {
-          "name": "Huyện Lục Nam",
+          "name": "H. Lục Nam",
           "code": 218,
           "codename": "huyen_luc_nam",
           "division_type": "huyện",
@@ -20856,7 +20856,7 @@
           ]
         },
         {
-          "name": "Huyện Lục Ngạn",
+          "name": "H. Lục Ngạn",
           "code": 219,
           "codename": "huyen_luc_ngan",
           "division_type": "huyện",
@@ -21068,7 +21068,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Động",
+          "name": "H. Sơn Động",
           "code": 220,
           "codename": "huyen_son_dong",
           "division_type": "huyện",
@@ -21196,7 +21196,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Dũng",
+          "name": "H. Yên Dũng",
           "code": 221,
           "codename": "huyen_yen_dung",
           "division_type": "huyện",
@@ -21331,7 +21331,7 @@
           ]
         },
         {
-          "name": "Huyện Việt Yên",
+          "name": "H. Việt Yên",
           "code": 222,
           "codename": "huyen_viet_yen",
           "division_type": "huyện",
@@ -21459,7 +21459,7 @@
           ]
         },
         {
-          "name": "Huyện Hiệp Hòa",
+          "name": "H. Hiệp Hòa",
           "code": 223,
           "codename": "huyen_hiep_hoa",
           "division_type": "huyện",
@@ -21645,14 +21645,14 @@
       ]
     },
     {
-      "name": "Tỉnh Phú Thọ",
+      "name": "T. Phú Thọ",
       "code": 25,
       "codename": "tinh_phu_tho",
       "division_type": "tỉnh",
       "phone_code": 210,
       "districts": [
         {
-          "name": "Thành phố Việt Trì",
+          "name": "TP. Việt Trì",
           "code": 227,
           "codename": "thanh_pho_viet_tri",
           "division_type": "thành phố",
@@ -21887,7 +21887,7 @@
           ]
         },
         {
-          "name": "Huyện Đoan Hùng",
+          "name": "H. Đoan Hùng",
           "code": 230,
           "codename": "huyen_doan_hung",
           "division_type": "huyện",
@@ -22050,7 +22050,7 @@
           ]
         },
         {
-          "name": "Huyện Hạ Hoà",
+          "name": "H. Hạ Hoà",
           "code": 231,
           "codename": "huyen_ha_hoa",
           "division_type": "huyện",
@@ -22199,7 +22199,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Ba",
+          "name": "H. Thanh Ba",
           "code": 232,
           "codename": "huyen_thanh_ba",
           "division_type": "huyện",
@@ -22341,7 +22341,7 @@
           ]
         },
         {
-          "name": "Huyện Phù Ninh",
+          "name": "H. Phù Ninh",
           "code": 233,
           "codename": "huyen_phu_ninh",
           "division_type": "huyện",
@@ -22383,7 +22383,7 @@
               "short_codename": "tram_than"
             },
             {
-              "name": "Xã Trị Quận",
+              "name": "Xã Trị Q.",
               "code": 8242,
               "codename": "xa_tri_quan",
               "division_type": "xã",
@@ -22469,7 +22469,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Lập",
+          "name": "H. Yên Lập",
           "code": 234,
           "codename": "huyen_yen_lap",
           "division_type": "huyện",
@@ -22597,7 +22597,7 @@
           ]
         },
         {
-          "name": "Huyện Cẩm Khê",
+          "name": "H. Cẩm Khê",
           "code": 235,
           "codename": "huyen_cam_khe",
           "division_type": "huyện",
@@ -22774,7 +22774,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Nông",
+          "name": "H. Tam Nông",
           "code": 236,
           "codename": "huyen_tam_nong",
           "division_type": "huyện",
@@ -22867,7 +22867,7 @@
           ]
         },
         {
-          "name": "Huyện Lâm Thao",
+          "name": "H. Lâm Thao",
           "code": 237,
           "codename": "huyen_lam_thao",
           "division_type": "huyện",
@@ -22960,7 +22960,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Sơn",
+          "name": "H. Thanh Sơn",
           "code": 238,
           "codename": "huyen_thanh_son",
           "division_type": "huyện",
@@ -23130,7 +23130,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Thuỷ",
+          "name": "H. Thanh Thuỷ",
           "code": 239,
           "codename": "huyen_thanh_thuy",
           "division_type": "huyện",
@@ -23216,7 +23216,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Sơn",
+          "name": "H. Tân Sơn",
           "code": 240,
           "codename": "huyen_tan_son",
           "division_type": "huyện",
@@ -23346,14 +23346,14 @@
       ]
     },
     {
-      "name": "Tỉnh Vĩnh Phúc",
+      "name": "T. Vĩnh Phúc",
       "code": 26,
       "codename": "tinh_vinh_phuc",
       "division_type": "tỉnh",
       "phone_code": 211,
       "districts": [
         {
-          "name": "Thành phố Vĩnh Yên",
+          "name": "TP. Vĩnh Yên",
           "code": 243,
           "codename": "thanh_pho_vinh_yen",
           "division_type": "thành phố",
@@ -23425,7 +23425,7 @@
           ]
         },
         {
-          "name": "Thành phố Phúc Yên",
+          "name": "TP. Phúc Yên",
           "code": 244,
           "codename": "thanh_pho_phuc_yen",
           "division_type": "thành phố",
@@ -23504,7 +23504,7 @@
           ]
         },
         {
-          "name": "Huyện Lập Thạch",
+          "name": "H. Lập Thạch",
           "code": 246,
           "codename": "huyen_lap_thach",
           "division_type": "huyện",
@@ -23653,7 +23653,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Dương",
+          "name": "H. Tam Dương",
           "code": 247,
           "codename": "huyen_tam_duong",
           "division_type": "huyện",
@@ -23753,7 +23753,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Đảo",
+          "name": "H. Tam Đảo",
           "code": 248,
           "codename": "huyen_tam_dao",
           "division_type": "huyện",
@@ -23825,7 +23825,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Xuyên",
+          "name": "H. Bình Xuyên",
           "code": 249,
           "codename": "huyen_binh_xuyen",
           "division_type": "huyện",
@@ -23925,7 +23925,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Lạc",
+          "name": "H. Yên Lạc",
           "code": 251,
           "codename": "huyen_yen_lac",
           "division_type": "huyện",
@@ -24053,7 +24053,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Tường",
+          "name": "H. Vĩnh Tường",
           "code": 252,
           "codename": "huyen_vinh_tuong",
           "division_type": "huyện",
@@ -24258,7 +24258,7 @@
           ]
         },
         {
-          "name": "Huyện Sông Lô",
+          "name": "H. Sông Lô",
           "code": 253,
           "codename": "huyen_song_lo",
           "division_type": "huyện",
@@ -24388,14 +24388,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bắc Ninh",
+      "name": "T. Bắc Ninh",
       "code": 27,
       "codename": "tinh_bac_ninh",
       "division_type": "tỉnh",
       "phone_code": 222,
       "districts": [
         {
-          "name": "Thành phố Bắc Ninh",
+          "name": "TP. Bắc Ninh",
           "code": 256,
           "codename": "thanh_pho_bac_ninh",
           "division_type": "thành phố",
@@ -24537,7 +24537,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Phong",
+          "name": "H. Yên Phong",
           "code": 258,
           "codename": "huyen_yen_phong",
           "division_type": "huyện",
@@ -24644,7 +24644,7 @@
           ]
         },
         {
-          "name": "Huyện Quế Võ",
+          "name": "H. Quế Võ",
           "code": 259,
           "codename": "huyen_que_vo",
           "division_type": "huyện",
@@ -24800,7 +24800,7 @@
           ]
         },
         {
-          "name": "Huyện Tiên Du",
+          "name": "H. Tiên Du",
           "code": 260,
           "codename": "huyen_tien_du",
           "division_type": "huyện",
@@ -25000,7 +25000,7 @@
           ]
         },
         {
-          "name": "Huyện Thuận Thành",
+          "name": "H. Thuận Thành",
           "code": 262,
           "codename": "huyen_thuan_thanh",
           "division_type": "huyện",
@@ -25135,7 +25135,7 @@
           ]
         },
         {
-          "name": "Huyện Gia Bình",
+          "name": "H. Gia Bình",
           "code": 263,
           "codename": "huyen_gia_binh",
           "division_type": "huyện",
@@ -25242,7 +25242,7 @@
           ]
         },
         {
-          "name": "Huyện Lương Tài",
+          "name": "H. Lương Tài",
           "code": 264,
           "codename": "huyen_luong_tai",
           "division_type": "huyện",
@@ -25351,14 +25351,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hải Dương",
+      "name": "T. Hải Dương",
       "code": 30,
       "codename": "tinh_hai_duong",
       "division_type": "tỉnh",
       "phone_code": 220,
       "districts": [
         {
-          "name": "Thành phố Hải Dương",
+          "name": "TP. Hải Dương",
           "code": 288,
           "codename": "thanh_pho_hai_duong",
           "division_type": "thành phố",
@@ -25542,7 +25542,7 @@
           ]
         },
         {
-          "name": "Thành phố Chí Linh",
+          "name": "TP. Chí Linh",
           "code": 290,
           "codename": "thanh_pho_chi_linh",
           "division_type": "thành phố",
@@ -25684,7 +25684,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Sách",
+          "name": "H. Nam Sách",
           "code": 291,
           "codename": "huyen_nam_sach",
           "division_type": "huyện",
@@ -25945,7 +25945,7 @@
               "short_codename": "hiep_son"
             },
             {
-              "name": "Xã Thượng Quận",
+              "name": "Xã Thượng Q.",
               "code": 10729,
               "codename": "xa_thuong_quan",
               "division_type": "xã",
@@ -25996,7 +25996,7 @@
           ]
         },
         {
-          "name": "Huyện Kim Thành",
+          "name": "H. Kim Thành",
           "code": 293,
           "codename": "huyen_kim_thanh",
           "division_type": "huyện",
@@ -26131,7 +26131,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Hà",
+          "name": "H. Thanh Hà",
           "code": 294,
           "codename": "huyen_thanh_ha",
           "division_type": "huyện",
@@ -26280,7 +26280,7 @@
           ]
         },
         {
-          "name": "Huyện Cẩm Giàng",
+          "name": "H. Cẩm Giàng",
           "code": 295,
           "codename": "huyen_cam_giang",
           "division_type": "huyện",
@@ -26408,7 +26408,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Giang",
+          "name": "H. Bình Giang",
           "code": 296,
           "codename": "huyen_binh_giang",
           "division_type": "huyện",
@@ -26529,7 +26529,7 @@
           ]
         },
         {
-          "name": "Huyện Gia Lộc",
+          "name": "H. Gia Lộc",
           "code": 297,
           "codename": "huyen_gia_loc",
           "division_type": "huyện",
@@ -26664,7 +26664,7 @@
           ]
         },
         {
-          "name": "Huyện Tứ Kỳ",
+          "name": "H. Tứ Kỳ",
           "code": 298,
           "codename": "huyen_tu_ky",
           "division_type": "huyện",
@@ -26834,7 +26834,7 @@
           ]
         },
         {
-          "name": "Huyện Ninh Giang",
+          "name": "H. Ninh Giang",
           "code": 299,
           "codename": "huyen_ninh_giang",
           "division_type": "huyện",
@@ -26983,7 +26983,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Miện",
+          "name": "H. Thanh Miện",
           "code": 300,
           "codename": "huyen_thanh_mien",
           "division_type": "huyện",
@@ -27113,14 +27113,14 @@
       ]
     },
     {
-      "name": "Thành phố Hải Phòng",
+      "name": "TP. Hải Phòng",
       "code": 31,
       "codename": "thanh_pho_hai_phong",
       "division_type": "thành phố trung ương",
       "phone_code": 225,
       "districts": [
         {
-          "name": "Quận Hồng Bàng",
+          "name": "Q. Hồng Bàng",
           "code": 303,
           "codename": "quan_hong_bang",
           "division_type": "quận",
@@ -27192,7 +27192,7 @@
           ]
         },
         {
-          "name": "Quận Ngô Quyền",
+          "name": "Q. Ngô Quyền",
           "code": 304,
           "codename": "quan_ngo_quyen",
           "division_type": "quận",
@@ -27285,7 +27285,7 @@
           ]
         },
         {
-          "name": "Quận Lê Chân",
+          "name": "Q. Lê Chân",
           "code": 305,
           "codename": "quan_le_chan",
           "division_type": "quận",
@@ -27399,7 +27399,7 @@
           ]
         },
         {
-          "name": "Quận Hải An",
+          "name": "Q. Hải An",
           "code": 306,
           "codename": "quan_hai_an",
           "division_type": "quận",
@@ -27464,7 +27464,7 @@
           ]
         },
         {
-          "name": "Quận Kiến An",
+          "name": "Q. Kiến An",
           "code": 307,
           "codename": "quan_kien_an",
           "division_type": "quận",
@@ -27543,7 +27543,7 @@
           ]
         },
         {
-          "name": "Quận Đồ Sơn",
+          "name": "Q. Đồ Sơn",
           "code": 308,
           "codename": "quan_do_son",
           "division_type": "quận",
@@ -27594,7 +27594,7 @@
           ]
         },
         {
-          "name": "Quận Dương Kinh",
+          "name": "Q. Dương Kinh",
           "code": 309,
           "codename": "quan_duong_kinh",
           "division_type": "quận",
@@ -27645,7 +27645,7 @@
           ]
         },
         {
-          "name": "Huyện Thuỷ Nguyên",
+          "name": "H. Thuỷ Nguyên",
           "code": 311,
           "codename": "huyen_thuy_nguyen",
           "division_type": "huyện",
@@ -27913,7 +27913,7 @@
           ]
         },
         {
-          "name": "Huyện An Dương",
+          "name": "H. An Dương",
           "code": 312,
           "codename": "huyen_an_duong",
           "division_type": "huyện",
@@ -28034,7 +28034,7 @@
           ]
         },
         {
-          "name": "Huyện An Lão",
+          "name": "H. An Lão",
           "code": 313,
           "codename": "huyen_an_lao",
           "division_type": "huyện",
@@ -28162,7 +28162,7 @@
           ]
         },
         {
-          "name": "Huyện Kiến Thuỵ",
+          "name": "H. Kiến Thuỵ",
           "code": 314,
           "codename": "huyen_kien_thuy",
           "division_type": "huyện",
@@ -28297,7 +28297,7 @@
           ]
         },
         {
-          "name": "Huyện Tiên Lãng",
+          "name": "H. Tiên Lãng",
           "code": 315,
           "codename": "huyen_tien_lang",
           "division_type": "huyện",
@@ -28453,7 +28453,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Bảo",
+          "name": "H. Vĩnh Bảo",
           "code": 316,
           "codename": "huyen_vinh_bao",
           "division_type": "huyện",
@@ -28672,7 +28672,7 @@
           ]
         },
         {
-          "name": "Huyện Cát Hải",
+          "name": "H. Cát Hải",
           "code": 317,
           "codename": "huyen_cat_hai",
           "division_type": "huyện",
@@ -28765,7 +28765,7 @@
           ]
         },
         {
-          "name": "Huyện Bạch Long Vĩ",
+          "name": "H. Bạch Long Vĩ",
           "code": 318,
           "codename": "huyen_bach_long_vi",
           "division_type": "huyện",
@@ -28775,14 +28775,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hưng Yên",
+      "name": "T. Hưng Yên",
       "code": 33,
       "codename": "tinh_hung_yen",
       "division_type": "tỉnh",
       "phone_code": 221,
       "districts": [
         {
-          "name": "Thành phố Hưng Yên",
+          "name": "TP. Hưng Yên",
           "code": 323,
           "codename": "thanh_pho_hung_yen",
           "division_type": "thành phố",
@@ -28910,7 +28910,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Lâm",
+          "name": "H. Văn Lâm",
           "code": 325,
           "codename": "huyen_van_lam",
           "division_type": "huyện",
@@ -28996,7 +28996,7 @@
           ]
         },
         {
-          "name": "Huyện Văn Giang",
+          "name": "H. Văn Giang",
           "code": 326,
           "codename": "huyen_van_giang",
           "division_type": "huyện",
@@ -29082,7 +29082,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Mỹ",
+          "name": "H. Yên Mỹ",
           "code": 327,
           "codename": "huyen_yen_my",
           "division_type": "huyện",
@@ -29310,7 +29310,7 @@
           ]
         },
         {
-          "name": "Huyện Ân Thi",
+          "name": "H. Ân Thi",
           "code": 329,
           "codename": "huyen_an_thi",
           "division_type": "huyện",
@@ -29466,7 +29466,7 @@
           ]
         },
         {
-          "name": "Huyện Khoái Châu",
+          "name": "H. Khoái Châu",
           "code": 330,
           "codename": "huyen_khoai_chau",
           "division_type": "huyện",
@@ -29650,7 +29650,7 @@
           ]
         },
         {
-          "name": "Huyện Kim Động",
+          "name": "H. Kim Động",
           "code": 331,
           "codename": "huyen_kim_dong",
           "division_type": "huyện",
@@ -29778,7 +29778,7 @@
           ]
         },
         {
-          "name": "Huyện Tiên Lữ",
+          "name": "H. Tiên Lữ",
           "code": 332,
           "codename": "huyen_tien_lu",
           "division_type": "huyện",
@@ -29892,7 +29892,7 @@
           ]
         },
         {
-          "name": "Huyện Phù Cừ",
+          "name": "H. Phù Cừ",
           "code": 333,
           "codename": "huyen_phu_cu",
           "division_type": "huyện",
@@ -30001,14 +30001,14 @@
       ]
     },
     {
-      "name": "Tỉnh Thái Bình",
+      "name": "T. Thái Bình",
       "code": 34,
       "codename": "tinh_thai_binh",
       "division_type": "tỉnh",
       "phone_code": 227,
       "districts": [
         {
-          "name": "Thành phố Thái Bình",
+          "name": "TP. Thái Bình",
           "code": 336,
           "codename": "thanh_pho_thai_binh",
           "division_type": "thành phố",
@@ -30150,7 +30150,7 @@
           ]
         },
         {
-          "name": "Huyện Quỳnh Phụ",
+          "name": "H. Quỳnh Phụ",
           "code": 338,
           "codename": "huyen_quynh_phu",
           "division_type": "huyện",
@@ -30418,7 +30418,7 @@
           ]
         },
         {
-          "name": "Huyện Hưng Hà",
+          "name": "H. Hưng Hà",
           "code": 339,
           "codename": "huyen_hung_ha",
           "division_type": "huyện",
@@ -30672,7 +30672,7 @@
           ]
         },
         {
-          "name": "Huyện Đông Hưng",
+          "name": "H. Đông Hưng",
           "code": 340,
           "codename": "huyen_dong_hung",
           "division_type": "huyện",
@@ -30947,7 +30947,7 @@
           ]
         },
         {
-          "name": "Huyện Thái Thụy",
+          "name": "H. Thái Thụy",
           "code": 341,
           "codename": "huyen_thai_thuy",
           "division_type": "huyện",
@@ -31208,7 +31208,7 @@
           ]
         },
         {
-          "name": "Huyện Tiền Hải",
+          "name": "H. Tiền Hải",
           "code": 342,
           "codename": "huyen_tien_hai",
           "division_type": "huyện",
@@ -31441,7 +31441,7 @@
           ]
         },
         {
-          "name": "Huyện Kiến Xương",
+          "name": "H. Kiến Xương",
           "code": 343,
           "codename": "huyen_kien_xuong",
           "division_type": "huyện",
@@ -31681,7 +31681,7 @@
           ]
         },
         {
-          "name": "Huyện Vũ Thư",
+          "name": "H. Vũ Thư",
           "code": 344,
           "codename": "huyen_vu_thu",
           "division_type": "huyện",
@@ -31902,14 +31902,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hà Nam",
+      "name": "T. Hà Nam",
       "code": 35,
       "codename": "tinh_ha_nam",
       "division_type": "tỉnh",
       "phone_code": 226,
       "districts": [
         {
-          "name": "Thành phố Phủ Lý",
+          "name": "TP. Phủ Lý",
           "code": 347,
           "codename": "thanh_pho_phu_ly",
           "division_type": "thành phố",
@@ -32186,7 +32186,7 @@
           ]
         },
         {
-          "name": "Huyện Kim Bảng",
+          "name": "H. Kim Bảng",
           "code": 350,
           "codename": "huyen_kim_bang",
           "division_type": "huyện",
@@ -32321,7 +32321,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Liêm",
+          "name": "H. Thanh Liêm",
           "code": 351,
           "codename": "huyen_thanh_liem",
           "division_type": "huyện",
@@ -32442,7 +32442,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Lục",
+          "name": "H. Bình Lục",
           "code": 352,
           "codename": "huyen_binh_luc",
           "division_type": "huyện",
@@ -32570,7 +32570,7 @@
           ]
         },
         {
-          "name": "Huyện Lý Nhân",
+          "name": "H. Lý Nhân",
           "code": 353,
           "codename": "huyen_ly_nhan",
           "division_type": "huyện",
@@ -32728,14 +32728,14 @@
       ]
     },
     {
-      "name": "Tỉnh Nam Định",
+      "name": "T. Nam Định",
       "code": 36,
       "codename": "tinh_nam_dinh",
       "division_type": "tỉnh",
       "phone_code": 228,
       "districts": [
         {
-          "name": "Thành phố Nam Định",
+          "name": "TP. Nam Định",
           "code": 356,
           "codename": "thanh_pho_nam_dinh",
           "division_type": "thành phố",
@@ -32919,7 +32919,7 @@
           ]
         },
         {
-          "name": "Huyện Mỹ Lộc",
+          "name": "H. Mỹ Lộc",
           "code": 358,
           "codename": "huyen_my_loc",
           "division_type": "huyện",
@@ -33005,7 +33005,7 @@
           ]
         },
         {
-          "name": "Huyện Vụ Bản",
+          "name": "H. Vụ Bản",
           "code": 359,
           "codename": "huyen_vu_ban",
           "division_type": "huyện",
@@ -33140,7 +33140,7 @@
           ]
         },
         {
-          "name": "Huyện Ý Yên",
+          "name": "H. Ý Yên",
           "code": 360,
           "codename": "huyen_y_yen",
           "division_type": "huyện",
@@ -33366,7 +33366,7 @@
           ]
         },
         {
-          "name": "Huyện Nghĩa Hưng",
+          "name": "H. Nghĩa Hưng",
           "code": 361,
           "codename": "huyen_nghia_hung",
           "division_type": "huyện",
@@ -33543,7 +33543,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Trực",
+          "name": "H. Nam Trực",
           "code": 362,
           "codename": "huyen_nam_truc",
           "division_type": "huyện",
@@ -33692,7 +33692,7 @@
           ]
         },
         {
-          "name": "Huyện Trực Ninh",
+          "name": "H. Trực Ninh",
           "code": 363,
           "codename": "huyen_truc_ninh",
           "division_type": "huyện",
@@ -33848,7 +33848,7 @@
           ]
         },
         {
-          "name": "Huyện Xuân Trường",
+          "name": "H. Xuân Trường",
           "code": 364,
           "codename": "huyen_xuan_truong",
           "division_type": "huyện",
@@ -33997,7 +33997,7 @@
           ]
         },
         {
-          "name": "Huyện Giao Thủy",
+          "name": "H. Giao Thủy",
           "code": 365,
           "codename": "huyen_giao_thuy",
           "division_type": "huyện",
@@ -34160,7 +34160,7 @@
           ]
         },
         {
-          "name": "Huyện Hải Hậu",
+          "name": "H. Hải Hậu",
           "code": 366,
           "codename": "huyen_hai_hau",
           "division_type": "huyện",
@@ -34409,14 +34409,14 @@
       ]
     },
     {
-      "name": "Tỉnh Ninh Bình",
+      "name": "T. Ninh Bình",
       "code": 37,
       "codename": "tinh_ninh_binh",
       "division_type": "tỉnh",
       "phone_code": 229,
       "districts": [
         {
-          "name": "Thành phố Ninh Bình",
+          "name": "TP. Ninh Bình",
           "code": 369,
           "codename": "thanh_pho_ninh_binh",
           "division_type": "thành phố",
@@ -34523,7 +34523,7 @@
           ]
         },
         {
-          "name": "Thành phố Tam Điệp",
+          "name": "TP. Tam Điệp",
           "code": 370,
           "codename": "thanh_pho_tam_diep",
           "division_type": "thành phố",
@@ -34595,7 +34595,7 @@
           ]
         },
         {
-          "name": "Huyện Nho Quan",
+          "name": "H. Nho Quan",
           "code": 372,
           "codename": "huyen_nho_quan",
           "division_type": "huyện",
@@ -34793,7 +34793,7 @@
           ]
         },
         {
-          "name": "Huyện Gia Viễn",
+          "name": "H. Gia Viễn",
           "code": 373,
           "codename": "huyen_gia_vien",
           "division_type": "huyện",
@@ -34949,7 +34949,7 @@
           ]
         },
         {
-          "name": "Huyện Hoa Lư",
+          "name": "H. Hoa Lư",
           "code": 374,
           "codename": "huyen_hoa_lu",
           "division_type": "huyện",
@@ -35035,7 +35035,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Khánh",
+          "name": "H. Yên Khánh",
           "code": 375,
           "codename": "huyen_yen_khanh",
           "division_type": "huyện",
@@ -35177,7 +35177,7 @@
           ]
         },
         {
-          "name": "Huyện Kim Sơn",
+          "name": "H. Kim Sơn",
           "code": 376,
           "codename": "huyen_kim_son",
           "division_type": "huyện",
@@ -35361,7 +35361,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Mô",
+          "name": "H. Yên Mô",
           "code": 377,
           "codename": "huyen_yen_mo",
           "division_type": "huyện",
@@ -35491,14 +35491,14 @@
       ]
     },
     {
-      "name": "Tỉnh Thanh Hóa",
+      "name": "T. Thanh Hóa",
       "code": 38,
       "codename": "tinh_thanh_hoa",
       "division_type": "tỉnh",
       "phone_code": 237,
       "districts": [
         {
-          "name": "Thành phố Thanh Hóa",
+          "name": "TP. Thanh Hóa",
           "code": 380,
           "codename": "thanh_pho_thanh_hoa",
           "division_type": "thành phố",
@@ -35803,7 +35803,7 @@
           ]
         },
         {
-          "name": "Thành phố Sầm Sơn",
+          "name": "TP. Sầm Sơn",
           "code": 382,
           "codename": "thanh_pho_sam_son",
           "division_type": "thành phố",
@@ -35889,7 +35889,7 @@
           ]
         },
         {
-          "name": "Huyện Mường Lát",
+          "name": "H. Mường Lát",
           "code": 384,
           "codename": "huyen_muong_lat",
           "division_type": "huyện",
@@ -35954,7 +35954,7 @@
           ]
         },
         {
-          "name": "Huyện Quan Hóa",
+          "name": "H. Quan Hóa",
           "code": 385,
           "codename": "huyen_quan_hoa",
           "division_type": "huyện",
@@ -36068,7 +36068,7 @@
           ]
         },
         {
-          "name": "Huyện Bá Thước",
+          "name": "H. Bá Thước",
           "code": 386,
           "codename": "huyen_ba_thuoc",
           "division_type": "huyện",
@@ -36224,7 +36224,7 @@
           ]
         },
         {
-          "name": "Huyện Quan Sơn",
+          "name": "H. Quan Sơn",
           "code": 387,
           "codename": "huyen_quan_son",
           "division_type": "huyện",
@@ -36317,7 +36317,7 @@
           ]
         },
         {
-          "name": "Huyện Lang Chánh",
+          "name": "H. Lang Chánh",
           "code": 388,
           "codename": "huyen_lang_chanh",
           "division_type": "huyện",
@@ -36396,7 +36396,7 @@
           ]
         },
         {
-          "name": "Huyện Ngọc Lặc",
+          "name": "H. Ngọc Lặc",
           "code": 389,
           "codename": "huyen_ngoc_lac",
           "division_type": "huyện",
@@ -36552,7 +36552,7 @@
           ]
         },
         {
-          "name": "Huyện Cẩm Thủy",
+          "name": "H. Cẩm Thủy",
           "code": 390,
           "codename": "huyen_cam_thuy",
           "division_type": "huyện",
@@ -36680,7 +36680,7 @@
           ]
         },
         {
-          "name": "Huyện Thạch Thành",
+          "name": "H. Thạch Thành",
           "code": 391,
           "codename": "huyen_thach_thanh",
           "division_type": "huyện",
@@ -36864,7 +36864,7 @@
           ]
         },
         {
-          "name": "Huyện Hà Trung",
+          "name": "H. Hà Trung",
           "code": 392,
           "codename": "huyen_ha_trung",
           "division_type": "huyện",
@@ -37013,7 +37013,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Lộc",
+          "name": "H. Vĩnh Lộc",
           "code": 393,
           "codename": "huyen_vinh_loc",
           "division_type": "huyện",
@@ -37113,7 +37113,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Định",
+          "name": "H. Yên Định",
           "code": 394,
           "codename": "huyen_yen_dinh",
           "division_type": "huyện",
@@ -37304,7 +37304,7 @@
           ]
         },
         {
-          "name": "Huyện Thọ Xuân",
+          "name": "H. Thọ Xuân",
           "code": 395,
           "codename": "huyen_tho_xuan",
           "division_type": "huyện",
@@ -37523,7 +37523,7 @@
           ]
         },
         {
-          "name": "Huyện Thường Xuân",
+          "name": "H. Thường Xuân",
           "code": 396,
           "codename": "huyen_thuong_xuan",
           "division_type": "huyện",
@@ -37644,7 +37644,7 @@
           ]
         },
         {
-          "name": "Huyện Triệu Sơn",
+          "name": "H. Triệu Sơn",
           "code": 397,
           "codename": "huyen_trieu_son",
           "division_type": "huyện",
@@ -37891,7 +37891,7 @@
           ]
         },
         {
-          "name": "Huyện Thiệu Hóa",
+          "name": "H. Thiệu Hóa",
           "code": 398,
           "codename": "huyen_thieu_hoa",
           "division_type": "huyện",
@@ -38075,7 +38075,7 @@
           ]
         },
         {
-          "name": "Huyện Hoằng Hóa",
+          "name": "H. Hoằng Hóa",
           "code": 399,
           "codename": "huyen_hoang_hoa",
           "division_type": "huyện",
@@ -38343,7 +38343,7 @@
           ]
         },
         {
-          "name": "Huyện Hậu Lộc",
+          "name": "H. Hậu Lộc",
           "code": 400,
           "codename": "huyen_hau_loc",
           "division_type": "huyện",
@@ -38513,7 +38513,7 @@
           ]
         },
         {
-          "name": "Huyện Nga Sơn",
+          "name": "H. Nga Sơn",
           "code": 401,
           "codename": "huyen_nga_son",
           "division_type": "huyện",
@@ -38690,7 +38690,7 @@
           ]
         },
         {
-          "name": "Huyện Như Xuân",
+          "name": "H. Như Xuân",
           "code": 402,
           "codename": "huyen_nhu_xuan",
           "division_type": "huyện",
@@ -38811,7 +38811,7 @@
           ]
         },
         {
-          "name": "Huyện Như Thanh",
+          "name": "H. Như Thanh",
           "code": 403,
           "codename": "huyen_nhu_thanh",
           "division_type": "huyện",
@@ -38918,7 +38918,7 @@
           ]
         },
         {
-          "name": "Huyện Nông Cống",
+          "name": "H. Nông Cống",
           "code": 404,
           "codename": "huyen_nong_cong",
           "division_type": "huyện",
@@ -39130,7 +39130,7 @@
           ]
         },
         {
-          "name": "Huyện Đông Sơn",
+          "name": "H. Đông Sơn",
           "code": 405,
           "codename": "huyen_dong_son",
           "division_type": "huyện",
@@ -39237,7 +39237,7 @@
           ]
         },
         {
-          "name": "Huyện Quảng Xương",
+          "name": "H. Quảng Xương",
           "code": 406,
           "codename": "huyen_quang_xuong",
           "division_type": "huyện",
@@ -39656,14 +39656,14 @@
       ]
     },
     {
-      "name": "Tỉnh Nghệ An",
+      "name": "T. Nghệ An",
       "code": 40,
       "codename": "tinh_nghe_an",
       "division_type": "tỉnh",
       "phone_code": 238,
       "districts": [
         {
-          "name": "Thành phố Vinh",
+          "name": "TP. Vinh",
           "code": 412,
           "codename": "thanh_pho_vinh",
           "division_type": "thành phố",
@@ -39977,7 +39977,7 @@
           ]
         },
         {
-          "name": "Huyện Quế Phong",
+          "name": "H. Quế Phong",
           "code": 415,
           "codename": "huyen_que_phong",
           "division_type": "huyện",
@@ -40077,7 +40077,7 @@
           ]
         },
         {
-          "name": "Huyện Quỳ Châu",
+          "name": "H. Quỳ Châu",
           "code": 416,
           "codename": "huyen_quy_chau",
           "division_type": "huyện",
@@ -40170,7 +40170,7 @@
           ]
         },
         {
-          "name": "Huyện Kỳ Sơn",
+          "name": "H. Kỳ Sơn",
           "code": 417,
           "codename": "huyen_ky_son",
           "division_type": "huyện",
@@ -40326,7 +40326,7 @@
           ]
         },
         {
-          "name": "Huyện Tương Dương",
+          "name": "H. Tương Dương",
           "code": 418,
           "codename": "huyen_tuong_duong",
           "division_type": "huyện",
@@ -40454,7 +40454,7 @@
           ]
         },
         {
-          "name": "Huyện Nghĩa Đàn",
+          "name": "H. Nghĩa Đàn",
           "code": 419,
           "codename": "huyen_nghia_dan",
           "division_type": "huyện",
@@ -40624,7 +40624,7 @@
           ]
         },
         {
-          "name": "Huyện Quỳ Hợp",
+          "name": "H. Quỳ Hợp",
           "code": 420,
           "codename": "huyen_quy_hop",
           "division_type": "huyện",
@@ -40780,7 +40780,7 @@
           ]
         },
         {
-          "name": "Huyện Quỳnh Lưu",
+          "name": "H. Quỳnh Lưu",
           "code": 421,
           "codename": "huyen_quynh_luu",
           "division_type": "huyện",
@@ -41020,7 +41020,7 @@
           ]
         },
         {
-          "name": "Huyện Con Cuông",
+          "name": "H. Con Cuông",
           "code": 422,
           "codename": "huyen_con_cuong",
           "division_type": "huyện",
@@ -41120,7 +41120,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Kỳ",
+          "name": "H. Tân Kỳ",
           "code": 423,
           "codename": "huyen_tan_ky",
           "division_type": "huyện",
@@ -41283,7 +41283,7 @@
           ]
         },
         {
-          "name": "Huyện Anh Sơn",
+          "name": "H. Anh Sơn",
           "code": 424,
           "codename": "huyen_anh_son",
           "division_type": "huyện",
@@ -41439,7 +41439,7 @@
           ]
         },
         {
-          "name": "Huyện Diễn Châu",
+          "name": "H. Diễn Châu",
           "code": 425,
           "codename": "huyen_dien_chau",
           "division_type": "huyện",
@@ -41707,7 +41707,7 @@
           ]
         },
         {
-          "name": "Huyện Yên Thành",
+          "name": "H. Yên Thành",
           "code": 426,
           "codename": "huyen_yen_thanh",
           "division_type": "huyện",
@@ -41989,7 +41989,7 @@
           ]
         },
         {
-          "name": "Huyện Đô Lương",
+          "name": "H. Đô Lương",
           "code": 427,
           "codename": "huyen_do_luong",
           "division_type": "huyện",
@@ -42229,7 +42229,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Chương",
+          "name": "H. Thanh Chương",
           "code": 428,
           "codename": "huyen_thanh_chuong",
           "division_type": "huyện",
@@ -42504,7 +42504,7 @@
           ]
         },
         {
-          "name": "Huyện Nghi Lộc",
+          "name": "H. Nghi Lộc",
           "code": 429,
           "codename": "huyen_nghi_loc",
           "division_type": "huyện",
@@ -42716,7 +42716,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Đàn",
+          "name": "H. Nam Đàn",
           "code": 430,
           "codename": "huyen_nam_dan",
           "division_type": "huyện",
@@ -42858,7 +42858,7 @@
           ]
         },
         {
-          "name": "Huyện Hưng Nguyên",
+          "name": "H. Hưng Nguyên",
           "code": 431,
           "codename": "huyen_hung_nguyen",
           "division_type": "huyện",
@@ -43074,14 +43074,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hà Tĩnh",
+      "name": "T. Hà Tĩnh",
       "code": 42,
       "codename": "tinh_ha_tinh",
       "division_type": "tỉnh",
       "phone_code": 239,
       "districts": [
         {
-          "name": "Thành phố Hà Tĩnh",
+          "name": "TP. Hà Tĩnh",
           "code": 436,
           "codename": "thanh_pho_ha_tinh",
           "division_type": "thành phố",
@@ -43246,7 +43246,7 @@
           ]
         },
         {
-          "name": "Huyện Hương Sơn",
+          "name": "H. Hương Sơn",
           "code": 439,
           "codename": "huyen_huong_son",
           "division_type": "huyện",
@@ -43430,7 +43430,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Thọ",
+          "name": "H. Đức Thọ",
           "code": 440,
           "codename": "huyen_duc_tho",
           "division_type": "huyện",
@@ -43551,7 +43551,7 @@
           ]
         },
         {
-          "name": "Huyện Vũ Quang",
+          "name": "H. Vũ Quang",
           "code": 441,
           "codename": "huyen_vu_quang",
           "division_type": "huyện",
@@ -43630,7 +43630,7 @@
           ]
         },
         {
-          "name": "Huyện Nghi Xuân",
+          "name": "H. Nghi Xuân",
           "code": 442,
           "codename": "huyen_nghi_xuan",
           "division_type": "huyện",
@@ -43758,7 +43758,7 @@
           ]
         },
         {
-          "name": "Huyện Can Lộc",
+          "name": "H. Can Lộc",
           "code": 443,
           "codename": "huyen_can_loc",
           "division_type": "huyện",
@@ -43893,7 +43893,7 @@
           ]
         },
         {
-          "name": "Huyện Hương Khê",
+          "name": "H. Hương Khê",
           "code": 444,
           "codename": "huyen_huong_khe",
           "division_type": "huyện",
@@ -44049,7 +44049,7 @@
           ]
         },
         {
-          "name": "Huyện Thạch Hà",
+          "name": "H. Thạch Hà",
           "code": 445,
           "codename": "huyen_thach_ha",
           "division_type": "huyện",
@@ -44212,7 +44212,7 @@
           ]
         },
         {
-          "name": "Huyện Cẩm Xuyên",
+          "name": "H. Cẩm Xuyên",
           "code": 446,
           "codename": "huyen_cam_xuyen",
           "division_type": "huyện",
@@ -44382,7 +44382,7 @@
           ]
         },
         {
-          "name": "Huyện Kỳ Anh",
+          "name": "H. Kỳ Anh",
           "code": 447,
           "codename": "huyen_ky_anh",
           "division_type": "huyện",
@@ -44531,7 +44531,7 @@
           ]
         },
         {
-          "name": "Huyện Lộc Hà",
+          "name": "H. Lộc Hà",
           "code": 448,
           "codename": "huyen_loc_ha",
           "division_type": "huyện",
@@ -44712,7 +44712,7 @@
       ]
     },
     {
-      "name": "Tỉnh Quảng Bình",
+      "name": "T. Quảng Bình",
       "code": 44,
       "codename": "tinh_quang_binh",
       "division_type": "tỉnh",
@@ -44833,7 +44833,7 @@
           ]
         },
         {
-          "name": "Huyện Minh Hóa",
+          "name": "H. Minh Hóa",
           "code": 452,
           "codename": "huyen_minh_hoa",
           "division_type": "huyện",
@@ -44947,7 +44947,7 @@
           ]
         },
         {
-          "name": "Huyện Tuyên Hóa",
+          "name": "H. Tuyên Hóa",
           "code": 453,
           "codename": "huyen_tuyen_hoa",
           "division_type": "huyện",
@@ -45089,7 +45089,7 @@
           ]
         },
         {
-          "name": "Huyện Quảng Trạch",
+          "name": "H. Quảng Trạch",
           "code": 454,
           "codename": "huyen_quang_trach",
           "division_type": "huyện",
@@ -45217,7 +45217,7 @@
           ]
         },
         {
-          "name": "Huyện Bố Trạch",
+          "name": "H. Bố Trạch",
           "code": 455,
           "codename": "huyen_bo_trach",
           "division_type": "huyện",
@@ -45422,7 +45422,7 @@
           ]
         },
         {
-          "name": "Huyện Quảng Ninh",
+          "name": "H. Quảng Ninh",
           "code": 456,
           "codename": "huyen_quang_ninh",
           "division_type": "huyện",
@@ -45536,7 +45536,7 @@
           ]
         },
         {
-          "name": "Huyện Lệ Thủy",
+          "name": "H. Lệ Thủy",
           "code": 457,
           "codename": "huyen_le_thuy",
           "division_type": "huyện",
@@ -45850,14 +45850,14 @@
       ]
     },
     {
-      "name": "Tỉnh Quảng Trị",
+      "name": "T. Quảng Trị",
       "code": 45,
       "codename": "tinh_quang_tri",
       "division_type": "tỉnh",
       "phone_code": 233,
       "districts": [
         {
-          "name": "Thành phố Đông Hà",
+          "name": "TP. Đông Hà",
           "code": 461,
           "codename": "thanh_pho_dong_ha",
           "division_type": "thành phố",
@@ -45973,7 +45973,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Linh",
+          "name": "H. Vĩnh Linh",
           "code": 464,
           "codename": "huyen_vinh_linh",
           "division_type": "huyện",
@@ -46108,7 +46108,7 @@
           ]
         },
         {
-          "name": "Huyện Hướng Hóa",
+          "name": "H. Hướng Hóa",
           "code": 465,
           "codename": "huyen_huong_hoa",
           "division_type": "huyện",
@@ -46264,7 +46264,7 @@
           ]
         },
         {
-          "name": "Huyện Gio Linh",
+          "name": "H. Gio Linh",
           "code": 466,
           "codename": "huyen_gio_linh",
           "division_type": "huyện",
@@ -46392,7 +46392,7 @@
           ]
         },
         {
-          "name": "Huyện Đa Krông",
+          "name": "H. Đa Krông",
           "code": 467,
           "codename": "huyen_da_krong",
           "division_type": "huyện",
@@ -46492,7 +46492,7 @@
           ]
         },
         {
-          "name": "Huyện Cam Lộ",
+          "name": "H. Cam Lộ",
           "code": 468,
           "codename": "huyen_cam_lo",
           "division_type": "huyện",
@@ -46557,7 +46557,7 @@
           ]
         },
         {
-          "name": "Huyện Triệu Phong",
+          "name": "H. Triệu Phong",
           "code": 469,
           "codename": "huyen_trieu_phong",
           "division_type": "huyện",
@@ -46692,7 +46692,7 @@
           ]
         },
         {
-          "name": "Huyện Hải Lăng",
+          "name": "H. Hải Lăng",
           "code": 470,
           "codename": "huyen_hai_lang",
           "division_type": "huyện",
@@ -46813,7 +46813,7 @@
           ]
         },
         {
-          "name": "Huyện Cồn Cỏ",
+          "name": "H. Cồn Cỏ",
           "code": 471,
           "codename": "huyen_con_co",
           "division_type": "huyện",
@@ -46823,14 +46823,14 @@
       ]
     },
     {
-      "name": "Tỉnh Thừa Thiên Huế",
+      "name": "T. Thừa Thiên Huế",
       "code": 46,
       "codename": "tinh_thua_thien_hue",
       "division_type": "tỉnh",
       "phone_code": 234,
       "districts": [
         {
-          "name": "Thành phố Huế",
+          "name": "TP. Huế",
           "code": 474,
           "codename": "thanh_pho_hue",
           "division_type": "thành phố",
@@ -47028,7 +47028,7 @@
           ]
         },
         {
-          "name": "Huyện Phong Điền",
+          "name": "H. Phong Điền",
           "code": 476,
           "codename": "huyen_phong_dien",
           "division_type": "huyện",
@@ -47149,7 +47149,7 @@
           ]
         },
         {
-          "name": "Huyện Quảng Điền",
+          "name": "H. Quảng Điền",
           "code": 477,
           "codename": "huyen_quang_dien",
           "division_type": "huyện",
@@ -47235,7 +47235,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Vang",
+          "name": "H. Phú Vang",
           "code": 478,
           "codename": "huyen_phu_vang",
           "division_type": "huyện",
@@ -47584,7 +47584,7 @@
           ]
         },
         {
-          "name": "Huyện A Lưới",
+          "name": "H. A Lưới",
           "code": 481,
           "codename": "huyen_a_luoi",
           "division_type": "huyện",
@@ -47719,7 +47719,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Lộc",
+          "name": "H. Phú Lộc",
           "code": 482,
           "codename": "huyen_phu_loc",
           "division_type": "huyện",
@@ -47847,7 +47847,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Đông",
+          "name": "H. Nam Đông",
           "code": 483,
           "codename": "huyen_nam_dong",
           "division_type": "huyện",
@@ -47928,14 +47928,14 @@
       ]
     },
     {
-      "name": "Thành phố Đà Nẵng",
+      "name": "TP. Đà Nẵng",
       "code": 48,
       "codename": "thanh_pho_da_nang",
       "division_type": "thành phố trung ương",
       "phone_code": 236,
       "districts": [
         {
-          "name": "Quận Liên Chiểu",
+          "name": "Q. Liên Chiểu",
           "code": 490,
           "codename": "quan_lien_chieu",
           "division_type": "quận",
@@ -47979,7 +47979,7 @@
           ]
         },
         {
-          "name": "Quận Thanh Khê",
+          "name": "Q. Thanh Khê",
           "code": 491,
           "codename": "quan_thanh_khe",
           "division_type": "quận",
@@ -48058,7 +48058,7 @@
           ]
         },
         {
-          "name": "Quận Hải Châu",
+          "name": "Q. Hải Châu",
           "code": 492,
           "codename": "quan_hai_chau",
           "division_type": "quận",
@@ -48158,7 +48158,7 @@
           ]
         },
         {
-          "name": "Quận Sơn Trà",
+          "name": "Q. Sơn Trà",
           "code": 493,
           "codename": "quan_son_tra",
           "division_type": "quận",
@@ -48216,7 +48216,7 @@
           ]
         },
         {
-          "name": "Quận Ngũ Hành Sơn",
+          "name": "Q. Ngũ Hành Sơn",
           "code": 494,
           "codename": "quan_ngu_hanh_son",
           "division_type": "quận",
@@ -48253,7 +48253,7 @@
           ]
         },
         {
-          "name": "Quận Cẩm Lệ",
+          "name": "Q. Cẩm Lệ",
           "code": 495,
           "codename": "quan_cam_le",
           "division_type": "quận",
@@ -48304,7 +48304,7 @@
           ]
         },
         {
-          "name": "Huyện Hòa Vang",
+          "name": "H. Hòa Vang",
           "code": 497,
           "codename": "huyen_hoa_vang",
           "division_type": "huyện",
@@ -48390,7 +48390,7 @@
           ]
         },
         {
-          "name": "Huyện Hoàng Sa",
+          "name": "H. Hoàng Sa",
           "code": 498,
           "codename": "huyen_hoang_sa",
           "division_type": "huyện",
@@ -48400,14 +48400,14 @@
       ]
     },
     {
-      "name": "Tỉnh Quảng Nam",
+      "name": "T. Quảng Nam",
       "code": 49,
       "codename": "tinh_quang_nam",
       "division_type": "tỉnh",
       "phone_code": 235,
       "districts": [
         {
-          "name": "Thành phố Tam Kỳ",
+          "name": "TP. Tam Kỳ",
           "code": 502,
           "codename": "thanh_pho_tam_ky",
           "division_type": "thành phố",
@@ -48507,7 +48507,7 @@
           ]
         },
         {
-          "name": "Thành phố Hội An",
+          "name": "TP. Hội An",
           "code": 503,
           "codename": "thanh_pho_hoi_an",
           "division_type": "thành phố",
@@ -48607,7 +48607,7 @@
           ]
         },
         {
-          "name": "Huyện Tây Giang",
+          "name": "H. Tây Giang",
           "code": 504,
           "codename": "huyen_tay_giang",
           "division_type": "huyện",
@@ -48686,7 +48686,7 @@
           ]
         },
         {
-          "name": "Huyện Đông Giang",
+          "name": "H. Đông Giang",
           "code": 505,
           "codename": "huyen_dong_giang",
           "division_type": "huyện",
@@ -48772,7 +48772,7 @@
           ]
         },
         {
-          "name": "Huyện Đại Lộc",
+          "name": "H. Đại Lộc",
           "code": 506,
           "codename": "huyen_dai_loc",
           "division_type": "huyện",
@@ -49056,7 +49056,7 @@
           ]
         },
         {
-          "name": "Huyện Duy Xuyên",
+          "name": "H. Duy Xuyên",
           "code": 508,
           "codename": "huyen_duy_xuyen",
           "division_type": "huyện",
@@ -49163,7 +49163,7 @@
           ]
         },
         {
-          "name": "Huyện Quế Sơn",
+          "name": "H. Quế Sơn",
           "code": 509,
           "codename": "huyen_que_son",
           "division_type": "huyện",
@@ -49263,7 +49263,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Giang",
+          "name": "H. Nam Giang",
           "code": 510,
           "codename": "huyen_nam_giang",
           "division_type": "huyện",
@@ -49356,7 +49356,7 @@
           ]
         },
         {
-          "name": "Huyện Phước Sơn",
+          "name": "H. Phước Sơn",
           "code": 511,
           "codename": "huyen_phuoc_son",
           "division_type": "huyện",
@@ -49449,7 +49449,7 @@
           ]
         },
         {
-          "name": "Huyện Hiệp Đức",
+          "name": "H. Hiệp Đức",
           "code": 512,
           "codename": "huyen_hiep_duc",
           "division_type": "huyện",
@@ -49535,7 +49535,7 @@
           ]
         },
         {
-          "name": "Huyện Thăng Bình",
+          "name": "H. Thăng Bình",
           "code": 513,
           "codename": "huyen_thang_binh",
           "division_type": "huyện",
@@ -49698,7 +49698,7 @@
           ]
         },
         {
-          "name": "Huyện Tiên Phước",
+          "name": "H. Tiên Phước",
           "code": 514,
           "codename": "huyen_tien_phuoc",
           "division_type": "huyện",
@@ -49812,7 +49812,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Trà My",
+          "name": "H. Bắc Trà My",
           "code": 515,
           "codename": "huyen_bac_tra_my",
           "division_type": "huyện",
@@ -49912,7 +49912,7 @@
           ]
         },
         {
-          "name": "Huyện Nam Trà My",
+          "name": "H. Nam Trà My",
           "code": 516,
           "codename": "huyen_nam_tra_my",
           "division_type": "huyện",
@@ -49991,7 +49991,7 @@
           ]
         },
         {
-          "name": "Huyện Núi Thành",
+          "name": "H. Núi Thành",
           "code": 517,
           "codename": "huyen_nui_thanh",
           "division_type": "huyện",
@@ -50119,7 +50119,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Ninh",
+          "name": "H. Phú Ninh",
           "code": 518,
           "codename": "huyen_phu_ninh",
           "division_type": "huyện",
@@ -50205,7 +50205,7 @@
           ]
         },
         {
-          "name": "Huyện Nông Sơn",
+          "name": "H. Nông Sơn",
           "code": 519,
           "codename": "huyen_nong_son",
           "division_type": "huyện",
@@ -50258,14 +50258,14 @@
       ]
     },
     {
-      "name": "Tỉnh Quảng Ngãi",
+      "name": "T. Quảng Ngãi",
       "code": 51,
       "codename": "tinh_quang_ngai",
       "division_type": "tỉnh",
       "phone_code": 255,
       "districts": [
         {
-          "name": "Thành phố Quảng Ngãi",
+          "name": "TP. Quảng Ngãi",
           "code": 522,
           "codename": "thanh_pho_quang_ngai",
           "division_type": "thành phố",
@@ -50435,7 +50435,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Sơn",
+          "name": "H. Bình Sơn",
           "code": 524,
           "codename": "huyen_binh_son",
           "division_type": "huyện",
@@ -50598,7 +50598,7 @@
           ]
         },
         {
-          "name": "Huyện Trà Bồng",
+          "name": "H. Trà Bồng",
           "code": 525,
           "codename": "huyen_tra_bong",
           "division_type": "huyện",
@@ -50719,7 +50719,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Tịnh",
+          "name": "H. Sơn Tịnh",
           "code": 527,
           "codename": "huyen_son_tinh",
           "division_type": "huyện",
@@ -50805,7 +50805,7 @@
           ]
         },
         {
-          "name": "Huyện Tư Nghĩa",
+          "name": "H. Tư Nghĩa",
           "code": 528,
           "codename": "huyen_tu_nghia",
           "division_type": "huyện",
@@ -50912,7 +50912,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Hà",
+          "name": "H. Sơn Hà",
           "code": 529,
           "codename": "huyen_son_ha",
           "division_type": "huyện",
@@ -51019,7 +51019,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Tây",
+          "name": "H. Sơn Tây",
           "code": 530,
           "codename": "huyen_son_tay",
           "division_type": "huyện",
@@ -51091,7 +51091,7 @@
           ]
         },
         {
-          "name": "Huyện Minh Long",
+          "name": "H. Minh Long",
           "code": 531,
           "codename": "huyen_minh_long",
           "division_type": "huyện",
@@ -51135,7 +51135,7 @@
           ]
         },
         {
-          "name": "Huyện Nghĩa Hành",
+          "name": "H. Nghĩa Hành",
           "code": 532,
           "codename": "huyen_nghia_hanh",
           "division_type": "huyện",
@@ -51228,7 +51228,7 @@
           ]
         },
         {
-          "name": "Huyện Mộ Đức",
+          "name": "H. Mộ Đức",
           "code": 533,
           "codename": "huyen_mo_duc",
           "division_type": "huyện",
@@ -51442,7 +51442,7 @@
           ]
         },
         {
-          "name": "Huyện Ba Tơ",
+          "name": "H. Ba Tơ",
           "code": 535,
           "codename": "huyen_ba_to",
           "division_type": "huyện",
@@ -51584,7 +51584,7 @@
           ]
         },
         {
-          "name": "Huyện Lý Sơn",
+          "name": "H. Lý Sơn",
           "code": 536,
           "codename": "huyen_ly_son",
           "division_type": "huyện",
@@ -51594,14 +51594,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bình Định",
+      "name": "T. Bình Định",
       "code": 52,
       "codename": "tinh_binh_dinh",
       "division_type": "tỉnh",
       "phone_code": 256,
       "districts": [
         {
-          "name": "Thành phố Quy Nhơn",
+          "name": "TP. Quy Nhơn",
           "code": 540,
           "codename": "thanh_pho_quy_nhon",
           "division_type": "thành phố",
@@ -51757,7 +51757,7 @@
           ]
         },
         {
-          "name": "Huyện An Lão",
+          "name": "H. An Lão",
           "code": 542,
           "codename": "huyen_an_lao",
           "division_type": "huyện",
@@ -51964,7 +51964,7 @@
           ]
         },
         {
-          "name": "Huyện Hoài Ân",
+          "name": "H. Hoài Ân",
           "code": 544,
           "codename": "huyen_hoai_an",
           "division_type": "huyện",
@@ -52078,7 +52078,7 @@
           ]
         },
         {
-          "name": "Huyện Phù Mỹ",
+          "name": "H. Phù Mỹ",
           "code": 545,
           "codename": "huyen_phu_my",
           "division_type": "huyện",
@@ -52220,7 +52220,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Thạnh",
+          "name": "H. Vĩnh Thạnh",
           "code": 546,
           "codename": "huyen_vinh_thanh",
           "division_type": "huyện",
@@ -52292,7 +52292,7 @@
           ]
         },
         {
-          "name": "Huyện Tây Sơn",
+          "name": "H. Tây Sơn",
           "code": 547,
           "codename": "huyen_tay_son",
           "division_type": "huyện",
@@ -52406,7 +52406,7 @@
           ]
         },
         {
-          "name": "Huyện Phù Cát",
+          "name": "H. Phù Cát",
           "code": 548,
           "codename": "huyen_phu_cat",
           "division_type": "huyện",
@@ -52655,7 +52655,7 @@
           ]
         },
         {
-          "name": "Huyện Tuy Phước",
+          "name": "H. Tuy Phước",
           "code": 550,
           "codename": "huyen_tuy_phuoc",
           "division_type": "huyện",
@@ -52755,7 +52755,7 @@
           ]
         },
         {
-          "name": "Huyện Vân Canh",
+          "name": "H. Vân Canh",
           "code": 551,
           "codename": "huyen_van_canh",
           "division_type": "huyện",
@@ -52815,14 +52815,14 @@
       ]
     },
     {
-      "name": "Tỉnh Phú Yên",
+      "name": "T. Phú Yên",
       "code": 54,
       "codename": "tinh_phu_yen",
       "division_type": "tỉnh",
       "phone_code": 257,
       "districts": [
         {
-          "name": "Thành phố Tuy Hoà",
+          "name": "TP. Tuy Hoà",
           "code": 555,
           "codename": "thanh_pho_tuy_hoa",
           "division_type": "thành phố",
@@ -53043,7 +53043,7 @@
           ]
         },
         {
-          "name": "Huyện Đồng Xuân",
+          "name": "H. Đồng Xuân",
           "code": 558,
           "codename": "huyen_dong_xuan",
           "division_type": "huyện",
@@ -53129,7 +53129,7 @@
           ]
         },
         {
-          "name": "Huyện Tuy An",
+          "name": "H. Tuy An",
           "code": 559,
           "codename": "huyen_tuy_an",
           "division_type": "huyện",
@@ -53243,7 +53243,7 @@
           ]
         },
         {
-          "name": "Huyện Sơn Hòa",
+          "name": "H. Sơn Hòa",
           "code": 560,
           "codename": "huyen_son_hoa",
           "division_type": "huyện",
@@ -53350,7 +53350,7 @@
           ]
         },
         {
-          "name": "Huyện Sông Hinh",
+          "name": "H. Sông Hinh",
           "code": 561,
           "codename": "huyen_song_hinh",
           "division_type": "huyện",
@@ -53436,7 +53436,7 @@
           ]
         },
         {
-          "name": "Huyện Tây Hoà",
+          "name": "H. Tây Hoà",
           "code": 562,
           "codename": "huyen_tay_hoa",
           "division_type": "huyện",
@@ -53522,7 +53522,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Hoà",
+          "name": "H. Phú Hoà",
           "code": 563,
           "codename": "huyen_phu_hoa",
           "division_type": "huyện",
@@ -53675,14 +53675,14 @@
       ]
     },
     {
-      "name": "Tỉnh Khánh Hòa",
+      "name": "T. Khánh Hòa",
       "code": 56,
       "codename": "tinh_khanh_hoa",
       "division_type": "tỉnh",
       "phone_code": 258,
       "districts": [
         {
-          "name": "Thành phố Nha Trang",
+          "name": "TP. Nha Trang",
           "code": 568,
           "codename": "thanh_pho_nha_trang",
           "division_type": "thành phố",
@@ -53880,7 +53880,7 @@
           ]
         },
         {
-          "name": "Thành phố Cam Ranh",
+          "name": "TP. Cam Ranh",
           "code": 569,
           "codename": "thanh_pho_cam_ranh",
           "division_type": "thành phố",
@@ -53994,7 +53994,7 @@
           ]
         },
         {
-          "name": "Huyện Cam Lâm",
+          "name": "H. Cam Lâm",
           "code": 570,
           "codename": "huyen_cam_lam",
           "division_type": "huyện",
@@ -54101,7 +54101,7 @@
           ]
         },
         {
-          "name": "Huyện Vạn Ninh",
+          "name": "H. Vạn Ninh",
           "code": 571,
           "codename": "huyen_van_ninh",
           "division_type": "huyện",
@@ -54399,7 +54399,7 @@
           ]
         },
         {
-          "name": "Huyện Khánh Vĩnh",
+          "name": "H. Khánh Vĩnh",
           "code": 573,
           "codename": "huyen_khanh_vinh",
           "division_type": "huyện",
@@ -54506,7 +54506,7 @@
           ]
         },
         {
-          "name": "Huyện Diên Khánh",
+          "name": "H. Diên Khánh",
           "code": 574,
           "codename": "huyen_dien_khanh",
           "division_type": "huyện",
@@ -54641,7 +54641,7 @@
           ]
         },
         {
-          "name": "Huyện Khánh Sơn",
+          "name": "H. Khánh Sơn",
           "code": 575,
           "codename": "huyen_khanh_son",
           "division_type": "huyện",
@@ -54706,7 +54706,7 @@
           ]
         },
         {
-          "name": "Huyện Trường Sa",
+          "name": "H. Trường Sa",
           "code": 576,
           "codename": "huyen_truong_sa",
           "division_type": "huyện",
@@ -54738,14 +54738,14 @@
       ]
     },
     {
-      "name": "Tỉnh Ninh Thuận",
+      "name": "T. Ninh Thuận",
       "code": 58,
       "codename": "tinh_ninh_thuan",
       "division_type": "tỉnh",
       "phone_code": 259,
       "districts": [
         {
-          "name": "Thành phố Phan Rang-Tháp Chàm",
+          "name": "TP. Phan Rang-Tháp Chàm",
           "code": 582,
           "codename": "thanh_pho_phan_rang_thap_cham",
           "division_type": "thành phố",
@@ -54866,7 +54866,7 @@
           ]
         },
         {
-          "name": "Huyện Bác Ái",
+          "name": "H. Bác Ái",
           "code": 584,
           "codename": "huyen_bac_ai",
           "division_type": "huyện",
@@ -54938,7 +54938,7 @@
           ]
         },
         {
-          "name": "Huyện Ninh Sơn",
+          "name": "H. Ninh Sơn",
           "code": 585,
           "codename": "huyen_ninh_son",
           "division_type": "huyện",
@@ -55003,7 +55003,7 @@
           ]
         },
         {
-          "name": "Huyện Ninh Hải",
+          "name": "H. Ninh Hải",
           "code": 586,
           "codename": "huyen_ninh_hai",
           "division_type": "huyện",
@@ -55075,7 +55075,7 @@
           ]
         },
         {
-          "name": "Huyện Ninh Phước",
+          "name": "H. Ninh Phước",
           "code": 587,
           "codename": "huyen_ninh_phuoc",
           "division_type": "huyện",
@@ -55147,7 +55147,7 @@
           ]
         },
         {
-          "name": "Huyện Thuận Bắc",
+          "name": "H. Thuận Bắc",
           "code": 588,
           "codename": "huyen_thuan_bac",
           "division_type": "huyện",
@@ -55198,7 +55198,7 @@
           ]
         },
         {
-          "name": "Huyện Thuận Nam",
+          "name": "H. Thuận Nam",
           "code": 589,
           "codename": "huyen_thuan_nam",
           "division_type": "huyện",
@@ -55265,14 +55265,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bình Thuận",
+      "name": "T. Bình Thuận",
       "code": 60,
       "codename": "tinh_binh_thuan",
       "division_type": "tỉnh",
       "phone_code": 252,
       "districts": [
         {
-          "name": "Thành phố Phan Thiết",
+          "name": "TP. Phan Thiết",
           "code": 593,
           "codename": "thanh_pho_phan_thiet",
           "division_type": "thành phố",
@@ -55479,7 +55479,7 @@
           ]
         },
         {
-          "name": "Huyện Tuy Phong",
+          "name": "H. Tuy Phong",
           "code": 595,
           "codename": "huyen_tuy_phong",
           "division_type": "huyện",
@@ -55565,7 +55565,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Bình",
+          "name": "H. Bắc Bình",
           "code": 596,
           "codename": "huyen_bac_binh",
           "division_type": "huyện",
@@ -55700,7 +55700,7 @@
           ]
         },
         {
-          "name": "Huyện Hàm Thuận Bắc",
+          "name": "H. Hàm Thuận Bắc",
           "code": 597,
           "codename": "huyen_ham_thuan_bac",
           "division_type": "huyện",
@@ -55828,7 +55828,7 @@
           ]
         },
         {
-          "name": "Huyện Hàm Thuận Nam",
+          "name": "H. Hàm Thuận Nam",
           "code": 598,
           "codename": "huyen_ham_thuan_nam",
           "division_type": "huyện",
@@ -55928,7 +55928,7 @@
           ]
         },
         {
-          "name": "Huyện Tánh Linh",
+          "name": "H. Tánh Linh",
           "code": 599,
           "codename": "huyen_tanh_linh",
           "division_type": "huyện",
@@ -56028,7 +56028,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Linh",
+          "name": "H. Đức Linh",
           "code": 600,
           "codename": "huyen_duc_linh",
           "division_type": "huyện",
@@ -56121,7 +56121,7 @@
           ]
         },
         {
-          "name": "Huyện Hàm Tân",
+          "name": "H. Hàm Tân",
           "code": 601,
           "codename": "huyen_ham_tan",
           "division_type": "huyện",
@@ -56200,7 +56200,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Quí",
+          "name": "H. Phú Quí",
           "code": 602,
           "codename": "huyen_phu_qui",
           "division_type": "huyện",
@@ -56232,14 +56232,14 @@
       ]
     },
     {
-      "name": "Tỉnh Kon Tum",
+      "name": "T. Kon Tum",
       "code": 62,
       "codename": "tinh_kon_tum",
       "division_type": "tỉnh",
       "phone_code": 260,
       "districts": [
         {
-          "name": "Thành phố Kon Tum",
+          "name": "TP. Kon Tum",
           "code": 608,
           "codename": "thanh_pho_kon_tum",
           "division_type": "thành phố",
@@ -56395,7 +56395,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk Glei",
+          "name": "H. Đắk Glei",
           "code": 610,
           "codename": "huyen_dak_glei",
           "division_type": "huyện",
@@ -56488,7 +56488,7 @@
           ]
         },
         {
-          "name": "Huyện Ngọc Hồi",
+          "name": "H. Ngọc Hồi",
           "code": 611,
           "codename": "huyen_ngoc_hoi",
           "division_type": "huyện",
@@ -56553,7 +56553,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk Tô",
+          "name": "H. Đắk Tô",
           "code": 612,
           "codename": "huyen_dak_to",
           "division_type": "huyện",
@@ -56625,7 +56625,7 @@
           ]
         },
         {
-          "name": "Huyện Kon Plông",
+          "name": "H. Kon Plông",
           "code": 613,
           "codename": "huyen_kon_plong",
           "division_type": "huyện",
@@ -56697,7 +56697,7 @@
           ]
         },
         {
-          "name": "Huyện Kon Rẫy",
+          "name": "H. Kon Rẫy",
           "code": 614,
           "codename": "huyen_kon_ray",
           "division_type": "huyện",
@@ -56755,7 +56755,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk Hà",
+          "name": "H. Đắk Hà",
           "code": 615,
           "codename": "huyen_dak_ha",
           "division_type": "huyện",
@@ -56841,7 +56841,7 @@
           ]
         },
         {
-          "name": "Huyện Sa Thầy",
+          "name": "H. Sa Thầy",
           "code": 616,
           "codename": "huyen_sa_thay",
           "division_type": "huyện",
@@ -56927,7 +56927,7 @@
           ]
         },
         {
-          "name": "Huyện Tu Mơ Rông",
+          "name": "H. Tu Mơ Rông",
           "code": 617,
           "codename": "huyen_tu_mo_rong",
           "division_type": "huyện",
@@ -57013,7 +57013,7 @@
           ]
         },
         {
-          "name": "Huyện Ia H' Drai",
+          "name": "H. Ia H' Drai",
           "code": 618,
           "codename": "huyen_ia_h_drai",
           "division_type": "huyện",
@@ -57045,14 +57045,14 @@
       ]
     },
     {
-      "name": "Tỉnh Gia Lai",
+      "name": "T. Gia Lai",
       "code": 64,
       "codename": "tinh_gia_lai",
       "division_type": "tỉnh",
       "phone_code": 269,
       "districts": [
         {
-          "name": "Thành phố Pleiku",
+          "name": "TP. Pleiku",
           "code": 622,
           "codename": "thanh_pho_pleiku",
           "division_type": "thành phố",
@@ -57366,7 +57366,7 @@
           ]
         },
         {
-          "name": "Huyện KBang",
+          "name": "H. KBang",
           "code": 625,
           "codename": "huyen_kbang",
           "division_type": "huyện",
@@ -57473,7 +57473,7 @@
           ]
         },
         {
-          "name": "Huyện Đăk Đoa",
+          "name": "H. Đăk Đoa",
           "code": 626,
           "codename": "huyen_dak_doa",
           "division_type": "huyện",
@@ -57601,7 +57601,7 @@
           ]
         },
         {
-          "name": "Huyện Chư Păh",
+          "name": "H. Chư Păh",
           "code": 627,
           "codename": "huyen_chu_pah",
           "division_type": "huyện",
@@ -57708,7 +57708,7 @@
           ]
         },
         {
-          "name": "Huyện Ia Grai",
+          "name": "H. Ia Grai",
           "code": 628,
           "codename": "huyen_ia_grai",
           "division_type": "huyện",
@@ -57808,7 +57808,7 @@
           ]
         },
         {
-          "name": "Huyện Mang Yang",
+          "name": "H. Mang Yang",
           "code": 629,
           "codename": "huyen_mang_yang",
           "division_type": "huyện",
@@ -57901,7 +57901,7 @@
           ]
         },
         {
-          "name": "Huyện Kông Chro",
+          "name": "H. Kông Chro",
           "code": 630,
           "codename": "huyen_kong_chro",
           "division_type": "huyện",
@@ -58008,7 +58008,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Cơ",
+          "name": "H. Đức Cơ",
           "code": 631,
           "codename": "huyen_duc_co",
           "division_type": "huyện",
@@ -58087,7 +58087,7 @@
           ]
         },
         {
-          "name": "Huyện Chư Prông",
+          "name": "H. Chư Prông",
           "code": 632,
           "codename": "huyen_chu_prong",
           "division_type": "huyện",
@@ -58236,7 +58236,7 @@
           ]
         },
         {
-          "name": "Huyện Chư Sê",
+          "name": "H. Chư Sê",
           "code": 633,
           "codename": "huyen_chu_se",
           "division_type": "huyện",
@@ -58350,7 +58350,7 @@
           ]
         },
         {
-          "name": "Huyện Đăk Pơ",
+          "name": "H. Đăk Pơ",
           "code": 634,
           "codename": "huyen_dak_po",
           "division_type": "huyện",
@@ -58415,7 +58415,7 @@
           ]
         },
         {
-          "name": "Huyện Ia Pa",
+          "name": "H. Ia Pa",
           "code": 635,
           "codename": "huyen_ia_pa",
           "division_type": "huyện",
@@ -58487,7 +58487,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Pa",
+          "name": "H. Krông Pa",
           "code": 637,
           "codename": "huyen_krong_pa",
           "division_type": "huyện",
@@ -58594,7 +58594,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Thiện",
+          "name": "H. Phú Thiện",
           "code": 638,
           "codename": "huyen_phu_thien",
           "division_type": "huyện",
@@ -58673,7 +58673,7 @@
           ]
         },
         {
-          "name": "Huyện Chư Pưh",
+          "name": "H. Chư Pưh",
           "code": 639,
           "codename": "huyen_chu_puh",
           "division_type": "huyện",
@@ -58747,14 +58747,14 @@
       ]
     },
     {
-      "name": "Tỉnh Đắk Lắk",
+      "name": "T. Đắk Lắk",
       "code": 66,
       "codename": "tinh_dak_lak",
       "division_type": "tỉnh",
       "phone_code": 262,
       "districts": [
         {
-          "name": "Thành phố Buôn Ma Thuột",
+          "name": "TP. Buôn Ma Thuột",
           "code": 643,
           "codename": "thanh_pho_buon_ma_thuot",
           "division_type": "thành phố",
@@ -59003,7 +59003,7 @@
           ]
         },
         {
-          "name": "Huyện Ea H'leo",
+          "name": "H. Ea H'leo",
           "code": 645,
           "codename": "huyen_ea_hleo",
           "division_type": "huyện",
@@ -59096,7 +59096,7 @@
           ]
         },
         {
-          "name": "Huyện Ea Súp",
+          "name": "H. Ea Súp",
           "code": 646,
           "codename": "huyen_ea_sup",
           "division_type": "huyện",
@@ -59175,7 +59175,7 @@
           ]
         },
         {
-          "name": "Huyện Buôn Đôn",
+          "name": "H. Buôn Đôn",
           "code": 647,
           "codename": "huyen_buon_don",
           "division_type": "huyện",
@@ -59233,7 +59233,7 @@
           ]
         },
         {
-          "name": "Huyện Cư M'gar",
+          "name": "H. Cư M'gar",
           "code": 648,
           "codename": "huyen_cu_mgar",
           "division_type": "huyện",
@@ -59361,7 +59361,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Búk",
+          "name": "H. Krông Búk",
           "code": 649,
           "codename": "huyen_krong_buk",
           "division_type": "huyện",
@@ -59419,7 +59419,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Năng",
+          "name": "H. Krông Năng",
           "code": 650,
           "codename": "huyen_krong_nang",
           "division_type": "huyện",
@@ -59512,7 +59512,7 @@
           ]
         },
         {
-          "name": "Huyện Ea Kar",
+          "name": "H. Ea Kar",
           "code": 651,
           "codename": "huyen_ea_kar",
           "division_type": "huyện",
@@ -59633,7 +59633,7 @@
           ]
         },
         {
-          "name": "Huyện M'Đrắk",
+          "name": "H. M'Đrắk",
           "code": 652,
           "codename": "huyen_mdrak",
           "division_type": "huyện",
@@ -59733,7 +59733,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Bông",
+          "name": "H. Krông Bông",
           "code": 653,
           "codename": "huyen_krong_bong",
           "division_type": "huyện",
@@ -59840,7 +59840,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Pắc",
+          "name": "H. Krông Pắc",
           "code": 654,
           "codename": "huyen_krong_pac",
           "division_type": "huyện",
@@ -59961,7 +59961,7 @@
           ]
         },
         {
-          "name": "Huyện Krông A Na",
+          "name": "H. Krông A Na",
           "code": 655,
           "codename": "huyen_krong_a_na",
           "division_type": "huyện",
@@ -60026,7 +60026,7 @@
           ]
         },
         {
-          "name": "Huyện Lắk",
+          "name": "H. Lắk",
           "code": 656,
           "codename": "huyen_lak",
           "division_type": "huyện",
@@ -60112,7 +60112,7 @@
           ]
         },
         {
-          "name": "Huyện Cư Kuin",
+          "name": "H. Cư Kuin",
           "code": 657,
           "codename": "huyen_cu_kuin",
           "division_type": "huyện",
@@ -60179,14 +60179,14 @@
       ]
     },
     {
-      "name": "Tỉnh Đắk Nông",
+      "name": "T. Đắk Nông",
       "code": 67,
       "codename": "tinh_dak_nong",
       "division_type": "tỉnh",
       "phone_code": 261,
       "districts": [
         {
-          "name": "Thành phố Gia Nghĩa",
+          "name": "TP. Gia Nghĩa",
           "code": 660,
           "codename": "thanh_pho_gia_nghia",
           "division_type": "thành phố",
@@ -60251,7 +60251,7 @@
           ]
         },
         {
-          "name": "Huyện Đăk Glong",
+          "name": "H. Đăk Glong",
           "code": 661,
           "codename": "huyen_dak_glong",
           "division_type": "huyện",
@@ -60309,7 +60309,7 @@
           ]
         },
         {
-          "name": "Huyện Cư Jút",
+          "name": "H. Cư Jút",
           "code": 662,
           "codename": "huyen_cu_jut",
           "division_type": "huyện",
@@ -60374,7 +60374,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk Mil",
+          "name": "H. Đắk Mil",
           "code": 663,
           "codename": "huyen_dak_mil",
           "division_type": "huyện",
@@ -60453,7 +60453,7 @@
           ]
         },
         {
-          "name": "Huyện Krông Nô",
+          "name": "H. Krông Nô",
           "code": 664,
           "codename": "huyen_krong_no",
           "division_type": "huyện",
@@ -60546,7 +60546,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk Song",
+          "name": "H. Đắk Song",
           "code": 665,
           "codename": "huyen_dak_song",
           "division_type": "huyện",
@@ -60618,7 +60618,7 @@
           ]
         },
         {
-          "name": "Huyện Đắk R'Lấp",
+          "name": "H. Đắk R'Lấp",
           "code": 666,
           "codename": "huyen_dak_rlap",
           "division_type": "huyện",
@@ -60704,7 +60704,7 @@
           ]
         },
         {
-          "name": "Huyện Tuy Đức",
+          "name": "H. Tuy Đức",
           "code": 667,
           "codename": "huyen_tuy_duc",
           "division_type": "huyện",
@@ -60757,14 +60757,14 @@
       ]
     },
     {
-      "name": "Tỉnh Lâm Đồng",
+      "name": "T. Lâm Đồng",
       "code": 68,
       "codename": "tinh_lam_dong",
       "division_type": "tỉnh",
       "phone_code": 263,
       "districts": [
         {
-          "name": "Thành phố Đà Lạt",
+          "name": "TP. Đà Lạt",
           "code": 672,
           "codename": "thanh_pho_da_lat",
           "division_type": "thành phố",
@@ -60885,7 +60885,7 @@
           ]
         },
         {
-          "name": "Thành phố Bảo Lộc",
+          "name": "TP. Bảo Lộc",
           "code": 673,
           "codename": "thanh_pho_bao_loc",
           "division_type": "thành phố",
@@ -60971,7 +60971,7 @@
           ]
         },
         {
-          "name": "Huyện Đam Rông",
+          "name": "H. Đam Rông",
           "code": 674,
           "codename": "huyen_dam_rong",
           "division_type": "huyện",
@@ -61036,7 +61036,7 @@
           ]
         },
         {
-          "name": "Huyện Lạc Dương",
+          "name": "H. Lạc Dương",
           "code": 675,
           "codename": "huyen_lac_duong",
           "division_type": "huyện",
@@ -61087,7 +61087,7 @@
           ]
         },
         {
-          "name": "Huyện Lâm Hà",
+          "name": "H. Lâm Hà",
           "code": 676,
           "codename": "huyen_lam_ha",
           "division_type": "huyện",
@@ -61208,7 +61208,7 @@
           ]
         },
         {
-          "name": "Huyện Đơn Dương",
+          "name": "H. Đơn Dương",
           "code": 677,
           "codename": "huyen_don_duong",
           "division_type": "huyện",
@@ -61287,7 +61287,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Trọng",
+          "name": "H. Đức Trọng",
           "code": 678,
           "codename": "huyen_duc_trong",
           "division_type": "huyện",
@@ -61401,7 +61401,7 @@
           ]
         },
         {
-          "name": "Huyện Di Linh",
+          "name": "H. Di Linh",
           "code": 679,
           "codename": "huyen_di_linh",
           "division_type": "huyện",
@@ -61543,7 +61543,7 @@
           ]
         },
         {
-          "name": "Huyện Bảo Lâm",
+          "name": "H. Bảo Lâm",
           "code": 680,
           "codename": "huyen_bao_lam",
           "division_type": "huyện",
@@ -61650,7 +61650,7 @@
           ]
         },
         {
-          "name": "Huyện Đạ Huoai",
+          "name": "H. Đạ Huoai",
           "code": 681,
           "codename": "huyen_da_huoai",
           "division_type": "huyện",
@@ -61722,7 +61722,7 @@
           ]
         },
         {
-          "name": "Huyện Đạ Tẻh",
+          "name": "H. Đạ Tẻh",
           "code": 682,
           "codename": "huyen_da_teh",
           "division_type": "huyện",
@@ -61794,7 +61794,7 @@
           ]
         },
         {
-          "name": "Huyện Cát Tiên",
+          "name": "H. Cát Tiên",
           "code": 683,
           "codename": "huyen_cat_tien",
           "division_type": "huyện",
@@ -61868,7 +61868,7 @@
       ]
     },
     {
-      "name": "Tỉnh Bình Phước",
+      "name": "T. Bình Phước",
       "code": 70,
       "codename": "tinh_binh_phuoc",
       "division_type": "tỉnh",
@@ -61933,7 +61933,7 @@
           ]
         },
         {
-          "name": "Thành phố Đồng Xoài",
+          "name": "TP. Đồng Xoài",
           "code": 689,
           "codename": "thanh_pho_dong_xoai",
           "division_type": "thành phố",
@@ -62049,7 +62049,7 @@
           ]
         },
         {
-          "name": "Huyện Bù Gia Mập",
+          "name": "H. Bù Gia Mập",
           "code": 691,
           "codename": "huyen_bu_gia_map",
           "division_type": "huyện",
@@ -62114,7 +62114,7 @@
           ]
         },
         {
-          "name": "Huyện Lộc Ninh",
+          "name": "H. Lộc Ninh",
           "code": 692,
           "codename": "huyen_loc_ninh",
           "division_type": "huyện",
@@ -62235,7 +62235,7 @@
           ]
         },
         {
-          "name": "Huyện Bù Đốp",
+          "name": "H. Bù Đốp",
           "code": 693,
           "codename": "huyen_bu_dop",
           "division_type": "huyện",
@@ -62293,7 +62293,7 @@
           ]
         },
         {
-          "name": "Huyện Hớn Quản",
+          "name": "H. Hớn Quản",
           "code": 694,
           "codename": "huyen_hon_quan",
           "division_type": "huyện",
@@ -62393,7 +62393,7 @@
           ]
         },
         {
-          "name": "Huyện Đồng Phú",
+          "name": "H. Đồng Phú",
           "code": 695,
           "codename": "huyen_dong_phu",
           "division_type": "huyện",
@@ -62479,7 +62479,7 @@
           ]
         },
         {
-          "name": "Huyện Bù Đăng",
+          "name": "H. Bù Đăng",
           "code": 696,
           "codename": "huyen_bu_dang",
           "division_type": "huyện",
@@ -62600,7 +62600,7 @@
           ]
         },
         {
-          "name": "Huyện Chơn Thành",
+          "name": "H. Chơn Thành",
           "code": 697,
           "codename": "huyen_chon_thanh",
           "division_type": "huyện",
@@ -62672,7 +62672,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Riềng",
+          "name": "H. Phú Riềng",
           "code": 698,
           "codename": "huyen_phu_rieng",
           "division_type": "huyện",
@@ -62753,14 +62753,14 @@
       ]
     },
     {
-      "name": "Tỉnh Tây Ninh",
+      "name": "T. Tây Ninh",
       "code": 72,
       "codename": "tinh_tay_ninh",
       "division_type": "tỉnh",
       "phone_code": 276,
       "districts": [
         {
-          "name": "Thành phố Tây Ninh",
+          "name": "TP. Tây Ninh",
           "code": 703,
           "codename": "thanh_pho_tay_ninh",
           "division_type": "thành phố",
@@ -62839,7 +62839,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Biên",
+          "name": "H. Tân Biên",
           "code": 705,
           "codename": "huyen_tan_bien",
           "division_type": "huyện",
@@ -62918,7 +62918,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Châu",
+          "name": "H. Tân Châu",
           "code": 706,
           "codename": "huyen_tan_chau",
           "division_type": "huyện",
@@ -63011,7 +63011,7 @@
           ]
         },
         {
-          "name": "Huyện Dương Minh Châu",
+          "name": "H. Dương Minh Châu",
           "code": 707,
           "codename": "huyen_duong_minh_chau",
           "division_type": "huyện",
@@ -63097,7 +63097,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 708,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -63276,7 +63276,7 @@
           ]
         },
         {
-          "name": "Huyện Gò Dầu",
+          "name": "H. Gò Dầu",
           "code": 710,
           "codename": "huyen_go_dau",
           "division_type": "huyện",
@@ -63348,7 +63348,7 @@
           ]
         },
         {
-          "name": "Huyện Bến Cầu",
+          "name": "H. Bến Cầu",
           "code": 711,
           "codename": "huyen_ben_cau",
           "division_type": "huyện",
@@ -63501,14 +63501,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bình Dương",
+      "name": "T. Bình Dương",
       "code": 74,
       "codename": "tinh_binh_duong",
       "division_type": "tỉnh",
       "phone_code": 274,
       "districts": [
         {
-          "name": "Thành phố Thủ Dầu Một",
+          "name": "TP. Thủ Dầu Một",
           "code": 718,
           "codename": "thanh_pho_thu_dau_mot",
           "division_type": "thành phố",
@@ -63615,7 +63615,7 @@
           ]
         },
         {
-          "name": "Huyện Bàu Bàng",
+          "name": "H. Bàu Bàng",
           "code": 719,
           "codename": "huyen_bau_bang",
           "division_type": "huyện",
@@ -63673,7 +63673,7 @@
           ]
         },
         {
-          "name": "Huyện Dầu Tiếng",
+          "name": "H. Dầu Tiếng",
           "code": 720,
           "codename": "huyen_dau_tieng",
           "division_type": "huyện",
@@ -63831,7 +63831,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Giáo",
+          "name": "H. Phú Giáo",
           "code": 722,
           "codename": "huyen_phu_giao",
           "division_type": "huyện",
@@ -64010,7 +64010,7 @@
           ]
         },
         {
-          "name": "Thành phố Dĩ An",
+          "name": "TP. Dĩ An",
           "code": 724,
           "codename": "thanh_pho_di_an",
           "division_type": "thành phố",
@@ -64068,7 +64068,7 @@
           ]
         },
         {
-          "name": "Thành phố Thuận An",
+          "name": "TP. Thuận An",
           "code": 725,
           "codename": "thanh_pho_thuan_an",
           "division_type": "thành phố",
@@ -64147,7 +64147,7 @@
           ]
         },
         {
-          "name": "Huyện Bắc Tân Uyên",
+          "name": "H. Bắc Tân Uyên",
           "code": 726,
           "codename": "huyen_bac_tan_uyen",
           "division_type": "huyện",
@@ -64228,14 +64228,14 @@
       ]
     },
     {
-      "name": "Tỉnh Đồng Nai",
+      "name": "T. Đồng Nai",
       "code": 75,
       "codename": "tinh_dong_nai",
       "division_type": "tỉnh",
       "phone_code": 251,
       "districts": [
         {
-          "name": "Thành phố Biên Hòa",
+          "name": "TP. Biên Hòa",
           "code": 731,
           "codename": "thanh_pho_bien_hoa",
           "division_type": "thành phố",
@@ -64454,7 +64454,7 @@
           ]
         },
         {
-          "name": "Thành phố Long Khánh",
+          "name": "TP. Long Khánh",
           "code": 732,
           "codename": "thanh_pho_long_khanh",
           "division_type": "thành phố",
@@ -64568,7 +64568,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Phú",
+          "name": "H. Tân Phú",
           "code": 734,
           "codename": "huyen_tan_phu",
           "division_type": "huyện",
@@ -64703,7 +64703,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Cửu",
+          "name": "H. Vĩnh Cửu",
           "code": 735,
           "codename": "huyen_vinh_cuu",
           "division_type": "huyện",
@@ -64796,7 +64796,7 @@
           ]
         },
         {
-          "name": "Huyện Định Quán",
+          "name": "H. Định Quán",
           "code": 736,
           "codename": "huyen_dinh_quan",
           "division_type": "huyện",
@@ -64903,7 +64903,7 @@
           ]
         },
         {
-          "name": "Huyện Trảng Bom",
+          "name": "H. Trảng Bom",
           "code": 737,
           "codename": "huyen_trang_bom",
           "division_type": "huyện",
@@ -65031,7 +65031,7 @@
           ]
         },
         {
-          "name": "Huyện Thống Nhất",
+          "name": "H. Thống Nhất",
           "code": 738,
           "codename": "huyen_thong_nhat",
           "division_type": "huyện",
@@ -65110,7 +65110,7 @@
           ]
         },
         {
-          "name": "Huyện Cẩm Mỹ",
+          "name": "H. Cẩm Mỹ",
           "code": 739,
           "codename": "huyen_cam_my",
           "division_type": "huyện",
@@ -65210,7 +65210,7 @@
           ]
         },
         {
-          "name": "Huyện Long Thành",
+          "name": "H. Long Thành",
           "code": 740,
           "codename": "huyen_long_thanh",
           "division_type": "huyện",
@@ -65317,7 +65317,7 @@
           ]
         },
         {
-          "name": "Huyện Xuân Lộc",
+          "name": "H. Xuân Lộc",
           "code": 741,
           "codename": "huyen_xuan_loc",
           "division_type": "huyện",
@@ -65431,7 +65431,7 @@
           ]
         },
         {
-          "name": "Huyện Nhơn Trạch",
+          "name": "H. Nhơn Trạch",
           "code": 742,
           "codename": "huyen_nhon_trach",
           "division_type": "huyện",
@@ -65526,14 +65526,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bà Rịa - Vũng Tàu",
+      "name": "T. Bà Rịa - Vũng Tàu",
       "code": 77,
       "codename": "tinh_ba_ria_vung_tau",
       "division_type": "tỉnh",
       "phone_code": 254,
       "districts": [
         {
-          "name": "Thành phố Vũng Tàu",
+          "name": "TP. Vũng Tàu",
           "code": 747,
           "codename": "thanh_pho_vung_tau",
           "division_type": "thành phố",
@@ -65661,7 +65661,7 @@
           ]
         },
         {
-          "name": "Thành phố Bà Rịa",
+          "name": "TP. Bà Rịa",
           "code": 748,
           "codename": "thanh_pho_ba_ria",
           "division_type": "thành phố",
@@ -65747,7 +65747,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Đức",
+          "name": "H. Châu Đức",
           "code": 750,
           "codename": "huyen_chau_duc",
           "division_type": "huyện",
@@ -65868,7 +65868,7 @@
           ]
         },
         {
-          "name": "Huyện Xuyên Mộc",
+          "name": "H. Xuyên Mộc",
           "code": 751,
           "codename": "huyen_xuyen_moc",
           "division_type": "huyện",
@@ -65968,7 +65968,7 @@
           ]
         },
         {
-          "name": "Huyện Long Điền",
+          "name": "H. Long Điền",
           "code": 752,
           "codename": "huyen_long_dien",
           "division_type": "huyện",
@@ -66010,7 +66010,7 @@
               "short_codename": "an_nhut"
             },
             {
-              "name": "Xã Phước Tỉnh",
+              "name": "Xã Phước T.",
               "code": 26674,
               "codename": "xa_phuoc_tinh",
               "division_type": "xã",
@@ -66026,7 +66026,7 @@
           ]
         },
         {
-          "name": "Huyện Đất Đỏ",
+          "name": "H. Đất Đỏ",
           "code": 753,
           "codename": "huyen_dat_do",
           "division_type": "huyện",
@@ -66170,7 +66170,7 @@
           ]
         },
         {
-          "name": "Huyện Côn Đảo",
+          "name": "H. Côn Đảo",
           "code": 755,
           "codename": "huyen_con_dao",
           "division_type": "huyện",
@@ -66180,14 +66180,14 @@
       ]
     },
     {
-      "name": "Thành phố Hồ Chí Minh",
+      "name": "TP. Hồ Chí Minh",
       "code": 79,
       "codename": "thanh_pho_ho_chi_minh",
       "division_type": "thành phố trung ương",
       "phone_code": 28,
       "districts": [
         {
-          "name": "Quận 1",
+          "name": "Q. 1",
           "code": 760,
           "codename": "quan_1",
           "division_type": "quận",
@@ -66266,7 +66266,7 @@
           ]
         },
         {
-          "name": "Quận 12",
+          "name": "Q. 12",
           "code": 761,
           "codename": "quan_12",
           "division_type": "quận",
@@ -66352,7 +66352,7 @@
           ]
         },
         {
-          "name": "Quận Gò Vấp",
+          "name": "Q. Gò Vấp",
           "code": 764,
           "codename": "quan_go_vap",
           "division_type": "quận",
@@ -66473,7 +66473,7 @@
           ]
         },
         {
-          "name": "Quận Bình Thạnh",
+          "name": "Q. Bình Thạnh",
           "code": 765,
           "codename": "quan_binh_thanh",
           "division_type": "quận",
@@ -66622,7 +66622,7 @@
           ]
         },
         {
-          "name": "Quận Tân Bình",
+          "name": "Q. Tân Bình",
           "code": 766,
           "codename": "quan_tan_binh",
           "division_type": "quận",
@@ -66736,7 +66736,7 @@
           ]
         },
         {
-          "name": "Quận Tân Phú",
+          "name": "Q. Tân Phú",
           "code": 767,
           "codename": "quan_tan_phu",
           "division_type": "quận",
@@ -66822,7 +66822,7 @@
           ]
         },
         {
-          "name": "Quận Phú Nhuận",
+          "name": "Q. Phú Nhuận",
           "code": 768,
           "codename": "quan_phu_nhuan",
           "division_type": "quận",
@@ -66922,7 +66922,7 @@
           ]
         },
         {
-          "name": "Thành phố Thủ Đức",
+          "name": "TP. Thủ Đức",
           "code": 769,
           "codename": "thanh_pho_thu_duc",
           "division_type": "thành phố",
@@ -67169,7 +67169,7 @@
           ]
         },
         {
-          "name": "Quận 3",
+          "name": "Q. 3",
           "code": 770,
           "codename": "quan_3",
           "division_type": "quận",
@@ -67262,7 +67262,7 @@
           ]
         },
         {
-          "name": "Quận 10",
+          "name": "Q. 10",
           "code": 771,
           "codename": "quan_10",
           "division_type": "quận",
@@ -67369,7 +67369,7 @@
           ]
         },
         {
-          "name": "Quận 11",
+          "name": "Q. 11",
           "code": 772,
           "codename": "quan_11",
           "division_type": "quận",
@@ -67490,7 +67490,7 @@
           ]
         },
         {
-          "name": "Quận 4",
+          "name": "Q. 4",
           "code": 773,
           "codename": "quan_4",
           "division_type": "quận",
@@ -67590,7 +67590,7 @@
           ]
         },
         {
-          "name": "Quận 5",
+          "name": "Q. 5",
           "code": 774,
           "codename": "quan_5",
           "division_type": "quận",
@@ -67697,7 +67697,7 @@
           ]
         },
         {
-          "name": "Quận 6",
+          "name": "Q. 6",
           "code": 775,
           "codename": "quan_6",
           "division_type": "quận",
@@ -67804,7 +67804,7 @@
           ]
         },
         {
-          "name": "Quận 8",
+          "name": "Q. 8",
           "code": 776,
           "codename": "quan_8",
           "division_type": "quận",
@@ -67925,7 +67925,7 @@
           ]
         },
         {
-          "name": "Quận Bình Tân",
+          "name": "Q. Bình Tân",
           "code": 777,
           "codename": "quan_binh_tan",
           "division_type": "quận",
@@ -68004,7 +68004,7 @@
           ]
         },
         {
-          "name": "Quận 7",
+          "name": "Q. 7",
           "code": 778,
           "codename": "quan_7",
           "division_type": "quận",
@@ -68083,7 +68083,7 @@
           ]
         },
         {
-          "name": "Huyện Củ Chi",
+          "name": "H. Củ Chi",
           "code": 783,
           "codename": "huyen_cu_chi",
           "division_type": "huyện",
@@ -68239,7 +68239,7 @@
           ]
         },
         {
-          "name": "Huyện Hóc Môn",
+          "name": "H. Hóc Môn",
           "code": 784,
           "codename": "huyen_hoc_mon",
           "division_type": "huyện",
@@ -68332,7 +68332,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Chánh",
+          "name": "H. Bình Chánh",
           "code": 785,
           "codename": "huyen_binh_chanh",
           "division_type": "huyện",
@@ -68453,7 +68453,7 @@
           ]
         },
         {
-          "name": "Huyện Nhà Bè",
+          "name": "H. Nhà Bè",
           "code": 786,
           "codename": "huyen_nha_be",
           "division_type": "huyện",
@@ -68511,7 +68511,7 @@
           ]
         },
         {
-          "name": "Huyện Cần Giờ",
+          "name": "H. Cần Giờ",
           "code": 787,
           "codename": "huyen_can_gio",
           "division_type": "huyện",
@@ -68571,14 +68571,14 @@
       ]
     },
     {
-      "name": "Tỉnh Long An",
+      "name": "T. Long An",
       "code": 80,
       "codename": "tinh_long_an",
       "division_type": "tỉnh",
       "phone_code": 272,
       "districts": [
         {
-          "name": "Thành phố Tân An",
+          "name": "TP. Tân An",
           "code": 794,
           "codename": "thanh_pho_tan_an",
           "division_type": "thành phố",
@@ -68750,7 +68750,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Hưng",
+          "name": "H. Tân Hưng",
           "code": 796,
           "codename": "huyen_tan_hung",
           "division_type": "huyện",
@@ -68843,7 +68843,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Hưng",
+          "name": "H. Vĩnh Hưng",
           "code": 797,
           "codename": "huyen_vinh_hung",
           "division_type": "huyện",
@@ -68922,7 +68922,7 @@
           ]
         },
         {
-          "name": "Huyện Mộc Hóa",
+          "name": "H. Mộc Hóa",
           "code": 798,
           "codename": "huyen_moc_hoa",
           "division_type": "huyện",
@@ -68980,7 +68980,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Thạnh",
+          "name": "H. Tân Thạnh",
           "code": 799,
           "codename": "huyen_tan_thanh",
           "division_type": "huyện",
@@ -69080,7 +69080,7 @@
           ]
         },
         {
-          "name": "Huyện Thạnh Hóa",
+          "name": "H. Thạnh Hóa",
           "code": 800,
           "codename": "huyen_thanh_hoa",
           "division_type": "huyện",
@@ -69166,7 +69166,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Huệ",
+          "name": "H. Đức Huệ",
           "code": 801,
           "codename": "huyen_duc_hue",
           "division_type": "huyện",
@@ -69252,7 +69252,7 @@
           ]
         },
         {
-          "name": "Huyện Đức Hòa",
+          "name": "H. Đức Hòa",
           "code": 802,
           "codename": "huyen_duc_hoa",
           "division_type": "huyện",
@@ -69401,7 +69401,7 @@
           ]
         },
         {
-          "name": "Huyện Bến Lức",
+          "name": "H. Bến Lức",
           "code": 803,
           "codename": "huyen_ben_luc",
           "division_type": "huyện",
@@ -69515,7 +69515,7 @@
           ]
         },
         {
-          "name": "Huyện Thủ Thừa",
+          "name": "H. Thủ Thừa",
           "code": 804,
           "codename": "huyen_thu_thua",
           "division_type": "huyện",
@@ -69608,7 +69608,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Trụ",
+          "name": "H. Tân Trụ",
           "code": 805,
           "codename": "huyen_tan_tru",
           "division_type": "huyện",
@@ -69687,7 +69687,7 @@
           ]
         },
         {
-          "name": "Huyện Cần Đước",
+          "name": "H. Cần Đước",
           "code": 806,
           "codename": "huyen_can_duoc",
           "division_type": "huyện",
@@ -69815,7 +69815,7 @@
           ]
         },
         {
-          "name": "Huyện Cần Giuộc",
+          "name": "H. Cần Giuộc",
           "code": 807,
           "codename": "huyen_can_giuoc",
           "division_type": "huyện",
@@ -69929,7 +69929,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 808,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -70031,14 +70031,14 @@
       ]
     },
     {
-      "name": "Tỉnh Tiền Giang",
+      "name": "T. Tiền Giang",
       "code": 82,
       "codename": "tinh_tien_giang",
       "division_type": "tỉnh",
       "phone_code": 273,
       "districts": [
         {
-          "name": "Thành phố Mỹ Tho",
+          "name": "TP. Mỹ Tho",
           "code": 815,
           "codename": "thanh_pho_my_tho",
           "division_type": "thành phố",
@@ -70380,7 +70380,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Phước",
+          "name": "H. Tân Phước",
           "code": 818,
           "codename": "huyen_tan_phuoc",
           "division_type": "huyện",
@@ -70473,7 +70473,7 @@
           ]
         },
         {
-          "name": "Huyện Cái Bè",
+          "name": "H. Cái Bè",
           "code": 819,
           "codename": "huyen_cai_be",
           "division_type": "huyện",
@@ -70657,7 +70657,7 @@
           ]
         },
         {
-          "name": "Huyện Cai Lậy",
+          "name": "H. Cai Lậy",
           "code": 820,
           "codename": "huyen_cai_lay",
           "division_type": "huyện",
@@ -70778,7 +70778,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 821,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -70948,7 +70948,7 @@
           ]
         },
         {
-          "name": "Huyện Chợ Gạo",
+          "name": "H. Chợ Gạo",
           "code": 822,
           "codename": "huyen_cho_gao",
           "division_type": "huyện",
@@ -71090,7 +71090,7 @@
           ]
         },
         {
-          "name": "Huyện Gò Công Tây",
+          "name": "H. Gò Công Tây",
           "code": 823,
           "codename": "huyen_go_cong_tay",
           "division_type": "huyện",
@@ -71190,7 +71190,7 @@
           ]
         },
         {
-          "name": "Huyện Gò Công Đông",
+          "name": "H. Gò Công Đông",
           "code": 824,
           "codename": "huyen_go_cong_dong",
           "division_type": "huyện",
@@ -71290,7 +71290,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Phú Đông",
+          "name": "H. Tân Phú Đông",
           "code": 825,
           "codename": "huyen_tan_phu_dong",
           "division_type": "huyện",
@@ -71343,14 +71343,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bến Tre",
+      "name": "T. Bến Tre",
       "code": 83,
       "codename": "tinh_ben_tre",
       "division_type": "tỉnh",
       "phone_code": 275,
       "districts": [
         {
-          "name": "Thành phố Bến Tre",
+          "name": "TP. Bến Tre",
           "code": 829,
           "codename": "thanh_pho_ben_tre",
           "division_type": "thành phố",
@@ -71457,7 +71457,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 831,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -71613,7 +71613,7 @@
           ]
         },
         {
-          "name": "Huyện Chợ Lách",
+          "name": "H. Chợ Lách",
           "code": 832,
           "codename": "huyen_cho_lach",
           "division_type": "huyện",
@@ -71699,7 +71699,7 @@
           ]
         },
         {
-          "name": "Huyện Mỏ Cày Nam",
+          "name": "H. Mỏ Cày Nam",
           "code": 833,
           "codename": "huyen_mo_cay_nam",
           "division_type": "huyện",
@@ -71820,7 +71820,7 @@
           ]
         },
         {
-          "name": "Huyện Giồng Trôm",
+          "name": "H. Giồng Trôm",
           "code": 834,
           "codename": "huyen_giong_trom",
           "division_type": "huyện",
@@ -71976,7 +71976,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Đại",
+          "name": "H. Bình Đại",
           "code": 835,
           "codename": "huyen_binh_dai",
           "division_type": "huyện",
@@ -72125,7 +72125,7 @@
           ]
         },
         {
-          "name": "Huyện Ba Tri",
+          "name": "H. Ba Tri",
           "code": 836,
           "codename": "huyen_ba_tri",
           "division_type": "huyện",
@@ -72295,7 +72295,7 @@
           ]
         },
         {
-          "name": "Huyện Thạnh Phú",
+          "name": "H. Thạnh Phú",
           "code": 837,
           "codename": "huyen_thanh_phu",
           "division_type": "huyện",
@@ -72430,7 +72430,7 @@
           ]
         },
         {
-          "name": "Huyện Mỏ Cày Bắc",
+          "name": "H. Mỏ Cày Bắc",
           "code": 838,
           "codename": "huyen_mo_cay_bac",
           "division_type": "huyện",
@@ -72532,14 +72532,14 @@
       ]
     },
     {
-      "name": "Tỉnh Trà Vinh",
+      "name": "T. Trà Vinh",
       "code": 84,
       "codename": "tinh_tra_vinh",
       "division_type": "tỉnh",
       "phone_code": 294,
       "districts": [
         {
-          "name": "Thành phố Trà Vinh",
+          "name": "TP. Trà Vinh",
           "code": 842,
           "codename": "thanh_pho_tra_vinh",
           "division_type": "thành phố",
@@ -72618,7 +72618,7 @@
           ]
         },
         {
-          "name": "Huyện Càng Long",
+          "name": "H. Càng Long",
           "code": 844,
           "codename": "huyen_cang_long",
           "division_type": "huyện",
@@ -72725,7 +72725,7 @@
           ]
         },
         {
-          "name": "Huyện Cầu Kè",
+          "name": "H. Cầu Kè",
           "code": 845,
           "codename": "huyen_cau_ke",
           "division_type": "huyện",
@@ -72811,7 +72811,7 @@
           ]
         },
         {
-          "name": "Huyện Tiểu Cần",
+          "name": "H. Tiểu Cần",
           "code": 846,
           "codename": "huyen_tieu_can",
           "division_type": "huyện",
@@ -72897,7 +72897,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 847,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -73004,7 +73004,7 @@
           ]
         },
         {
-          "name": "Huyện Cầu Ngang",
+          "name": "H. Cầu Ngang",
           "code": 848,
           "codename": "huyen_cau_ngang",
           "division_type": "huyện",
@@ -73118,7 +73118,7 @@
           ]
         },
         {
-          "name": "Huyện Trà Cú",
+          "name": "H. Trà Cú",
           "code": 849,
           "codename": "huyen_tra_cu",
           "division_type": "huyện",
@@ -73246,7 +73246,7 @@
           ]
         },
         {
-          "name": "Huyện Duyên Hải",
+          "name": "H. Duyên Hải",
           "code": 850,
           "codename": "huyen_duyen_hai",
           "division_type": "huyện",
@@ -73364,14 +73364,14 @@
       ]
     },
     {
-      "name": "Tỉnh Vĩnh Long",
+      "name": "T. Vĩnh Long",
       "code": 86,
       "codename": "tinh_vinh_long",
       "division_type": "tỉnh",
       "phone_code": 270,
       "districts": [
         {
-          "name": "Thành phố Vĩnh Long",
+          "name": "TP. Vĩnh Long",
           "code": 855,
           "codename": "thanh_pho_vinh_long",
           "division_type": "thành phố",
@@ -73457,7 +73457,7 @@
           ]
         },
         {
-          "name": "Huyện Long Hồ",
+          "name": "H. Long Hồ",
           "code": 857,
           "codename": "huyen_long_ho",
           "division_type": "huyện",
@@ -73571,7 +73571,7 @@
           ]
         },
         {
-          "name": "Huyện Mang Thít",
+          "name": "H. Mang Thít",
           "code": 858,
           "codename": "huyen_mang_thit",
           "division_type": "huyện",
@@ -73664,7 +73664,7 @@
           ]
         },
         {
-          "name": "Huyện Vũng Liêm",
+          "name": "H. Vũng Liêm",
           "code": 859,
           "codename": "huyen_vung_liem",
           "division_type": "huyện",
@@ -73813,7 +73813,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Bình",
+          "name": "H. Tam Bình",
           "code": 860,
           "codename": "huyen_tam_binh",
           "division_type": "huyện",
@@ -74006,7 +74006,7 @@
           ]
         },
         {
-          "name": "Huyện Trà Ôn",
+          "name": "H. Trà Ôn",
           "code": 862,
           "codename": "huyen_tra_on",
           "division_type": "huyện",
@@ -74113,7 +74113,7 @@
           ]
         },
         {
-          "name": "Huyện Bình Tân",
+          "name": "H. Bình Tân",
           "code": 863,
           "codename": "huyen_binh_tan",
           "division_type": "huyện",
@@ -74194,14 +74194,14 @@
       ]
     },
     {
-      "name": "Tỉnh Đồng Tháp",
+      "name": "T. Đồng Tháp",
       "code": 87,
       "codename": "tinh_dong_thap",
       "division_type": "tỉnh",
       "phone_code": 277,
       "districts": [
         {
-          "name": "Thành phố Cao Lãnh",
+          "name": "TP. Cao Lãnh",
           "code": 866,
           "codename": "thanh_pho_cao_lanh",
           "division_type": "thành phố",
@@ -74315,7 +74315,7 @@
           ]
         },
         {
-          "name": "Thành phố Sa Đéc",
+          "name": "TP. Sa Đéc",
           "code": 867,
           "codename": "thanh_pho_sa_dec",
           "division_type": "thành phố",
@@ -74387,7 +74387,7 @@
           ]
         },
         {
-          "name": "Thành phố Hồng Ngự",
+          "name": "TP. Hồng Ngự",
           "code": 868,
           "codename": "thanh_pho_hong_ngu",
           "division_type": "thành phố",
@@ -74445,7 +74445,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Hồng",
+          "name": "H. Tân Hồng",
           "code": 869,
           "codename": "huyen_tan_hong",
           "division_type": "huyện",
@@ -74517,7 +74517,7 @@
           ]
         },
         {
-          "name": "Huyện Hồng Ngự",
+          "name": "H. Hồng Ngự",
           "code": 870,
           "codename": "huyen_hong_ngu",
           "division_type": "huyện",
@@ -74596,7 +74596,7 @@
           ]
         },
         {
-          "name": "Huyện Tam Nông",
+          "name": "H. Tam Nông",
           "code": 871,
           "codename": "huyen_tam_nong",
           "division_type": "huyện",
@@ -74689,7 +74689,7 @@
           ]
         },
         {
-          "name": "Huyện Tháp Mười",
+          "name": "H. Tháp Mười",
           "code": 872,
           "codename": "huyen_thap_muoi",
           "division_type": "huyện",
@@ -74789,7 +74789,7 @@
           ]
         },
         {
-          "name": "Huyện Cao Lãnh",
+          "name": "H. Cao Lãnh",
           "code": 873,
           "codename": "huyen_cao_lanh",
           "division_type": "huyện",
@@ -74924,7 +74924,7 @@
           ]
         },
         {
-          "name": "Huyện Thanh Bình",
+          "name": "H. Thanh Bình",
           "code": 874,
           "codename": "huyen_thanh_binh",
           "division_type": "huyện",
@@ -75024,7 +75024,7 @@
           ]
         },
         {
-          "name": "Huyện Lấp Vò",
+          "name": "H. Lấp Vò",
           "code": 875,
           "codename": "huyen_lap_vo",
           "division_type": "huyện",
@@ -75124,7 +75124,7 @@
           ]
         },
         {
-          "name": "Huyện Lai Vung",
+          "name": "H. Lai Vung",
           "code": 876,
           "codename": "huyen_lai_vung",
           "division_type": "huyện",
@@ -75217,7 +75217,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 877,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -75312,14 +75312,14 @@
       ]
     },
     {
-      "name": "Tỉnh An Giang",
+      "name": "T. An Giang",
       "code": 89,
       "codename": "tinh_an_giang",
       "division_type": "tỉnh",
       "phone_code": 296,
       "districts": [
         {
-          "name": "Thành phố Long Xuyên",
+          "name": "TP. Long Xuyên",
           "code": 883,
           "codename": "thanh_pho_long_xuyen",
           "division_type": "thành phố",
@@ -75419,7 +75419,7 @@
           ]
         },
         {
-          "name": "Thành phố Châu Đốc",
+          "name": "TP. Châu Đốc",
           "code": 884,
           "codename": "thanh_pho_chau_doc",
           "division_type": "thành phố",
@@ -75477,7 +75477,7 @@
           ]
         },
         {
-          "name": "Huyện An Phú",
+          "name": "H. An Phú",
           "code": 886,
           "codename": "huyen_an_phu",
           "division_type": "huyện",
@@ -75691,7 +75691,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Tân",
+          "name": "H. Phú Tân",
           "code": 888,
           "codename": "huyen_phu_tan",
           "division_type": "huyện",
@@ -75826,7 +75826,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Phú",
+          "name": "H. Châu Phú",
           "code": 889,
           "codename": "huyen_chau_phu",
           "division_type": "huyện",
@@ -75926,7 +75926,7 @@
           ]
         },
         {
-          "name": "Huyện Tịnh Biên",
+          "name": "H. Tịnh Biên",
           "code": 890,
           "codename": "huyen_tinh_bien",
           "division_type": "huyện",
@@ -76033,7 +76033,7 @@
           ]
         },
         {
-          "name": "Huyện Tri Tôn",
+          "name": "H. Tri Tôn",
           "code": 891,
           "codename": "huyen_tri_ton",
           "division_type": "huyện",
@@ -76147,7 +76147,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 892,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -76247,7 +76247,7 @@
           ]
         },
         {
-          "name": "Huyện Chợ Mới",
+          "name": "H. Chợ Mới",
           "code": 893,
           "codename": "huyen_cho_moi",
           "division_type": "huyện",
@@ -76382,7 +76382,7 @@
           ]
         },
         {
-          "name": "Huyện Thoại Sơn",
+          "name": "H. Thoại Sơn",
           "code": 894,
           "codename": "huyen_thoai_son",
           "division_type": "huyện",
@@ -76512,14 +76512,14 @@
       ]
     },
     {
-      "name": "Tỉnh Kiên Giang",
+      "name": "T. Kiên Giang",
       "code": 91,
       "codename": "tinh_kien_giang",
       "division_type": "tỉnh",
       "phone_code": 297,
       "districts": [
         {
-          "name": "Thành phố Rạch Giá",
+          "name": "TP. Rạch Giá",
           "code": 899,
           "codename": "thanh_pho_rach_gia",
           "division_type": "thành phố",
@@ -76612,7 +76612,7 @@
           ]
         },
         {
-          "name": "Thành phố Hà Tiên",
+          "name": "TP. Hà Tiên",
           "code": 900,
           "codename": "thanh_pho_ha_tien",
           "division_type": "thành phố",
@@ -76670,7 +76670,7 @@
           ]
         },
         {
-          "name": "Huyện Kiên Lương",
+          "name": "H. Kiên Lương",
           "code": 902,
           "codename": "huyen_kien_luong",
           "division_type": "huyện",
@@ -76735,7 +76735,7 @@
           ]
         },
         {
-          "name": "Huyện Hòn Đất",
+          "name": "H. Hòn Đất",
           "code": 903,
           "codename": "huyen_hon_dat",
           "division_type": "huyện",
@@ -76842,7 +76842,7 @@
           ]
         },
         {
-          "name": "Huyện Tân Hiệp",
+          "name": "H. Tân Hiệp",
           "code": 904,
           "codename": "huyen_tan_hiep",
           "division_type": "huyện",
@@ -76928,7 +76928,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 905,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -77007,7 +77007,7 @@
           ]
         },
         {
-          "name": "Huyện Giồng Riềng",
+          "name": "H. Giồng Riềng",
           "code": 906,
           "codename": "huyen_giong_rieng",
           "division_type": "huyện",
@@ -77149,7 +77149,7 @@
           ]
         },
         {
-          "name": "Huyện Gò Quao",
+          "name": "H. Gò Quao",
           "code": 907,
           "codename": "huyen_go_quao",
           "division_type": "huyện",
@@ -77235,7 +77235,7 @@
           ]
         },
         {
-          "name": "Huyện An Biên",
+          "name": "H. An Biên",
           "code": 908,
           "codename": "huyen_an_bien",
           "division_type": "huyện",
@@ -77307,7 +77307,7 @@
           ]
         },
         {
-          "name": "Huyện An Minh",
+          "name": "H. An Minh",
           "code": 909,
           "codename": "huyen_an_minh",
           "division_type": "huyện",
@@ -77393,7 +77393,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Thuận",
+          "name": "H. Vĩnh Thuận",
           "code": 910,
           "codename": "huyen_vinh_thuan",
           "division_type": "huyện",
@@ -77458,7 +77458,7 @@
           ]
         },
         {
-          "name": "Thành phố Phú Quốc",
+          "name": "TP. Phú Quốc",
           "code": 911,
           "codename": "thanh_pho_phu_quoc",
           "division_type": "thành phố",
@@ -77530,7 +77530,7 @@
           ]
         },
         {
-          "name": "Huyện Kiên Hải",
+          "name": "H. Kiên Hải",
           "code": 912,
           "codename": "huyen_kien_hai",
           "division_type": "huyện",
@@ -77567,7 +77567,7 @@
           ]
         },
         {
-          "name": "Huyện U Minh Thượng",
+          "name": "H. U Minh Thượng",
           "code": 913,
           "codename": "huyen_u_minh_thuong",
           "division_type": "huyện",
@@ -77618,7 +77618,7 @@
           ]
         },
         {
-          "name": "Huyện Giang Thành",
+          "name": "H. Giang Thành",
           "code": 914,
           "codename": "huyen_giang_thanh",
           "division_type": "huyện",
@@ -77664,14 +77664,14 @@
       ]
     },
     {
-      "name": "Thành phố Cần Thơ",
+      "name": "TP. Cần Thơ",
       "code": 92,
       "codename": "thanh_pho_can_tho",
       "division_type": "thành phố trung ương",
       "phone_code": 292,
       "districts": [
         {
-          "name": "Quận Ninh Kiều",
+          "name": "Q. Ninh Kiều",
           "code": 916,
           "codename": "quan_ninh_kieu",
           "division_type": "quận",
@@ -77757,7 +77757,7 @@
           ]
         },
         {
-          "name": "Quận Ô Môn",
+          "name": "Q. Ô Môn",
           "code": 917,
           "codename": "quan_o_mon",
           "division_type": "quận",
@@ -77815,7 +77815,7 @@
           ]
         },
         {
-          "name": "Quận Bình Thuỷ",
+          "name": "Q. Bình Thuỷ",
           "code": 918,
           "codename": "quan_binh_thuy",
           "division_type": "quận",
@@ -77880,7 +77880,7 @@
           ]
         },
         {
-          "name": "Quận Cái Răng",
+          "name": "Q. Cái Răng",
           "code": 919,
           "codename": "quan_cai_rang",
           "division_type": "quận",
@@ -77938,7 +77938,7 @@
           ]
         },
         {
-          "name": "Quận Thốt Nốt",
+          "name": "Q. Thốt Nốt",
           "code": 923,
           "codename": "quan_thot_not",
           "division_type": "quận",
@@ -78010,7 +78010,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Thạnh",
+          "name": "H. Vĩnh Thạnh",
           "code": 924,
           "codename": "huyen_vinh_thanh",
           "division_type": "huyện",
@@ -78096,7 +78096,7 @@
           ]
         },
         {
-          "name": "Huyện Cờ Đỏ",
+          "name": "H. Cờ Đỏ",
           "code": 925,
           "codename": "huyen_co_do",
           "division_type": "huyện",
@@ -78175,7 +78175,7 @@
           ]
         },
         {
-          "name": "Huyện Phong Điền",
+          "name": "H. Phong Điền",
           "code": 926,
           "codename": "huyen_phong_dien",
           "division_type": "huyện",
@@ -78233,7 +78233,7 @@
           ]
         },
         {
-          "name": "Huyện Thới Lai",
+          "name": "H. Thới Lai",
           "code": 927,
           "codename": "huyen_thoi_lai",
           "division_type": "huyện",
@@ -78335,14 +78335,14 @@
       ]
     },
     {
-      "name": "Tỉnh Hậu Giang",
+      "name": "T. Hậu Giang",
       "code": 93,
       "codename": "tinh_hau_giang",
       "division_type": "tỉnh",
       "phone_code": 293,
       "districts": [
         {
-          "name": "Thành phố Vị Thanh",
+          "name": "TP. Vị Thanh",
           "code": 930,
           "codename": "thanh_pho_vi_thanh",
           "division_type": "thành phố",
@@ -78414,7 +78414,7 @@
           ]
         },
         {
-          "name": "Thành phố Ngã Bảy",
+          "name": "TP. Ngã Bảy",
           "code": 931,
           "codename": "thanh_pho_nga_bay",
           "division_type": "thành phố",
@@ -78465,7 +78465,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành A",
+          "name": "H. Châu Thành A",
           "code": 932,
           "codename": "huyen_chau_thanh_a",
           "division_type": "huyện",
@@ -78544,7 +78544,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 933,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -78609,7 +78609,7 @@
           ]
         },
         {
-          "name": "Huyện Phụng Hiệp",
+          "name": "H. Phụng Hiệp",
           "code": 934,
           "codename": "huyen_phung_hiep",
           "division_type": "huyện",
@@ -78723,7 +78723,7 @@
           ]
         },
         {
-          "name": "Huyện Vị Thuỷ",
+          "name": "H. Vị Thuỷ",
           "code": 935,
           "codename": "huyen_vi_thuy",
           "division_type": "huyện",
@@ -78802,7 +78802,7 @@
           ]
         },
         {
-          "name": "Huyện Long Mỹ",
+          "name": "H. Long Mỹ",
           "code": 936,
           "codename": "huyen_long_my",
           "division_type": "huyện",
@@ -78941,14 +78941,14 @@
       ]
     },
     {
-      "name": "Tỉnh Sóc Trăng",
+      "name": "T. Sóc Trăng",
       "code": 94,
       "codename": "tinh_soc_trang",
       "division_type": "tỉnh",
       "phone_code": 299,
       "districts": [
         {
-          "name": "Thành phố Sóc Trăng",
+          "name": "TP. Sóc Trăng",
           "code": 941,
           "codename": "thanh_pho_soc_trang",
           "division_type": "thành phố",
@@ -79027,7 +79027,7 @@
           ]
         },
         {
-          "name": "Huyện Châu Thành",
+          "name": "H. Châu Thành",
           "code": 942,
           "codename": "huyen_chau_thanh",
           "division_type": "huyện",
@@ -79092,7 +79092,7 @@
           ]
         },
         {
-          "name": "Huyện Kế Sách",
+          "name": "H. Kế Sách",
           "code": 943,
           "codename": "huyen_ke_sach",
           "division_type": "huyện",
@@ -79192,7 +79192,7 @@
           ]
         },
         {
-          "name": "Huyện Mỹ Tú",
+          "name": "H. Mỹ Tú",
           "code": 944,
           "codename": "huyen_my_tu",
           "division_type": "huyện",
@@ -79264,7 +79264,7 @@
           ]
         },
         {
-          "name": "Huyện Cù Lao Dung",
+          "name": "H. Cù Lao Dung",
           "code": 945,
           "codename": "huyen_cu_lao_dung",
           "division_type": "huyện",
@@ -79329,7 +79329,7 @@
           ]
         },
         {
-          "name": "Huyện Long Phú",
+          "name": "H. Long Phú",
           "code": 946,
           "codename": "huyen_long_phu",
           "division_type": "huyện",
@@ -79415,7 +79415,7 @@
           ]
         },
         {
-          "name": "Huyện Mỹ Xuyên",
+          "name": "H. Mỹ Xuyên",
           "code": 947,
           "codename": "huyen_my_xuyen",
           "division_type": "huyện",
@@ -79566,7 +79566,7 @@
           ]
         },
         {
-          "name": "Huyện Thạnh Trị",
+          "name": "H. Thạnh Trị",
           "code": 949,
           "codename": "huyen_thanh_tri",
           "division_type": "huyện",
@@ -79724,7 +79724,7 @@
           ]
         },
         {
-          "name": "Huyện Trần Đề",
+          "name": "H. Trần Đề",
           "code": 951,
           "codename": "huyen_tran_de",
           "division_type": "huyện",
@@ -79812,14 +79812,14 @@
       ]
     },
     {
-      "name": "Tỉnh Bạc Liêu",
+      "name": "T. Bạc Liêu",
       "code": 95,
       "codename": "tinh_bac_lieu",
       "division_type": "tỉnh",
       "phone_code": 291,
       "districts": [
         {
-          "name": "Thành phố Bạc Liêu",
+          "name": "TP. Bạc Liêu",
           "code": 954,
           "codename": "thanh_pho_bac_lieu",
           "division_type": "thành phố",
@@ -79898,7 +79898,7 @@
           ]
         },
         {
-          "name": "Huyện Hồng Dân",
+          "name": "H. Hồng Dân",
           "code": 956,
           "codename": "huyen_hong_dan",
           "division_type": "huyện",
@@ -79970,7 +79970,7 @@
           ]
         },
         {
-          "name": "Huyện Phước Long",
+          "name": "H. Phước Long",
           "code": 957,
           "codename": "huyen_phuoc_long",
           "division_type": "huyện",
@@ -80035,7 +80035,7 @@
           ]
         },
         {
-          "name": "Huyện Vĩnh Lợi",
+          "name": "H. Vĩnh Lợi",
           "code": 958,
           "codename": "huyen_vinh_loi",
           "division_type": "huyện",
@@ -80179,7 +80179,7 @@
           ]
         },
         {
-          "name": "Huyện Đông Hải",
+          "name": "H. Đông Hải",
           "code": 960,
           "codename": "huyen_dong_hai",
           "division_type": "huyện",
@@ -80265,7 +80265,7 @@
           ]
         },
         {
-          "name": "Huyện Hoà Bình",
+          "name": "H. Hoà Bình",
           "code": 961,
           "codename": "huyen_hoa_binh",
           "division_type": "huyện",
@@ -80332,14 +80332,14 @@
       ]
     },
     {
-      "name": "Tỉnh Cà Mau",
+      "name": "T. Cà Mau",
       "code": 96,
       "codename": "tinh_ca_mau",
       "division_type": "tỉnh",
       "phone_code": 290,
       "districts": [
         {
-          "name": "Thành phố Cà Mau",
+          "name": "TP. Cà Mau",
           "code": 964,
           "codename": "thanh_pho_ca_mau",
           "division_type": "thành phố",
@@ -80467,7 +80467,7 @@
           ]
         },
         {
-          "name": "Huyện U Minh",
+          "name": "H. U Minh",
           "code": 966,
           "codename": "huyen_u_minh",
           "division_type": "huyện",
@@ -80532,7 +80532,7 @@
           ]
         },
         {
-          "name": "Huyện Thới Bình",
+          "name": "H. Thới Bình",
           "code": 967,
           "codename": "huyen_thoi_binh",
           "division_type": "huyện",
@@ -80625,7 +80625,7 @@
           ]
         },
         {
-          "name": "Huyện Trần Văn Thời",
+          "name": "H. Trần Văn Thời",
           "code": 968,
           "codename": "huyen_tran_van_thoi",
           "division_type": "huyện",
@@ -80725,7 +80725,7 @@
           ]
         },
         {
-          "name": "Huyện Cái Nước",
+          "name": "H. Cái Nước",
           "code": 969,
           "codename": "huyen_cai_nuoc",
           "division_type": "huyện",
@@ -80811,7 +80811,7 @@
           ]
         },
         {
-          "name": "Huyện Đầm Dơi",
+          "name": "H. Đầm Dơi",
           "code": 970,
           "codename": "huyen_dam_doi",
           "division_type": "huyện",
@@ -80932,7 +80932,7 @@
           ]
         },
         {
-          "name": "Huyện Năm Căn",
+          "name": "H. Năm Căn",
           "code": 971,
           "codename": "huyen_nam_can",
           "division_type": "huyện",
@@ -80997,7 +80997,7 @@
           ]
         },
         {
-          "name": "Huyện Phú Tân",
+          "name": "H. Phú Tân",
           "code": 972,
           "codename": "huyen_phu_tan",
           "division_type": "huyện",
@@ -81069,7 +81069,7 @@
           ]
         },
         {
-          "name": "Huyện Ngọc Hiển",
+          "name": "H. Ngọc Hiển",
           "code": 973,
           "codename": "huyen_ngoc_hien",
           "division_type": "huyện",

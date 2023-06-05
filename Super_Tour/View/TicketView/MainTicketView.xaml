@@ -98,30 +98,30 @@
                                                 CanUserResize="False" 
                                                 Width="0.6*"
                                                 Binding="{Binding TOURIST.Id_Booking}"/>
-                        <DataGridTextColumn Header="Cus. Name" 
+                        <DataGridTextColumn Header="Cus. Booking" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.8*"
+                                                Width="0.7*"
                                                 Binding="{Binding TOURIST.BOOKING.CUSTOMER.Name_Customer}"/>
-                        <DataGridTextColumn Header="Tourist Name" 
+                        <DataGridTextColumn Header="Tourist" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.8*"
+                                                Width="0.7*"
                                                 Binding="{Binding TOURIST.Name_Tourist}"/>
                         <DataGridTextColumn Header="Travel Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.3*"
+                                                Width="1.*"
                                                 Binding="{Binding TOURIST.BOOKING.TRAVEL.TOUR.Name_Tour}"/>
-                        <DataGridTextColumn Header="Status" 
+                        <DataGridTextColumn Header="Booking Date" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="0.5*"
-                                                Binding="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                                Width="0.8*"
+                                                Binding="{Binding TOURIST.BOOKING.Booking_Date, StringFormat='dd/MM/yyyy'}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
-                                                Width="0.5*">
+                                                Width="0.6*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

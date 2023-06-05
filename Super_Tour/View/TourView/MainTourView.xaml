@@ -116,7 +116,6 @@
                                                 CanUserResize="False" 
                                                 Width="0.5*"
                                                 Binding="{Binding Id_Tour}"/>
-
                         <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
@@ -125,12 +124,12 @@
                         <DataGridTextColumn Header="Total Day" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="*"
+                                                Width="0.6*"
                                                 Binding="{Binding TotalDay}"/>
                         <DataGridTextColumn Header="Total Night" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="*"
+                                                Width="0.6*"
                                                 Binding="{Binding TotalNight}"/>
                         <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
@@ -140,7 +139,7 @@
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
-                                                Width="*">
+                                                Width="0.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

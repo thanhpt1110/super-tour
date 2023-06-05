@@ -2,6 +2,7 @@
 using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
+using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,9 @@ namespace Super_Tour.ViewModel
         private TYPE_PACKAGE _selectedTypePackage;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private List<PACKAGE> _listAvailablePackage;
+        private Province _selectedProvince;
+        private List<Province> _listProvince;
+        private ObservableCollection<Province> _listProvinces;
         private ObservableCollection<PACKAGE> _observableListAvailablePackage;
         private ObservableCollection<PACKAGE> _observableListSelectedPackage;
         private TOUR _tour;
@@ -32,6 +36,26 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Declare binding
+        public Province SelectedProvince
+        {
+            get { return _selectedProvince; }
+            set
+            {
+                _selectedProvince = value;
+                OnPropertyChanged(nameof(SelectedProvince));    
+            }
+        }
+
+        public ObservableCollection<Province> ListProvinces
+        {
+            get { return _listProvinces; }
+            set
+            {
+                _listProvinces = value;
+                OnPropertyChanged(nameof(ListProvinces));   
+            }
+        }
+
         public bool IsDataModified
         {
             get { return _isDataModified; }
@@ -106,6 +130,7 @@ namespace Super_Tour.ViewModel
         public ICommand AddAvailablePackageCommand { get; }
         public ICommand DeleteSelectedPackageCommand { get; }
         public ICommand SearchCommand { get; }
+        public ICommand SearchProvinceCommand { get; }  
         #endregion
 
         #region Constructor
@@ -127,6 +152,7 @@ namespace Super_Tour.ViewModel
             DeleteSelectedPackageCommand = new RelayCommand(ExecuteDeletePickedPackage);
             CreateNewPacakgeCommand = new RelayCommand(ExecuteCreatePackgeCommand);
             SearchCommand = new RelayCommand(ExecuteSearchCommand);
+            SearchProvinceCommand = new RelayCommand(ExecuteSearchProvinceCommand);
             if (isUpdate)
                 SavePackageCommand = new RelayCommand(ExecuteUpdatePackage);
             else
@@ -134,6 +160,10 @@ namespace Super_Tour.ViewModel
 
             // Load combo box TypePackage
             LoadTypePackage();
+
+            // Load combo box Province 
+            LoadProvinces();
+
             // Load datagrid Available Pacakage
             LoadAvailablePackage();
         }
@@ -150,6 +180,20 @@ namespace Super_Tour.ViewModel
             All.Name_Type = "All";
             All.Id_Type_Package = -1;
             _listTypePackage.Insert(0, All);
+            SelectedTypePackage = All;
+        }
+
+        private void LoadProvinces()
+        {
+            _listProvince = Get_Api_Address.getProvinces();
+            _listProvinces = new ObservableCollection<Province>(_listProvince);
+
+            // Add option load all Province
+            Province All = new Province();
+            All.name = "All";
+            All.codename = "-1";
+            _listProvinces.Insert(0, All);
+            SelectedProvince = All;
         }
 
         private async Task LoadAvailablePackage()
@@ -182,19 +226,30 @@ namespace Super_Tour.ViewModel
 
         private void LoadWithSearch()
         {
+            // Process query
             List<PACKAGE> listSearchType = null;
-            if (_selectedTypePackage.Id_Type_Package != -1)
-                listSearchType = this._listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
+
+            // Search by Province first
+            if (_selectedProvince.codename == "-1")
+                listSearchType = _listAvailablePackage;
             else
-                listSearchType = this._listAvailablePackage;
+                listSearchType = _listAvailablePackage.Where(p => p.Id_Province.Contains(_selectedProvince.codename)).ToList();
+            // Search by Type Package 
+            if (_selectedTypePackage.Id_Type_Package != -1)
+                listSearchType = _listAvailablePackage.Where(p => p.Id_Package == _selectedTypePackage.Id_Type_Package).ToList();
 
             ObservableListAvailablePackage.Clear();
+            // Load UI
             foreach (PACKAGE package in listSearchType)
             {
+                Province province = Get_Api_Address.getProvinces().First(p => p.codename == package.Id_Province);
+                package.ProvinceName = province.name;
                 ObservableListAvailablePackage.Add(package);
             }
             foreach (PACKAGE package in _observableListSelectedPackage)
             {
+                Province province = Get_Api_Address.getProvinces().First(p => p.codename == package.Id_Province);
+                package.ProvinceName = province.name;
                 ObservableListAvailablePackage.Remove(package);
             }
         }
@@ -204,6 +259,11 @@ namespace Super_Tour.ViewModel
         private void ExecuteSearchCommand(object obj)
         {
             LoadWithSearch();
+        }
+
+        private void ExecuteSearchProvinceCommand(object obj)
+        {
+            LoadWithSearch();   
         }
         #endregion
 

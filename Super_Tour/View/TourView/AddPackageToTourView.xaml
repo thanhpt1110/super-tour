@@ -83,11 +83,11 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox materialDesign:HintAssist.Hint="- Select Package Type -"
+                            <ComboBox materialDesign:HintAssist.Hint="Select Package Type"
                                   Width="200"
-                                      ItemsSource="{Binding ListTypePackage}"
-                                      DisplayMemberPath="Name_Type"
-                                      SelectedItem="{Binding SelectedTypePackage}"
+                                  ItemsSource="{Binding ListTypePackage}"
+                                  DisplayMemberPath="Name_Type"
+                                  SelectedItem="{Binding SelectedTypePackage}"
                                   materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
                                   Background="{StaticResource ComboBoxColor}"
                                   Foreground="Black"
@@ -95,12 +95,33 @@
                                   BorderBrush="DarkGray"
                                   FontSize="15"
                                   HorizontalAlignment="Left"
-                                  Margin="50,0,0,0"
+                                  Margin="10,0,0,0"
                                   Effect="{StaticResource MaterialDesignElevationShadow6}"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
                                         <i:InvokeCommandAction Command="{Binding SearchCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <ComboBox materialDesign:HintAssist.Hint="Select Province"
+                                  Width="200"
+                                  ItemsSource="{Binding ListProvinces}"
+                                  DisplayMemberPath="name"
+                                  SelectedItem="{Binding SelectedProvince}"
+                                  materialDesign:HintAssist.Background="{StaticResource ComboBoxColor}"
+                                  Background="{StaticResource ComboBoxColor}"
+                                  Foreground="Black"
+                                  materialDesign:HintAssist.Foreground="Black"
+                                  BorderBrush="DarkGray"
+                                  FontSize="15"
+                                  HorizontalAlignment="Left"
+                                  Margin="35,0,0,0"
+                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SearchProvinceCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
@@ -134,20 +155,19 @@
                                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                                           Style="{DynamicResource smallerDataGridStyle1}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Package ID"
+                                            <DataGridTextColumn Header="Package"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False"
-                                                Width="0.9*"
-                                                            Binding="{Binding Id_Package}"/>
-
-                                        <DataGridTextColumn Header="Package Name" 
+                                                Width="1*"
+                                                Binding="{Binding Name_Package}"/>
+                                            <DataGridTextColumn Header="Province" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
-                                                Binding="{Binding Name_Package}"/>
+                                                Width="0.8*"
+                                                Binding="{Binding ProvinceName}"/>
                                         <DataGridTemplateColumn Header="Operations" 
                                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
-                                                                IsReadOnly="True" Width="*">
+                                                                IsReadOnly="True" Width="0.6*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -193,18 +213,17 @@
                                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                                           Style="{DynamicResource smallerDataGridStyle1}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Package ID"
+                                            <DataGridTextColumn Header="Package"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False"
-                                                Width="0.9*"
-                                                Binding="{Binding Id_Package}"/>
-
-                                        <DataGridTextColumn Header="Package Name" 
+                                                Width="1*"
+                                                Binding="{Binding Name_Package}"/>
+                                            <DataGridTextColumn Header="Province" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
-                                                Binding="{Binding Name_Package}"/>
-                                        <DataGridTemplateColumn Header="Operations" HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" IsReadOnly="True" Width="*">
+                                                Width="0.8*"
+                                                Binding="{Binding ProvinceName}"/>
+                                            <DataGridTemplateColumn Header="Operations" HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}" IsReadOnly="True" Width="0.6*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
