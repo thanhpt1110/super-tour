@@ -224,12 +224,12 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Check data per second 
-        public void ReloadAfterCreateBooking(BOOKING booking)
+        public void ReloadAfterCreateBooking()
         {
             try
             {
-                _listOriginalBooking.Add(booking);
-                ListBookings.Add(booking);
+                _listOriginalBooking = db.BOOKINGs.ToList();
+                ReloadData();
             }
             catch (Exception ex)
             {

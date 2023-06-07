@@ -35,6 +35,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<District> _listDistricts = null;
         private Province _selectedProvince;
         private District _selectedDistrict;
+        private CUSTOMER _loadedCustomer = null;
         private string _selectedFilter = "Tour Name";
         private bool _isDataModified = false;
         private bool _onSearching = false;
@@ -82,8 +83,6 @@ namespace Super_Tour.ViewModel
                 {
                     _idNumber = value;
                     OnPropertyChanged(nameof(IdNumber));
-                    if (_idNumber.Length == 12)
-                        CheckAutoFillInformation();
                     CheckDataModified();
                 }
             }
@@ -101,6 +100,8 @@ namespace Super_Tour.ViewModel
                 {
                     _phoneNumber = value;
                     OnPropertyChanged(nameof(PhoneNumber));
+                    if (_phoneNumber.Length == 10)
+                        CheckAutoFillInformation();
                     CheckDataModified();
                 }
             }
@@ -392,23 +393,29 @@ namespace Super_Tour.ViewModel
         #region Auto fill Customer
         private void CheckAutoFillInformation()
         {
-            // Dò trong DB có ID Number đó ko
-            CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(p => p.IdNumber == this.IdNumber);
-            if (customer != null)
+            // Dò trong DB có Phone Number đó ko
+            _loadedCustomer = db.CUSTOMERs.FirstOrDefault(p => p.PhoneNumber == this.PhoneNumber);
+            if (_loadedCustomer != null)
             {
                 //MyMessageBox.ShowDialog("These information will be auto generated from existed customer!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                CustomerName = customer.Name_Customer;
-                PhoneNumber = customer.PhoneNumber;
-                SelectedGender = customer.Gender;
-                SelectedProvince = _listProvinces.Where(p => p.codename == customer.Id_Province).First();
+                CustomerName = _loadedCustomer.Name_Customer;
+                SelectedGender = _loadedCustomer.Gender;
 
-                _listDistricts.Clear();
-                List<District> districts = Get_Api_Address.getDistrict(_selectedProvince).ToList();
-                foreach (District district in districts)
+                if (_loadedCustomer.IdNumber != null) 
+                    IdNumber = _loadedCustomer.IdNumber;
+
+                if (_loadedCustomer.Id_Province != null && _loadedCustomer.Id_District != null)
                 {
-                    _listDistricts.Add(district);
+                    SelectedProvince = _listProvinces.Where(p => p.codename == _loadedCustomer.Id_Province).First();
+
+                    _listDistricts.Clear();
+                    List<District> districts = Get_Api_Address.getDistrict(_selectedProvince).ToList();
+                    foreach (District district in districts)
+                    {
+                        _listDistricts.Add(district);
+                    }
+                    SelectedDistrict = _selectedProvince.districts.Where(p => p.codename == _loadedCustomer.Id_District).FirstOrDefault();
                 }
-                SelectedDistrict = _selectedProvince.districts.Where(p => p.codename == customer.Id_District).FirstOrDefault();
             }
         }
         #endregion
@@ -419,25 +426,22 @@ namespace Super_Tour.ViewModel
             try
             {
                 // Update customer information 
-                CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(p => p.IdNumber == this.IdNumber);
-                if (customer == null)
-                {
-                    customer = new CUSTOMER();
-                    customer.IdNumber = this.IdNumber;
-                }
-                customer.Name_Customer = CustomerName;
-                customer.PhoneNumber = PhoneNumber;
-                customer.Gender = _selectedGender;
-                customer.Id_Province = _selectedProvince.codename;
-                customer.Id_District = _selectedDistrict.codename;
-                db.CUSTOMERs.AddOrUpdate(customer); 
+                if (_loadedCustomer == null)
+                    _loadedCustomer = new CUSTOMER();
+                _loadedCustomer.PhoneNumber = PhoneNumber;
+                _loadedCustomer.Name_Customer = CustomerName;
+                _loadedCustomer.IdNumber = IdNumber;
+                _loadedCustomer.Gender = _selectedGender;
+                _loadedCustomer.Id_Province = _selectedProvince.codename;
+                _loadedCustomer.Id_District = _selectedDistrict.codename;
+                db.CUSTOMERs.AddOrUpdate(_loadedCustomer); 
                 await db.SaveChangesAsync();
 
                 // Save booking to BOOKING table
                 BOOKING booking = new BOOKING();
                 booking.Status = "Payed";
                 booking.Id_Travel = _selectedTravel.Id_Travel;
-                booking.Id_Customer_Booking = customer.Id_Customer;
+                booking.Id_Customer_Booking = _loadedCustomer.Id_Customer;
                 booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count;
                 booking.Booking_Date = DateTime.Now;
                 db.BOOKINGs.Add(booking);
@@ -460,7 +464,7 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog("Add new booking successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 _mainViewModel.removeFirstChild();
                 _mainViewModel.CurrentChildView = _mainBookingViewModel;
-                _mainBookingViewModel.ReloadAfterCreateBooking(booking);
+                _mainBookingViewModel.ReloadAfterCreateBooking();
             }
             catch(Exception ex)
             {

@@ -227,7 +227,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <Label Content="ID Number"
+                                        <Label Content="Phone Number"
                                                FontSize="15"/>
                                         <Label Content="*"
                                                Foreground="Red"
@@ -236,18 +236,18 @@
                                     </StackPanel>
                                     <TextBox
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="auto"
                                         FontSize="18"
                                         CaretBrush="Black"
                                         BorderBrush="Black"
                                         Foreground="Black"
                                         Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Ex: 075203002689"
+                                        materialDesign:HintAssist.Hint="Ex: 2152045519"
                                         materialDesign:HintAssist.Foreground="Black"
                                         materialDesign:HintAssist.Background="Transparent"
                                         materialDesign:HintAssist.IsFloating="False"
-                                        MaxLength="12"/>
+                                        MaxLength="10"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical"
                                             Margin="0,10,0,0">
@@ -276,7 +276,7 @@
                                 <StackPanel Orientation="Vertical"
                                             Margin="0,10,0,0">
                                     <StackPanel Orientation="Horizontal">
-                                        <Label Content="Phone number"
+                                        <Label Content="ID number"
                                                FontSize="15"/>
                                         <Label Content="*"
                                                Foreground="Red"
@@ -285,18 +285,18 @@
                                     </StackPanel>
                                     <TextBox
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="auto"
                                         FontSize="18"
                                         CaretBrush="Black"
                                         BorderBrush="Black"
                                         Foreground="Black"
                                         Background="{StaticResource TextBoxColor}"
-                                        materialDesign:HintAssist.Hint="Ex: 2152045519"
+                                        materialDesign:HintAssist.Hint="Ex: 075203002689"
                                         materialDesign:HintAssist.Foreground="Black"
                                         materialDesign:HintAssist.Background="Transparent"
                                         materialDesign:HintAssist.IsFloating="False"
-                                        MaxLength="10"/>
+                                        MaxLength="12"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Vertical"

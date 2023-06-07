@@ -95,13 +95,13 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.4*"/>
-                        <DataGridTextColumn Header="ID Number" 
-                                            Binding="{Binding IdNumber}"
+                        <DataGridTextColumn Header="Phone number" 
+                                            Binding="{Binding PhoneNumber}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.2*"/>
-                        <DataGridTextColumn Header="Phone number" 
-                                            Binding="{Binding PhoneNumber}"
+                        <DataGridTextColumn Header="Gender" 
+                                            Binding="{Binding Gender}"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1.2*"/>

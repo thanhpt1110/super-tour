@@ -166,14 +166,21 @@ namespace Super_Tour.ViewModel
             _listDistrict = new ObservableCollection<District>();
 
             // Load data from existed item
-            LoadProvinces();
-            _selectedProvince = _listProvince.Where(p => p.codename == _selectedItem.Id_Province).FirstOrDefault();
-            _selectedDistrict = Get_Api_Address.getDistrict(_selectedProvince).Where(p => p.codename == _selectedItem.Id_District).FirstOrDefault();
-            LoadDistrict();
-            _selectedGender = _selectedItem.Gender;
+            // These fill can not be null
             _phoneNumber = _selectedItem.PhoneNumber;
+            _selectedGender = _selectedItem.Gender;
             _name = _selectedItem.Name_Customer;
-            _idNumber = _selectedItem.IdNumber;
+
+            // These fill can be null
+            LoadProvinces();
+            if (_selectedItem.Id_Province != null && _selectedItem.Id_District != null)
+            {
+                _selectedProvince = _listProvince.Where(p => p.codename == _selectedItem.Id_Province).FirstOrDefault();
+                _selectedDistrict = Get_Api_Address.getDistrict(_selectedProvince).Where(p => p.codename == _selectedItem.Id_District).FirstOrDefault();
+                LoadDistrict();
+            }
+            if (_selectedItem.IdNumber != null) 
+                _idNumber = _selectedItem.IdNumber;
         }
         #endregion
 
@@ -224,29 +231,35 @@ namespace Super_Tour.ViewModel
         #region Check data is modified
         private void CheckDataModified()
         {
-            if ((string.IsNullOrEmpty(_idNumber) || string.IsNullOrEmpty(_phoneNumber) || string.IsNullOrEmpty(_name) ||
-                _selectedGender == null || _selectedProvince == null || _selectedDistrict == null) ||
-                _idNumber == _selectedItem.IdNumber && _phoneNumber == _selectedItem.PhoneNumber &&
-                _name == _selectedItem.Name_Customer && _selectedGender == _selectedItem.Gender &&
-                _selectedDistrict.codename == _selectedItem.Id_District && _selectedProvince.codename == _selectedItem.Id_Province)
+            if ((string.IsNullOrEmpty(_phoneNumber) || string.IsNullOrEmpty(_name) ||
+                _selectedGender == null || _phoneNumber == _selectedItem.PhoneNumber &&
+                _name == _selectedItem.Name_Customer && _selectedGender == _selectedItem.Gender)
+                && (_selectedItem.IdNumber != null && _selectedItem.IdNumber == IdNumber) 
+                && (_selectedItem.Id_Province != null && _selectedItem.Id_Province == _selectedProvince.codename)
+                && (_selectedItem.Id_District != null && _selectedItem.Id_District == _selectedDistrict.codename))
                 IsDataModified = false;
             else
                 IsDataModified = true;
         }
         #endregion
 
-        #region Perform add new customer
+        #region Perform update customer
         public void AddNewCustomer(object a)
         {
             try
             {
                 // Save data to DB
-                _selectedItem.IdNumber = _idNumber;
-                _selectedItem.Name_Customer = _name;
                 _selectedItem.PhoneNumber = _phoneNumber;
+                _selectedItem.Name_Customer = _name;
                 _selectedItem.Gender = _selectedGender;
-                _selectedItem.Id_Province = _selectedProvince.codename;
-                _selectedItem.Id_District = _selectedDistrict.codename;
+
+                if (IdNumber != null)
+                    _selectedItem.IdNumber = _idNumber;
+                if (_selectedItem.Id_Province != null && _selectedItem.Id_District != null)
+                {
+                    _selectedItem.Id_Province = _selectedProvince.codename;
+                    _selectedItem.Id_District = _selectedDistrict.codename;
+                }
                 db.CUSTOMERs.AddOrUpdate(_selectedItem);
                 db.SaveChanges();
 

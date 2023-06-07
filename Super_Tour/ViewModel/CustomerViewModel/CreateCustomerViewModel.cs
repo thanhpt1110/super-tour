@@ -216,8 +216,8 @@ namespace Super_Tour.ViewModel
         #region Check data is modified
         private void CheckDataModified()
         {
-            if (string.IsNullOrEmpty(_idNumber) || string.IsNullOrEmpty(_phoneNumber)|| string.IsNullOrEmpty(_name) ||
-                _selectedGender == null || _selectedProvince == null || _selectedDistrict == null)
+            if (string.IsNullOrEmpty(_phoneNumber)|| string.IsNullOrEmpty(_name) ||
+                _selectedGender == null)
                 IsDataModified = false;
             else
                 IsDataModified = true;
@@ -230,12 +230,15 @@ namespace Super_Tour.ViewModel
             try
             {
                 // Save data to DB
-                _selectedItem.IdNumber = _idNumber;
-                _selectedItem.Name_Customer = _name;
                 _selectedItem.PhoneNumber = _phoneNumber;
+                _selectedItem.Name_Customer = _name;
                 _selectedItem.Gender = _selectedGender;
+
+                // These fill can be null
+                /*_selectedItem.IdNumber = _idNumber;
                 _selectedItem.Id_Province = _selectedProvince.codename;
-                _selectedItem.Id_District = _selectedDistrict.codename;
+                _selectedItem.Id_District = _selectedDistrict.codename;*/
+
                 db.CUSTOMERs.Add(_selectedItem);
                 db.SaveChanges();
                 _selectedItem.Id_Customer = db.CUSTOMERs.Max(p => p.Id_Customer);

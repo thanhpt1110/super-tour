@@ -102,121 +102,27 @@
                                                     HorizontalAlignment="Center"
                                                     Margin="10,10,0,0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Content="ID number"/>
-                                                <Label Content="*"
-                                                       Foreground="Red"
-                                                       Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <TextBox
-                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                    Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Height="auto"
-                                                    FontSize="15"
-                                                    CaretBrush="Black"
-                                                    BorderBrush="Black"
-                                                    Foreground="Black"
-                                                    Background="{StaticResource TextBoxColor}"
-                                                    materialDesign:HintAssist.Hint="Ex: 075203002869"
-                                                    materialDesign:HintAssist.Foreground="Black"
-                                                    materialDesign:HintAssist.Background="Transparent"
-                                                    materialDesign:HintAssist.IsFloating="False"
-                                                    MaxLength="12"  
-                                                    Width="300">
-                                            </TextBox>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <StackPanel Orientation="Vertical"
-                                                    HorizontalAlignment="Center"
-                                                Margin="10,10,0,0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Name"/>
-                                                <Label Content="*"
-                                                       Foreground="Red"
-                                                       Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <TextBox
-                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Height="auto"
-                                                FontSize="15"
-                                                BorderBrush="Black"
-                                                CaretBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource TextBoxColor}"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Ex: Nguyen Van A"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="300"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Grid.Row="2">
-                                        <StackPanel Orientation="Vertical"
-                                                    HorizontalAlignment="Center"
-                                                Margin="10,10,0,0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Label Content="Province"/>
-                                                <Label Content="*"
-                                                       Foreground="Red"
-                                                       Margin="-5,0,0,0"/>
-                                            </StackPanel>
-                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                ItemsSource="{Binding ListProvince}"
-                                                DisplayMemberPath="name"
-                                                SelectedItem="{Binding SelectedProvince}"
-                                                HorizontalAlignment="Left"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxColor}"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select Province"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="300"
-                                                Height="auto"
-                                                FontSize="15">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </ComboBox>
-                                        </StackPanel>
-                                        
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <StackPanel Orientation="Vertical"
-                                                HorizontalAlignment="Center"
-                                                Margin="10,10,0,0">
-                                            <StackPanel Orientation="Horizontal">
                                                 <Label Content="Phone"/>
                                                 <Label Content="*"
                                                        Foreground="Red"
                                                        Margin="-5,0,0,0"/>
                                             </StackPanel>
                                             <TextBox
-                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Height="auto"
-                                                FontSize="15"
-                                                Background="{StaticResource TextBoxColor}"
-                                                BorderBrush="Black"
-                                                CaretBrush="Black"
-                                                Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Ex: 2152045519"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"
-                                                Width="300"
-                                                MaxLength="10"/>
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                    Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="auto"
+                                                    FontSize="15"
+                                                    CaretBrush="Black"
+                                                    BorderBrush="Black"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource TextBoxColor}"
+                                                    materialDesign:HintAssist.Hint="Ex: 2152045519"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    MaxLength="10"  
+                                                    Width="300">
+                                            </TextBox>
                                         </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1">
@@ -254,10 +160,96 @@
                                                     HorizontalAlignment="Center"
                                                 Margin="10,10,0,0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Content="District"/>
+                                                <Label Content="Province"/>
+                                            </StackPanel>
+                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                ItemsSource="{Binding ListProvince}"
+                                                DisplayMemberPath="name"
+                                                SelectedItem="{Binding SelectedProvince}"
+                                                HorizontalAlignment="Left"
+                                                BorderBrush="Black"
+                                                Foreground="Black"
+                                                Background="{StaticResource ComboBoxColor}"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Select Province"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                Height="auto"
+                                                FontSize="15">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="SelectionChanged">
+                                                        <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Name"/>
                                                 <Label Content="*"
                                                        Foreground="Red"
                                                        Margin="-5,0,0,0"/>
+                                            </StackPanel>
+                                            <TextBox
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Height="auto"
+                                                FontSize="15"
+                                                BorderBrush="Black"
+                                                CaretBrush="Black"
+                                                Foreground="Black"
+                                                Background="{StaticResource TextBoxColor}"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Ex: Nguyen Van A"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="ID Number"/>
+                                            </StackPanel>
+                                            <TextBox
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Height="auto"
+                                                FontSize="15"
+                                                Background="{StaticResource TextBoxColor}"
+                                                BorderBrush="Black"
+                                                CaretBrush="Black"
+                                                Foreground="Black"
+                                                materialDesign:HintAssist.Hint="Ex: 075203002869"
+                                                materialDesign:HintAssist.Foreground="Black"
+                                                materialDesign:HintAssist.Background="Transparent"
+                                                materialDesign:HintAssist.IsFloating="False"
+                                                Width="300"
+                                                MaxLength="12"/>
+                                        </StackPanel>
+
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <StackPanel Orientation="Vertical"
+                                                    HorizontalAlignment="Center"
+                                                Margin="10,10,0,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="District"/>
                                             </StackPanel>
                                             <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 ItemsSource="{Binding ListDistrict}"
