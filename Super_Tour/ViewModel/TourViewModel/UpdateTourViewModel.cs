@@ -202,6 +202,8 @@ namespace Super_Tour.ViewModel
 
         private async Task LoadTourDetailsInformation()
         {
+            try
+            {
             await Task.Run(() => {
                 List<TOUR_DETAILS> listTourDetail = db.TOUR_DETAILs.Where(p => p.Id_Tour == _tour.Id_Tour).ToList();
                 Application.Current.Dispatcher.Invoke(() => {
@@ -228,6 +230,11 @@ namespace Super_Tour.ViewModel
                     TotalNight = _dateActivityList.Count - 1;
                 });
             });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -268,7 +275,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteAddADayCommand(object obj)
         {
             int currentDay = DateActivityList.Count + 1;
-            DateActivity dateActivity = new DateActivity(currentDay, null, this);
+            DateActivity dateActivity = new DateActivity(currentDay, null, this, true, _tour);
             DateActivityList.Add(dateActivity);
             TotalDay = currentDay;
             TotalNight = currentDay - 1;

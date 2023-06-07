@@ -357,7 +357,7 @@ namespace Super_Tour.ViewModel
             #region Add package to Tour
             private void ExecuteAddPackageToTourMorningCommand(object obj)
             {
-                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();               
+                AddPackageToTourView addPackageToTourView = new AddPackageToTourView();      
                 addPackageToTourView.DataContext = new AddPackageToTourViewModel(_morningTourDetail, _isUpdate, _tour);
 
                 // Calculate old price
@@ -390,6 +390,7 @@ namespace Super_Tour.ViewModel
             private void ExecuteAddPackageToTourEveningCommand(object obj)
             {
                 AddPackageToTourView addPackageToTourView = new AddPackageToTourView();
+                ObservableCollection<GridActivity> tempEvening = new ObservableCollection<GridActivity>(_eveningTourDetail);
                 addPackageToTourView.DataContext = new AddPackageToTourViewModel(_eveningTourDetail, _isUpdate, _tour);
 
                 // Calculate old price
@@ -399,9 +400,17 @@ namespace Super_Tour.ViewModel
                 // Calculate price 
                 decimal newEveningPrice = SumActivityPrice(_eveningTourDetail);
                 if (_isUpdate)
+                {
+                    if (tempEvening.Count() == 0 && tempEvening != _eveningTourDetail)
+                        _updateTourViewModel.TotalNight++;
                     _updateTourViewModel.ReloadPriceWith(oldEveningPrice, newEveningPrice);
+                }
                 else
+                {
+                    if (tempEvening.Count() == 0 && tempEvening != _eveningTourDetail)
+                        _createTourViewModel.TotalNight++;
                     _createTourViewModel.ReloadPriceWith(oldEveningPrice, newEveningPrice);
+                }
             }
 
             private decimal SumActivityPrice(ObservableCollection<GridActivity> activityDetails)
