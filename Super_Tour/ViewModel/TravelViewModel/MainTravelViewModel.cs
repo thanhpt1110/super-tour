@@ -165,7 +165,7 @@ namespace Super_Tour.ViewModel
             this._listTravels = new ObservableCollection<TRAVEL>();
             LoadDataAsync();
             Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromSeconds(3);
+            Timer.Interval = TimeSpan.FromSeconds(0.5);
             Timer.Tick += Timer_Tick; 
         }
         #endregion

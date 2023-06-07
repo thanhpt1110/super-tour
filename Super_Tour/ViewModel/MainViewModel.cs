@@ -17,6 +17,7 @@ using Super_Tour.View;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Super_Tour.CustomControls;
+using System.Windows.Documents;
 
 namespace Super_Tour.ViewModel
 {
@@ -50,9 +51,53 @@ namespace Super_Tour.ViewModel
         private TravelStatisticViewModel _travelStatisticViewModel = null;
         private DispatcherTimer _timer = null;
         private ACCOUNT _currentUser = null;
+        private bool _customerChecked = false;
+        private bool _travelChecked = false;
+        private bool _revenueChecked = false;
+        private bool _bookingChecked = false;
         #endregion
 
         #region Declare binding
+        public bool BookingChecked
+        {
+            get { return _bookingChecked; }
+            set
+            {
+                _bookingChecked = value;
+                OnPropertyChanged(nameof(BookingChecked));  
+            }
+        }
+
+        public bool RevenueChecked
+        {
+            get { return _revenueChecked; }
+            set
+            {
+                _revenueChecked = value;
+                OnPropertyChanged(nameof(RevenueChecked));
+            }
+        }
+
+        public bool TravelChecked
+        {
+            get { return _travelChecked; }
+            set
+            {
+                _travelChecked = value;
+                OnPropertyChanged(nameof(TravelChecked));
+            }
+        }
+
+        public bool CustomerChecked
+        {
+            get { return _customerChecked; }
+            set
+            {
+                _customerChecked = value;
+                OnPropertyChanged(nameof(CustomerChecked));
+            }
+        }
+
         public bool VisibilityTour
         {
             get { return _visibilityTour; }
@@ -221,14 +266,15 @@ namespace Super_Tour.ViewModel
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             BackToPreviousChildCommand = new RelayCommand(ExecuteBackToPreviousChildCommand);
             SignOutCommand = new RelayCommand(ExecuteSignOutCommand);
-            _dashBoardViewModel = new DashBoardViewModel();
+            _dashBoardViewModel = new DashBoardViewModel(this);
             removeFirstChild();
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
-            /*_timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
-            _timer.Tick += Timer_Tick;*/
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(0.5);
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
         #endregion
 
@@ -364,7 +410,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteShowDashboardViewCommand(object obj)
         {
             if (_dashBoardViewModel == null)
-                _dashBoardViewModel = new DashBoardViewModel();
+                _dashBoardViewModel = new DashBoardViewModel(this);
             CurrentChildView = _dashBoardViewModel;
             Caption = "Dashboard";
             Icon = IconChar.Home;
@@ -446,6 +492,9 @@ namespace Super_Tour.ViewModel
         }
         private void ExecuteShowRevenueStatisticViewCommand(object obj)
         {
+            if(_revenueStatisticViewModel == null)
+                _revenueStatisticViewModel = new RevenueStatisticViewModel();
+            CurrentChildView = _revenueStatisticViewModel;
             Caption = "Revenue Statistic";
             Icon = IconChar.Database;
             removeFirstChild();
@@ -521,6 +570,32 @@ namespace Super_Tour.ViewModel
                 VisibilityTour = false;
                 VisibilityTravel = false;
             }
+        }
+        #endregion
+
+        #region Open new window by Dashboard
+        public void GoToCustomerManagement()
+        {
+            ExecuteShowCustomerViewCommand(null);
+            CustomerChecked = true;
+        }
+
+        public void GoToTravelManagement()
+        {
+            ExecuteShowTravelViewCommand(null);
+            TravelChecked = true;
+        }
+
+        public void GoToBookingManagement()
+        {
+            ExecuteShowBookingViewCommand(null);
+            BookingChecked = true;
+        }
+
+        public void GoToRevenueStatistic()
+        {
+            ExecuteShowRevenueStatisticViewCommand(null);
+            RevenueChecked = true;
         }
         #endregion
     }

@@ -93,11 +93,6 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource DataGridStyle1}" Margin="55,30,55,10">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Booking ID"
-                                                IsReadOnly="True" 
-                                                CanUserResize="False" 
-                                                Width="0.6*"
-                                                Binding="{Binding TOURIST.Id_Booking}"/>
                         <DataGridTextColumn Header="Cus. Booking" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
@@ -118,6 +113,11 @@
                                                 CanUserResize="False" 
                                                 Width="0.8*"
                                                 Binding="{Binding TOURIST.BOOKING.Booking_Date, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Status" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="0.5*"
+                                                Binding="{Binding Status}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

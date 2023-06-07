@@ -135,7 +135,8 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color2}"
                                     Visibility="{Binding VisibilityTravel, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                     Command="{Binding ShowTravelViewCommand}">
+                                     Command="{Binding ShowTravelViewCommand}"
+                                     IsChecked="{Binding TravelChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Travel" Style="{StaticResource menuButtonText}"/>
@@ -143,7 +144,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color3}"
-                                     Command="{Binding ShowBookingViewCommand}">
+                                     Command="{Binding ShowBookingViewCommand}"
+                                     IsChecked="{Binding BookingChecked,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Hand" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Booking" Style="{StaticResource menuButtonText}"/>
@@ -151,7 +153,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource menuButton}"
                                     Tag="{StaticResource color4}"
-                                     Command="{Binding ShowCustomerViewCommand}">
+                                     Command="{Binding ShowCustomerViewCommand}"
+                                     IsChecked="{Binding CustomerChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Customer" Style="{StaticResource menuButtonText}"/>
@@ -194,7 +197,8 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource menuButton}"
                             Tag="{StaticResource color8}"
-                                     Command="{Binding ShowCustomerStatisticViewCommand}">
+                                     Command="{Binding ShowRevenueStatisticViewCommand}"
+                                     IsChecked="{Binding RevenueChecked}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>

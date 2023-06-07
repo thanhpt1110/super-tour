@@ -156,7 +156,7 @@ namespace Super_Tour.ViewModel
             firebaseStorage = new FirebaseStorage(@"supertour-30e53.appspot.com");
             LoadDataAsync();
             Timer = new DispatcherTimer();
-            Timer.Interval = TimeSpan.FromSeconds(1);
+            Timer.Interval = TimeSpan.FromSeconds(0.5);
             Timer.Tick += Timer_Tick;
         }
         #endregion

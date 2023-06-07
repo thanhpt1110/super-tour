@@ -150,7 +150,7 @@ namespace Super_Tour.ViewModel
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             LoadDataAsync();
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Interval = TimeSpan.FromSeconds(0.5);
             _timer.Tick += _timer_Tick;
         }
         #endregion

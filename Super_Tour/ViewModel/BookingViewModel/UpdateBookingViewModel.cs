@@ -309,6 +309,8 @@ namespace Super_Tour.ViewModel
                     db.TICKETs.RemoveRange(listTickets);
                     await db.SaveChangesAsync();
                 }
+                // Synchronize real-time data
+                UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
 
                 // Remove old data in List Tourist 
                 List<TOURIST> listTourist = db.TOURISTs.Where(p => p.Id_Booking == _booking.Id_Booking).ToList();

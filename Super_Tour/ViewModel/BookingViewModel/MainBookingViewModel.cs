@@ -177,7 +177,7 @@ namespace Super_Tour.ViewModel
 
             LoadDataAsync();
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Interval = TimeSpan.FromSeconds(0.5);
             _timer.Tick += Timer_Tick;
         }
         #endregion
@@ -399,6 +399,10 @@ namespace Super_Tour.ViewModel
                 db.TICKETs.Add(ticket);
             }
             await db.SaveChangesAsync();
+
+            // Synchronize real-time data
+            UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
+
             MyMessageBox.ShowDialog("Export tickets succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
         }
         #endregion

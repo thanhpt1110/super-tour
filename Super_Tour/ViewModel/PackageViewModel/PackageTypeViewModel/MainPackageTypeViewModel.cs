@@ -150,7 +150,7 @@ namespace Super_Tour.ViewModel
             TimePackageType = DateTime.Now;
             LoadDataAsync();
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Interval = TimeSpan.FromSeconds(0.5);
             _timer.Tick += Timer_Tick;
         }
         #endregion
