@@ -314,13 +314,13 @@ namespace Super_Tour.ViewModel
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Dashboard
-            /*if (_dashBoardViewModel != null)
+            if (_dashBoardViewModel != null)
             {
                 if (CurrentChildView == _dashBoardViewModel)
                     _dashBoardViewModel.Timer.Start();
                 else    
                     _dashBoardViewModel.Timer.Stop();
-            }*/
+            }
 
             // Travel
             if (_mainTravelViewModel != null)

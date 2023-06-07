@@ -5,6 +5,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Student_wpf_application.ViewModels.Command;
@@ -26,13 +27,31 @@ namespace Super_Tour.ViewModel
         private string _totalRevenue = null;
         private int _totalTicket = 0;
         private int _totalTravel = 0;
-        private string _mostFrequentlyProvince = null;
+        private string _mostFrequentlyTour = null;
         private string _totalBooking = null;
-        private DispatcherTimer Timer = null;
-        private string table = "UPDATE_DASHBOARD";
+        private int _unpaidBooking = 0;
+        private DispatcherTimer _timer = null;
+        private DateTime _customerDashboard;
+        private DateTime _ticketDashboard;
+        private DateTime _bookingDashboard;
+        private DateTime _travelDashboard;
+        private UPDATE_CHECK _trackerCustomer = null;
+        private UPDATE_CHECK _trackerTicket = null;
+        private UPDATE_CHECK _trackerTravel = null;
+        private UPDATE_CHECK _trackerBooking = null;
         #endregion
 
         #region Declare binding
+        public int UnpaidBooking
+        {
+            get { return _unpaidBooking; }
+            set
+            {
+                _unpaidBooking = value;
+                OnPropertyChanged(nameof(UnpaidBooking));
+            }
+        }
+
         public string TotalBooking
         {
             get { return _totalBooking; }
@@ -43,13 +62,13 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public string MostFrequentlyProvince
+        public string MostFrequentlyTour
         {
-            get { return _mostFrequentlyProvince;}
+            get { return _mostFrequentlyTour;}
             set
             {
-                _mostFrequentlyProvince = value;
-                OnPropertyChanged(nameof(MostFrequentlyProvince));
+                _mostFrequentlyTour = value;
+                OnPropertyChanged(nameof(MostFrequentlyTour));
             }
         }
 
@@ -109,6 +128,7 @@ namespace Super_Tour.ViewModel
         public ICommand GoToTravelManagementCommand { get; }
         public ICommand GoToBookingManagementCommand { get; }
         public ICommand GoToRevenueStatisticCommand { get; }
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
         #region Constructor
@@ -117,11 +137,16 @@ namespace Super_Tour.ViewModel
             // Create objects
             db = SUPER_TOUR.db;
             _mainViewModel = mainViewModel;
-            _timeDashboard = DateTime.Now;
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(0.5);
-            //Timer.Tick += Timer_Tick;
+            Timer.Tick += Timer_Tick;
 
+            // Objects to sync
+            _customerDashboard = DateTime.Now;
+            _travelDashboard = DateTime.Now;
+            _ticketDashboard = DateTime.Now;
+            _bookingDashboard = DateTime.Now;
+                
             // Create command
             GoToCustomerManagementCommand = new RelayCommand(ExecuteGoToCustomerManagement);
             GoToTravelManagementCommand = new RelayCommand(ExecuteGoToTravelManagement);
@@ -130,37 +155,95 @@ namespace Super_Tour.ViewModel
 
             LoadUI();
         }
+        #endregion
 
         #region Check data persecond
-       /* private async void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                await Task.Run(async () =>
-                {
-                    _tracker = UPDATE_CHECK.getTracker(table);
-                    if (DateTime.Parse(_tracker.DateTimeUpdate) > _timeDashboard)
-                    {
-                        _timeDashboard = (DateTime.Parse(_tracker.DateTimeUpdate));
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            
-                        });
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-        }*/
+             try
+             {
+                 await Task.Run(async () =>
+                 {
+                     // Compare customer
+                     _trackerCustomer = UPDATE_CHECK.getTracker("UPDATE_CUSTOMER");
+                     if (DateTime.Parse(_trackerCustomer.DateTimeUpdate) > _customerDashboard)
+                     {
+                         _customerDashboard = (DateTime.Parse(_trackerCustomer.DateTimeUpdate));
+                         System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             LoadCustomerData();
+                         });
+                     }
+                     // Compare ticket
+                     _trackerTicket = UPDATE_CHECK.getTracker("UPDATE_TICKET");
+                     if (DateTime.Parse(_trackerTicket.DateTimeUpdate) > _ticketDashboard)
+                     {
+                         _ticketDashboard = (DateTime.Parse(_trackerTicket.DateTimeUpdate));
+                         System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             LoadTicketData();
+                         });
+                     }
+                     // Compare booking
+                     _trackerBooking = UPDATE_CHECK.getTracker("UPDATE_BOOKING");
+                     if (DateTime.Parse(_trackerBooking.DateTimeUpdate) > _bookingDashboard)
+                     {
+                         _bookingDashboard = (DateTime.Parse(_trackerBooking.DateTimeUpdate));
+                         System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             LoadBookingData();
+                         });
+                     }
+                     // Compare travel
+                     _trackerTravel = UPDATE_CHECK.getTracker("UPDATE_TRAVEL");
+                     if (DateTime.Parse(_trackerTravel.DateTimeUpdate) > _travelDashboard)
+                     {
+                         _travelDashboard = (DateTime.Parse(_trackerTravel.DateTimeUpdate));
+                         System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                         {
+                             LoadTravelData();
+                         });
+                     }
+                 });
+             }
+             catch (Exception ex)
+             {
+                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+             }
+         }
         #endregion
 
         #region Load UI 
         public void LoadUI()
         {
+            LoadCustomerData();
+            LoadTravelData();
+            LoadBookingData();
+            LoadTicketData();           
+        }
+        #endregion
+
+        #region Load CUSTOMER data
+        private void LoadCustomerData()
+        {
             // Total customer
             TotalCustomer = db.CUSTOMERs.Count();
+        }
+        #endregion
+
+        #region Load TICKET data
+        private void LoadTicketData()
+        {
+            // Total ticket
+            TotalTicket = db.TICKETs.Count();
+        }
+        #endregion
+
+        #region Load BOOKING data
+        private void LoadBookingData()
+        {
+            // Unpaid booking
+            UnpaidBooking = db.BOOKINGs.Where(p => p.Status == "Unpaid").Count();
 
             //Most freq customer
             var result = db.BOOKINGs.GroupBy(b => b.Id_Customer_Booking).OrderByDescending(g => g.Count()).FirstOrDefault();
@@ -181,23 +264,34 @@ namespace Super_Tour.ViewModel
                 decimal totalPriceSum = db.BOOKINGs.Sum(b => b.TotalPrice);
                 TotalRevenue = totalPriceSum.ToString("#,#") + " VND";
             }
-            else 
+            else
                 TotalRevenue = "0 VND";
-
-            // Total ticket
-            TotalTicket = db.TICKETs.Count();   
-
-            // Total travel
-            TotalTravel =  db.TRAVELs.Count();
-
-            // Most freq province
 
             // Total booking
             TotalBooking = db.BOOKINGs.Count().ToString();
         }
         #endregion
 
-        #region Button naviagation
+        #region Load TRAVEL data
+        private void LoadTravelData()
+        {
+            // Total travel
+            TotalTravel = db.TRAVELs.Count();
+
+            // Most freq tour
+            var tour = db.TRAVELs.GroupBy(b => b.Id_Tour).OrderByDescending(g => g.Count()).FirstOrDefault();
+            if (tour != null)
+            {
+                int idTour = tour.Key;
+                var mostTour = db.TOURs.FirstOrDefault(c => c.Id_Tour == idTour);
+                MostFrequentlyTour = mostTour.Name_Tour;
+            }
+            else
+                MostFrequentlyTour = "Not available!";
+        }
+        #endregion
+
+        #region Button navigation
         private void ExecuteGoToCustomerManagement(object obj)
         {
             _mainViewModel.GoToCustomerManagement();
@@ -218,6 +312,6 @@ namespace Super_Tour.ViewModel
             _mainViewModel.GoToRevenueStatistic();
         }
         #endregion
-        #endregion
+
     }
 }

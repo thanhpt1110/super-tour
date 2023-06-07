@@ -191,12 +191,12 @@
                                     Foreground="{StaticResource DashboardBorderColor4}"
                                     HorizontalAlignment="Center"
                                     Margin="0,15,0,0"/>
-                                <TextBlock Text="17"
+                                <TextBlock Text="{Binding UnpaidBooking, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            FontSize="20"
                                            FontWeight="Medium"
                                            HorizontalAlignment="Center"
                                            Margin="0,5,0,5"/>
-                                <TextBlock Text="Booking confirmation"
+                                <TextBlock Text="Unpaid booking"
                                            FontSize="15"
                                            FontWeight="Medium"
                                            HorizontalAlignment="Center"/>
@@ -211,7 +211,13 @@
                             <TextBlock Text="Resolve Now >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding GoToBookingManagementCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                            </TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -297,7 +303,7 @@
                                             FontWeight="Bold"
                                             Margin="20,0,0,2"/>
                                     <TextBlock 
-                                            Text="Most Frequently Booking"
+                                            Text="Most frequently booking"
                                             FontSize="15"
                                             Margin="20,2,0,0"/>
                                 </StackPanel>
@@ -369,12 +375,12 @@
                                 <StackPanel Orientation="Vertical"
                                                 VerticalAlignment="Center">
                                     <TextBlock 
-                                            Text="{Binding MostFrequentlyProvince, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding MostFrequentlyTour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="20"
                                             FontWeight="Bold"
                                             Margin="20,0,0,2"/>
                                     <TextBlock 
-                                            Text="Most Frequently Place"
+                                            Text="Most frequently tour"
                                             FontSize="15"
                                             Margin="20,2,0,0"/>
                                 </StackPanel>

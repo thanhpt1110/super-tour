@@ -154,6 +154,7 @@ namespace Super_Tour.ViewModel
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
         public ICommand ExportTicketCommand { get; private set; }
+        public ICommand UpdateBookingStatusCommand { get; private set; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
@@ -172,6 +173,7 @@ namespace Super_Tour.ViewModel
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchBooking);
             ExportTicketCommand = new RelayCommand(ExecuteExportTicket);
+            UpdateBookingStatusCommand = new RelayCommand(ExecuteUpdateBookingStatus);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
 
@@ -383,6 +385,12 @@ namespace Super_Tour.ViewModel
         #region Export ticket
         private async void ExecuteExportTicket(object obj)
         {
+            if (_selectedItem.Status == "Unpaid")
+            {
+                MyMessageBox.ShowDialog("Can not export ticket for unpaid booking!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                return;
+            }
+
             // Tìm xem Ticket đã đc Export chưa
             if (db.TICKETs.Where(p => p.TOURIST.Id_Booking == _selectedItem.Id_Booking).ToList().Count> 0)
             {
@@ -390,6 +398,7 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog("These tickets were exported!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 return;
             }
+
             // Chưa thì thêm data vào TICKET
             foreach(TOURIST tourits in _selectedItem.TOURISTs)
             {
@@ -402,8 +411,19 @@ namespace Super_Tour.ViewModel
 
             // Synchronize real-time data
             UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
-
             MyMessageBox.ShowDialog("Export tickets succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+        }
+        #endregion
+
+        #region Update status of Booking
+        private void ExecuteUpdateBookingStatus(object obj)
+        {
+            if (SelectedItem.Status == "Unpaid")
+                SelectedItem.Status = "Paid";
+            else
+                SelectedItem.Status = "Unpaid";
+            RefreshDatagrid();
+            db.SaveChanges();
         }
         #endregion
 

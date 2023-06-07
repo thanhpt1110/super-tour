@@ -109,11 +109,6 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               Style="{DynamicResource DataGridStyle1}" Margin="55,30,55,10">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Booking ID"
-                                                IsReadOnly="True" 
-                                                CanUserResize="False" 
-                                                Width="0.6*"
-                                                Binding="{Binding Id_Booking}"/>
                         <DataGridTextColumn Header="Customer Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
@@ -129,19 +124,31 @@
                                                 CanUserResize="False" 
                                                 Width="0.8*"
                                                 Binding="{Binding Booking_Date,StringFormat='dd/MM/yyyy HH:mm'}"/>
-                        <DataGridTextColumn Header="Tourists" 
+                        <DataGridTextColumn Header="Status"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.5*"
+                                                Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="Tourists" 
+                                                IsReadOnly="True" 
+                                                CanUserResize="False" 
+                                                Width="0.4*"
                                                 Binding="{Binding TOURISTs.Count}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
-                                                Width="0.65*">
+                                                Width="0.75*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Style="{StaticResource iconButton}"
+                                                Command="{Binding DataContext.UpdateBookingStatusCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}">
+                                            <fa:IconImage Icon="Rotate" Foreground="#AA4B22"/>
+                                        </Button>
+                                        <Button 
+                                                Margin="15 0 0 0" 
+                                                Style="{StaticResource iconButton}"
                                                 Command="{Binding DataContext.UpdateBookingViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding}">
                                             <fa:IconImage Icon="Edit" Foreground="#32C948"/>

@@ -42,7 +42,8 @@ namespace Super_Tour.ViewModel
         private string _phoneNumber;
         private string _selectedGender;
         private string _searchTravel;
-        private string table = "UPDATE_BOOKING";
+        private string tableBooking = "UPDATE_BOOKING";
+        private string tableCustomer = "UPDATE_CUSTOMER";
         #endregion
 
         #region Declare binding
@@ -308,7 +309,8 @@ namespace Super_Tour.ViewModel
                     await db.SaveChangesAsync();
                 }
                 // Synchronize real-time data
-                UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
+                MainTicketViewModel.TimeTicket = DateTime.Now;
+                UPDATE_CHECK.NotifyChange("UPDATE_TICKET", MainTicketViewModel.TimeTicket);
 
                 // Remove old data in List Tourist 
                 List<TOURIST> listTourist = db.TOURISTs.Where(p => p.Id_Booking == _booking.Id_Booking).ToList();
@@ -327,9 +329,9 @@ namespace Super_Tour.ViewModel
                 }
                 await db.SaveChangesAsync();
 
-                // Synchronyze real-time DB
-                MainTravelViewModel.TimeTravel = DateTime.Now;
-                UPDATE_CHECK.NotifyChange(table, MainTravelViewModel.TimeTravel);
+                MainBookingViewModel.TimeBooking = MainCustomerViewModel.TimeCustomer = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(tableBooking, MainBookingViewModel.TimeBooking);
+                UPDATE_CHECK.NotifyChange(tableCustomer, MainCustomerViewModel.TimeCustomer);
 
                 // Process UI event
                 MyMessageBox.ShowDialog("Update booking successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);

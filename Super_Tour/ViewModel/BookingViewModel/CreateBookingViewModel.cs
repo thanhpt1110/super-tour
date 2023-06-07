@@ -44,7 +44,8 @@ namespace Super_Tour.ViewModel
         private string _phoneNumber;
         private string _selectedGender;
         private string _searchTravel;
-        private string table = "UPDATE_BOOKING";
+        private string tableBooking = "UPDATE_BOOKING";
+        private string tableCustomer = "UPDATE_CUSTOMER";
         #endregion
 
         #region Declare binding
@@ -439,7 +440,7 @@ namespace Super_Tour.ViewModel
 
                 // Save booking to BOOKING table
                 BOOKING booking = new BOOKING();
-                booking.Status = "Payed";
+                booking.Status = "Unpaid";
                 booking.Id_Travel = _selectedTravel.Id_Travel;
                 booking.Id_Customer_Booking = _loadedCustomer.Id_Customer;
                 booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count;
@@ -457,8 +458,9 @@ namespace Super_Tour.ViewModel
                 await db.SaveChangesAsync();
 
                 // Synchronyze real-time DB
-                MainTravelViewModel.TimeTravel = DateTime.Now;
-                UPDATE_CHECK.NotifyChange(table, MainTravelViewModel.TimeTravel);
+                MainBookingViewModel.TimeBooking = MainCustomerViewModel.TimeCustomer = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(tableBooking, MainBookingViewModel.TimeBooking);
+                UPDATE_CHECK.NotifyChange(tableCustomer, MainCustomerViewModel.TimeCustomer);
 
                 // Process UI event
                 MyMessageBox.ShowDialog("Add new booking successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
