@@ -323,8 +323,9 @@ namespace Super_Tour.ViewModel
                     await db.SaveChangesAsync();
 
                     // Synchronize real-time data
-                    TimeBooking = DateTime.Now;
+                    TimeBooking = DateTime.Now; 
                     UPDATE_CHECK.NotifyChange(table, TimeBooking);
+                    UPDATE_CHECK.NotifyChange("UPDATE_TICKET", TimeBooking);
 
                     // Process UI event
                     MyMessageBox.ShowDialog("Delete information successful.", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
