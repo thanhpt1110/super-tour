@@ -104,6 +104,8 @@
                                                 <Label Content="Phone"/>
                                             </StackPanel>
                                             <TextBox
+                                                IsHitTestVisible="False"
+                                                BorderThickness="1"
                                                 IsReadOnly="True"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -113,7 +115,7 @@
                                                 BorderBrush="Black"
                                                 Foreground="Black"
                                                 Background="{StaticResource TextBoxReadOnlyColor}"
-                                                materialDesign:HintAssist.Hint="Ex: 2152045519"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
@@ -129,7 +131,10 @@
                                                 <Label Content="Gender"/>
                                             </StackPanel>
                                             <ComboBox 
-                                                IsReadOnly="True"
+                                                IsHitTestVisible="False"
+                                                IsDropDownOpen="False"
+                                                BorderThickness="1"
+                                                IsEditable="False"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 SelectedValue="{Binding SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="Content"
@@ -138,7 +143,7 @@
                                                 Background="{StaticResource ComboBoxReadOnlyColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Hint="Select Gender"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="50"
@@ -157,6 +162,7 @@
                                                 <Label Content="Province"/>
                                             </StackPanel>
                                             <ComboBox 
+                                                IsHitTestVisible="False"
                                                 IsReadOnly="True"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 ItemsSource="{Binding ListProvince}"
@@ -168,7 +174,7 @@
                                                 Background="{StaticResource ComboBoxReadOnlyColor}"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Select Province"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="auto"
@@ -197,6 +203,8 @@
                                                 <Label Content="Name"/>
                                             </StackPanel>
                                             <TextBox
+                                                IsHitTestVisible="False"
+                                                BorderThickness="1"
                                                 IsReadOnly="True"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -207,7 +215,7 @@
                                                 Foreground="Black"
                                                 Background="{StaticResource TextBoxReadOnlyColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Ex: Nguyen Van A"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"/>
@@ -221,6 +229,7 @@
                                                 <Label Content="ID Number"/>
                                             </StackPanel>
                                             <TextBox
+                                                IsHitTestVisible="False"
                                                 IsReadOnly="True"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                 Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -230,7 +239,7 @@
                                                 BorderBrush="Black"
                                                 CaretBrush="Black"
                                                 Foreground="Black"
-                                                materialDesign:HintAssist.Hint="Ex: 075203002869"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
                                                 materialDesign:HintAssist.IsFloating="False"
@@ -246,6 +255,7 @@
                                                 <Label Content="District"/>
                                             </StackPanel>
                                             <ComboBox
+                                                IsHitTestVisible="False"
                                                 IsReadOnly="True"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 ItemsSource="{Binding ListDistrict}"
@@ -256,7 +266,7 @@
                                                 Background="{StaticResource ComboBoxReadOnlyColor}"
                                                 materialDesign:HintAssist.Foreground="Black"
                                                 materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.Hint="Select District"
+                                                materialDesign:HintAssist.Hint="Chưa có thông tin"
                                                 materialDesign:HintAssist.IsFloating="False"
                                                 Width="300"
                                                 Height="50"
@@ -272,14 +282,13 @@
                     </Grid>
                     <Grid Grid.Row="5">
                         <Button Content="Close"
-                                IsEnabled="{Binding IsDataModified}"
-                                Command="{Binding SaveCommand}"
                                 Background="{StaticResource btnDelete}"
                                 BorderThickness="0"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                 Width="140"
                                 FontSize="20"
                                 Height="40"
+                                Click="btnClose_Click"
                                 >
                         </Button>
                     </Grid>

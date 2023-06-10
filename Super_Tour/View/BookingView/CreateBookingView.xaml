@@ -61,19 +61,22 @@
                                                FontSize="15"
                                                Margin="-5,0,0,0"/>
                                         </StackPanel>
-                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    materialDesign:HintAssist.Hint="Select from list below"
-                                    Width="auto"
-                                    Height="auto"
-                                    FontSize="18"
-                                    IsReadOnly="True"
-                                    Text="{Binding SelectedTravel.TOUR.Name_Tour}"
-                                    Background="LightGray"
-                                    BorderBrush="Black"
-                                    Foreground="Black"
-                                    materialDesign:HintAssist.IsFloating="False"
-                                    materialDesign:HintAssist.Foreground="Black"
-                                    materialDesign:HintAssist.Background="Transparent"/>
+                                        <TextBox 
+                                            BorderThickness="1"
+                                            IsHitTestVisible="False"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            materialDesign:HintAssist.Hint="Select from list below"
+                                            Width="auto"
+                                            Height="auto"
+                                            FontSize="18"
+                                            IsReadOnly="True"
+                                            Text="{Binding SelectedTravel.TOUR.Name_Tour}"
+                                            Background="LightGray"
+                                            BorderBrush="Black"
+                                            Foreground="Black"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Background="Transparent"/>
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Row="2"
@@ -187,7 +190,7 @@
                                                                 Content="i"
                                                                 FontSize="16"
                                                                 Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                                Background="#2196F3">
+                                                                Background="{StaticResource ThemeColor}">
                                                             </Button>
                                                             <Button
                                                                 Style="{StaticResource MaterialDesignIconButton}"

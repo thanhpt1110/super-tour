@@ -102,6 +102,8 @@
                                                     <Label Content="Province" />
                                                 </StackPanel>
                                                 <ComboBox
+                                                    BorderThickness="1"
+                                                    IsHitTestVisible="False"
                                                     IsReadOnly="True"
                                                     ItemsSource="{Binding ListProvince}"
                                                     DisplayMemberPath="name"
@@ -140,20 +142,22 @@
                                                         <Label Content="District" />
                                                     </StackPanel>
                                                     <ComboBox
-                                                    IsReadOnly="True"
-                                                    ItemsSource="{Binding ListDistrict}"
-                                                    DisplayMemberPath="name"
-                                                    SelectedItem="{Binding SelectedDistrict}"
-                                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                    FontSize="15"
-                                                    Width="185"
-                                                    Foreground="Black"
-                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
-                                                    BorderBrush="Black"
-                                                    materialDesign:HintAssist.IsFloating="False"
-                                                    materialDesign:HintAssist.Hint="Select District"
-                                                    materialDesign:HintAssist.Foreground="Black"
-                                                    materialDesign:HintAssist.Background="Transparent"
+                                                        BorderThickness="1"
+                                                        IsHitTestVisible="False"
+                                                        IsReadOnly="True"
+                                                        ItemsSource="{Binding ListDistrict}"
+                                                        DisplayMemberPath="name"
+                                                        SelectedItem="{Binding SelectedDistrict}"
+                                                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                        FontSize="15"
+                                                        Width="185"
+                                                        Foreground="Black"
+                                                        Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                        BorderBrush="Black"
+                                                        materialDesign:HintAssist.IsFloating="False"
+                                                        materialDesign:HintAssist.Hint="Select District"
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        materialDesign:HintAssist.Background="Transparent"
                                                   ></ComboBox>
                                                 </StackPanel>
                                             </Grid>
@@ -163,6 +167,8 @@
                                                         <Label Content="Type" />
                                                     </StackPanel>
                                                     <ComboBox
+                                                        BorderThickness="1"
+                                                        IsHitTestVisible="False"
                                                         IsReadOnly="True"
                                                         ItemsSource="{Binding ListTypePackage}"
                                                         DisplayMemberPath="Name_Type"
@@ -202,6 +208,8 @@
                                                     <Label Content="Name" />
                                                 </StackPanel>
                                                 <TextBox 
+                                                    BorderThickness="1"
+                                                    IsHitTestVisible="False"
                                                     IsReadOnly="True"
                                                     Text="{Binding PackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Foreground="Black"
@@ -222,21 +230,23 @@
                                                             Margin="0,10,0,0">
                                                     <Label Content="Description" />
                                                     <TextBox
+                                                        BorderThickness="1"
+                                                        IsHitTestVisible="False"
                                                         IsReadOnly="True"
-                                                    Foreground="Black"
-                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
-                                                    BorderBrush="Black"
-                                                    VerticalContentAlignment="Top"
-                                                    VerticalAlignment="Top"
-                                                    materialDesign:HintAssist.IsFloating="False"
-                                                    materialDesign:HintAssist.Hint=""
-                                                    materialDesign:HintAssist.Foreground="Black"
-                                                    materialDesign:HintAssist.Background="Transparent"
-                                                    Height="250"
-                                                     FontSize="15"
-                                                   CaretBrush="Black"
-                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Foreground="Black"
+                                                        Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                        BorderBrush="Black"
+                                                        VerticalContentAlignment="Top"
+                                                        VerticalAlignment="Top"
+                                                        materialDesign:HintAssist.IsFloating="False"
+                                                        materialDesign:HintAssist.Hint=""
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        materialDesign:HintAssist.Background="Transparent"
+                                                        Height="250"
+                                                        FontSize="15"
+                                                        CaretBrush="Black"
+                                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                        Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 ></TextBox>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Vertical"
@@ -245,6 +255,8 @@
                                                         <Label Content="Price" />
                                                     </StackPanel>
                                                     <TextBox 
+                                                        BorderThickness="1"
+                                                        IsHitTestVisible="False"
                                                         IsReadOnly="True"
                                                         Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Foreground="Black"
@@ -276,8 +288,8 @@
                     </Grid>
                     <Grid Grid.Row="3">
                         <Button
+                            Click="btnClose_Click"
                             materialDesign:ButtonAssist.CornerRadius="5"
-                            IsEnabled="{Binding IsDataModified}"
                             HorizontalAlignment="Center"
                             Width="120"
                             BorderThickness="0"

@@ -18,6 +18,7 @@ using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
+using Super_Tour.ViewModel.TourViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -149,6 +150,7 @@ namespace Super_Tour.ViewModel
         public ICommand OpenCreateTourViewCommand { get; }
         public ICommand UpdateTourCommand { get; }
         public ICommand DeleteTourCommnand { get; }
+        public ICommand DetailTourCommand { get; }
         public ICommand OnSearchTextChangedCommand { get;}
         public ICommand SelectedFilterCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
@@ -166,6 +168,7 @@ namespace Super_Tour.ViewModel
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             UpdateTourCommand = new RelayCommand(ExecuteUpdateTourCommand);
+            DetailTourCommand = new RelayCommand(ExecuteDetailTourCommand);
             DeleteTourCommnand = new RelayCommand(ExecuteDeleteTour);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
@@ -285,6 +288,22 @@ namespace Super_Tour.ViewModel
                 UpdateTourViewModel updateTourViewModel = new UpdateTourViewModel(_selectedItem, this, mainViewModel);
                 mainViewModel.CurrentChildView = updateTourViewModel;
                 mainViewModel.setFirstChild("Update Tour");
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Detail
+        private void ExecuteDetailTourCommand(object obj)
+        {
+            try
+            {
+                DetailTourView detailTourView = new DetailTourView();
+                detailTourView.DataContext = new DetailTourViewModel();
+                detailTourView.ShowDialog();
             }
             catch (Exception ex)
             {

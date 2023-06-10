@@ -372,6 +372,7 @@
     <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\AddTouristViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\CreateBookingViewModel.cs" />
+    <Compile Include="ViewModel\BookingViewModel\DetailBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\MainBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\SelectTravelForBookingViewModel.cs" />
     <Compile Include="ViewModel\BookingViewModel\UpdateBookingViewModel.cs" />
@@ -387,6 +388,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\MainAccountViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\CreatePackageViewModel.cs" />
+    <Compile Include="ViewModel\PackageViewModel\DetailPackageViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\CreatePackageTypeViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\MainPackageTypeViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel\PackageTypeViewModel\UpdatePackageTypeViewModel.cs" />
@@ -400,9 +402,11 @@
     <Compile Include="ViewModel\TicketViewModel\MainTicketViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\AddPackageToTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\CreateTourViewModel.cs" />
+    <Compile Include="ViewModel\TourViewModel\DetailTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\MainTourViewModel.cs" />
     <Compile Include="ViewModel\TourViewModel\UpdateTourViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\CreateTravelViewModel.cs" />
+    <Compile Include="ViewModel\TravelViewModel\DetailTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\MainTravelViewModel.cs" />
     <Compile Include="ViewModel\TravelViewModel\UpdateTravelViewModel.cs" />
     <Compile Include="View\AccountView\CreateAccountView.xaml.cs">

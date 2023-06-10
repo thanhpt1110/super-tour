@@ -131,6 +131,7 @@ namespace Super_Tour.ViewModel
         public ICommand OpenCreateCustomerViewCommand { get; }
         public ICommand UpdateCustomerCommand { get; }
         public ICommand DeleteCustomerCommand { get; }
+        public ICommand DetailCustomerCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
         public ICommand GoToNextPageCommand { get; private set; }
@@ -146,6 +147,7 @@ namespace Super_Tour.ViewModel
             OnSearchTextChangedCommand = new RelayCommand(SearchCustomerName);
             UpdateCustomerCommand = new RelayCommand(ExecuteUpdateCustomer);
             DeleteCustomerCommand = new RelayCommand(ExecuteDeleteCustomer);
+            DetailCustomerCommand = new RelayCommand(ExecuteDetailCustomer);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
             GoToNextPageCommand = new RelayCommand(ExecuteGoToNextPageCommand);
             LoadDataAsync();
@@ -311,6 +313,23 @@ namespace Super_Tour.ViewModel
                 _onSearching = true;
                 this._currentPage = 1;
                 ReloadData();
+            }
+        }
+        #endregion
+
+        #region Detail
+        private void ExecuteDetailCustomer(object obj)
+        {
+            try
+            {
+                DetailCustomerView detailView = new DetailCustomerView();
+                detailView.DataContext = new DetailCustomerViewModel(SelectedItem);
+                detailView.ShowDialog();
+                RefreshDatagrid();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         #endregion

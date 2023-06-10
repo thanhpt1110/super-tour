@@ -83,7 +83,9 @@
                     </Grid>
                     <Grid Grid.Row="2">
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox materialDesign:HintAssist.Hint="Select Package Type"
+                            <ComboBox 
+                                BorderThickness="1"
+                                materialDesign:HintAssist.Hint="Select Package Type"
                                   Width="200"
                                   ItemsSource="{Binding ListTypePackage}"
                                   DisplayMemberPath="Name_Type"
@@ -96,7 +98,6 @@
                                   FontSize="15"
                                   HorizontalAlignment="Left"
                                   Margin="10,0,0,0"
-                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
@@ -104,7 +105,9 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
-                            <ComboBox materialDesign:HintAssist.Hint="Select Province"
+                            <ComboBox
+                                BorderThickness="1"
+                                materialDesign:HintAssist.Hint="Select Province"
                                   Width="200"
                                   ItemsSource="{Binding ListProvinces}"
                                   DisplayMemberPath="name"
@@ -117,7 +120,6 @@
                                   FontSize="15"
                                   HorizontalAlignment="Left"
                                   Margin="35,0,0,0"
-                                  Effect="{StaticResource MaterialDesignElevationShadow6}"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">

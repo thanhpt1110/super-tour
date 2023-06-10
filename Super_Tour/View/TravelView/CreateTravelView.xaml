@@ -51,19 +51,21 @@
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
                         <TextBox 
-                                    Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    materialDesign:HintAssist.Hint="Select from list on the left"
-                                    Width="auto"
-                                    Height="auto"
-                                    FontSize="20"
-                                    IsReadOnly="True"
-                                    Background="LightGray"
-                                    BorderBrush="Black"
-                                    Foreground="Black"
-                                    materialDesign:HintAssist.IsFloating="False"
-                                    materialDesign:HintAssist.Foreground="Black"
-                                    materialDesign:HintAssist.Background="Transparent"/>
+                            BorderThickness="1"
+                            IsHitTestVisible="False"
+                            Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            materialDesign:HintAssist.Hint="Select from list on the left"
+                            Width="auto"
+                            Height="auto"
+                            FontSize="20"
+                            IsReadOnly="True"
+                            Background="LightGray"
+                            BorderBrush="Black"
+                            Foreground="Black"
+                            materialDesign:HintAssist.IsFloating="False"
+                            materialDesign:HintAssist.Foreground="Black"
+                            materialDesign:HintAssist.Background="Transparent"/>
                         <StackPanel Orientation="Horizontal"
                                             Margin="0,40,0,0">
                             <Label Content="Start location"
@@ -338,16 +340,33 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button 
-                                                        Margin="20, 0, 0, 0"
-                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                    <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
                                                         Height="25"
                                                         Width="25"
+                                                        Foreground="White"
+                                                        Content="i"
+                                                        FontSize="16"
+                                                        Margin="10 0 0 0"
                                                         Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                        Background="#2196F3"
+                                                        Background="{StaticResource ThemeColor}">
+                                                    </Button>
+                                                    <Button 
+                                                        Style="{StaticResource MaterialDesignIconButton}"
+                                                        Width="Auto"
+                                                        Background="{StaticResource btnAdd}"
+                                                        BorderThickness="0"
+                                                        Foreground="White"
+                                                        Height="25"
+                                                        Margin="10 0 0 0"
+                                                        Effect="{StaticResource MaterialDesignElevationShadow3}"
                                                         Command="{Binding DataContext.SelectTourCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                         CommandParameter="{Binding}">
-                                                        <fa:IconImage Icon="Check" Height="15" Foreground="White"/>
+                                                        <materialDesign:PackIcon 
+                                                                    Height="20" 
+                                                                    Width="25" 
+                                                                    FontWeight="Bold" 
+                                                                    Kind="Tick" 
+                                                                    Foreground="White" />
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>

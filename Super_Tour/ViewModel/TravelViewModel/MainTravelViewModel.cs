@@ -15,7 +15,7 @@ using Super_Tour.View;
 
 namespace Super_Tour.ViewModel
 {
-    internal class MainTravelViewModel: ObservableObject
+    internal class MainTravelViewModel : ObservableObject
     {
         #region Declare varialbe
         private SUPER_TOUR db;
@@ -130,7 +130,7 @@ namespace Super_Tour.ViewModel
 
         public ObservableCollection<TRAVEL> ListTravels
         {
-            get { return _listTravels ; }
+            get { return _listTravels; }
             set
             {
                 _listTravels = value;
@@ -144,6 +144,7 @@ namespace Super_Tour.ViewModel
         public ICommand DeleteTravelCommand { get; }
         public ICommand SearchTravelCommand { get; }
         public ICommand UpdateTravelCommand { get; }
+        public ICommand DetailTravelCommand { get; }
         public ICommand SelectedFilterCommand { get; }
         public ICommand GoToNextPageCommand { get; }
         public ICommand GoToPreviousPageCommand { get; }
@@ -161,13 +162,14 @@ namespace Super_Tour.ViewModel
             SearchTravelCommand = new RelayCommand(ExecuteSearchTravel);
             DeleteTravelCommand = new RelayCommand(ExecuteDeleteTravel);
             UpdateTravelCommand = new RelayCommand(ExecuteUpdateCommand);
+            DetailTravelCommand = new RelayCommand(ExecuteDetailCommand);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             this._listTravels = new ObservableCollection<TRAVEL>();
             LoadDataAsync();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(0.5);
             Timer.Tick += Timer_Tick; 
-        }
+        }        
         #endregion
 
         #region Load data async
@@ -309,6 +311,22 @@ namespace Super_Tour.ViewModel
             }
             finally
             {
+            }
+        }
+        #endregion
+
+        #region Detail
+        private void ExecuteDetailCommand(object obj)
+        {
+            try
+            {
+                DetailTravelView detailTravelView = new DetailTravelView();
+                detailTravelView.DataContext = new DetailTravelViewModel();
+                detailTravelView.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         #endregion

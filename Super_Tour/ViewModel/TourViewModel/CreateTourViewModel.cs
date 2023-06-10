@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data.Entity.Migrations;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using Super_Tour.ViewModel.TourViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -313,6 +314,11 @@ namespace Super_Tour.ViewModel
             public ICommand DeletePackageAfternoonCommand { get; private set; }
             public ICommand AddPackageToTourEveningCommand { get; private set; }
             public ICommand DeletePackageEveningCommand { get; private set; }
+            public int DateOrder1 { get; }
+            public object Value { get; }
+            public DetailTourViewModel DetailTourViewModel { get; }
+            public bool V { get; }
+            public TOUR Tour { get; }
             #endregion
 
             #region Constructor
@@ -333,6 +339,15 @@ namespace Super_Tour.ViewModel
                 DeletePackageAfternoonCommand = new RelayCommand(ExecuteDeletePacakgeAfternoonCommand);
                 AddPackageToTourEveningCommand = new RelayCommand(ExecuteAddPackageToTourEveningCommand);
                 DeletePackageEveningCommand = new RelayCommand(ExecuteDeletePacakgeEveningCommand);
+            }
+
+            public DateActivity(int dateOrder, object value, DetailTourViewModel detailTourViewModel, bool v, TOUR tour)
+            {
+                DateOrder1 = dateOrder;
+                Value = value;
+                DetailTourViewModel = detailTourViewModel;
+                V = v;
+                Tour = tour;
             }
             #endregion
 

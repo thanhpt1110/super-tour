@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Super_Tour.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,5 +43,19 @@ namespace Super_Tour.View
         {
             this.WindowState = WindowState.Minimized;
         }
+        private void ComboBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox != null)
+            {
+                comboBox.IsDropDownOpen = false;
+            }
+        }
+        private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
     }
 }

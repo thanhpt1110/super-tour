@@ -6,16 +6,19 @@
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-            xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-            TextElement.FontWeight="Regular"
-            TextElement.FontSize="13"
-            TextOptions.TextFormattingMode="Ideal"
-            TextOptions.TextRenderingMode="Auto"
-            FontFamily="{DynamicResource MaterialDesignFont}"
-            Background="Transparent"
-            Height="875" Width="950">
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Height="875" Width="950">
     <Border CornerRadius="10"
             BorderThickness="2"
             Background="White">
@@ -431,7 +434,6 @@
                 </Grid>
                 <Grid Grid.Row="3">
                     <Button
-                        IsEnabled="{Binding IsDataModified}"
                         Content="Close"
                         Background="{StaticResource btnDelete}"
                         BorderThickness="0"
@@ -439,7 +441,7 @@
                         FontSize="20"
                         Height="50"
                         materialDesign:ButtonAssist.CornerRadius="8"
-                        IsDefault="True">
+                        Click="btnClose_Click">
                     </Button>
                 </Grid>
             </Grid>

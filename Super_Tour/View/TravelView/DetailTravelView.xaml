@@ -6,16 +6,19 @@
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-            xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-            TextElement.FontWeight="Regular"
-            TextElement.FontSize="13"
-            TextOptions.TextFormattingMode="Ideal"
-            TextOptions.TextRenderingMode="Auto"
-            FontFamily="{DynamicResource MaterialDesignFont}"
-            Height="790" Width="1005"
-            Background="Transparent">
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Height="790" Width="1005"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
     <Border CornerRadius="10"
             BorderThickness="2"
             Background="White">
@@ -85,6 +88,8 @@
                                            FontSize="15"/>
                             </StackPanel>
                             <TextBox
+                                BorderThickness="1"
+                                IsHitTestVisible="False"
                                 IsReadOnly="True"
                                 Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -104,6 +109,8 @@
                                            FontSize="15"/>
                             </StackPanel>
                             <TextBox
+                                BorderThickness="1"
+                                IsHitTestVisible="False"
                                 IsReadOnly="True"
                                 Text="{Binding StartLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -130,6 +137,8 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <DatePicker
+                                            BorderThickness="1"
+                                                    IsHitTestVisible="False"
                                                 SelectedDate="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                 Foreground="Black"
@@ -151,6 +160,8 @@
                                                     FontSize="15"/>
                                         </StackPanel>
                                         <materialDesign:TimePicker
+                                            BorderThickness="1"
+                                                    IsHitTestVisible="False"
                                                 SelectedTime="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                 Foreground="Black"
@@ -177,6 +188,8 @@
                                                     FontSize="15"/>
                                         </StackPanel>
                                         <TextBox
+                                            BorderThickness="1"
+                                            IsHitTestVisible="False"
                                             IsReadOnly="True"
                                             Text="{Binding MaxTicket, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -202,27 +215,28 @@
 
                                         </StackPanel>
                                         <ComboBox
+                                            BorderThickness="1"
+                                            IsHitTestVisible="False"
                                             IsReadOnly="True"
-                                                ItemsSource="{Binding ListDiscount}"
-                                                SelectedItem="{Binding SelectedDiscount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                FontSize="18"
-                                                Height="58"
-                                                Width="200"
-                                                BorderBrush="Black"
-                                                Foreground="Black"
-                                                Background="{StaticResource ComboBoxReadOnlyColor}"
-                                                materialDesign:HintAssist.Hint="Select discount"
-                                                materialDesign:HintAssist.Foreground="Black"
-                                                materialDesign:HintAssist.Background="Transparent"
-                                                materialDesign:HintAssist.IsFloating="False"></ComboBox>
+                                            ItemsSource="{Binding ListDiscount}"
+                                            SelectedItem="{Binding SelectedDiscount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                            FontSize="18"
+                                            Height="58"
+                                            Width="200"
+                                            BorderBrush="Black"
+                                            Foreground="Black"
+                                            Background="{StaticResource ComboBoxReadOnlyColor}"
+                                            materialDesign:HintAssist.Hint="Select discount"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Background="Transparent"
+                                            materialDesign:HintAssist.IsFloating="False"></ComboBox>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
                             <Button
                                     Margin="0,130,0,0"
-                                    Command="{Binding SaveCommand}"
-                                    IsEnabled="{Binding IsDataModified}"
+                                    Click="btnClose_Click"
                                     Content="Close"
                                     Background="{StaticResource btnDelete}"
                                     BorderThickness="0"
@@ -269,6 +283,8 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox
+                                            BorderThickness="1"
+                                            IsHitTestVisible="False"
                                             IsReadOnly="True"
                                             Text="{Binding TourName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -291,6 +307,8 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox 
+                                            BorderThickness="1"
+                                            IsHitTestVisible="False"
                                             IsReadOnly="True"
                                             Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"

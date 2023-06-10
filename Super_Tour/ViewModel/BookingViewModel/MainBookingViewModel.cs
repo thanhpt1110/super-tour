@@ -19,6 +19,7 @@ using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.View;
+using Super_Tour.ViewModel.BookingViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -149,6 +150,7 @@ namespace Super_Tour.ViewModel
         public ICommand SelectedFilterCommand { get; }
         public ICommand OpenCreateBookingViewCommand { get; }
         public ICommand UpdateBookingViewCommand { get; }
+        public ICommand DetailBookingViewCommand { get; }
         public ICommand DeleteBookingViewCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
@@ -170,6 +172,7 @@ namespace Super_Tour.ViewModel
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter); 
             OpenCreateBookingViewCommand = new RelayCommand(ExecuteOpenCreateBookingViewCommand);
             UpdateBookingViewCommand = new RelayCommand(ExecuteUpdateBooking);
+            DetailBookingViewCommand = new RelayCommand(ExecuteDetailBooking);
             DeleteBookingViewCommand = new RelayCommand(ExecuteDeleteBooking);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchBooking);
             ExportTicketCommand = new RelayCommand(ExecuteExportTicket);
@@ -297,6 +300,22 @@ namespace Super_Tour.ViewModel
                 mainViewModel.setFirstChild("Update Booking");
             }
             catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Detail
+        private void ExecuteDetailBooking(object obj)
+        {
+            try
+            {
+                DetailBookingView detailBookingView = new DetailBookingView();
+                detailBookingView.DataContext = new DetailBookingViewModel();
+                detailBookingView.ShowDialog();
+            }
+            catch(Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }

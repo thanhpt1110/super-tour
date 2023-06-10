@@ -17,6 +17,7 @@ using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
+using Super_Tour.ViewModel.PackageViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -135,6 +136,7 @@ namespace Super_Tour.ViewModel
         #region Command 
         public ICommand OpenCreatePackageViewCommand { get; }
         public ICommand UpdatePackageViewCommand { get; }
+        public ICommand DetailPackageViewCommand { get; }
         public ICommand DeletePackageCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand GoToPreviousPageCommand { get; private set; }
@@ -149,6 +151,7 @@ namespace Super_Tour.ViewModel
             _listPackages = new ObservableCollection<PACKAGE>();
             OpenCreatePackageViewCommand = new RelayCommand(ExecuteOpenCreatePackageViewCommand);
             UpdatePackageViewCommand = new RelayCommand(ExecuteUpdatePackage);
+            DetailPackageViewCommand = new RelayCommand(ExecuteDetailPackage);
             DeletePackageCommand = new RelayCommand(ExecuteDeletePackage);
             OnSearchTextChangedCommand = new RelayCommand(SearchPackage);
             GoToPreviousPageCommand = new RelayCommand(ExecuteGoToPreviousPageCommand);
@@ -266,6 +269,22 @@ namespace Super_Tour.ViewModel
                 RefreshDatagrid();
             }
             catch(Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Detail
+        private void ExecuteDetailPackage(object obj)
+        {
+            try
+            {
+                DetailPackageView detailView = new DetailPackageView ();
+                detailView.DataContext = new DetailPackageViewModel(SelectedItem);
+                detailView.ShowDialog();
+            }
+            catch (Exception ex)
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }

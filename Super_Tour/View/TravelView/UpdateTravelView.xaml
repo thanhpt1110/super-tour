@@ -51,19 +51,21 @@
                                            Margin="-5,0,0,0"/>
                         </StackPanel>
                         <TextBox
-                                    Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    materialDesign:HintAssist.Hint="Select from list on the left"
-                                    Width="auto"
-                                    Height="auto"
-                                    FontSize="20"
-                                    IsReadOnly="True"
-                                    Background="LightGray"
-                                    BorderBrush="Black"
-                                    Foreground="Black"
-                                    materialDesign:HintAssist.IsFloating="False"
-                                    materialDesign:HintAssist.Foreground="Black"
-                                    materialDesign:HintAssist.Background="Transparent"/>
+                            BorderThickness="1"
+                            IsHitTestVisible="False"
+                            Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            materialDesign:HintAssist.Hint="Select from list on the left"
+                            Width="auto"
+                            Height="auto"
+                            FontSize="20"
+                            IsReadOnly="True"
+                            Background="LightGray"
+                            BorderBrush="Black"
+                            Foreground="Black"
+                            materialDesign:HintAssist.IsFloating="False"
+                            materialDesign:HintAssist.Foreground="Black"
+                            materialDesign:HintAssist.Background="Transparent"/>
                         <StackPanel Orientation="Horizontal"
                                             Margin="0,40,0,0">
                             <Label Content="Start location"
