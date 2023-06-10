@@ -429,6 +429,9 @@
     <Compile Include="View\CustomerView\CreateCustomerView.xaml.cs">
       <DependentUpon>CreateCustomerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomerView\DetailCustomerView.xaml.cs">
+      <DependentUpon>DetailCustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView\MainCustomerView.xaml.cs">
       <DependentUpon>MainCustomerView.xaml</DependentUpon>
     </Compile>
@@ -452,6 +455,9 @@
     </Compile>
     <Compile Include="View\PackageView\CreatePackageView.xaml.cs">
       <DependentUpon>CreatePackageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PackageView\DetailPackageView.xaml.cs">
+      <DependentUpon>DetailPackageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PackageView\MainPackageView.xaml.cs">
       <DependentUpon>MainPackageView.xaml</DependentUpon>
@@ -594,6 +600,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CustomerView\DetailCustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomerView\MainCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -635,6 +645,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PackageView\CreatePackageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PackageView\DetailPackageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

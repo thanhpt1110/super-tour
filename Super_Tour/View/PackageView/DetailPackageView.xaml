@@ -1,0 +1,293 @@
+﻿<Window x:Class="Super_Tour.View.DetailPackageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Super_Tour.View"
+        mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="CreatePackageView" Height="680" Width="800"
+        ShowInTaskbar="False">
+    <Grid>
+        <Border CornerRadius="10"
+            BorderThickness="2">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource BorderColor1}" Offset="0"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor2}" Offset="0.75"></GradientStop>
+                    <GradientStop Color="{StaticResource BorderColor3}" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border CornerRadius="10,10,10,10"
+                    Background="{StaticResource BackgroundChildContent}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="55"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <StackPanel x:Name="pnlControlBar" 
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown">
+                            <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="Red"
+                                Click="btnClose_Click">
+                                <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Green">
+                                <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                            <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="Orange"
+                                Click="btnMinimize_Click">
+                                <fa:IconImage Width="12" Icon="WindowMinimize" Style="{StaticResource controlButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <fa:IconImage Margin="0,0,10,0"
+                                          Icon="BagShopping" 
+                                          Height="20"
+                                          Foreground="{StaticResource TitleText}"/>
+                            <TextBlock Text="Package Information"
+                                       FontSize="25"
+                                       FontWeight="Medium"
+                                       FontFamily="Segoe UI"
+                                       Foreground="{StaticResource TitleText}"
+                                       />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <StackPanel>
+                            <Border Margin="50,0,50,0"
+                                    CornerRadius="10"
+                                    Background="{StaticResource BackgroundDataGridRowHover}"
+                                    Height="auto">
+                                <StackPanel Orientation="Vertical">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <StackPanel Orientation="Vertical"
+                                                Margin="20,10,10,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label Content="Province" />
+                                                </StackPanel>
+                                                <ComboBox
+                                                    IsReadOnly="True"
+                                                    ItemsSource="{Binding ListProvince}"
+                                                    DisplayMemberPath="name"
+                                                    SelectedItem="{Binding SelectedProvince}"
+                                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                    FontSize="15"
+                                                    Width="auto"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                    BorderBrush="Black"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    materialDesign:HintAssist.Hint="Select Province"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    >
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="SelectionChanged">
+                                                            <i:InvokeCommandAction Command="{Binding SelectedProvinceCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1"
+                                              Margin="0,10,0,0"
+                                              HorizontalAlignment="Left">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0"
+                                                  HorizontalAlignment="Left">
+                                                <StackPanel Orientation="Vertical"
+                                                            Margin="5,0,0,0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="District" />
+                                                    </StackPanel>
+                                                    <ComboBox
+                                                    IsReadOnly="True"
+                                                    ItemsSource="{Binding ListDistrict}"
+                                                    DisplayMemberPath="name"
+                                                    SelectedItem="{Binding SelectedDistrict}"
+                                                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                    FontSize="15"
+                                                    Width="185"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                    BorderBrush="Black"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    materialDesign:HintAssist.Hint="Select District"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                  ></ComboBox>
+                                                </StackPanel>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="Type" />
+                                                    </StackPanel>
+                                                    <ComboBox
+                                                        IsReadOnly="True"
+                                                        ItemsSource="{Binding ListTypePackage}"
+                                                        DisplayMemberPath="Name_Type"
+                                                        SelectedItem="{Binding SelectedTypePackage}"
+                                                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                        FontSize="15"
+                                                        Width="138"
+                                                        Foreground="Black"
+                                                        Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                        BorderBrush="Black"
+                                                        materialDesign:HintAssist.IsFloating="False"
+                                                        materialDesign:HintAssist.Hint="Select Type"
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        materialDesign:HintAssist.Background="Transparent">
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Height="40"></StackPanel>
+                                                <Image Height="340" Margin="5,10,5,5" Source="{Binding SelectedImage}">
+
+                                                </Image>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <StackPanel Orientation="Vertical"
+                                                Margin="5,10,10,5">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label Content="Name" />
+                                                </StackPanel>
+                                                <TextBox 
+                                                    IsReadOnly="True"
+                                                    Text="{Binding PackageName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Foreground="Black"
+                                                    BorderBrush="Black"
+                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                    VerticalContentAlignment="Top"
+                                                    VerticalAlignment="Top"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    materialDesign:HintAssist.Hint="Ex: Team building"
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    Height="auto"
+                                                    FontSize="15"
+                                                    CaretBrush="Black"
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                ></TextBox>
+                                                <StackPanel Orientation="Vertical"
+                                                            Margin="0,10,0,0">
+                                                    <Label Content="Description" />
+                                                    <TextBox
+                                                        IsReadOnly="True"
+                                                    Foreground="Black"
+                                                    Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                    BorderBrush="Black"
+                                                    VerticalContentAlignment="Top"
+                                                    VerticalAlignment="Top"
+                                                    materialDesign:HintAssist.IsFloating="False"
+                                                    materialDesign:HintAssist.Hint=""
+                                                    materialDesign:HintAssist.Foreground="Black"
+                                                    materialDesign:HintAssist.Background="Transparent"
+                                                    Height="250"
+                                                     FontSize="15"
+                                                   CaretBrush="Black"
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                ></TextBox>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Vertical"
+                                                            Margin="0,10,0,10">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="Price" />
+                                                    </StackPanel>
+                                                    <TextBox 
+                                                        IsReadOnly="True"
+                                                        Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Foreground="Black"
+                                                        BorderBrush="Black"
+                                                        Background="{StaticResource ComboBoxReadOnlyColor}"
+                                                        VerticalContentAlignment="Top"
+                                                        VerticalAlignment="Top"
+                                                        materialDesign:HintAssist.IsFloating="False"
+                                                        materialDesign:HintAssist.Hint="Ex: 50.000"
+                                                        materialDesign:HintAssist.Foreground="Black"
+                                                        materialDesign:HintAssist.Background="Transparent"
+                                                        Height="auto"
+                                                        FontSize="15"
+                                                        CaretBrush="Black"
+                                                        Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="PreviewTextInput">
+                                                                <i:InvokeCommandAction Command="{Binding TextChangeOnlyNum}" />
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                    </TextBox>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Button
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            IsEnabled="{Binding IsDataModified}"
+                            HorizontalAlignment="Center"
+                            Width="120"
+                            BorderThickness="0"
+                            Background="{StaticResource btnDelete}"
+                            Content="Close"
+                            Margin="0, 10, 0, 10">
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

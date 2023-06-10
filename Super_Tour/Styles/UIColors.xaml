@@ -42,7 +42,8 @@
     <!--TextBox && ComboBox-->
     <SolidColorBrush x:Key="TextBoxColor" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="ComboBoxColor" Color="White"></SolidColorBrush>
-    
+    <SolidColorBrush x:Key="TextBoxReadOnlyColor" Color="#FAFAFA"></SolidColorBrush>
+    <SolidColorBrush x:Key="ComboBoxReadOnlyColor" Color="#FAFAFA"></SolidColorBrush>
     <!--ControlBar Button-->
     <SolidColorBrush x:Key="BackgroundControlBarButtonHover" Color="#CFCFCF"></SolidColorBrush>
     
