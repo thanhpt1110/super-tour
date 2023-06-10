@@ -420,6 +420,9 @@
     <Compile Include="View\BookingView\CreateBookingView.xaml.cs">
       <DependentUpon>CreateBookingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookingView\DetailBookingView.xaml.cs">
+      <DependentUpon>DetailBookingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BookingView\MainBookingView.xaml.cs">
       <DependentUpon>MainBookingView.xaml</DependentUpon>
     </Compile>
@@ -501,6 +504,9 @@
     <Compile Include="View\TourView\CreateTourView.xaml.cs">
       <DependentUpon>CreateTourView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TourView\DetailTourView.xaml.cs">
+      <DependentUpon>DetailTourView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TourView\MainTourView.xaml.cs">
       <DependentUpon>MainTourView.xaml</DependentUpon>
     </Compile>
@@ -509,6 +515,9 @@
     </Compile>
     <Compile Include="View\TravelView\CreateTravelView.xaml.cs">
       <DependentUpon>CreateTravelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TravelView\DetailTravelView.xaml.cs">
+      <DependentUpon>DetailTravelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TravelView\MainTravelView.xaml.cs">
       <DependentUpon>MainTravelView.xaml</DependentUpon>
@@ -585,6 +594,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookingView\CreateBookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingView\DetailBookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -708,6 +721,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TourView\DetailTourView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TourView\MainTourView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -717,6 +734,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TravelView\CreateTravelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TravelView\DetailTravelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
