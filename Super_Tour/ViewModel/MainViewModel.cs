@@ -237,6 +237,8 @@ namespace Super_Tour.ViewModel
             set
             {
                 _customerStatisticChecked = value;
+                _statisticChecked = value;
+                OnPropertyChanged(nameof(StatisticChecked));
                 OnPropertyChanged(nameof(CustomerStatisticChecked));
             }
         }
@@ -246,6 +248,9 @@ namespace Super_Tour.ViewModel
             set
             {
                 _travelStatisticChecked = value;
+                _statisticChecked = value;
+                OnPropertyChanged(nameof(StatisticChecked));
+                OnPropertyChanged(nameof(TravelStatisticChecked));
             }
         }
         public bool RevenueStatisticChecked
@@ -254,6 +259,8 @@ namespace Super_Tour.ViewModel
             set
             {
                 _revenueStatisticChecked = value;
+                _statisticChecked = value;
+                OnPropertyChanged(nameof(StatisticChecked));
                 OnPropertyChanged(nameof(RevenueStatisticChecked));
             }
         }
@@ -263,7 +270,16 @@ namespace Super_Tour.ViewModel
             set
             {
                 _statisticChecked = value;
+                if(StatisticChecked == false)
+                {
+                    CustomerStatisticChecked = false;
+                    RevenueStatisticChecked = false;
+                    TravelStatisticChecked = false;
+                }
                 OnPropertyChanged(nameof(StatisticChecked));
+                OnPropertyChanged(nameof(TravelStatisticChecked));
+                OnPropertyChanged(nameof(CustomerStatisticChecked));
+                OnPropertyChanged(nameof(RevenueStatisticChecked));
             }
         }
         #endregion
@@ -320,15 +336,13 @@ namespace Super_Tour.ViewModel
         #endregion
         private void ExecuteStatisticSubMenuViewCommand(object obj)
         {
-            if (IsSubMenuVisible == false)
+            if (IsSubMenuVisible ==  false)
             {
                 IsSubMenuVisible = true;
-                StatisticChecked = true;
             }
             else
             {
                 IsSubMenuVisible = false;
-                StatisticChecked = false;
             }
         }
         private void ExecuteBackToPreviousChildCommand(object obj)

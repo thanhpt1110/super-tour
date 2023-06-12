@@ -364,6 +364,8 @@
     <Compile Include="Ultis\BooleanToCursorConverter.cs" />
     <Compile Include="Ultis\BooleanToVisibilityConverter.cs" />
     <Compile Include="Ultis\Constant.cs" />
+    <Compile Include="Ultis\DecimalToStringConverter.cs" />
+    <Compile Include="Ultis\IntToStringConverter.cs" />
     <Compile Include="Ultis\MyApp.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
