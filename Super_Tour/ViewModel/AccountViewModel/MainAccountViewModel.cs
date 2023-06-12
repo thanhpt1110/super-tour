@@ -251,10 +251,13 @@ namespace Super_Tour.ViewModel
         #region Update
         private void ExecuteUpdateAccountCommand(object obj)
         {
-            UpdateAccountView updateAccountView = new UpdateAccountView();
-            updateAccountView.DataContext = new UpdateAccountViewModel(SelectedItem);
-            updateAccountView.ShowDialog();
-            RefreshDatagrid();
+            if (SelectedItem != null)
+            {
+                UpdateAccountView updateAccountView = new UpdateAccountView();
+                updateAccountView.DataContext = new UpdateAccountViewModel(SelectedItem);
+                updateAccountView.ShowDialog();
+                RefreshDatagrid();
+            }
         }
         #endregion
 

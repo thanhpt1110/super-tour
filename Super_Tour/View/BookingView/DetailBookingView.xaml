@@ -107,7 +107,7 @@
                                         </StackPanel>
                                         <TextBox
                                 IsReadOnly="True"
-                                Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 materialDesign:HintAssist.Hint="Select from list on the left"
                                 Width="auto"
@@ -151,6 +151,7 @@
                                                    FontSize="15"/>
                                                     </StackPanel>
                                                     <DatePicker
+                                                IsHitTestVisible="False"
                                                 SelectedDate="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                                                 Foreground="Black"
@@ -172,6 +173,7 @@
                                                     FontSize="15"/>
                                                     </StackPanel>
                                                     <materialDesign:TimePicker
+                                                IsHitTestVisible="False"
                                                 SelectedTime="{Binding SelectedDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedTimePicker}"
                                                 Foreground="Black"
@@ -223,7 +225,8 @@
 
                                                     </StackPanel>
                                                     <ComboBox
-                                            IsReadOnly="True"
+                                                IsReadOnly="True"
+                                                IsHitTestVisible="False"
                                                 ItemsSource="{Binding ListDiscount}"
                                                 SelectedItem="{Binding SelectedDiscount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -241,9 +244,8 @@
                                             </Grid>
                                         </Grid>
                                         <Button
-                                    Margin="0,110,0,0"
-                                    Command="{Binding SaveCommand}"
-                                    IsEnabled="{Binding IsDataModified}"
+                                    Margin="0,111,0,0"
+                                    Command="{Binding ViewDetailScheduleCommand}"
                                     Content="View detail schedule"
                                     Background="{StaticResource ThemeColor}"
                                     BorderThickness="0"
@@ -322,6 +324,7 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <TextBox
+                                                    IsReadOnly="True"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                         Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Height="auto"
@@ -345,6 +348,8 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                IsHitTestVisible="False"
+                                                IsReadOnly="True"
                                                 SelectedValue="{Binding SelectedGender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="Content"
                                                 HorizontalAlignment="Left"
@@ -370,10 +375,12 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <ComboBox 
-                                         ItemsSource="{Binding ListProvinces}"
-                                        SelectedItem="{Binding SelectedProvince}"
-                                        DisplayMemberPath="name"
-                                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                IsReadOnly="True"
+                                                IsHitTestVisible="False"
+                                                ItemsSource="{Binding ListProvinces}"
+                                                SelectedItem="{Binding SelectedProvince, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                DisplayMemberPath="name"
+                                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                 HorizontalAlignment="Left"
                                                 BorderBrush="Black"
                                                 Foreground="Black"
@@ -400,8 +407,10 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <ComboBox 
+                                        IsReadOnly="True"
+                                        IsHitTestVisible="False"
                                         ItemsSource="{Binding ListDistricts}"
-                                        SelectedItem="{Binding SelectedDistrict}"
+                                        SelectedItem="{Binding SelectedDistrict, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         DisplayMemberPath="name"
                                         Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                         HorizontalAlignment="Left"

@@ -16,6 +16,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using static Super_Tour.ViewModel.MainTourViewModel;
 using Org.BouncyCastle.Asn1.X509;
+using Super_Tour.ViewModel.TourViewModel;
 
 namespace Super_Tour.ViewModel
 {
@@ -169,6 +170,7 @@ namespace Super_Tour.ViewModel
         public ICommand SaveCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
         public ICommand SelectedFilterCommand { get; }
+        public ICommand ViewTourDetailCommand { get; }
         #endregion
 
         #region Constructor
@@ -190,6 +192,7 @@ namespace Super_Tour.ViewModel
             SaveCommand = new RelayCommand(ExecuteSave);
             SelectedFilterCommand = new RelayCommand(ExecuteSelectFilter);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTour);
+            ViewTourDetailCommand = new RelayCommand(ExecuteViewTourDetailCommand);
         }
         #endregion
 
@@ -308,6 +311,25 @@ namespace Super_Tour.ViewModel
                 return;
             this._listToursSearching = _listToursOriginal.Where(p => p.PlaceOfTour.Contains(_searchType)).ToList();
 
+        }
+        #endregion
+
+        #region View tour detail
+        private void ExecuteViewTourDetailCommand(object obj)
+        {
+            try
+            {
+                if (SelectedItem != null)
+                {
+                    DetailTourView detailTourView = new DetailTourView();
+                    detailTourView.DataContext = new DetailTourViewModel(SelectedItem);
+                    detailTourView.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
         #endregion
 

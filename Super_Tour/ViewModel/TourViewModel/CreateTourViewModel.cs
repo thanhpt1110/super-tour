@@ -269,6 +269,7 @@ namespace Super_Tour.ViewModel
             private ObservableCollection<GridActivity> _eveningTourDetail;
             private CreateTourViewModel _createTourViewModel;
             private UpdateTourViewModel _updateTourViewModel;
+            private DetailTourViewModel _detailTourViewModel;
             #endregion
 
             #region Declare binding
@@ -322,7 +323,7 @@ namespace Super_Tour.ViewModel
             #endregion
 
             #region Constructor
-            public DateActivity(int dateOrder, CreateTourViewModel createTourViewModel = null, UpdateTourViewModel updateTourViewModel = null, bool isUpdate = false,TOUR tour=null)
+            public DateActivity(int dateOrder, CreateTourViewModel createTourViewModel = null, UpdateTourViewModel updateTourViewModel = null, DetailTourViewModel detailTourViewModel = null, bool isUpdate = false,TOUR tour=null)
             {
                 db = SUPER_TOUR.db;
                 _dateOrder = dateOrder;
@@ -330,6 +331,7 @@ namespace Super_Tour.ViewModel
                 _isUpdate = isUpdate;
                 _createTourViewModel = createTourViewModel; 
                 _updateTourViewModel = updateTourViewModel;
+                _detailTourViewModel = detailTourViewModel;
                 _morningTourDetail = new ObservableCollection<GridActivity>();
                 _afternoonTourDetail = new ObservableCollection<GridActivity>();
                 _eveningTourDetail = new ObservableCollection<GridActivity>();

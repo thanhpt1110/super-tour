@@ -211,7 +211,7 @@ namespace Super_Tour.ViewModel
                     while (listTourDetail.Where(p => p.Date_Order_Package == dateOrder).ToList().Count > 0)
                     {
                         List<TOUR_DETAILS> dateNum = listTourDetail.Where(p => p.Date_Order_Package == dateOrder).ToList();
-                        DateActivity dateActivity = new DateActivity(dateOrder, null, this, true, _tour);
+                        DateActivity dateActivity = new DateActivity(dateOrder, null, this, null, true, _tour);
                         foreach (TOUR_DETAILS date in dateNum)
                         {
                             GridActivity gridActivity = new GridActivity() { Tour_detail = date, TimeOfPackage = DateTime.Now.Date.Add(date.Start_Time_Package), PackageName = db.PACKAGEs.Find(date.Id_Package).Name_Package };
@@ -275,7 +275,7 @@ namespace Super_Tour.ViewModel
         private void ExecuteAddADayCommand(object obj)
         {
             int currentDay = DateActivityList.Count + 1;
-            DateActivity dateActivity = new DateActivity(currentDay, null, this, true, _tour);
+            DateActivity dateActivity = new DateActivity(currentDay, null, this, null, true, _tour);
             DateActivityList.Add(dateActivity);
             TotalDay = currentDay;
             TotalNight = currentDay - 1;

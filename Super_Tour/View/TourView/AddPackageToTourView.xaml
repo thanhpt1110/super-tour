@@ -152,7 +152,8 @@
                                            Text="Available Package"/>
                                 <DataGrid Margin="10" 
                                           ItemsSource="{Binding ObservableListAvailablePackage}"
-                                    RowStyle="{DynamicResource DataGridRowStyle1}" 
+                                          SelectedItem="{Binding SelectedItem}"
+                                            RowStyle="{DynamicResource DataGridRowStyle1}" 
                                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                                           Style="{DynamicResource smallerDataGridStyle1}">
@@ -173,11 +174,13 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
-                                                                    Background="{StaticResource ThemeColor}"
-                                                                    Width="20"
-                                                                Height="20"
-                                                                >
+                                                            <Button 
+                                                                Command="{Binding DataContext.ViewPackageDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                                CommandParameter="{Binding}"
+                                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                                Background="{StaticResource ThemeColor}"
+                                                                Width="20"
+                                                                Height="20">
                                                                 <fa:IconImage Width="5" Icon="Info" Foreground="White"/>
                                                             </Button>
                                                             <Button Style="{StaticResource MaterialDesignIconButton}"
@@ -210,7 +213,8 @@
                                            Text="Selected Package"/>
                                 <DataGrid Margin="10" 
                                           ItemsSource="{Binding ObservableListSelectedPackage}"
-                                    RowStyle="{DynamicResource DataGridRowStyle1}" 
+                                          SelectedItem="{Binding SelectedItem}"
+                                          RowStyle="{DynamicResource DataGridRowStyle1}" 
                                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                                           Style="{DynamicResource smallerDataGridStyle1}">
@@ -229,9 +233,12 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
-                                                                    Background="{StaticResource ThemeColor}"
-                                                                    Width="20"
+                                                            <Button 
+                                                                Command="{Binding DataContext.ViewPackageDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                                CommandParameter="{Binding}"
+                                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                                Background="{StaticResource ThemeColor}"
+                                                                Width="20"
                                                                 Height="20"
                                                                 >
                                                                 <fa:IconImage Width="5" Icon="Info" Foreground="White"/>

@@ -283,7 +283,7 @@
                                                                             <StackPanel Orientation="Vertical" 
                                                                                     VerticalAlignment="Center">
                                                                                 <TextBlock FontSize="16"
-                                                                        Margin="0,10,0,0"
+                                                                        Margin="0,0,0,0"
                                                                         Text="Morning Activities"
                                                                         HorizontalAlignment="Center"/>
                                                                                 <Button Margin="0,10,0,10"
@@ -352,7 +352,7 @@
                                                                     BorderThickness="1,0,1,1">
                                                                             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                                                                 <TextBlock FontSize="16"
-                                                                            Margin="0,10,0,0"
+                                                                            Margin="0,0,0,0"
                                                                             Text="Afternoon Activities"
                                                                             HorizontalAlignment="Center"/>
                                                                                 <Button Margin="0,10,0,10"
@@ -422,7 +422,7 @@
                                                                     BorderThickness="1,0,1,1">
                                                                             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                                                                 <TextBlock FontSize="16"
-                                                                            Margin="0,10,0,0"
+                                                                            Margin="0,0,0,0"
                                                                             Text="Night Activities"
                                                                             HorizontalAlignment="Center"/>
                                                                                 <Button Margin="0,10,0,10"

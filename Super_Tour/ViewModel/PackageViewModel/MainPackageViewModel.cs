@@ -263,10 +263,13 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                UpdatePackageView updateView = new UpdatePackageView();
-                updateView.DataContext = new UpdatePackageViewModel(SelectedItem);
-                updateView.ShowDialog();
-                RefreshDatagrid();
+                if (SelectedItem != null)
+                {
+                    UpdatePackageView updateView = new UpdatePackageView();
+                    updateView.DataContext = new UpdatePackageViewModel(SelectedItem);
+                    updateView.ShowDialog();
+                    RefreshDatagrid();
+                }
             }
             catch(Exception ex)
             {
@@ -280,9 +283,12 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                DetailPackageView detailView = new DetailPackageView ();
-                detailView.DataContext = new DetailPackageViewModel(SelectedItem);
-                detailView.ShowDialog();
+                if (SelectedItem != null)
+                {
+                    DetailPackageView detailView = new DetailPackageView ();
+                    detailView.DataContext = new DetailPackageViewModel(SelectedItem);
+                    detailView.ShowDialog();
+                }
             }
             catch (Exception ex)
             {

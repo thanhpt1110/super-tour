@@ -83,28 +83,7 @@
                                         VerticalAlignment="Center"
                                         Text="Travel Details"/>
                             <StackPanel Orientation="Horizontal"
-                                            Margin="0,12,0,0">
-                                <Label Content="Tour name"
-                                           FontSize="15"/>
-                            </StackPanel>
-                            <TextBox
-                                BorderThickness="1"
-                                IsHitTestVisible="False"
-                                IsReadOnly="True"
-                                Text="{Binding SelectedItem.Name_Tour, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                materialDesign:HintAssist.Hint="Select from list on the left"
-                                Width="auto"
-                                Height="auto"
-                                FontSize="20"
-                                Background="{StaticResource TextBoxReadOnlyColor}"
-                                BorderBrush="Black"
-                                Foreground="Black"
-                                materialDesign:HintAssist.IsFloating="False"
-                                materialDesign:HintAssist.Foreground="Black"
-                                materialDesign:HintAssist.Background="Transparent"/>
-                            <StackPanel Orientation="Horizontal"
-                                            Margin="0,40,0,0">
+                                            Margin="0,10,0,0">
                                 <Label Content="Start location"
                                            FontSize="15"/>
                             </StackPanel>
@@ -125,7 +104,7 @@
                                 Background="{StaticResource TextBoxReadOnlyColor}"
                                 materialDesign:HintAssist.Background="Transparent"
                                 CaretBrush="Black"/>
-                            <Grid Margin="0,40,0,0">
+                            <Grid Margin="0,45,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
@@ -235,7 +214,7 @@
                                 </Grid>
                             </Grid>
                             <Button
-                                    Margin="0,130,0,0"
+                                    Margin="0,256,0,0"
                                     Click="btnClose_Click"
                                     Content="Close"
                                     Background="{StaticResource btnDelete}"
@@ -268,12 +247,7 @@
                             </Grid>
                             <Grid Grid.Row="1">
                                 <StackPanel Orientation="Vertical" 
-                                            Margin="0,20,0,0">
-                                    <TextBlock
-                                    FontSize="23"
-                                    FontWeight="Bold"
-                                    TextAlignment="Left"
-                                    Text="General Information"/>
+                                            Margin="0,0,0,0">
                                     <StackPanel Orientation="Vertical"
                                                 VerticalAlignment="Center"
                                                 Margin="0,10,0,0">
@@ -300,7 +274,7 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical"
                                                 VerticalAlignment="Center"
-                                                Margin="0,10,0,0">
+                                                Margin="0,40,0,0">
                                         <StackPanel Orientation="Horizontal"
                                                     VerticalAlignment="Center">
                                             <Label Content="Tour price"
@@ -322,7 +296,7 @@
                                             materialDesign:HintAssist.IsFloating="False">
                                         </TextBox>
                                     </StackPanel>
-                                    <Grid Margin="0,20">
+                                    <Grid Margin="0, 45, 0, 10">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
@@ -334,6 +308,7 @@
                                                        FontSize="18"
                                                        HorizontalAlignment="Center"/>
                                                 <TextBlock Text="{Binding TotalDay}"
+                                                    Margin="0, 10, 0, 0"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -348,6 +323,7 @@
                                                        HorizontalAlignment="Center"/>
                                                 <TextBlock 
                                                     Text="{Binding TotalNight}"
+                                                    Margin="0, 10, 0, 0"
                                                     FontWeight="Medium"
                                                     FontSize="25"
                                                     HorizontalAlignment="Center"
@@ -366,7 +342,7 @@
                                     Text="Province List"/>
                                     <ScrollViewer CanContentScroll="True"
                                                   VerticalScrollBarVisibility="Visible" 
-                                                  Height="230"
+                                                  Height="225"
                                                   >
                                         <ItemsControl ItemsSource="{Binding SelectedProvinceList}"
                                                       Margin="0 10"
@@ -393,21 +369,6 @@
                                                                         VerticalAlignment="Center"/>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
-                                                                    <Button
-                                                                         
-                                                                        Command="{Binding DataContext.RemoveSelectedProvinceCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                                                        CommandParameter="{Binding}"
-                                                                        Style="{StaticResource MaterialDesignIconButton}"
-                                                                        HorizontalAlignment="Right"
-                                                                            Height="auto"
-                                                                            Width="auto"
-                                                                            Margin="5">
-                                                                        <materialDesign:PackIcon Kind="Remove"
-                                                                            Height="25"
-                                                                            Width="25"  
-                                                                            Margin="5"
-                                                                            Foreground="Black"/>
-                                                                    </Button>
                                                                 </Grid>
                                                             </Grid>
                                                         </Border>
@@ -417,6 +378,7 @@
                                         </ItemsControl>
                                     </ScrollViewer>
                                     <Button 
+                                        Command="{Binding ViewDetailScheduleCommand}"
                                         FontSize="20"
                                         FontWeight="Medium"
                                         Margin="0 10 0 0"

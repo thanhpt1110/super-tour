@@ -256,10 +256,13 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                UpdateCustomerView updateView = new UpdateCustomerView();
-                updateView.DataContext = new UpdateCustomerViewModel(SelectedItem);
-                updateView.ShowDialog();
-                RefreshDatagrid();
+                if (SelectedItem != null)
+                {
+                    UpdateCustomerView updateView = new UpdateCustomerView();
+                    updateView.DataContext = new UpdateCustomerViewModel(SelectedItem);
+                    updateView.ShowDialog();
+                    RefreshDatagrid();
+                }
             }
             catch (Exception ex)
             {
@@ -322,10 +325,12 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                DetailCustomerView detailView = new DetailCustomerView();
-                detailView.DataContext = new DetailCustomerViewModel(SelectedItem);
-                detailView.ShowDialog();
-                RefreshDatagrid();
+                if (SelectedItem != null)
+                {
+                    DetailCustomerView detailView = new DetailCustomerView();
+                    detailView.DataContext = new DetailCustomerViewModel(SelectedItem);
+                    detailView.ShowDialog();
+                }
             }
             catch (Exception ex)
             {

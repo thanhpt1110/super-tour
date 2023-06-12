@@ -4,6 +4,7 @@ using Super_Tour.Model;
 using Super_Tour.Ultis;
 using Super_Tour.Ultis.Api_Address;
 using Super_Tour.View;
+using Super_Tour.ViewModel.PackageViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace Super_Tour.ViewModel
         #region Declare variable
         private SUPER_TOUR db = null;
         private TYPE_PACKAGE _selectedTypePackage;
+        private PACKAGE _selectedItem = null;
         private ObservableCollection<TYPE_PACKAGE> _listTypePackage;
         private List<PACKAGE> _listAvailablePackage;
         private Province _selectedProvince;
@@ -36,6 +38,16 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Declare binding
+        public PACKAGE SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
         public Province SelectedProvince
         {
             get { return _selectedProvince; }
@@ -131,6 +143,7 @@ namespace Super_Tour.ViewModel
         public ICommand DeleteSelectedPackageCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand SearchProvinceCommand { get; }  
+        public ICommand ViewPackageDetailCommand { get; }
         #endregion
 
         #region Constructor
@@ -157,7 +170,7 @@ namespace Super_Tour.ViewModel
                 SavePackageCommand = new RelayCommand(ExecuteUpdatePackage);
             else
                 SavePackageCommand = new RelayCommand(ExecuteSavePackage);
-
+            ViewPackageDetailCommand = new RelayCommand(ExecuteViewPackageDetailCommand);
             // Load combo box TypePackage
             LoadTypePackage();
 
@@ -264,6 +277,25 @@ namespace Super_Tour.ViewModel
         private void ExecuteSearchProvinceCommand(object obj)
         {
             LoadWithSearch();   
+        }
+        #endregion
+
+        #region View package detail
+        private void ExecuteViewPackageDetailCommand(object obj)
+        {
+            try
+            {
+                if (SelectedItem != null)
+                {
+                    DetailPackageView detailView = new DetailPackageView();
+                    detailView.DataContext = new DetailPackageViewModel(SelectedItem);
+                    detailView.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
         #endregion
 

@@ -183,7 +183,10 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource MaterialDesignIconButton}"
+                                                            <Button 
+                                                            Command="{Binding DataContext.ViewTravelDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource MaterialDesignIconButton}"
                                                             Height="25"
                                                             Width="25"
                                                             Content="i"

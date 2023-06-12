@@ -237,6 +237,7 @@ namespace Super_Tour.ViewModel
         public ICommand OpenAddTouristForBookingViewCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand OnSearchTextChangedCommand { get; }
+        public ICommand ViewTravelDetailCommand { get; }
         #endregion
 
         #region Constructor
@@ -257,6 +258,7 @@ namespace Super_Tour.ViewModel
             OpenAddTouristForBookingViewCommand = new RelayCommand(ExecuteOpenAddTouristForBookingViewCommand);
             OnSearchTextChangedCommand = new RelayCommand(ExecuteSearchTravel);
             SaveCommand = new RelayCommand(ExecuteSaveCommand);
+            ViewTravelDetailCommand = new RelayCommand(ExecuteViewTravelDetailCommand);
 
             // Load UI
             LoadTravel();
@@ -484,6 +486,25 @@ namespace Super_Tour.ViewModel
             if (_listTravelOriginal == null || _listTravelOriginal.Count == 0)
                 return;
             this._listTravelSearching = _listTravelOriginal.Where(p => p.TOUR.PlaceOfTour.ToLower().Contains(_searchTravel.ToLower())).ToList();
+        }
+        #endregion
+
+        #region View travel detail
+        private void ExecuteViewTravelDetailCommand(object obj)
+        {
+            try
+            {
+                if (SelectedTravel != null)
+                {
+                    DetailTravelView detailTravelView = new DetailTravelView();
+                    detailTravelView.DataContext = new DetailTravelViewModel(SelectedTravel);
+                    detailTravelView.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
         }
         #endregion
 

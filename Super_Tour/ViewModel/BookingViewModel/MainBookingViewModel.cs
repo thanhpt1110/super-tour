@@ -295,9 +295,12 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                UpdateBookingViewModel updateBoooingViewModel = new UpdateBookingViewModel(_selectedItem, mainViewModel, this);
-                mainViewModel.CurrentChildView = updateBoooingViewModel;
-                mainViewModel.setFirstChild("Update Booking");
+                if (SelectedItem != null)
+                {
+                    UpdateBookingViewModel updateBoooingViewModel = new UpdateBookingViewModel(SelectedItem, mainViewModel, this);
+                    mainViewModel.CurrentChildView = updateBoooingViewModel;
+                    mainViewModel.setFirstChild("Update Booking");
+                }
             }
             catch (Exception ex)
             {
@@ -312,8 +315,11 @@ namespace Super_Tour.ViewModel
             try
             {
                 DetailBookingView detailBookingView = new DetailBookingView();
-                detailBookingView.DataContext = new DetailBookingViewModel();
-                detailBookingView.ShowDialog();
+                if (SelectedItem != null) 
+                { 
+                    detailBookingView.DataContext = new DetailBookingViewModel(SelectedItem);
+                    detailBookingView.ShowDialog();
+                }
             }
             catch(Exception ex)
             {

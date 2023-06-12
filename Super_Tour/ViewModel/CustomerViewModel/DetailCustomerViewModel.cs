@@ -19,7 +19,6 @@ namespace Super_Tour.ViewModel
     internal class DetailCustomerViewModel: ObservableObject
     {
         #region Declare variable
-        private SUPER_TOUR db = null;
         private ObservableCollection<Province> _listProvince = null;
         private ObservableCollection<District> _listDistrict = null;
         private CUSTOMER _selectedItem = null;
@@ -27,25 +26,13 @@ namespace Super_Tour.ViewModel
         private string _phoneNumber = null;
         private string _selectedGender = null;
         private string _name = null;
-        private bool _isDataModified = false;
         private Province _selectedProvince = null;
         private District _selectedDistrict = null;
         private List<Province> ListProvinces = null;
         private List<District> ListDistricts = null;
-        private string table = "UPDATE_CUSTOMER";
         #endregion
 
         #region Declare binding
-        public bool IsDataModified
-        {
-            get { return _isDataModified; }
-            set
-            {
-                _isDataModified = value;
-                OnPropertyChanged(nameof(IsDataModified));
-            }
-        }
-
         public string IdNumber
         {
             get { return _idNumber; }
@@ -55,7 +42,6 @@ namespace Super_Tour.ViewModel
                 {
                     _idNumber = value;
                     OnPropertyChanged(nameof(IdNumber));
-                    CheckDataModified();
                 }
             }
         }
@@ -69,7 +55,6 @@ namespace Super_Tour.ViewModel
                 {
                     _phoneNumber = value;
                     OnPropertyChanged(nameof(PhoneNumber));
-                    CheckDataModified();
                 }
             }
         }
@@ -83,7 +68,6 @@ namespace Super_Tour.ViewModel
                 {
                     _name = value;
                     OnPropertyChanged(nameof(Name));
-                    CheckDataModified();
                 }
             }
         }
@@ -95,7 +79,6 @@ namespace Super_Tour.ViewModel
             {
                 _selectedGender = value;
                 OnPropertyChanged(nameof(SelectedGender));
-                CheckDataModified();
             }
         }
 
@@ -106,7 +89,6 @@ namespace Super_Tour.ViewModel
             {
                 _selectedDistrict = value;
                 OnPropertyChanged(nameof(SelectedDistrict));
-                CheckDataModified();
             }
         }
 
@@ -117,7 +99,6 @@ namespace Super_Tour.ViewModel
             {
                 _selectedProvince = value;
                 OnPropertyChanged(nameof(SelectedProvince));
-                CheckDataModified();
             }
         }
 
@@ -142,11 +123,6 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        #region Command
-        public ICommand SaveCommand { get; }
-        public ICommand SelectedProvinceCommand { get; }
-        #endregion        
-
         #region Constructor
         public DetailCustomerViewModel()
         {
@@ -155,12 +131,9 @@ namespace Super_Tour.ViewModel
 
         public DetailCustomerViewModel(CUSTOMER customer)
         {
-            db = SUPER_TOUR.db;
             this._selectedItem = customer;
 
             // Create object
-            SaveCommand = new RelayCommand(AddNewCustomer);
-            SelectedProvinceCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
             _listProvince = new ObservableCollection<Province>();
             _listDistrict = new ObservableCollection<District>();
 
@@ -202,12 +175,6 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region District
-        private void ExecuteSelectedProvinceComboBox(object obj)
-        {
-            _selectedDistrict = null;
-            LoadDistrict();
-        }
-
         private void LoadDistrict()
         {
             try
@@ -223,65 +190,6 @@ namespace Super_Tour.ViewModel
             {
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
 
-            }
-        }
-        #endregion
-
-        #region Check data is modified
-        private void CheckDataModified()
-        {
-            if ((string.IsNullOrEmpty(_phoneNumber) || string.IsNullOrEmpty(_name) ||
-                _selectedGender == null || _phoneNumber == _selectedItem.PhoneNumber &&
-                _name == _selectedItem.Name_Customer && _selectedGender == _selectedItem.Gender)
-                && (_selectedItem.IdNumber != null && _selectedItem.IdNumber == IdNumber)
-                && (_selectedItem.Id_Province != null && _selectedItem.Id_Province == _selectedProvince.codename)
-                && (_selectedItem.Id_District != null && _selectedItem.Id_District == _selectedDistrict.codename))
-                IsDataModified = false;
-            else
-                IsDataModified = true;
-        }
-        #endregion
-
-        #region Perform update customer
-        public void AddNewCustomer(object a)
-        {
-            try
-            {
-                // Save data to DB
-                _selectedItem.PhoneNumber = _phoneNumber;
-                _selectedItem.Name_Customer = _name;
-                _selectedItem.Gender = _selectedGender;
-
-                if (IdNumber != null)
-                    _selectedItem.IdNumber = _idNumber;
-                if (_selectedItem.Id_Province != null && _selectedItem.Id_District != null)
-                {
-                    _selectedItem.Id_Province = _selectedProvince.codename;
-                    _selectedItem.Id_District = _selectedDistrict.codename;
-                }
-                db.CUSTOMERs.AddOrUpdate(_selectedItem);
-                db.SaveChanges();
-
-                // Synchronize data to real time DB
-                MainCustomerViewModel.TimeCustomer = DateTime.Now;
-                UPDATE_CHECK.NotifyChange(table, MainCustomerViewModel.TimeCustomer);
-
-                // Process UI events
-                MyMessageBox.ShowDialog("Update customer successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                UpdateCustomerView updateCustomerView = null; ;
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window is UpdateCustomerView)
-                    {
-                        updateCustomerView = window as UpdateCustomerView;
-                        break;
-                    }
-                }
-                updateCustomerView.Close();
-            }
-            catch (Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
         #endregion

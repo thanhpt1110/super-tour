@@ -42,7 +42,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
         private bool _isDataModified = false;
         private string _imagePath = null;
         private bool _isNewImage = false;
-        private string table = "UPDATE_PACKAGE";
         #endregion
 
         #region Declare binding
@@ -65,7 +64,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
                 {
                     _price = value;
                     OnPropertyChanged(nameof(Price));
-                    CheckDataModified();
                 }
             }
         }
@@ -90,7 +88,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             {
                 _packageName = value;
                 OnPropertyChanged(nameof(PackageName));
-                CheckDataModified();
             }
         }
 
@@ -101,7 +98,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             {
                 _selectedImage = value;
                 OnPropertyChanged(nameof(SelectedImage));
-                CheckDataModified();
             }
         }
 
@@ -115,7 +111,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             {
                 _selectedTypePackage = value;
                 OnPropertyChanged(nameof(SelectedTypePackage));
-                CheckDataModified();
             }
         }
 
@@ -139,7 +134,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             {
                 _selectedDistrict = value;
                 OnPropertyChanged(nameof(SelectedDistrict));
-                CheckDataModified();
             }
         }
 
@@ -150,7 +144,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             {
                 _selectedProvince = value;
                 OnPropertyChanged(nameof(SelectedProvince));
-                CheckDataModified();
             }
         }
 
@@ -181,12 +174,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
         }
         #endregion
 
-        #region Command
-        public ICommand SelectedProvinceCommand { get; }
-        public ICommand OpenPictureCommand { get; }
-        public ICommand UpdatePackageCommand { get; }
-        #endregion
-
         #region Constructor
         public DetailPackageViewModel()
         {
@@ -198,9 +185,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
             this._selectedItem = Package;
 
             // Create object
-            SelectedProvinceCommand = new RelayCommand(ExecuteSelectedProvinceComboBox);
-            OpenPictureCommand = new RelayCommand(ExecuteOpenImage);
-            UpdatePackageCommand = new RelayCommand(ExecuteUpdatePackage);
             _listProvince = new ObservableCollection<Province>();
             _listDistrict = new ObservableCollection<District>();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>();
@@ -334,63 +318,6 @@ namespace Super_Tour.ViewModel.PackageViewModel
                 return image;
             }
             return _selectedItem.Image_Package;
-        }
-        #endregion
-
-        #region Check data modified
-        private void CheckDataModified()
-        {
-            if (_selectedProvince == null || _selectedDistrict == null || _selectedImage == null || _selectedTypePackage == null ||
-                string.IsNullOrEmpty(_packageName) || string.IsNullOrEmpty(_price)
-                || (_selectedProvince.codename == _selectedItem.Id_Province && _selectedDistrict.codename == _selectedItem.Id_District &&
-                    _selectedTypePackage.Id_Type_Package == _selectedItem.Id_Type_Package && _packageName == _selectedItem.Name_Package &&
-                    _price == _selectedItem.Price.ToString() && _isNewImage == false))
-                IsDataModified = false;
-            else
-                IsDataModified = true;
-        }
-        #endregion
-
-        #region Perform update action
-        private async void ExecuteUpdatePackage(object obj)
-        {
-            try
-            {
-                _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
-                _selectedItem.Name_Package = _packageName;
-                _selectedItem.Id_Province = _selectedProvince.codename;
-                _selectedItem.Id_District = _selectedDistrict.codename;
-                _selectedItem.Description_Package = _description;
-                _selectedItem.Price = decimal.Parse(_price);
-                _selectedItem.Image_Package = await UploadImg();
-                db.PACKAGEs.AddOrUpdate(_selectedItem);
-                await db.SaveChangesAsync();
-
-                // Synchronize data to real time DB
-                MainPackageViewModel.TimePackage = DateTime.Now;
-                UPDATE_CHECK.NotifyChange(table, MainPackageViewModel.TimePackage);
-
-                MyMessageBox.ShowDialog("Update package successful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                // Find view to close 
-                UpdatePackageView createPackageView = null;
-                foreach (Window window in Application.Current.Windows)
-                {
-                    Console.WriteLine(window.ToString());
-                    if (window is UpdatePackageView)
-                    {
-                        createPackageView = window as UpdatePackageView;
-                        break;
-                    }
-                }
-                createPackageView.Close();
-            }
-            catch (Exception ex)
-            {
-                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-            }
-            finally
-            {
-            }
         }
         #endregion
     }

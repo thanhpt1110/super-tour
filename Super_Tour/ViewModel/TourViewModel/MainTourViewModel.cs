@@ -285,9 +285,12 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                UpdateTourViewModel updateTourViewModel = new UpdateTourViewModel(_selectedItem, this, mainViewModel);
-                mainViewModel.CurrentChildView = updateTourViewModel;
-                mainViewModel.setFirstChild("Update Tour");
+                if (SelectedItem != null)
+                {
+                    UpdateTourViewModel updateTourViewModel = new UpdateTourViewModel(SelectedItem, this, mainViewModel);
+                    mainViewModel.CurrentChildView = updateTourViewModel;
+                    mainViewModel.setFirstChild("Update Tour");
+                }
             }
             catch (Exception ex)
             {
@@ -301,9 +304,12 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                DetailTourView detailTourView = new DetailTourView();
-                detailTourView.DataContext = new DetailTourViewModel();
-                detailTourView.ShowDialog();
+                if (SelectedItem != null)
+                {
+                    DetailTourView detailTourView = new DetailTourView();
+                    detailTourView.DataContext = new DetailTourViewModel(SelectedItem);
+                    detailTourView.ShowDialog();
+                }
             }
             catch (Exception ex)
             {

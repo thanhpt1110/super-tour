@@ -347,6 +347,8 @@
                                                         Content="i"
                                                         FontSize="16"
                                                         Margin="10 0 0 0"
+                                                        Command="{Binding DataContext.ViewTourDetailCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        CommandParameter="{Binding}"
                                                         Effect="{StaticResource MaterialDesignElevationShadow3}"
                                                         Background="{StaticResource ThemeColor}">
                                                     </Button>
