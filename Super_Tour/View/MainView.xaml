@@ -70,6 +70,12 @@
         <DataTemplate DataType="{x:Type viewModel:CustomerStatisticViewModel}">
             <local:CustomerStatisticView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RevenueStatisticViewModel}">
+            <local:RevenueStatisticView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TravelStatisticViewModel}">
+            <local:TravelStatisticView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:MainAccountViewModel}">
             <local:MainAccountView/>
         </DataTemplate>
@@ -133,7 +139,7 @@
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource menuButton}"
-                                     Tag="{StaticResource color2}"
+                                     Tag="{StaticResource color6}"
                                     Visibility="{Binding VisibilityTravel, Converter={StaticResource BooleanToVisibilityConverter}}"
                                      Command="{Binding ShowTravelViewCommand}"
                                      IsChecked="{Binding TravelChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -197,13 +203,48 @@
                         </RadioButton>
                         <RadioButton Style="{StaticResource menuButton}"
                             Tag="{StaticResource color8}"
-                                     Command="{Binding ShowRevenueStatisticViewCommand}"
-                                     IsChecked="{Binding RevenueChecked}">
+                            Command="{Binding StatisticSubMenuViewCommand}"
+                                     x:Name="SatisticMenu"
+                                     IsChecked="{Binding StatisticChecked}"
+                                     >
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Database" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Statistic" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </RadioButton>
+                        <StackPanel
+                            Background="#354457"
+                            Visibility="{Binding IsSubMenuVisible,Converter={StaticResource BooleanToVisibilityConverter}}"
+                            x:Name="subMenuStatistic"
+                            Orientation="Vertical">
+                            <RadioButton Style="{StaticResource subMenuButton}"
+                            Tag="{StaticResource color4}"
+                                     Command="{Binding ShowCustomerStatisticViewCommand}"
+                                     IsChecked="{Binding CustomerStatisticChecked}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="AddressBook" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Customer Statistic" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource subMenuButton}"
+                            Tag="{StaticResource color9}"
+                                     Command="{Binding ShowRevenueStatisticViewCommand}"
+                                     IsChecked="{Binding RevenueStatisticChecked}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="MoneyCheckDollar" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Revenue Statistic" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource subMenuButton}"
+                            Tag="{StaticResource color6}"
+                                     Command="{Binding ShowTravelStatisticViewCommand}"
+                                     IsChecked="{Binding TravelStatisticChecked}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Icon="Plane" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Travel Statistic" Style="{StaticResource menuButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+                        </StackPanel>
                         <RadioButton Style="{StaticResource menuButton}"
                                     Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
                                     Tag="{StaticResource color9}"

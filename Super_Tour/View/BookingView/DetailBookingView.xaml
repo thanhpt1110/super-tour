@@ -106,6 +106,7 @@
                                            FontSize="15"/>
                                         </StackPanel>
                                         <TextBox
+                                            IsHitTestVisible="False"
                                 IsReadOnly="True"
                                 Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -125,6 +126,7 @@
                                            FontSize="15"/>
                                         </StackPanel>
                                         <TextBox
+                                            IsHitTestVisible="False"
                                 IsReadOnly="True"
                                 Text="{Binding StartLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -200,6 +202,7 @@
                                                     FontSize="15"/>
                                                     </StackPanel>
                                                     <TextBox
+                                                        IsHitTestVisible="False"
                                             IsReadOnly="True"
                                             Text="{Binding MaxTicket, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -281,6 +284,7 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <TextBox
+                                                    IsHitTestVisible="False"
                                                     IsReadOnly="True"
                                         Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -303,6 +307,7 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <TextBox
+                                                    IsHitTestVisible="False"
                                                     IsReadOnly="True"
                                         Text="{Binding CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                                        
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -324,6 +329,7 @@
                                                FontSize="15"/>
                                                 </StackPanel>
                                                 <TextBox
+                                                    IsHitTestVisible="False"
                                                     IsReadOnly="True"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                         Text="{Binding IdNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

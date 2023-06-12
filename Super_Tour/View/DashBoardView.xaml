@@ -207,7 +207,13 @@
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor4}"
                                     CornerRadius="0,0,20,20"
-                                    Background="{StaticResource DashboardBackgroundColor4}"></Border>
+                                    Background="{StaticResource DashboardBackgroundColor4}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding GoToBookingManagementCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
                             <TextBlock Text="Resolve Now >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
@@ -216,7 +222,7 @@
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <i:InvokeCommandAction Command="{Binding GoToBookingManagementCommand}" />
                                         </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                </i:Interaction.Triggers>
                             </TextBlock>
                         </Grid>
                     </Grid>

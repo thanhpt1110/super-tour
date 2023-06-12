@@ -24,6 +24,7 @@ namespace Super_Tour.ViewModel
     internal class MainViewModel : ObservableObject
     {
         #region Declare variable
+        private bool _isSubMenuVisible = false;
         public static ObservableObject _currentChildView;
         private string _nextChildCaption1;
         private bool _haveOneChild = false;
@@ -53,28 +54,31 @@ namespace Super_Tour.ViewModel
         private ACCOUNT _currentUser = null;
         private bool _customerChecked = false;
         private bool _travelChecked = false;
-        private bool _revenueChecked = false;
+        private bool _customerStatisticChecked = false;
+        private bool _travelStatisticChecked = false;
+        private bool _revenueStatisticChecked = false;
         private bool _bookingChecked = false;
+        private bool _statisticChecked = false;
+
         #endregion
 
         #region Declare binding
+        public bool IsSubMenuVisible
+        {
+            get => _isSubMenuVisible;
+            set
+            {
+                _isSubMenuVisible = value;
+                OnPropertyChanged(nameof(IsSubMenuVisible));
+            }
+        }
         public bool BookingChecked
         {
             get { return _bookingChecked; }
             set
             {
                 _bookingChecked = value;
-                OnPropertyChanged(nameof(BookingChecked));  
-            }
-        }
-
-        public bool RevenueChecked
-        {
-            get { return _revenueChecked; }
-            set
-            {
-                _revenueChecked = value;
-                OnPropertyChanged(nameof(RevenueChecked));
+                OnPropertyChanged(nameof(BookingChecked));
             }
         }
 
@@ -104,10 +108,10 @@ namespace Super_Tour.ViewModel
             set
             {
                 _visibilityTour = value;
-                OnPropertyChanged(nameof(VisibilityTour));  
+                OnPropertyChanged(nameof(VisibilityTour));
             }
         }
-        
+
         public bool VisibilityTravel
         {
             get { return _visibilityTravel; }
@@ -141,18 +145,18 @@ namespace Super_Tour.ViewModel
         public bool VisibilityAccount
         {
             get { return _visibilityAccount; }
-            set 
-            { 
-                _visibilityAccount = value; 
-                OnPropertyChanged(nameof(VisibilityAccount));   
+            set
+            {
+                _visibilityAccount = value;
+                OnPropertyChanged(nameof(VisibilityAccount));
             }
         }
 
         public ACCOUNT CurrentUser
         {
             get { return _currentUser; }
-            set 
-            { 
+            set
+            {
                 _currentUser = value;
                 OnPropertyChanged(nameof(CurrentUser));
                 ReloadNewLogin();
@@ -227,6 +231,41 @@ namespace Super_Tour.ViewModel
                 OnPropertyChanged(nameof(NextChildCaption1Color));
             }
         }
+        public bool CustomerStatisticChecked
+        {
+            get => _customerStatisticChecked;
+            set
+            {
+                _customerStatisticChecked = value;
+                OnPropertyChanged(nameof(CustomerStatisticChecked));
+            }
+        }
+        public bool TravelStatisticChecked
+        {
+            get => _travelStatisticChecked;
+            set
+            {
+                _travelStatisticChecked = value;
+            }
+        }
+        public bool RevenueStatisticChecked
+        {
+            get => _revenueStatisticChecked;
+            set
+            {
+                _revenueStatisticChecked = value;
+                OnPropertyChanged(nameof(RevenueStatisticChecked));
+            }
+        }
+        public bool StatisticChecked
+        {
+            get => _statisticChecked;
+            set
+            {
+                _statisticChecked = value;
+                OnPropertyChanged(nameof(StatisticChecked));
+            }
+        }
         #endregion
 
         #region Command
@@ -246,6 +285,7 @@ namespace Super_Tour.ViewModel
         public RelayCommand ShowTechnicalHelpViewCommand { get; }
         public ICommand BackToPreviousChildCommand { get; }
         public ICommand SignOutCommand { get; }
+        public ICommand StatisticSubMenuViewCommand { get; }
         #endregion
 
         #region Constructor
@@ -266,6 +306,7 @@ namespace Super_Tour.ViewModel
             ShowTechnicalHelpViewCommand = new RelayCommand(ExecuteShowTechnicalHelpViewCommand);
             BackToPreviousChildCommand = new RelayCommand(ExecuteBackToPreviousChildCommand);
             SignOutCommand = new RelayCommand(ExecuteSignOutCommand);
+            StatisticSubMenuViewCommand = new RelayCommand(ExecuteStatisticSubMenuViewCommand);
             _dashBoardViewModel = new DashBoardViewModel(this);
             removeFirstChild();
             CurrentChildView = _dashBoardViewModel;
@@ -277,7 +318,19 @@ namespace Super_Tour.ViewModel
             _timer.Start();
         }
         #endregion
-
+        private void ExecuteStatisticSubMenuViewCommand(object obj)
+        {
+            if (IsSubMenuVisible == false)
+            {
+                IsSubMenuVisible = true;
+                StatisticChecked = true;
+            }
+            else
+            {
+                IsSubMenuVisible = false;
+                StatisticChecked = false;
+            }
+        }
         private void ExecuteBackToPreviousChildCommand(object obj)
         {
             removeFirstChild();
@@ -487,7 +540,7 @@ namespace Super_Tour.ViewModel
                 _customerStatisticViewModel = new CustomerStatisticViewModel();
             CurrentChildView = _customerStatisticViewModel;
             Caption = "Customer Statistic";
-            Icon = IconChar.Database;
+            Icon = IconChar.AddressBook;
             removeFirstChild();
         }
         private void ExecuteShowRevenueStatisticViewCommand(object obj)
@@ -496,13 +549,16 @@ namespace Super_Tour.ViewModel
                 _revenueStatisticViewModel = new RevenueStatisticViewModel();
             CurrentChildView = _revenueStatisticViewModel;
             Caption = "Revenue Statistic";
-            Icon = IconChar.Database;
+            Icon = IconChar.MoneyCheckDollar;
             removeFirstChild();
         }
         private void ExecuteShowTravelStatisticViewCommand(object obj)
         {
+            if(_travelStatisticViewModel == null)
+                _travelStatisticViewModel = new TravelStatisticViewModel();
+            CurrentChildView = _travelStatisticViewModel;
             Caption = "Travel Statistic";
-            Icon = IconChar.Database;
+            Icon = IconChar.Plane;
             removeFirstChild();
         }
         private void ExecuteShowAccountViewCommand(object obj)
@@ -595,7 +651,8 @@ namespace Super_Tour.ViewModel
         public void GoToRevenueStatistic()
         {
             ExecuteShowRevenueStatisticViewCommand(null);
-            RevenueChecked = true;
+            RevenueStatisticChecked = true;
+            StatisticChecked = true;
         }
         #endregion
     }
