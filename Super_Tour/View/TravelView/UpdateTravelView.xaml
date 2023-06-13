@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
+             xmlns:mainNamespace="clr-namespace:Super_Tour"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,6 +17,9 @@
             FontFamily="{DynamicResource MaterialDesignFont}"
             Height="788" Width="1138"
             Background="{StaticResource BackgroundChildContent}">
+    <UserControl.Resources>
+        <mainNamespace:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Border 
             Margin="0,20,0,0"
@@ -300,11 +304,7 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="69*"/>
-                                <ColumnDefinition Width="143*"/>
-                                <ColumnDefinition Width="466*"/>
-                            </Grid.ColumnDefinitions>
+
                             <DataGrid x:Name="membersDataGrid" 
                               ItemsSource="{Binding ListTours}"
                               SelectedItem="{Binding SelectedItem}"
@@ -334,7 +334,7 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="0.8*"
-                                                Binding="{Binding PriceTour}"/>
+                                                Binding="{Binding PriceTour, Converter={StaticResource DecimalToStringConverter}}"/>
                                     <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

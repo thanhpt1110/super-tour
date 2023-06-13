@@ -223,6 +223,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Database" Foreground="{StaticResource color8}" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Statistic" Foreground="{StaticResource plainTextColor3}" Style="{StaticResource menuButtonText}"/>
+                                <materialDesign:PackIcon 
+                                    Kind="ArrowDropDown" 
+                                    VerticalAlignment="Center"
+                                    Height="25"
+                                    Width="25"
+                                    Margin="60 0 0 0"
+                                    />
                             </StackPanel>
                         </Button>
                         <StackPanel

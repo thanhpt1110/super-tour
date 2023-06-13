@@ -21,7 +21,7 @@
         Height="788" Width="1138"
         Background="Transparent">
     <Window.Resources>
-        <mainNamespace:StringWithCommasConverter  x:Key="StringWithCommasConverter"/>
+        <mainNamespace:DecimalToStringConverter  x:Key="DecimalToStringConverter"/>
     </Window.Resources>
     <Border CornerRadius="10"
             Background="Transparent"
@@ -140,7 +140,7 @@
                                                     BorderThickness="1"
                                                     IsHitTestVisible="False"
                                                     IsReadOnly="True"
-                                                    Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringWithCommasConverter}}"
+                                                    Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                     FontSize="20"
                                                     BorderBrush="Black"

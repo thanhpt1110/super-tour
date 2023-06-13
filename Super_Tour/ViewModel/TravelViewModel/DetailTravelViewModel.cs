@@ -30,7 +30,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<string> _listDiscount;
 
         // Tour information
-        private string _tourPrice = "0";
+        private decimal _tourPrice = 0;
         private int _totalDay = 0;
         private int _totalNight = 0;
         private Province _selectedProvince = null;
@@ -155,12 +155,13 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public string TourPrice
+        public decimal TourPrice
         {
             get { return _tourPrice; }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                string stringValue = value.ToString();
+                if (string.IsNullOrEmpty(stringValue) || stringValue.All(char.IsDigit))
                 {
                     _tourPrice = value;
                     OnPropertyChanged(nameof(TourPrice));
@@ -226,7 +227,7 @@ namespace Super_Tour.ViewModel
 
                 // Load basic tour information
                 TourName = _tour.Name_Tour;
-                TourPrice = _tour.PriceTour.ToString();
+                TourPrice = _tour.PriceTour;
                 TotalDay = _tour.TotalDay;
                 TotalNight = _tour.TotalNight;
             }

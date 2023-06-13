@@ -24,7 +24,7 @@ namespace Super_Tour.ViewModel
         private MainViewModel _mainViewModel;
         private MainTourViewModel _mainTourViewModel;
         private string _tourName = null;
-        private string _tourPrice = "0";
+        private decimal _tourPrice = 0;
         private int _totalDay = 0;
         private int _totalNight = 0;
         private TOUR _tour = null;
@@ -99,12 +99,13 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public string TourPrice
+        public decimal TourPrice
         {
             get { return _tourPrice; }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                string stringValue = value.ToString();
+                if (string.IsNullOrEmpty(stringValue) || stringValue.All(char.IsDigit))
                 {
                     _tourPrice = value;
                     OnPropertyChanged(nameof(TourPrice));
@@ -197,7 +198,7 @@ namespace Super_Tour.ViewModel
 
             // Load tour name and price
             TourName = _tour.Name_Tour;
-            TourPrice = _tour.PriceTour.ToString();
+            TourPrice = _tour.PriceTour;
         }
 
         private async Task LoadTourDetailsInformation()
@@ -292,7 +293,7 @@ namespace Super_Tour.ViewModel
                 _tour.TotalDay = _totalDay;
                 _tour.TotalNight = _totalNight;
                 _tour.PlaceOfTour = "";
-                _tour.PriceTour = decimal.Parse(TourPrice);
+                _tour.PriceTour = TourPrice;
                 foreach (string province in _selectedProvinceList)
                 {
                     _tour.PlaceOfTour = _tour.PlaceOfTour + province + "|";
@@ -409,18 +410,18 @@ namespace Super_Tour.ViewModel
         #region Reload price 
         public void ReloadPriceWith(decimal oldPrice, decimal newPrice)
         {
-            decimal currentPrice = decimal.Parse(TourPrice);
+            decimal currentPrice = TourPrice;
             currentPrice -= oldPrice;
             currentPrice += newPrice;
-            TourPrice = currentPrice.ToString();
+            TourPrice = currentPrice;
         }
         #endregion
 
         #region CheckDataModified
         private void CheckDataModified()
         {
-            if ((string.IsNullOrEmpty(TourName) || string.IsNullOrEmpty(TourPrice) || SelectedProvinceList.Count == 0
-                || _dateActivityList.Count == 0) || _tour.Name_Tour == TourName && _tour.PriceTour == decimal.Parse(TourPrice))
+            if ((string.IsNullOrEmpty(TourName) || string.IsNullOrEmpty(TourPrice.ToString()) || SelectedProvinceList.Count == 0
+                || _dateActivityList.Count == 0) || _tour.Name_Tour == TourName && _tour.PriceTour == TourPrice)
                 IsDataModified = false;
             else
                 IsDataModified = true;

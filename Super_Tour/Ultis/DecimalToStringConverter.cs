@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Super_Tour
@@ -14,7 +15,7 @@ namespace Super_Tour
         {
             if (value is decimal decimalValue)
             {
-                string formattedValue = decimalValue.ToString("#,##0").Split('.')[0];
+                string formattedValue = decimalValue.ToString("#,##0");
                 return formattedValue;
             }
 
@@ -23,7 +24,18 @@ namespace Super_Tour
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is string stringValue)
+            {
+                // Xóa dấu phẩy trong chuỗi
+                string decimalString = stringValue.Replace(".", string.Empty);
+
+                if (decimal.TryParse(decimalString, out decimal decimalValue))
+                {
+                    return decimalValue;
+                }
+            }
+
+            return DependencyProperty.UnsetValue; // Giá trị không hợp lệ
         }
     }
 }

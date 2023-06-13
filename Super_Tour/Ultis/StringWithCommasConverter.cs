@@ -14,12 +14,10 @@ namespace Super_Tour
         {
             if (value is string stringValue)
             {
-                
-                decimal number = decimal.Parse(stringValue.Trim(','));
+                decimal number;
                 if (decimal.TryParse(stringValue, out number))
                 {
-                    string[] parts = number.ToString("N").Split('.');
-                    string formattedValue = parts[0];
+                    string formattedValue = number.ToString("#,##0");
                     return formattedValue;
                 }
             }
@@ -29,7 +27,17 @@ namespace Super_Tour
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is string stringValue)
+            {
+                string formattedValue = stringValue.Replace(",", "");
+                decimal number;
+                if (decimal.TryParse(formattedValue, out number))
+                {
+                    return formattedValue;
+                }
+            }
+
+            return value;
         }
     }
 }

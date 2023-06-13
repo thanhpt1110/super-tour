@@ -26,7 +26,7 @@ namespace Super_Tour.ViewModel
         private MainViewModel _mainViewModel;
         private MainTourViewModel _mainTourViewModel;
         private string _tourName = null;
-        private string _tourPrice = "0";
+        private decimal _tourPrice = 0;
         private int _totalDay = 0;
         private int _totalNight = 0;
         private Province _selectedProvince = null;
@@ -100,16 +100,13 @@ namespace Super_Tour.ViewModel
             }
         }
 
-        public string TourPrice
+        public decimal TourPrice
         {
             get { return _tourPrice; }
             set
             {
-                if(value!=null)
-                {
-                    value = value.Trim(',');
-                }    
-                if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
+                string stringValue = value.ToString();  
+                if (string.IsNullOrEmpty(stringValue) || stringValue.All(char.IsDigit))
                 {
                     _tourPrice = value;
                     OnPropertyChanged(nameof(TourPrice));
@@ -454,10 +451,10 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                decimal currentPrice = decimal.Parse(TourPrice);
+                decimal currentPrice = TourPrice;
                 currentPrice -= oldPrice;
                 currentPrice += newPrice;
-                TourPrice = currentPrice.ToString();
+                TourPrice = currentPrice;
             }
             catch (Exception ex) 
             {
@@ -469,7 +466,7 @@ namespace Super_Tour.ViewModel
         #region Check data modified
         private void CheckDataModified()
         {
-            if (string.IsNullOrEmpty(_tourName) || string.IsNullOrEmpty(_tourPrice) || SelectedProvinceList.Count == 0
+            if (string.IsNullOrEmpty(_tourName) || string.IsNullOrEmpty(_tourPrice.ToString()) || SelectedProvinceList.Count == 0
                 || _dateActivityList.Count == 0)
                 IsDataModified = false;
             else
@@ -489,7 +486,7 @@ namespace Super_Tour.ViewModel
                 tour.TotalNight = TotalNight;
                 tour.PlaceOfTour = "";
                 tour.Status_Tour = "Available";
-                tour.PriceTour = decimal.Parse(TourPrice);
+                tour.PriceTour = TourPrice;
                 foreach(string province in _selectedProvinceList)
                 {
                     tour.PlaceOfTour = tour.PlaceOfTour + province + "|";

@@ -18,7 +18,7 @@
             Height="788" Width="1138"
             Background="White">
     <UserControl.Resources>
-        <mainNamespace:StringWithCommasConverter x:Key="StringWithCommasConverter"/>
+        <mainNamespace:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -100,7 +100,7 @@
                                                    FontSize="15"/>
                                         </StackPanel>
                                         <TextBox 
-                                                Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
                                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  FontSize="20"
                                                  BorderBrush="Black"
