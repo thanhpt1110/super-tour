@@ -247,15 +247,19 @@ namespace Super_Tour.ViewModel
         #region Update
         private void ExecuteUpdateTicket(object obj)
         {
-            if(SelectedFilter != null)
+            if(SelectedItem != null)
             {
                 if (SelectedItem.Status == "Paid")
                     SelectedItem.Status = "Canceled";
                 else
                     SelectedItem.Status = "Paid";
+                RefreshDatagrid();
+                db.SaveChanges();
+
+                // Synchronize real-time data
+                TimeTicket = DateTime.Now;
+                UPDATE_CHECK.NotifyChange(table, TimeTicket);
             }    
-            RefreshDatagrid();
-            db.SaveChanges();
         }
         #endregion
 

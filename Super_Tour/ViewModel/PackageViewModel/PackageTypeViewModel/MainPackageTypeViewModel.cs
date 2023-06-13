@@ -207,7 +207,7 @@ namespace Super_Tour.ViewModel
             try
             {
                 await Task.Run(async () =>
-                {
+                {       
                     _tracker = UPDATE_CHECK.getTracker(table);
                     if (DateTime.Parse(_tracker.DateTimeUpdate) > TimePackageType)
                     {

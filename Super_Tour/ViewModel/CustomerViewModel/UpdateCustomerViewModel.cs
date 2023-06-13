@@ -272,7 +272,7 @@ namespace Super_Tour.ViewModel
                 UpdateCustomerView updateCustomerView = null; ;
                 foreach (Window window in Application.Current.Windows)
                 {
-                    if (window is DetailCustomerView)
+                    if (window is UpdateCustomerView)
                     {
                         updateCustomerView = window as UpdateCustomerView;
                         break;

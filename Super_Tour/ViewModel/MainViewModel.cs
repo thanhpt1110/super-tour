@@ -334,33 +334,6 @@ namespace Super_Tour.ViewModel
             _timer.Start();
         }
         #endregion
-        private void ExecuteStatisticSubMenuViewCommand(object obj)
-        {
-            if (IsSubMenuVisible ==  false)
-            {
-                IsSubMenuVisible = true;
-            }
-            else
-            {
-                IsSubMenuVisible = false;
-            }
-        }
-        private void ExecuteBackToPreviousChildCommand(object obj)
-        {
-            removeFirstChild();
-            if (Caption == "Travel")
-            {
-                CurrentChildView = _mainTravelViewModel;
-            }
-            else if(Caption == "Booking")
-            {
-                CurrentChildView = _mainBookingViewModel;
-            }
-            else if(Caption == "Tour")
-            {
-                CurrentChildView = _mainTourViewModel;
-            }
-        }
 
         public void setFirstChild(string nextChildCaption1)
         {
@@ -464,6 +437,35 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Execute command to set CurrentChildView
+        private void ExecuteStatisticSubMenuViewCommand(object obj)
+        {
+            if (IsSubMenuVisible == false)
+            {
+                IsSubMenuVisible = true;
+            }
+            else
+            {
+                IsSubMenuVisible = false;
+            }
+        }
+
+        private void ExecuteBackToPreviousChildCommand(object obj)
+        {
+            removeFirstChild();
+            if (Caption == "Travel")
+            {
+                CurrentChildView = _mainTravelViewModel;
+            }
+            else if (Caption == "Booking")
+            {
+                CurrentChildView = _mainBookingViewModel;
+            }
+            else if (Caption == "Tour")
+            {
+                CurrentChildView = _mainTourViewModel;
+            }
+        }
+
         private void ExecuteShowTechnicalHelpViewCommand(object obj)
         {
             if (_technicalHelpViewModel == null)

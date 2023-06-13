@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,12 @@ namespace Super_Tour
 
             // Đặt hình ảnh biểu tượng cho ứng dụng.
             Current.MainWindow.Icon = icon;
+
+            CultureInfo cultureInfo = new CultureInfo("vi-VN"); // Use "vi-VN" for Vietnamese format
+            cultureInfo.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            cultureInfo.DateTimeFormat.LongTimePattern = "HH:mm:ss";
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
@@ -37,6 +44,7 @@ namespace Super_Tour
                     mainView.Show();
                 }
             };*/
+
             var loginView = new LoginView();
             loginView.Show();
         }

@@ -347,7 +347,7 @@ namespace Super_Tour.ViewModel
                     db.BOOKINGs.Remove(_selectedItem);   
                     await db.SaveChangesAsync();
 
-                    // Synchronize real-time data
+                    // Synchronize real-time data   
                     TimeBooking = DateTime.Now; 
                     UPDATE_CHECK.NotifyChange(table, TimeBooking);
                     UPDATE_CHECK.NotifyChange("UPDATE_TICKET", TimeBooking);
@@ -450,6 +450,10 @@ namespace Super_Tour.ViewModel
                 SelectedItem.Status = "Unpaid";
             RefreshDatagrid();
             db.SaveChanges();
+
+            // Synchronize real-time data
+            TimeBooking = DateTime.Now;
+            UPDATE_CHECK.NotifyChange(table, TimeBooking);
         }
         #endregion
 
