@@ -24,7 +24,6 @@ namespace Super_Tour.View
         public CustomerStatisticView()
         {
             InitializeComponent();
-            DataContext = new CustomerStatisticViewModel();
         }
     }
 }

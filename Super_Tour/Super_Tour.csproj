@@ -369,6 +369,7 @@
     <Compile Include="Ultis\MyApp.cs" />
     <Compile Include="Ultis\ObservableObject.cs" />
     <Compile Include="Ultis\RelayCommand.cs" />
+    <Compile Include="Ultis\StringWithCommasConverter.cs" />
     <Compile Include="Ultis\ValidateDataFormat.cs" />
     <Compile Include="ViewModel\AccountViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\AccountViewModel\UpdateAccountViewModel.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="ViewModel\PackageViewModel\UpdatePackageViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\CustomerStatisticViewModel.cs" />
     <Compile Include="ViewModel\StatisticViewModel\RevenueStatisticViewModel.cs" />
+    <Compile Include="ViewModel\StatisticViewModel\TravelStatistic.cs" />
     <Compile Include="ViewModel\StatisticViewModel\TravelStatisticViewModel.cs" />
     <Compile Include="ViewModel\TechnicalHelpViewModel.cs" />
     <Compile Include="ViewModel\TicketViewModel\ExportedTicketViewModel.cs" />

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
              mc:Ignorable="d" 
+             xmlns:mainNamespace="clr-namespace:Super_Tour"
             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -14,6 +15,9 @@
             TextOptions.TextRenderingMode="Auto"
             FontFamily="{DynamicResource MaterialDesignFont}"
             d:DesignHeight="788" d:DesignWidth="1138">
+    <UserControl.Resources>
+        <mainNamespace:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+    </UserControl.Resources>
     <Grid Background="{StaticResource BackgroundChildContent}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -100,7 +104,7 @@
                                               Foreground="#FED500"
                                               Height="45"
                                               Margin="20,0,0,0"/>
-                                    <TextBlock Text="27/06/2023"
+                                    <TextBlock Text="{Binding Top1TravelBookingDate.Date}"
                                            FontSize="20"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -110,7 +114,7 @@
                                         Width="50"
                                         Foreground="#01A768"
                                         Margin="40,0,0,0"/>
-                                    <TextBlock Text="512"
+                                    <TextBlock Text="{Binding Top1TravelBookingDate.Count}"
                                            FontSize="22"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -129,7 +133,7 @@
                                               Foreground="#FED500"
                                               Height="45"
                                               Margin="20,0,0,0"/>
-                                    <TextBlock Text="27/06/2023"
+                                    <TextBlock Text="{Binding Top2TravelBookingDate.Date}"
                                            FontSize="20"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -139,7 +143,7 @@
                                         Width="50"
                                         Foreground="#01A768"
                                         Margin="40,0,0,0"/>
-                                    <TextBlock Text="512"
+                                    <TextBlock Text="{Binding Top2TravelBookingDate.Count}"
                                            FontSize="22"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -158,7 +162,7 @@
                                               Foreground="#FED500"
                                               Height="45"
                                               Margin="20,0,0,0"/>
-                                    <TextBlock Text="27/06/2023"
+                                    <TextBlock Text="{Binding Top3TravelBookingDate.Date}"
                                            FontSize="20"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -168,7 +172,7 @@
                                         Width="50"
                                         Foreground="#01A768"
                                         Margin="40,0,0,0"/>
-                                    <TextBlock Text="512"
+                                    <TextBlock Text="{Binding Top3TravelBookingDate.Count}"
                                            FontSize="22"
                                            FontWeight="Medium"
                                            VerticalAlignment="Center"
@@ -198,7 +202,7 @@
                             Height="38">
                         </Border>
                         <DataGrid x:Name="membersDataGrid" 
-                              ItemsSource="{Binding ListTypePackages}"
+                              ItemsSource="{Binding TravelStatisticList}"
                               RowStyle="{DynamicResource DataGridRowStyle1}" 
                               ColumnHeaderStyle="{DynamicResource StatisticDataGridColumnHeaderStyle1}" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -208,15 +212,18 @@
                                 <DataGridTextColumn Header="Travel name"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"/>
+                                                Width="1.5*"
+                                                Binding="{Binding TravelName}"/>
                                 <DataGridTextColumn Header="Total Bookings" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1*"/>
+                                                Width="1*"
+                                                Binding="{Binding TotalBooking}"/>
                                 <DataGridTextColumn Header="Total Revenue" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"/>
+                                                Width="1.5*"
+                                                Binding="{Binding TotalRevenue,Converter={StaticResource DecimalToStringConverter}}"/>
                                 <DataGridTemplateColumn Header="Operations" 
                                                 HeaderStyle="{StaticResource StatisticDataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
@@ -224,11 +231,15 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Style="{StaticResource iconButton}" 
-                                                Command="{Binding DataContext.UpdatePackageCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}">
-                                                    <fa:IconImage Icon="Info" Foreground="{StaticResource ThemeColor}"/>
-                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                Height="20"
+                                                Width="20"
+                                                Foreground="White"
+                                                Content="i"
+                                                FontSize="16"
+                                                Effect="{StaticResource MaterialDesignElevationShadow3}"
+                                                Background="{StaticResource ThemeColor}"
+                                                Command="{Binding DataContext.DetailBookingViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
                                             </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -271,7 +282,7 @@
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
-                                    <TextBlock Text="250"
+                                    <TextBlock Text="{Binding TotalTravel}"
                                                FontSize="22"
                                                VerticalAlignment="Center"
                                                Margin="20,0,0,0"
@@ -293,7 +304,7 @@
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
-                                    <TextBlock Text="250"
+                                    <TextBlock Text="{Binding TotalBooking}"
                                                FontSize="22"
                                                VerticalAlignment="Center"
                                                Margin="10,0,0,0"
@@ -315,7 +326,7 @@
                                                FontSize="20"
                                                VerticalAlignment="Center"
                                                FontWeight="Medium"/>
-                                    <TextBlock Text="250"
+                                    <TextBlock Text="{Binding TotalCancelBooking}"
                                                FontSize="22"
                                                VerticalAlignment="Center"
                                                Margin="20,0,0,0"

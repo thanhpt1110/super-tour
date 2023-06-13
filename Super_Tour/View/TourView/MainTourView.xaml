@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Super_Tour.View"
+             xmlns:mainNamespace="clr-namespace:Super_Tour"
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -15,6 +16,9 @@
              TextOptions.TextRenderingMode="Auto"
              FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="788" d:DesignWidth="1138">
+    <UserControl.Resources>
+        <mainNamespace:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+    </UserControl.Resources>
     <Border Background="{StaticResource BackgroundChildContent}">
         <Grid>
             <Grid.RowDefinitions>
@@ -135,7 +139,7 @@
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="*"
-                                                Binding="{Binding PriceTour}"/>
+                                                Binding="{Binding PriceTour, Converter={StaticResource DecimalToStringConverter}}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 

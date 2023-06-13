@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
+        xmlns:mainNamespace="clr-namespace:Super_Tour"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -19,6 +20,9 @@
         AllowsTransparency="True"
         Height="788" Width="1138"
         Background="Transparent">
+    <Window.Resources>
+        <mainNamespace:StringWithCommasConverter  x:Key="StringWithCommasConverter"/>
+    </Window.Resources>
     <Border CornerRadius="10"
             Background="Transparent"
             BorderThickness="2">
@@ -136,7 +140,7 @@
                                                     BorderThickness="1"
                                                     IsHitTestVisible="False"
                                                     IsReadOnly="True"
-                                                    Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Text = "{Binding TourPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringWithCommasConverter}}"
                                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                     FontSize="20"
                                                     BorderBrush="Black"

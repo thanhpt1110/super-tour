@@ -247,10 +247,13 @@ namespace Super_Tour.ViewModel
         #region Update
         private void ExecuteUpdateTicket(object obj)
         {
-            if (SelectedItem.Status == "Payed")
-                SelectedItem.Status = "Canceled";
-            else
-                SelectedItem.Status = "Payed";
+            if(SelectedFilter != null)
+            {
+                if (SelectedItem.Status == "Paid")
+                    SelectedItem.Status = "Canceled";
+                else
+                    SelectedItem.Status = "Paid";
+            }    
             RefreshDatagrid();
             db.SaveChanges();
         }

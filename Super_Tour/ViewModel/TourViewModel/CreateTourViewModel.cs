@@ -105,6 +105,10 @@ namespace Super_Tour.ViewModel
             get { return _tourPrice; }
             set
             {
+                if(value!=null)
+                {
+                    value = value.Trim(',');
+                }    
                 if (string.IsNullOrEmpty(value) || value.All(char.IsDigit))
                 {
                     _tourPrice = value;

@@ -264,10 +264,12 @@
                                 </StackPanel>
                             </RadioButton>
                         </StackPanel>
-                        <RadioButton Style="{StaticResource menuButton}"
-                                    Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    Tag="{StaticResource color9}"
-                                     Command="{Binding ShowAccountViewCommand}">
+                        <RadioButton 
+                            GroupName="Menu"
+                            Style="{StaticResource menuButton}"
+                            Visibility="{Binding VisibilityAccount, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Tag="{StaticResource color9}"
+                            Command="{Binding ShowAccountViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressCard" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Account" Style="{StaticResource menuButtonText}"/>
@@ -276,9 +278,11 @@
                         <Grid Margin="0 10" Background="{StaticResource BackgroundNavMenuButton}">
                             <Border BorderBrush="White" BorderThickness="0,1,0,0"></Border>
                         </Grid>
-                        <RadioButton Style="{StaticResource menuButton}"
-                        Tag="{StaticResource color10}"
-                                 Command="{Binding ShowTechnicalHelpViewCommand}">
+                        <RadioButton 
+                            GroupName="Menu"
+                            Style="{StaticResource menuButton}"
+                            Tag="{StaticResource color10}"
+                            Command="{Binding ShowTechnicalHelpViewCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="QuestionCircle" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Get Technical Help" Style="{StaticResource menuButtonText}"/>

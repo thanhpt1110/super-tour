@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Super_Tour.Ultis
 {
-    internal class ObservableObject :INotifyPropertyChanged
+    public class ObservableObject :INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void  OnPropertyChanged(string name)
