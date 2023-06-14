@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Super_Tour.View"
         mc:Ignorable="d"
+        xmlns:mainNamespace="clr-namespace:Super_Tour"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -19,6 +20,9 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Height="875" Width="950">
+    <Window.Resources>
+        <mainNamespace:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+    </Window.Resources>
     <Border CornerRadius="10"
             BorderThickness="2"
             Background="White">
@@ -107,19 +111,19 @@
                                         </StackPanel>
                                         <TextBox
                                             IsHitTestVisible="False"
-                                IsReadOnly="True"
-                                Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                materialDesign:HintAssist.Hint="Select from list on the left"
-                                Width="auto"
-                                Height="auto"
-                                FontSize="20"
-                                Background="{StaticResource TextBoxReadOnlyColor}"
-                                BorderBrush="Black"
-                                Foreground="Black"
-                                materialDesign:HintAssist.IsFloating="False"
-                                materialDesign:HintAssist.Foreground="Black"
-                                materialDesign:HintAssist.Background="Transparent"/>
+                                            IsReadOnly="True"
+                                            Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            materialDesign:HintAssist.Hint="Select from list on the left"
+                                            Width="auto"
+                                            Height="auto"
+                                            FontSize="20"
+                                            Background="{StaticResource TextBoxReadOnlyColor}"
+                                            BorderBrush="Black"
+                                            Foreground="Black"
+                                            materialDesign:HintAssist.IsFloating="False"
+                                            materialDesign:HintAssist.Foreground="Black"
+                                            materialDesign:HintAssist.Background="Transparent"/>
                                         <StackPanel Orientation="Horizontal"
                                             Margin="0,40,0,0">
                                             <Label Content="Start location"

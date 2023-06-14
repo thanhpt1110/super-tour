@@ -1,14 +1,18 @@
-﻿using Super_Tour.CustomControls;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using Super_Tour.CustomControls;
 using Super_Tour.Model;
 using Super_Tour.Ultis;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using static Super_Tour.ViewModel.TravelStatisticViewModel;
 
 namespace Super_Tour.ViewModel
@@ -53,6 +57,11 @@ namespace Super_Tour.ViewModel
 
         #region Declare variable
 
+        private DispatcherTimer _timer = null;
+        private UPDATE_CHECK _trackerTicket = null;
+        private UPDATE_CHECK _trackerBooking = null;
+        private DateTime lastUpdateBooking;
+        private DateTime lastUpdateTicket;
         private SUPER_TOUR db = null;
         private ObservableCollection<TravelStatistic> _travelStatisticList;
         private decimal _totalRevenue;
@@ -61,10 +70,55 @@ namespace Super_Tour.ViewModel
         private RevenueDate _top1RevenueDate;
         private RevenueDate _top2RevenueDate;
         private RevenueDate _top3RevenueDate;
+        private DateTime _startDate;
+        private DateTime _endDate;
+        private SeriesCollection _revenueSeries;
+        private List<string> _labels;
 
         #endregion
 
         #region Declare binding
+        public DispatcherTimer Timer { get => _timer; set => _timer = value; }
+        public DateTime StartDate
+        {
+            get { return _startDate; }
+            set
+            {
+                _startDate = value;
+                OnPropertyChanged(nameof(StartDate));
+                LoadChart();
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get { return _endDate; }
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged(nameof(EndDate));
+                LoadChart();
+            }
+        }
+        public SeriesCollection RevenueSeries
+        {
+            get { return _revenueSeries; }
+            set
+            {
+                _revenueSeries = value;
+                OnPropertyChanged(nameof(RevenueSeries));
+            }
+        }
+
+        public List<string> Labels
+        {
+            get { return _labels; }
+            set
+            {
+                _labels = value;
+                OnPropertyChanged(nameof(Labels));
+            }
+        }
         public ObservableCollection<TravelStatistic> TravelStatisticList
         {
             get => _travelStatisticList;
@@ -138,6 +192,16 @@ namespace Super_Tour.ViewModel
         {
             db = SUPER_TOUR.db;
             TravelStatisticList = new ObservableCollection<TravelStatistic>();
+            StartDate = DateTime.Parse("01/06/2023");
+            EndDate = DateTime.Today;
+
+            lastUpdateBooking = DateTime.Now;
+            lastUpdateTicket = DateTime.Now;
+
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(0.5);
+            Timer.Tick += Timer_Tick;
+
             LoadDataAsync();
         }
 
@@ -154,14 +218,30 @@ namespace Super_Tour.ViewModel
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            var sqlQueryTotalRevenue = @"
+                            LoadChart();
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+            }
+        }
+        private void LoadChart()
+        {
+            var sqlQueryTotalRevenue = @"
                                 SELECT SUM(BOOKING.TotalPrice) 
                                 FROM BOOKING
                                 WHERE BOOKING.Status='Paid'";
-                            var totalRevenue = db.Database.SqlQuery<Decimal>(sqlQueryTotalRevenue);
-                            TotalRevenue = totalRevenue.ElementAtOrDefault(0);
+            var totalRevenue = db.Database.SqlQuery<Decimal>(sqlQueryTotalRevenue);
+            TotalRevenue = totalRevenue.ElementAtOrDefault(0);
 
-                            var sqlQueryTotalCancelMoney = @"SELECT SUM(TOUR.PriceTour) * COUNT(DISTINCT TOURIST.Id_Tourist)
+            var sqlQueryTotalCancelMoney = @"SELECT SUM(TOUR.PriceTour) * COUNT(DISTINCT TOURIST.Id_Tourist)
                                 FROM BOOKING
                                 JOIN TOURIST ON TOURIST.Id_Booking = BOOKING.Id_Booking
                                 JOIN TICKET ON TICKET.Id_Tourist = TOURIST.Id_Tourist
@@ -170,12 +250,12 @@ namespace Super_Tour.ViewModel
                                 WHERE TICKET.Status = 'Canceled'
                                 GROUP BY BOOKING.Id_Booking";
 
-                            TotalCancelMoney = db.Database.SqlQuery<Decimal>(sqlQueryTotalCancelMoney).ElementAtOrDefault(0);
+            TotalCancelMoney = db.Database.SqlQuery<Decimal>(sqlQueryTotalCancelMoney).ElementAtOrDefault(0);
 
 
-                            TotalTourist = db.TOURISTs.Count();
+            TotalTourist = db.TOURISTs.Count();
 
-                            var sqlTravelStatisticQuery = @"
+            var sqlTravelStatisticQuery = @"
                                 SELECT TOUR.Name_Tour AS TravelName, COUNT(BOOKING.Id_Booking) AS TotalBooking, SUM(BOOKING.TotalPrice) AS TotalRevenue
                                 FROM TRAVEL
                                 JOIN TOUR ON TRAVEL.Id_Tour = TOUR.Id_Tour
@@ -183,39 +263,90 @@ namespace Super_Tour.ViewModel
                                 GROUP BY TOUR.Name_Tour
                                 ";
 
-                            var result = db.Database.SqlQuery<TravelStatistic>(sqlTravelStatisticQuery);
+            var result = db.Database.SqlQuery<TravelStatistic>(sqlTravelStatisticQuery);
 
-                            foreach (var item in result)
-                            {
-                                // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
-                                TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
+            TravelStatisticList.Clear();
+            foreach (var item in result)
+            {
+                // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
+                TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
 
-                                // Thêm đối tượng CustomerStatistic vào ObservableCollection
-                                TravelStatisticList.Add(travelStatistic);
-                            }
+                // Thêm đối tượng CustomerStatistic vào ObservableCollection
+                TravelStatisticList.Add(travelStatistic);
+            }
 
-                            var top3Dates = (from booking in db.BOOKINGs
-                                             group booking by booking.Booking_Date into g
-                                             orderby g.Sum(x => x.TotalPrice) descending
-                                             select new
-                                             {
-                                                 Revenue = g.Sum(x => x.TotalPrice),
-                                                 Date = g.Key,
-                                             }).Take(3).ToList()
-                                             .Select(x => new RevenueDate
-                                             {
-                                                 Revenue = x.Revenue,
-                                                 Date = x.Date.ToString("dd-MM-yyyy"),
-                                             }).ToList();
+            var top3Dates = (from booking in db.BOOKINGs
+                             group booking by booking.Booking_Date into g
+                             orderby g.Sum(x => x.TotalPrice) descending
+                             select new
+                             {
+                                 Revenue = g.Sum(x => x.TotalPrice),
+                                 Date = g.Key,
+                             }).Take(3).ToList()
+                             .Select(x => new RevenueDate
+                             {
+                                 Revenue = x.Revenue,
+                                 Date = x.Date.ToString("dd-MM-yyyy"),
+                             }).ToList();
 
-                            Top1RevenueDate = top3Dates.ElementAtOrDefault(0);
-                            Top2RevenueDate = top3Dates.ElementAtOrDefault(1);
-                            Top3RevenueDate = top3Dates.ElementAtOrDefault(2);
+            Top1RevenueDate = top3Dates.ElementAtOrDefault(0);
+            Top2RevenueDate = top3Dates.ElementAtOrDefault(1);
+            Top3RevenueDate = top3Dates.ElementAtOrDefault(2);
+
+            RevenueSeries = new SeriesCollection();
+            Labels = new List<string>();
+
+            var revenueByDate = db.BOOKINGs
+                 .Where(b => b.Booking_Date >= StartDate && b.Booking_Date <= EndDate)
+                 .GroupBy(b => b.Booking_Date)
+                 .Select(g => new { Date = g.Key, TotalMoney = g.Sum(b => b.TotalPrice) })
+                 .ToList();
+
+
+            var values = new ChartValues<decimal>();
+
+            foreach (var item in revenueByDate)
+            {
+                values.Add(item.TotalMoney);
+                Labels.Add(item.Date.ToString("dd/MM/yyyy"));
+
+                
+            }
+            var series = new ColumnSeries
+            {
+                Title = "Revenue by day",
+                Values = values
+            };
+            RevenueSeries.Add(series);
+
+        }
+        #endregion
+
+        #region Check data persecond
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    // Compare Booking & Ticket
+                    _trackerBooking = UPDATE_CHECK.getTracker("UPDATE_BOOKING");
+                    _trackerTicket = UPDATE_CHECK.getTracker("UPDATE_TICKET");
+                    if (DateTime.Parse(_trackerBooking.DateTimeUpdate) > lastUpdateBooking)
+                    {
+                        lastUpdateBooking = (DateTime.Parse(_trackerBooking.DateTimeUpdate));
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            LoadDataAsync();
                         });
                     }
-                    catch (Exception ex)
+                    else if(DateTime.Parse(_trackerTicket.DateTimeUpdate) > lastUpdateTicket)
                     {
-                        MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                        lastUpdateTicket = (DateTime.Parse(_trackerTicket.DateTimeUpdate));
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            LoadDataAsync();
+                        });
                     }
                 });
             }
