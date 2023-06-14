@@ -361,7 +361,6 @@ namespace Super_Tour.ViewModel
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Lỗi: " + ex.InnerException.Message);
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
             finally
@@ -411,49 +410,69 @@ namespace Super_Tour.ViewModel
         #region Export ticket
         private async void ExecuteExportTicket(object obj)
         {
-            if (_selectedItem.Status == "Unpaid")
+            if (SelectedItem != null)
             {
-                MyMessageBox.ShowDialog("Can not export ticket for unpaid booking!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                return;
-            }
+                if (_selectedItem.Status == "Unpaid")
+                {
+                    MyMessageBox.ShowDialog("Can not export ticket for unpaid booking!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    return;
+                }
 
-            // Tìm xem Ticket đã đc Export chưa
-            if (db.TICKETs.Where(p => p.TOURIST.Id_Booking == _selectedItem.Id_Booking).ToList().Count> 0)
-            {
-                // Nếu export rồi thì thông báo, xong ko tạo mới
-                MyMessageBox.ShowDialog("These tickets were exported!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
-                return;
-            }
+                // Tìm xem Ticket đã đc Export chưa
+                if (db.TICKETs.Where(p => p.TOURIST.Id_Booking == _selectedItem.Id_Booking).ToList().Count> 0)
+                {
+                    // Nếu export rồi thì thông báo, xong ko tạo mới
+                    MyMessageBox.ShowDialog("These tickets were exported!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    return;
+                }
 
-            // Chưa thì thêm data vào TICKET
-            foreach(TOURIST tourits in _selectedItem.TOURISTs)
-            {
-                TICKET ticket = new TICKET();
-                ticket.Id_Tourist = tourits.Id_Tourist;
-                ticket.Status = "Payed";
-                db.TICKETs.Add(ticket);
-            }
-            await db.SaveChangesAsync();
+                try
+                {
+                    // Chưa thì thêm data vào TICKET
+                    foreach(TOURIST tourits in _selectedItem.TOURISTs)
+                    {
+                        TICKET ticket = new TICKET();
+                        ticket.Id_Tourist = tourits.Id_Tourist;
+                        ticket.Status = "Payed";
+                        db.TICKETs.Add(ticket);
+                    }
+                    await db.SaveChangesAsync();
 
-            // Synchronize real-time data
-            UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
-            MyMessageBox.ShowDialog("Export tickets succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    // Synchronize real-time data
+                    UPDATE_CHECK.NotifyChange("UPDATE_TICKET", DateTime.Now);
+                    MyMessageBox.ShowDialog("Export tickets succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                }
+            }
         }
         #endregion
 
         #region Update status of Booking
         private void ExecuteUpdateBookingStatus(object obj)
         {
-            if (SelectedItem.Status == "Unpaid")
-                SelectedItem.Status = "Paid";
-            else
-                SelectedItem.Status = "Unpaid";
-            RefreshDatagrid();
-            db.SaveChanges();
+            if (SelectedItem != null)
+            {
+                MyMessageBox.ShowDialog("Are you sure you want to update this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                {
+                    if (SelectedItem.Status == "Unpaid")
+                        SelectedItem.Status = "Paid";
+                    else
+                        SelectedItem.Status = "Unpaid";
+                    RefreshDatagrid();
+                    db.SaveChanges();
 
-            // Synchronize real-time data
-            TimeBooking = DateTime.Now;
-            UPDATE_CHECK.NotifyChange(table, TimeBooking);
+                    MyMessageBox.ShowDialog("Update booking's status succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+
+                    // Synchronize real-time data
+                    TimeBooking = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeBooking);
+                }
+            }
+
         }
         #endregion
 
