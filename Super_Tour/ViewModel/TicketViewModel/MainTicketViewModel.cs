@@ -249,16 +249,22 @@ namespace Super_Tour.ViewModel
         {
             if(SelectedItem != null)
             {
-                if (SelectedItem.Status == "Paid")
-                    SelectedItem.Status = "Canceled";
-                else
-                    SelectedItem.Status = "Paid";
-                RefreshDatagrid();
-                db.SaveChanges();
+                MyMessageBox.ShowDialog("Are you sure you want to update this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
+                if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
+                {
+                    if (SelectedItem.Status == "Paid")
+                        SelectedItem.Status = "Canceled";
+                    else
+                        SelectedItem.Status = "Paid";
+                    RefreshDatagrid();
+                    db.SaveChanges();
 
-                // Synchronize real-time data
-                TimeTicket = DateTime.Now;
-                UPDATE_CHECK.NotifyChange(table, TimeTicket);
+                    MyMessageBox.ShowDialog("Update ticket's status succesful!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+
+                    // Synchronize real-time data
+                    TimeTicket = DateTime.Now;
+                    UPDATE_CHECK.NotifyChange(table, TimeTicket);
+                }
             }    
         }
         #endregion
@@ -266,14 +272,17 @@ namespace Super_Tour.ViewModel
         #region Print Ticket
         private void ExecutePrintTicket(object obj)
         {
-            if (_selectedItem.Status == "Canceled")
+            if (SelectedItem != null)
             {
-                MyMessageBox.ShowDialog("Can not print canceled ticket!", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
-                return;
+                if (_selectedItem.Status == "Canceled")
+                {
+                    MyMessageBox.ShowDialog("Can not print canceled ticket!", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                    return;
+                }
+                ExportedTicketView exportedTicketView = new ExportedTicketView();
+                exportedTicketView.DataContext = new ExportedTicketViewModel(_selectedItem);
+                exportedTicketView.ShowDialog();
             }
-            ExportedTicketView exportedTicketView = new ExportedTicketView();
-            exportedTicketView.DataContext = new ExportedTicketViewModel(_selectedItem);
-            exportedTicketView.ShowDialog();
         }
         #endregion
 
