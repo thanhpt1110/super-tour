@@ -116,7 +116,7 @@
                                                 CanUserResize="False" 
                                                 Width="0.6*"
                                                 Binding="{Binding Id_Travel}"/>
-
+    
                         <DataGridTextColumn Header="Tour Name" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 

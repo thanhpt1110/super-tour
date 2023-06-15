@@ -229,7 +229,7 @@ namespace Super_Tour.ViewModel
                     if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeTravel)
                     {
                         TimeTravel = (DateTime.Parse(_tracker.DateTimeUpdate));
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.Invoke(() => 
                         {
                             _listTravelOriginal = db.TRAVELs.ToList();
                             ReloadData();

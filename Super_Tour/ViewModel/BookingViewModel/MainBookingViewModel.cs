@@ -433,7 +433,7 @@ namespace Super_Tour.ViewModel
                     {
                         TICKET ticket = new TICKET();
                         ticket.Id_Tourist = tourits.Id_Tourist;
-                        ticket.Status = "Payed";
+                        ticket.Status = "Paid";
                         db.TICKETs.Add(ticket);
                     }
                     await db.SaveChangesAsync();

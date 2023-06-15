@@ -469,6 +469,11 @@ namespace Super_Tour.ViewModel
                 db.BOOKINGs.Add(booking);
                 await db.SaveChangesAsync();
 
+                // Update remaining tickets in Travel 
+                booking.TRAVEL.RemainingTicket -= _tourists.Count;
+                db.TRAVELs.AddOrUpdate(booking.TRAVEL);
+                await db.SaveChangesAsync();    
+
                 // Save Tourists of BOOKING
                 int Id_Booking = db.BOOKINGs.Max(p => p.Id_Booking);
                 foreach (TOURIST tourist in _tourists)
