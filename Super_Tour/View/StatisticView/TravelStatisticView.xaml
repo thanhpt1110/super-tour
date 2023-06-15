@@ -1,11 +1,12 @@
 ﻿<UserControl x:Class="Super_Tour.View.TravelStatisticView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Super_Tour.View"
-             mc:Ignorable="d" 
-             xmlns:mainNamespace="clr-namespace:Super_Tour"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:local="clr-namespace:Super_Tour.View"
+            mc:Ignorable="d" 
+            xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+            xmlns:mainNamespace="clr-namespace:Super_Tour"
             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -30,6 +31,7 @@
                             Margin="20,0,0,0">
                     <Label Content="From date"/>
                     <DatePicker
+                        SelectedDate="{Binding StartDate}"
                         Width="200"
                         BorderBrush="Black"
                         Foreground="Black"
@@ -45,6 +47,7 @@
                             Margin="50,0,0,0">
                         <Label Content="To date"/>
                         <DatePicker
+                            SelectedDate="{Binding EndDate}"
                             Width="200"
                             BorderBrush="Black"
                             Foreground="Black"
@@ -68,10 +71,33 @@
                             BorderThickness="0"
                             Margin="20,10,10,10"
                             Background="White">
-                    <TextBlock Text="Number of booking-travel by time"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Number of booking by time"
                                        FontWeight="Bold"
                                        Margin="20,10,0,10"
                                        FontSize="22"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="10">
+                            <lvc:CartesianChart>
+                                <lvc:CartesianChart.Series>
+                                    <lvc:ColumnSeries Title="Number of Booking" Values="{Binding BookingSeries[0].Values}"/>
+                                </lvc:CartesianChart.Series>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Time" Labels="{Binding Labels}" />
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis
+                                        Title="Number of booking"
+                                          MinValue="0"/>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </Grid>
                 </Border>
             </Grid>
             <Grid Grid.Column="1">
@@ -88,7 +114,7 @@
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBlock Text="Most travel-booking dates"
+                            <TextBlock Text="Most booking dates"
                                        FontWeight="Bold"
                                        Margin="20,10,0,10"
                                        FontSize="22"/>
@@ -212,7 +238,7 @@
                                 <DataGridTextColumn Header="Travel name"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
+                                                Width="2*"
                                                 Binding="{Binding TravelName}"/>
                                 <DataGridTextColumn Header="Total Bookings" 
                                                 IsReadOnly="True" 
@@ -222,28 +248,8 @@
                                 <DataGridTextColumn Header="Total Revenue" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
+                                                Width="1*"
                                                 Binding="{Binding TotalRevenue,Converter={StaticResource DecimalToStringConverter}}"/>
-                                <DataGridTemplateColumn Header="Operations" 
-                                                HeaderStyle="{StaticResource StatisticDataGridColumnHeaderStyle2}"
-                                                IsReadOnly="True" 
-                                                Width="0.7*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                                Height="20"
-                                                Width="20"
-                                                Foreground="White"
-                                                Content="i"
-                                                FontSize="16"
-                                                Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                Background="{StaticResource ThemeColor}"
-                                                Command="{Binding DataContext.DetailBookingViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

@@ -33,7 +33,7 @@ namespace Super_Tour.ViewModel.BookingViewModel
         private string _maxTicket = null;
         private string _selectedDiscount = null;
         private ObservableCollection<string> _listDiscount;
-
+        private decimal _totalPrice;
         // Customer information
         private string _idNumber;
         private string _customerName;
@@ -223,11 +223,13 @@ namespace Super_Tour.ViewModel.BookingViewModel
             }
         }
         #endregion
+
         #endregion
 
         #region Command
         public ICommand OpenAddTouristForBookingViewCommand { get; private set; }
         public ICommand ViewDetailScheduleCommand { get; private set; }
+        
         #endregion
 
         #region Constructor

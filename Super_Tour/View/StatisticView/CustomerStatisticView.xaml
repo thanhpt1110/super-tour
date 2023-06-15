@@ -6,6 +6,7 @@
             xmlns:local="clr-namespace:Super_Tour.View"
             xmlns:mainNamespace="clr-namespace:Super_Tour"
             mc:Ignorable="d" 
+            xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -31,6 +32,7 @@
                             Margin="20,0,0,0">
                     <Label Content="From date"/>
                     <DatePicker
+                        SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Width="200"
                         BorderBrush="Black"
                         Foreground="Black"
@@ -46,6 +48,7 @@
                             Margin="50,0,0,0">
                         <Label Content="To date"/>
                         <DatePicker
+                            SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             Width="200"
                             BorderBrush="Black"
                             Foreground="Black"
@@ -77,7 +80,18 @@
                         </Grid>
                     <Grid Grid.Row="1"
                           Margin="20, 10">
-                        
+                        <lvc:CartesianChart>
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries Title="Number of Customers" Values="{Binding CustomerSeries[0].Values}"/>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Time" Labels="{Binding Labels}" />
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Number of Customers"
+                                          MinValue="0"/>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
                     </Grid>
                     </Grid>
                 </Border>
@@ -110,40 +124,19 @@
                             <DataGridTextColumn Header="Customer name"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
+                                                Width="2*"
                                                 Binding="{Binding CustomerName}"/>
                             <DataGridTextColumn Header="Total Bookings" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
                                                 Width="1*"
                                                 Binding="{Binding TotalBooking}"/>
-                            <DataGridTextColumn Header="Total Revenue" 
+                                <DataGridTextColumn Header="Total Revenue" 
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="1.5*"
+                                                Width="1*"
                                                 Binding="{Binding TotalRevenue,StringFormat=N, Converter={StaticResource DecimalToStringConverter}}"/>
-                            <DataGridTemplateColumn Header="Operations" 
-                                                HeaderStyle="{StaticResource StatisticDataGridColumnHeaderStyle2}"
-                                                IsReadOnly="True" 
-                                                Width="0.7*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                                Height="20"
-                                                Width="20"
-                                                Foreground="White"
-                                                Content="i"
-                                                FontSize="16"
-                                                Effect="{StaticResource MaterialDesignElevationShadow3}"
-                                                Background="{StaticResource ThemeColor}"
-                                                Command="{Binding DataContext.DetailBookingViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
-                                                </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
+                            </DataGrid.Columns>
                     </DataGrid>
                     </Grid>
                 </Border>
