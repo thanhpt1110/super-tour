@@ -128,6 +128,8 @@ namespace Super_Tour.ViewModel
         public ICommand GoToTravelManagementCommand { get; }
         public ICommand GoToBookingManagementCommand { get; }
         public ICommand GoToRevenueStatisticCommand { get; }
+        public ICommand GoToCustomerStatisticCommand { get; }
+        public ICommand GoToTravelStatisticCommand { get; }
         public DispatcherTimer Timer { get => _timer; set => _timer = value; }
         #endregion
 
@@ -152,7 +154,8 @@ namespace Super_Tour.ViewModel
             GoToTravelManagementCommand = new RelayCommand(ExecuteGoToTravelManagement);
             GoToBookingManagementCommand = new RelayCommand(ExecuteGoToBookingManagement);
             GoToRevenueStatisticCommand = new RelayCommand(ExecuteRevenueStatistic);
-
+            GoToTravelStatisticCommand = new RelayCommand(ExecuteTravelStatistic);
+            GoToCustomerStatisticCommand = new RelayCommand(ExecuteCustomerStatistic);
             LoadUI();
         }
         #endregion
@@ -310,6 +313,16 @@ namespace Super_Tour.ViewModel
         private void ExecuteRevenueStatistic(object obj)
         {
             _mainViewModel.GoToRevenueStatistic();
+        }
+
+        private void ExecuteCustomerStatistic(object obj)
+        {
+            _mainViewModel.GoToCustomertatistic();
+        }
+
+        private void ExecuteTravelStatistic(object obj)
+        {
+            _mainViewModel.GoToTravelStatistic();
         }
         #endregion
 

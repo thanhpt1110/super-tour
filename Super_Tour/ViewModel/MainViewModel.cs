@@ -668,7 +668,21 @@ namespace Super_Tour.ViewModel
         {
             ExecuteShowRevenueStatisticViewCommand(null);
             RevenueStatisticChecked = true;
-            StatisticChecked = true;
+            IsSubMenuVisible = true;
+        }
+
+        public void GoToCustomertatistic()
+        {
+            ExecuteShowCustomerStatisticViewCommand(null);
+            CustomerStatisticChecked = true;
+            IsSubMenuVisible = true;
+        }
+
+        public void GoToTravelStatistic()
+        {
+            ExecuteShowTravelStatisticViewCommand(null);
+            TravelStatisticChecked = true;
+            IsSubMenuVisible = true;
         }
         #endregion
     }

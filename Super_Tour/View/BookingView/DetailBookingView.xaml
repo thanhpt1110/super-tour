@@ -105,7 +105,7 @@
                                         VerticalAlignment="Center"
                                         Text="Travel Details"/>
                                         <StackPanel Orientation="Horizontal"
-                                            Margin="0,12,0,0">
+                                            Margin="0,8,0,0">
                                             <Label Content="Tour name"
                                            FontSize="15"/>
                                         </StackPanel>
@@ -125,7 +125,7 @@
                                             materialDesign:HintAssist.Foreground="Black"
                                             materialDesign:HintAssist.Background="Transparent"/>
                                         <StackPanel Orientation="Horizontal"
-                                            Margin="0,40,0,0">
+                                            Margin="0,9,0,0">
                                             <Label Content="Start location"
                                            FontSize="15"/>
                                         </StackPanel>
@@ -145,7 +145,7 @@
                                 Background="{StaticResource TextBoxReadOnlyColor}"
                                 materialDesign:HintAssist.Background="Transparent"
                                 CaretBrush="Black"/>
-                                        <Grid Margin="0,40,0,0">
+                                        <Grid Margin="0,10,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
@@ -194,7 +194,7 @@
                                                 </StackPanel>
                                             </Grid>
                                         </Grid>
-                                        <Grid Margin="0,40,0,0">
+                                        <Grid Margin="0,10,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
@@ -250,8 +250,32 @@
                                                 </StackPanel>
                                             </Grid>
                                         </Grid>
+                                        <Grid Margin="0, 20, 0, 0">
+                                            <Border
+                                                BorderBrush="Black"
+                                                    BorderThickness="0, 2, 0, 0">
+                                                <StackPanel Margin="0, 20, 0, 0"
+                                                        Orientation="Vertical"
+                                                        HorizontalAlignment="Left">
+                                                    <TextBlock
+                                                    Text="Total Booking Price"
+                                                    FontSize="30"
+                                                    FontWeight="Bold"
+                                                    VerticalAlignment="Center"
+                                                    />
+                                                    <TextBlock
+                                                    Margin="2, 10, 0, 0"
+                                                    Text="{Binding TotalBookingPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    FontSize="25"
+                                                    FontWeight="Bold"
+                                                    TextAlignment="Left"
+                                                    Foreground="{StaticResource btnDelete}" 
+                                                    />
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
                                         <Button
-                                    Margin="0,111,0,0"
+                                    Margin="0,88,0,0"
                                     Command="{Binding ViewDetailScheduleCommand}"
                                     Content="View detail schedule"
                                     Background="{StaticResource ThemeColor}"

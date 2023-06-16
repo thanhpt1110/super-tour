@@ -194,6 +194,7 @@ namespace Super_Tour.ViewModel
         {
             _listDiscount = new ObservableCollection<string>
             {
+                "0%",
                 "5%",
                 "10%",
                 "15%",

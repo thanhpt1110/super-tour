@@ -33,7 +33,7 @@ namespace Super_Tour.ViewModel.BookingViewModel
         private string _maxTicket = null;
         private string _selectedDiscount = null;
         private ObservableCollection<string> _listDiscount;
-        private decimal _totalPrice;
+        private string _totalBookingPrice = null;
         // Customer information
         private string _idNumber;
         private string _customerName;
@@ -108,6 +108,16 @@ namespace Super_Tour.ViewModel.BookingViewModel
             {
                 _selectedDiscount = value;
                 OnPropertyChanged(nameof(SelectedDiscount));
+            }
+        }
+
+        public string TotalBookingPrice
+        {
+            get { return _totalBookingPrice; }
+            set
+            {
+                _totalBookingPrice = value;
+                OnPropertyChanged(nameof(TotalBookingPrice));   
             }
         }
         #endregion
@@ -260,6 +270,7 @@ namespace Super_Tour.ViewModel.BookingViewModel
             _maxTicket = _travel.MaxTicket.ToString();
             _listDiscount = new ObservableCollection<string>
             {
+                "0%",
                 "5%",
                 "10%",
                 "15%",
@@ -272,6 +283,7 @@ namespace Super_Tour.ViewModel.BookingViewModel
                 "50%"
             };
             _selectedDiscount = _travel.Discount.ToString() + "%";
+            _totalBookingPrice = _booking.TotalPrice.ToString("#,#") + " VND";
         }
 
         private void LoadCustomerInformation()

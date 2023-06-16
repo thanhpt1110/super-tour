@@ -76,7 +76,13 @@
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding GoToCustomerStatisticCommand}" />
+                                        </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -121,7 +127,13 @@
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding GoToRevenueStatisticCommand}" />
+                                        </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -166,7 +178,13 @@
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"/>
+                                       HorizontalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding GoToTravelStatisticCommand}" />
+                                        </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -208,8 +208,16 @@ namespace Super_Tour.ViewModel
             TravelName = ticket.TOURIST.BOOKING.TRAVEL.TOUR.Name_Tour;
             _totalDay = ticket.TOURIST.BOOKING.TRAVEL.TOUR.TotalDay.ToString();
             _totalNight = ticket.TOURIST.BOOKING.TRAVEL.TOUR.TotalNight.ToString();
-            TotalDayNight = _totalDay + " DAY - " + _totalNight + " NIGHT"; 
-            _price = ticket.TOURIST.BOOKING.TRAVEL.TOUR.PriceTour.ToString("#,#") + "VND";
+            TotalDayNight = _totalDay + " DAY - " + _totalNight + " NIGHT";
+
+            int totalTourists = ticket.TOURIST.BOOKING.TOURISTs.Count();
+            decimal ticketPrice = 0;
+            if (totalTourists != 0)     
+                ticketPrice = ticket.TOURIST.BOOKING.TotalPrice / totalTourists;
+            else
+                ticketPrice = ticket.TOURIST.BOOKING.TotalPrice;
+            _price = ticketPrice.ToString("#,#") + " VND";
+
             _startDate = ticket.TOURIST.BOOKING.TRAVEL.StartDateTimeTravel.ToString("dd/MM/yyyy");
             _startTime = ticket.TOURIST.BOOKING.TRAVEL.StartDateTimeTravel.ToString("HH/mm/ss");
             _startLocation = ticket.TOURIST.BOOKING.TRAVEL.StartLocation.ToString();

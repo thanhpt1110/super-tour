@@ -464,7 +464,9 @@ namespace Super_Tour.ViewModel
                 booking.Status = "Unpaid";
                 booking.Id_Travel = _selectedTravel.Id_Travel;
                 booking.Id_Customer_Booking = _loadedCustomer.Id_Customer;
-                booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count;
+
+                decimal discount = _selectedTravel.Discount; 
+                booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count * (100 - discount) / 100;
                 booking.Booking_Date = DateTime.Now;
                 db.BOOKINGs.Add(booking);
                 await db.SaveChangesAsync();

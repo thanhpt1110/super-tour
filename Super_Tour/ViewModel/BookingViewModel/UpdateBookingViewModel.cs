@@ -294,7 +294,8 @@ namespace Super_Tour.ViewModel
                 // Save booking to BOOKING table
                 _booking.Id_Travel = _selectedTravel.Id_Travel;
                 _booking.Id_Customer_Booking = _loadedCustomer.Id_Customer;
-                _booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count;
+                decimal discount = _selectedTravel.Discount;
+                _booking.TotalPrice = _selectedTravel.TOUR.PriceTour * _tourists.Count * (100 - discount) / 100;
 
                 // Process remaining TICKET
                 int numberOfOldTourist = _booking.TOURISTs.Count;
