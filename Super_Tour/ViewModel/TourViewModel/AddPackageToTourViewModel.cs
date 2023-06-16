@@ -185,7 +185,7 @@ namespace Super_Tour.ViewModel
         #region Load view
         private void LoadTypePackage()
         {
-            List<TYPE_PACKAGE> package =  db.TYPE_PACKAGEs.ToList();
+            List<TYPE_PACKAGE> package =  db.TYPE_PACKAGEs.OrderBy(p => p.Name_Type).ToList();
             _listTypePackage = new ObservableCollection<TYPE_PACKAGE>(package);
 
             // Add option load all Type package
@@ -249,7 +249,7 @@ namespace Super_Tour.ViewModel
                 listSearchType = _listAvailablePackage.Where(p => p.Id_Province.Contains(_selectedProvince.codename)).ToList();
             // Search by Type Package 
             if (_selectedTypePackage.Id_Type_Package != -1)
-                listSearchType = _listAvailablePackage.Where(p => p.Id_Package == _selectedTypePackage.Id_Type_Package).ToList();
+                listSearchType = _listAvailablePackage.Where(p => p.Id_Type_Package == _selectedTypePackage.Id_Type_Package).ToList();
 
             ObservableListAvailablePackage.Clear();
             // Load UI

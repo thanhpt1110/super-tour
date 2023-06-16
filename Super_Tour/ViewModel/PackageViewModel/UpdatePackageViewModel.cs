@@ -268,7 +268,7 @@ namespace Super_Tour.ViewModel
         {
             try
             {
-                ListTypePackages = db.TYPE_PACKAGEs.ToList();
+                ListTypePackages = db.TYPE_PACKAGEs.OrderBy(p => p.Name_Type).ToList();
                 foreach (TYPE_PACKAGE TypePackage in ListTypePackages)
                 {
                     _listTypePackage.Add(TypePackage);
