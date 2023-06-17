@@ -61,6 +61,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <Button Width="100px" Content="Print" Command="{Binding PrintToImageCommand}" CommandParameter="{Binding ElementName=CustomerChart}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Border CornerRadius="10"
@@ -80,7 +81,7 @@
                         </Grid>
                     <Grid Grid.Row="1"
                           Margin="20, 10">
-                        <lvc:CartesianChart>
+                        <lvc:CartesianChart  x:Name="CustomerChart">
                             <lvc:CartesianChart.Series>
                                 <lvc:ColumnSeries Title="Number of Customers" Values="{Binding CustomerSeries[0].Values}"/>
                             </lvc:CartesianChart.Series>

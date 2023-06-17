@@ -60,6 +60,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <Button Width="100px" Content="Print"  Command="{Binding PrintToImageCommand}" CommandParameter="{Binding ElementName=RevenueChart}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -83,7 +84,7 @@
                                        FontSize="22"/>
                         </Grid>
                         <Grid Grid.Row="1" Margin="10 0 0 0">
-                            <lvc:CartesianChart>
+                            <lvc:CartesianChart x:Name="RevenueChart">
                                 <lvc:CartesianChart.Series>
                                     <lvc:ColumnSeries Title="Revenue by time" Values="{Binding RevenueSeries[0].Values}"/>
                                 </lvc:CartesianChart.Series>
