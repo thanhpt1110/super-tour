@@ -33,5 +33,10 @@ namespace Super_Tour.Model
         public int Discount { get; set; }
         [ForeignKey("Id_Tour")]
         public virtual TOUR TOUR { get; set; }
+        public virtual ICollection<BOOKING> BOOKINGs
+        {
+            get; set;
+        }
+
     }
 }
