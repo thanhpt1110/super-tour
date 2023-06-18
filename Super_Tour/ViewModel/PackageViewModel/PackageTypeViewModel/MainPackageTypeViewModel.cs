@@ -177,9 +177,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                             ReloadData();
                         });
                     }
@@ -212,9 +212,9 @@ namespace Super_Tour.ViewModel
                     if (DateTime.Parse(_tracker.DateTimeUpdate) > TimePackageType)
                     {
                         TimePackageType = (DateTime.Parse(_tracker.DateTimeUpdate));
+                        _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listTypePackageOriginal = db.TYPE_PACKAGEs.ToList();
                             ReloadData();
                         });
                     }   

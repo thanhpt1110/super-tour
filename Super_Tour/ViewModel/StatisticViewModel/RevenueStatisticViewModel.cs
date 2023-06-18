@@ -23,6 +23,7 @@ using Xceed.Document.NET;
 using Xceed.Words.NET;
 using static Super_Tour.ViewModel.TravelStatisticViewModel;
 using Student_wpf_application.ViewModels.Command;
+using System.Data.Entity;
 
 namespace Super_Tour.ViewModel
 {
@@ -95,7 +96,7 @@ namespace Super_Tour.ViewModel
             {
                 _startDate = value;
                 OnPropertyChanged(nameof(StartDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
 
@@ -106,7 +107,7 @@ namespace Super_Tour.ViewModel
             {
                 _endDate = value;
                 OnPropertyChanged(nameof(EndDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
         public SeriesCollection RevenueSeries
@@ -431,7 +432,7 @@ namespace Super_Tour.ViewModel
         #endregion
 
         #region Load Data
-        private async Task LoadDataAsync()
+        private async void LoadDataAsync()
         {
             try
             {
@@ -439,9 +440,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
                         {
-                            LoadChart();
+                             LoadChartAsync();
                         });
                     }
                     catch (Exception ex)
@@ -455,93 +456,93 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
-        private void LoadChart()
+        private async Task LoadChartAsync()
         {
+
             var sqlQueryTotalRevenue = @"
-                                SELECT SUM(BOOKING.TotalPrice) 
-                                FROM BOOKING
-                                WHERE BOOKING.Status='Paid'";
-            var totalRevenue = db.Database.SqlQuery<Decimal>(sqlQueryTotalRevenue);
-            TotalRevenue = totalRevenue.ElementAtOrDefault(0);
+        SELECT SUM(BOOKING.TotalPrice) 
+        FROM BOOKING
+        WHERE BOOKING.Status='Paid'";
+            var totalRevenue = await db.Database.SqlQuery<Decimal>(sqlQueryTotalRevenue).FirstOrDefaultAsync();
+            
 
             var sqlQueryTotalCancelMoney = @"SELECT SUM(TOUR.PriceTour) * COUNT(DISTINCT TOURIST.Id_Tourist)
-                                FROM BOOKING
-                                JOIN TOURIST ON TOURIST.Id_Booking = BOOKING.Id_Booking
-                                JOIN TICKET ON TICKET.Id_Tourist = TOURIST.Id_Tourist
-                                JOIN TRAVEL ON TRAVEL.Id_Travel = BOOKING.Id_Travel
-                                JOIN TOUR ON TOUR.Id_Tour = TRAVEL.Id_Tour
-                                WHERE TICKET.Status = 'Canceled'
-                                GROUP BY BOOKING.Id_Booking";
+        FROM BOOKING
+        JOIN TOURIST ON TOURIST.Id_Booking = BOOKING.Id_Booking
+        JOIN TICKET ON TICKET.Id_Tourist = TOURIST.Id_Tourist
+        JOIN TRAVEL ON TRAVEL.Id_Travel = BOOKING.Id_Travel
+        JOIN TOUR ON TOUR.Id_Tour = TRAVEL.Id_Tour
+        WHERE TICKET.Status = 'Canceled'
+        GROUP BY BOOKING.Id_Booking";
 
-            TotalCancelMoney = db.Database.SqlQuery<Decimal>(sqlQueryTotalCancelMoney).ElementAtOrDefault(0);
+             var  totalCancelMoney = await db.Database.SqlQuery<Decimal>(sqlQueryTotalCancelMoney).FirstOrDefaultAsync();
 
-
-            TotalTourist = db.TOURISTs.Count();
+            var totalTourist = await db.TOURISTs.CountAsync();
 
             var sqlTravelStatisticQuery = @"
-                                SELECT TOUR.Name_Tour AS TravelName, COUNT(BOOKING.Id_Booking) AS TotalBooking, SUM(BOOKING.TotalPrice) AS TotalRevenue
-                                FROM TRAVEL
-                                JOIN TOUR ON TRAVEL.Id_Tour = TOUR.Id_Tour
-                                JOIN BOOKING ON BOOKING.Id_Travel = TRAVEL.Id_Travel
-                                GROUP BY TOUR.Name_Tour
-                                ";
+        SELECT TOUR.Name_Tour AS TravelName, COUNT(BOOKING.Id_Booking) AS TotalBooking, SUM(BOOKING.TotalPrice) AS TotalRevenue
+        FROM TRAVEL
+        JOIN TOUR ON TRAVEL.Id_Tour = TOUR.Id_Tour
+        JOIN BOOKING ON BOOKING.Id_Travel = TRAVEL.Id_Travel
+        GROUP BY TOUR.Name_Tour";
 
-            var result = db.Database.SqlQuery<TravelStatistic>(sqlTravelStatisticQuery);
+            var result = await db.Database.SqlQuery<TravelStatistic>(sqlTravelStatisticQuery).ToListAsync();
 
-            TravelStatisticList.Clear();
-            foreach (var item in result)
+            var top3Dates = await Task.Run(() =>
             {
-                // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
-                TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
-
-                // Thêm đối tượng CustomerStatistic vào ObservableCollection
-                TravelStatisticList.Add(travelStatistic);
-            }
-
-            var top3Dates = (from booking in db.BOOKINGs
-                             group booking by booking.Booking_Date into g
-                             orderby g.Sum(x => x.TotalPrice) descending
-                             select new
-                             {
-                                 Revenue = g.Sum(x => x.TotalPrice),
-                                 Date = g.Key,
-                             }).Take(3).ToList()
-                             .Select(x => new RevenueDate
-                             {
-                                 Revenue = x.Revenue,
-                                 Date = x.Date.ToString("dd-MM-yyyy"),
-                             }).ToList();
-
-            Top1RevenueDate = top3Dates.ElementAtOrDefault(0);
-            Top2RevenueDate = top3Dates.ElementAtOrDefault(1);
-            Top3RevenueDate = top3Dates.ElementAtOrDefault(2);
-
-            RevenueSeries = new SeriesCollection();
-            Labels = new List<string>();
-
-            var revenueByDate = db.BOOKINGs
-                 .Where(b => b.Booking_Date >= StartDate && b.Booking_Date <= EndDate)
-                 .GroupBy(b => b.Booking_Date)
-                 .Select(g => new { Date = g.Key, TotalMoney = g.Sum(b => b.TotalPrice) })
-                 .ToList();
-
-
-            var values = new ChartValues<decimal>();
-
-            foreach (var item in revenueByDate)
+                return (from booking in db.BOOKINGs
+                        group booking by booking.Booking_Date into g
+                        orderby g.Sum(x => x.TotalPrice) descending
+                        select new
+                        {
+                            Revenue = g.Sum(x => x.TotalPrice),
+                            Date = g.Key,
+                        }).Take(3).ToList()
+                          .Select(x => new RevenueDate
+                          {
+                              Revenue = x.Revenue,
+                              Date = x.Date.ToString("dd-MM-yyyy"),
+                          }).ToList();
+            });
+            var revenueByDate = await db.BOOKINGs
+                .Where(b => b.Booking_Date >= StartDate && b.Booking_Date <= EndDate)
+                .GroupBy(b => b.Booking_Date)
+                .Select(g => new { Date = g.Key, TotalMoney = g.Sum(b => b.TotalPrice) })
+                .ToListAsync();
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                values.Add(item.TotalMoney);
-                Labels.Add(item.Date.ToString("dd/MM/yyyy"));
+                TotalRevenue = totalRevenue;
+                TotalTourist = totalTourist;
+                TotalCancelMoney = totalCancelMoney;
+                var values = new ChartValues<decimal>();
+                RevenueSeries = new SeriesCollection();
+                Labels = new List<string>();
+                TravelStatisticList.Clear();
+                foreach (var item in result)
+                {
+                    // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
+                    TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
 
-                
-            }
-            var series = new ColumnSeries
-            {
-                Title = "Revenue by day",
-                Values = values
-            };
-            RevenueSeries.Add(series);
+                    // Thêm đối tượng CustomerStatistic vào ObservableCollection
+                    TravelStatisticList.Add(travelStatistic);
+                }
 
+                Top1RevenueDate = top3Dates.ElementAtOrDefault(0);
+                Top2RevenueDate = top3Dates.ElementAtOrDefault(1);
+                Top3RevenueDate = top3Dates.ElementAtOrDefault(2);
+                foreach (var item in revenueByDate)
+                {
+                    values.Add(item.TotalMoney);
+                    Labels.Add(item.Date.ToString("dd/MM/yyyy"));
+                }
+
+                var series = new ColumnSeries
+                {
+                    Title = "Revenue by day",
+                    Values = values
+                };
+                RevenueSeries.Add(series);
+            });
         }
         #endregion
 

@@ -8,7 +8,6 @@ CREATE TABLE ACCOUNT
     Password varchar(1000),
 	Account_Name nvarchar(255),
     Service nvarchar(255),
-    Priority INT,
     Email varchar(255) unique
 ) auto_increment = 1000;
 CREATE TABLE TYPE_PACKAGE(
@@ -59,7 +58,6 @@ CREATE TABLE CUSTOMER(
     Name_Customer nvarchar(255),
     IdNumber nvarchar(15),
     PhoneNumber nvarchar(15),
-    Address nvarchar(255),
     Gender nvarchar(10),
     Province nvarchar(255),
     District nvarchar(255)

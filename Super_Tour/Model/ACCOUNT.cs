@@ -15,7 +15,6 @@ namespace Super_Tour.Model
         public string Password { get; set; }
         public string Account_Name { get; set; }
         public string Service { get; set; }
-        public int Priority { get; set; }
         public string Email { get; set; }
 
     }

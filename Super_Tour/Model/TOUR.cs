@@ -11,12 +11,12 @@ namespace Super_Tour.Model
     {
         [Key]
         public int Id_Tour { get; set; }
+        public decimal PriceTour { get; set; }
+        public string Name_Tour { get; set; }
         public int TotalDay { get; set; }
         public int TotalNight { get; set; }
         public string PlaceOfTour { get; set; }
         public string Status_Tour { get; set; }
-        public string Name_Tour { get; set; }
-        public decimal PriceTour { get; set; }
         public virtual ICollection<TOUR_DETAILS> TOUR_DETAILs
         {
             get; set;

@@ -176,9 +176,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        _listAccountOriginal =  db.ACCOUNTs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listAccountOriginal = db.ACCOUNTs.ToList();
                             ReloadData();
                         });
                     }
@@ -213,9 +213,9 @@ namespace Super_Tour.ViewModel
                     if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeAccount)
                     {
                         TimeAccount = (DateTime.Parse(_tracker.DateTimeUpdate));
+                        _listAccountOriginal = db.ACCOUNTs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listAccountOriginal = db.ACCOUNTs.ToList();
                             ReloadData();
                         });
                     }

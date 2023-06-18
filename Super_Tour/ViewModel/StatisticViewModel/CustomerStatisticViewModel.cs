@@ -148,7 +148,7 @@ namespace Super_Tour.ViewModel
             {
                 _startDate = value;
                 OnPropertyChanged(nameof(StartDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
 
@@ -160,7 +160,7 @@ namespace Super_Tour.ViewModel
             {
                 _endDate = value;
                 OnPropertyChanged(nameof(EndDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
         private SeriesCollection _customerSeries;
@@ -449,7 +449,7 @@ namespace Super_Tour.ViewModel
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            LoadChart();
+                            LoadChartAsync();
                         });
                     }
                     catch (Exception ex)
@@ -465,12 +465,10 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        #region LoadChart
-        private void LoadChart()
+        #region LoadChartAsync
+        private async Task LoadChartAsync()
         {
-            TotalCustomer = db.CUSTOMERs.Count();
-            TotalReBookingCustomer = db.BOOKINGs.GroupBy(bd => bd.Id_Customer_Booking).Count(g => g.Count() > 1);
-            TotalTicket = db.TICKETs.Count();
+
             var startDateParam = new SqlParameter("@StartDate", StartDate);
             var endDateParam = new SqlParameter("@EndDate", EndDate);
             
@@ -486,18 +484,7 @@ namespace Super_Tour.ViewModel
                                 GROUP BY CUSTOMER.Name_Customer";
 
 
-            var result = db.Database.SqlQuery<CustomerStatistic>(sqlQuery);
-            Console.WriteLine(result);
-
-            CustomerStatisticList.Clear();  
-            foreach (var item in result)
-            {
-                // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
-                CustomerStatistic customerStatistic = new CustomerStatistic(item.CustomerName, item.TotalBooking, item.TotalRevenue);
-
-                // Thêm đối tượng CustomerStatistic vào ObservableCollection
-                CustomerStatisticList.Add(customerStatistic);
-            }
+            var result = await db.Database.SqlQuery<CustomerStatistic>(sqlQuery).ToListAsync();
 
             //Load Chart Data
             // Khởi tạo SeriesCollection và Labels
@@ -505,31 +492,44 @@ namespace Super_Tour.ViewModel
             Labels = new List<string>();
 
 
-            var customerCounts = db.BOOKINGs
+            var customerCounts =await db.BOOKINGs
                  .Where(b => b.Booking_Date >= StartDate && b.Booking_Date <= EndDate)
                  .GroupBy(b => b.Booking_Date)
                  .Select(g => new { Date = g.Key, Count = g.Select(b => b.Id_Customer_Booking).Distinct().Count() })
                  .OrderBy(item => item.Date)
-                 .ToList();
+                 .ToListAsync();
 
             // Xử lý dữ liệu để hiển thị trên biểu đồ
             var values = new ChartValues<int>();
-
-            foreach (var item in customerCounts)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                values.Add(item.Count);
-                Labels.Add(item.Date.ToString("dd/MM/yyyy")); // Hàm GetFormattedDate để định dạng ngày theo yêu cầu của bạn
-            }
+                TotalCustomer = db.CUSTOMERs.Count();
+                TotalReBookingCustomer = db.BOOKINGs.GroupBy(bd => bd.Id_Customer_Booking).Count(g => g.Count() > 1);
+                TotalTicket = db.TICKETs.Count();
+                CustomerStatisticList.Clear();
+                foreach (var item in result)
+                {
+                    // Tạo một đối tượng CustomerStatistic từ kết quả truy vấn
+                    CustomerStatistic customerStatistic = new CustomerStatistic(item.CustomerName, item.TotalBooking, item.TotalRevenue);
 
-            // Tạo Series và thêm vào SeriesCollection
-            var series = new ColumnSeries
-            {
-                Title = "Number of Customers",
-                Values = values
-            };
+                    // Thêm đối tượng CustomerStatistic vào ObservableCollection
+                    CustomerStatisticList.Add(customerStatistic);
+                }
+                foreach (var item in customerCounts)
+                {
+                    values.Add(item.Count);
+                    Labels.Add(item.Date.ToString("dd/MM/yyyy")); // Hàm GetFormattedDate để định dạng ngày theo yêu cầu của bạn
+                }
 
+                // Tạo Series và thêm vào SeriesCollection
+                var series = new ColumnSeries
+                {
+                    Title = "Number of Customers",
+                    Values = values
+                };
+                CustomerSeries.Add(series);
+            });
 
-            CustomerSeries.Add(series);
         }
         #endregion
 

@@ -95,7 +95,7 @@ namespace Super_Tour.ViewModel
             {
                 _startDate = value;
                 OnPropertyChanged(nameof(StartDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
 
@@ -106,7 +106,7 @@ namespace Super_Tour.ViewModel
             {
                 _endDate = value;
                 OnPropertyChanged(nameof(EndDate));
-                LoadChart();
+                LoadChartAsync();
             }
         }
         public SeriesCollection BookingSeries
@@ -442,7 +442,7 @@ namespace Super_Tour.ViewModel
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            LoadChart();
+                            LoadChartAsync();
                         });
                     }
                     catch (Exception ex)
@@ -456,93 +456,96 @@ namespace Super_Tour.ViewModel
                 MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
         }
-        private void LoadChart()
+        private async Task LoadChartAsync()
         {
-            TotalBooking = db.BOOKINGs.Count();
 
-            TotalTravel = (
-                from booking in db.BOOKINGs
-                join tourists in db.TOURISTs on booking.Id_Booking equals tourists.Id_Booking
-                join ticket in db.TICKETs on tourists.Id_Tourist equals ticket.Id_Tourist
-                where ticket.Status != "Cancel" && booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
-                select booking.Id_Travel
-            ).Distinct().Count();
-
-            TotalCancelBooking = (
-                from booking in db.BOOKINGs
-                join tourists in db.TOURISTs on booking.Id_Booking equals tourists.Id_Booking
-                join ticket in db.TICKETs on tourists.Id_Tourist equals ticket.Id_Tourist
-                where ticket.Status == "Cancel" && booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
-                select booking.Id_Travel
-            ).Distinct().Count();
-
-            var top3Dates = (from booking in db.BOOKINGs
-                             where booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
-                             group booking by booking.Booking_Date into g
-                             orderby g.Count() descending
-                             select new
-                             {
-                                 Count = g.Count(),
-                                 Date = g.Key,
-                             }).Take(3).ToList()
+            using (var db = new SUPER_TOUR())
+            {
+                var top3Dates = await Task.Run(() =>
+            {
+                return (from booking in db.BOOKINGs
+                        where booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
+                        group booking by booking.Booking_Date into g
+                        orderby g.Count() descending
+                        select new
+                        {
+                            Count = g.Count(),
+                            Date = g.Key,
+                        }).Take(3).ToList()
                              .Select(x => new TravelBookingDate
                              {
                                  Count = x.Count,
                                  Date = x.Date.ToString("dd-MM-yyyy"),
                              }).ToList();
+            });
 
-            Top1TravelBookingDate = top3Dates.ElementAtOrDefault(0);
-            Top2TravelBookingDate = top3Dates.ElementAtOrDefault(1);
-            Top3TravelBookingDate = top3Dates.ElementAtOrDefault(2);
-
-            var sqlQuery = @"SELECT TOUR.Name_Tour AS TravelName, COUNT(BOOKING.Id_Booking) AS TotalBooking, SUM(BOOKING.TotalPrice) AS TotalRevenue
+                var sqlQuery = @"SELECT TOUR.Name_Tour AS TravelName, COUNT(BOOKING.Id_Booking) AS TotalBooking, SUM(BOOKING.TotalPrice) AS TotalRevenue
                             FROM TRAVEL
                             JOIN TOUR ON TRAVEL.Id_Tour = TOUR.Id_Tour
                             JOIN BOOKING ON BOOKING.Id_Travel = TRAVEL.Id_Travel
                             GROUP BY TOUR.Name_Tour";
 
-            var result = db.Database.SqlQuery<TravelStatistic>(sqlQuery);
-            Console.WriteLine(result);
+                var result = db.Database.SqlQuery<TravelStatistic>(sqlQuery);
+                BookingSeries = new SeriesCollection();
+                Labels = new List<string>();
 
-            TravelStatisticList.Clear();
-            foreach (var item in result)
-            {
-                // Tạo một đối tượng TravelStatistic từ kết quả truy vấn
-                TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
+                var bookingCounts = await db.BOOKINGs
+                     .Where(b => b.Status == "Paid" && b.Booking_Date >= StartDate && b.Booking_Date <= EndDate) // Lọc theo trạng thái xác nhận (tuỳ vào yêu cầu của bạn)
+                     .GroupBy(b => b.Booking_Date) // Nhóm booking theo ngày đặt tour
+                     .Select(g => new { Date = g.Key, Count = g.Count() }) // Chọn ngày và số lượng khách hàng
+                     .OrderBy(item => item.Date) // Sắp xếp theo ngày tăng dần
+                     .ToListAsync();
 
-                // Thêm đối tượng TravelStatistic vào ObservableCollection
-                TravelStatisticList.Add(travelStatistic);
+
+                // Xử lý dữ liệu để hiển thị trên biểu đồ
+                var values = new ChartValues<int>();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    TotalBooking = db.BOOKINGs.Count();
+
+                    TotalTravel = (
+                        from booking in db.BOOKINGs
+                        join tourists in db.TOURISTs on booking.Id_Booking equals tourists.Id_Booking
+                        join ticket in db.TICKETs on tourists.Id_Tourist equals ticket.Id_Tourist
+                        where ticket.Status != "Cancel" && booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
+                        select booking.Id_Travel
+                    ).Distinct().Count();
+
+                    TotalCancelBooking = (
+                        from booking in db.BOOKINGs
+                        join tourists in db.TOURISTs on booking.Id_Booking equals tourists.Id_Booking
+                        join ticket in db.TICKETs on tourists.Id_Tourist equals ticket.Id_Tourist
+                        where ticket.Status == "Cancel" && booking.Booking_Date >= StartDate && booking.Booking_Date <= EndDate
+                        select booking.Id_Travel
+                    ).Distinct().Count();
+                    TravelStatisticList.Clear();
+                    foreach (var item in result)
+                    {
+                        // Tạo một đối tượng TravelStatistic từ kết quả truy vấn
+                        TravelStatistic travelStatistic = new TravelStatistic(item.TravelName, item.TotalBooking, item.TotalRevenue);
+
+                        // Thêm đối tượng TravelStatistic vào ObservableCollection
+                        TravelStatisticList.Add(travelStatistic);
+                    }
+                    Top1TravelBookingDate = top3Dates.ElementAtOrDefault(0);
+                    Top2TravelBookingDate = top3Dates.ElementAtOrDefault(1);
+                    Top3TravelBookingDate = top3Dates.ElementAtOrDefault(2);
+                    foreach (var item in bookingCounts)
+                    {
+                        values.Add(item.Count);
+                        Labels.Add(item.Date.ToString("dd/MM/yyyy")); // Hàm GetFormattedDate để định dạng ngày theo yêu cầu của bạn
+                    }
+
+                    // Tạo Series và thêm vào SeriesCollection
+                    var series = new ColumnSeries
+                    {
+                        Title = "Number of Customers",
+                        Values = values
+                    };
+                    BookingSeries.Add(series);
+
+                });
             }
-
-
-            BookingSeries = new SeriesCollection();
-            Labels = new List<string>();
-
-            var bookingCounts = db.BOOKINGs
-                 .Where(b => b.Status == "Paid" && b.Booking_Date >= StartDate && b.Booking_Date <= EndDate) // Lọc theo trạng thái xác nhận (tuỳ vào yêu cầu của bạn)
-                 .GroupBy(b => b.Booking_Date) // Nhóm booking theo ngày đặt tour
-                 .Select(g => new { Date = g.Key, Count = g.Count() }) // Chọn ngày và số lượng khách hàng
-                 .OrderBy(item => item.Date) // Sắp xếp theo ngày tăng dần
-                 .ToList();
-
-
-            // Xử lý dữ liệu để hiển thị trên biểu đồ
-            var values = new ChartValues<int>();
-
-            foreach (var item in bookingCounts)
-            {
-                values.Add(item.Count);
-                Labels.Add(item.Date.ToString("dd/MM/yyyy")); // Hàm GetFormattedDate để định dạng ngày theo yêu cầu của bạn
-            }
-
-            // Tạo Series và thêm vào SeriesCollection
-            var series = new ColumnSeries
-            {
-                Title = "Number of Customers",
-                Values = values
-            };
-            BookingSeries.Add(series);
-
         }
         #endregion
 

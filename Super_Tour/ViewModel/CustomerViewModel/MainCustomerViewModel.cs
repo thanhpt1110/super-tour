@@ -170,7 +170,7 @@ namespace Super_Tour.ViewModel
         }
         #endregion
 
-        #region Load data asycn
+        #region Load data async
         private async Task LoadDataAsync()
         {
             try
@@ -179,9 +179,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        _listOriginalCustomer = db.CUSTOMERs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listOriginalCustomer = db.CUSTOMERs.ToList();
                             ReloadData();
                         });
                     }
@@ -211,9 +211,9 @@ namespace Super_Tour.ViewModel
                         if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeCustomer)
                         {
                             TimeCustomer = (DateTime.Parse(_tracker.DateTimeUpdate));
+                            _listOriginalCustomer = db.CUSTOMERs.ToList();
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                _listOriginalCustomer = db.CUSTOMERs.ToList();
                                 ReloadData();
                             });
                         }

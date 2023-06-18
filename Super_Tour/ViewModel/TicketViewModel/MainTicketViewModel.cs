@@ -192,9 +192,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        _listOriginalTicket = db.TICKETs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listOriginalTicket = db.TICKETs.ToList();
                             ReloadData();
                         });
                     }
@@ -224,9 +224,9 @@ namespace Super_Tour.ViewModel
                         if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeTicket)
                         {
                             TimeTicket = (DateTime.Parse(_tracker.DateTimeUpdate));
+                            _listOriginalTicket = db.TICKETs.ToList();
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                _listOriginalTicket = db.TICKETs.ToList();
                                 ReloadData();
                             });
                         }

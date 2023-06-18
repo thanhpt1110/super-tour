@@ -201,9 +201,9 @@ namespace Super_Tour.ViewModel
                 {
                     try
                     {
+                        _listTourOriginal = db.TOURs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listTourOriginal = db.TOURs.ToList();
                             ReloadData();
                         });
                     }
@@ -249,9 +249,9 @@ namespace Super_Tour.ViewModel
                     if (DateTime.Parse(_tracker.DateTimeUpdate) > TimeTour)
                     {
                         TimeTour = (DateTime.Parse(_tracker.DateTimeUpdate));
+                        _listTourOriginal = db.TOURs.ToList();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            _listTourOriginal = db.TOURs.ToList();
                             ReloadData();
                         });
                     }

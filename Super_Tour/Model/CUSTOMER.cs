@@ -20,7 +20,6 @@ namespace Super_Tour.Model
         [Column(name: "District")]
         public string Id_District { get; set; }
         public string PhoneNumber { get; set; }
-        public string Address { get; set; }
         public virtual ICollection<BOOKING> BOOKINGs
         {
             get; set;
