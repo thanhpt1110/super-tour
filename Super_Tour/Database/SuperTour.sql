@@ -83,19 +83,6 @@ CREATE TABLE TICKET(
     Id_Tourist int,
     Status nvarchar(100)
 ) auto_increment=100000;
-CREATE TABLE REFERENCE  (
-	Id_Reference int primary key auto_increment,
-	Update_ACCOUNT bit,
-    Update_TYPEPACKAGE bit,
-    Update_PACKAGE bit,
-    Update_TOUR bit,
-    Update_TOUR_DETAIL bit,
-    Update_TRAVEL bit,
-    Update_CUSTOMER bit,
-    Update_BOOKING bit,
-    Update_TOURIST bit,
-    Update_TICKET bit
-)
 
  -- FOREIGN KEY
  ALTER TABLE TOURIST ADD FOREIGN KEY(Id_Booking) references BOOKING(Id_booking);
@@ -109,5 +96,3 @@ CREATE TABLE REFERENCE  (
 
 -- ADD DEFAULT ACCOUNT
 INSERT INTO ACCOUNT(Username,Password,Account_Name,Service,Priority,Email) VALUES ('admin', '81dc9bdb52d04dc20036dbd8313ed055', 'Trùm cuối', 'Admin', '1', 'trumcuoi@gmail.com');
-INSERT INTO REFERENCE (Update_ACCOUNT, Update_TYPEPACKAGE, Update_PACKAGE, Update_TOUR, Update_TOUR_DETAIL, Update_TRAVEL, Update_CUSTOMER, Update_BOOKING, Update_TOURIST, Update_TICKET)
-VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
