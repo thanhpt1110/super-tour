@@ -13,6 +13,7 @@ An E-Tour Management System using WPF application implemented based on MVVM patt
 - Package and its type management.
 - Account management.
 - Revenue/Usage report.
+- Support export report file to PDF.
 - Support print ticket.
 - Decentralize account service.
 - Send report/feedback to developer team.

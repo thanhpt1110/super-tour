@@ -95,7 +95,8 @@ namespace Super_Tour.ViewModel
             get { return _selectedDateTime; }
             set
             {
-                _selectedDateTime = value;
+                if (CheckDateTimeValue(value))
+                    _selectedDateTime = value;
                 OnPropertyChanged(nameof(SelectedDateTime));
             }
         }
@@ -365,6 +366,16 @@ namespace Super_Tour.ViewModel
                 IsDataModified = false;
             else 
                 IsDataModified = true;
+        }
+
+        private bool CheckDateTimeValue(DateTime dateTime)
+        {
+            if (dateTime < DateTime.Now.Date)
+            {
+                MyMessageBox.ShowDialog("Can not set start date time in the past!", "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
         #endregion
     }
