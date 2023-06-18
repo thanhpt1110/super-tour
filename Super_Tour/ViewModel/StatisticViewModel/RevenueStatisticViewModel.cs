@@ -331,14 +331,14 @@ namespace Super_Tour.ViewModel
                         var paragraghTop3Body = doc.InsertParagraph();
                         paragraghTop3Body.InsertText("Top " + (top++).ToString() + ": ", false, boldFormat);
                         paragraghTop3Body.InsertText(top3Revenue[i], false, paragraphFormat);
-                        paragraghTop3Body.InsertText(" - " + top3Revenue[++i] + " VNĐ", false, paragraphFormat);
+                        paragraghTop3Body.InsertText(" - " + top3Revenue[++i] + " VND.", false, paragraphFormat);
                     }
                     #endregion
                     #region Add 3 total 
                     doc.InsertParagraph("");
                     // Thêm các đoạn văn bản "Service: Admin", "Total customer: 7", "Total re-booking customers: 0" và "Total ticket: 8"
-                    string[] texts = new string[] { "Total revenue: " , _totalRevenue.ToString("#,#") + " VNĐ", "Total cancle money: " , _totalCancelMoney.ToString("#,#") + " VNĐ"
-                    , "Total tourist: "  , _totalTourist.ToString() + " tourists" };
+                    string[] texts = new string[] { "Total revenue: " , _totalRevenue.ToString("#,#") + " VND.", "Total cancle money: " , _totalCancelMoney.ToString("#,#") + " VND."
+                    , "Total tourist: "  , _totalTourist.ToString() + "." };
 
                     for (i = 0; i < texts.Length; i++)
                     {
@@ -347,6 +347,8 @@ namespace Super_Tour.ViewModel
                     }
                     #endregion
                     #region Add Reporter
+                    doc.InsertParagraph("");
+                    doc.InsertParagraph("");
                     var paragraphReporterTitle = doc.InsertParagraph();
                     paragraphReporterTitle.Append("Reporter ", boldFormat);
                     paragraphReporterTitle.IndentationFirstLine = 230.0f; // Thụt đầu dòng 230 điểm ảnh
@@ -366,13 +368,14 @@ namespace Super_Tour.ViewModel
                     documentCore.Save(saveFileDialog.FileName);
                     File.Delete("myDocx.docx");
                     #endregion
+                    MyMessageBox.ShowDialog("Export file successfully!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MyMessageBox.ShowDialog(ex.Message, "Error", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
-        
+
         }
         public Bitmap ConvertChartToBitmap(CartesianChart chart)
         {

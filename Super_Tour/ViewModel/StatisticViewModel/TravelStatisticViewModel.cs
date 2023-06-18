@@ -332,14 +332,14 @@ namespace Super_Tour.ViewModel
                         var paragraghTop3Body = doc.InsertParagraph();
                         paragraghTop3Body.InsertText("Top " + (top++).ToString() + ": ", false, boldFormat);
                         paragraghTop3Body.InsertText(top3Booking[i], false, paragraphFormat);
-                        paragraghTop3Body.InsertText(" - " + top3Booking[++i] + " bookings", false, paragraphFormat);
+                        paragraghTop3Body.InsertText(" - " + top3Booking[++i] + " bookings.", false, paragraphFormat);
                     }
                     #endregion
                     #region Add 3 total 
                     doc.InsertParagraph("");
                     // Thêm các đoạn văn bản "Service: Admin", "Total customer: 7", "Total re-booking customers: 0" và "Total ticket: 8"
-                    string[] texts = new string[] { "Total travel: " , _totalTravel.ToString() + " travels", "Total booking: " , _totalBooking.ToString() + " bookings"
-                    , "Total cancle booking: "  , _totalCancelBooking.ToString() + " bookings" };
+                    string[] texts = new string[] { "Total travel: " , _totalTravel.ToString() + ".", "Total booking: " , _totalBooking.ToString() + "."
+                    , "Total cancle booking: "  , _totalCancelBooking.ToString() + "." };
 
                     for (i = 0; i < texts.Length; i++)
                     {
@@ -348,6 +348,8 @@ namespace Super_Tour.ViewModel
                     }
                     #endregion
                     #region Add Reporter
+                    doc.InsertParagraph("");
+                    doc.InsertParagraph("");
                     var paragraphReporterTitle = doc.InsertParagraph();
                     paragraphReporterTitle.Append("Reporter ", boldFormat);
                     paragraphReporterTitle.IndentationFirstLine = 230.0f; // Thụt đầu dòng 230 điểm ảnh
@@ -367,11 +369,12 @@ namespace Super_Tour.ViewModel
                     documentCore.Save(saveFileDialog.FileName);
                     File.Delete("myDocx.docx");
                     #endregion
+                    MyMessageBox.ShowDialog("Export file successfully!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MyMessageBox.ShowDialog(ex.Message, "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
 
         }

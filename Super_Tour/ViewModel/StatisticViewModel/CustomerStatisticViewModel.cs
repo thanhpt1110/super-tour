@@ -334,8 +334,8 @@ namespace Super_Tour.ViewModel
                     #region Add 3 total
                     doc.InsertParagraph("");
                     // Thêm các đoạn văn bản "Service: Admin", "Total customer: 7", "Total re-booking customers: 0" và "Total ticket: 8"
-                    string[] texts = new string[] { "Total customer: " , _totalCustomer.ToString() + " customers", "Total re-booking customers: " , _totalReBookingCustomer.ToString() + " customers"
-                    , "Total ticket: "  , _totalTicket.ToString() + " tickets" };
+                    string[] texts = new string[] { "Total customer: " , _totalCustomer.ToString() + ".", "Total re-booking customers: " , _totalReBookingCustomer.ToString() + "."
+                    , "Total ticket: "  , _totalTicket.ToString() + "." };
                     var paragraphFormat = new Formatting
                     {
                         FontFamily = new Xceed.Document.NET.Font("Times New Roman"),
@@ -356,7 +356,9 @@ namespace Super_Tour.ViewModel
                     }
                     #endregion
                     #region Add reporter
-                    var paragraphReporterTitle = doc.InsertParagraph();
+                    doc.InsertParagraph("");
+                    doc.InsertParagraph("");
+                    var paragraphReporterTitle = doc.InsertParagraph(); 
                     paragraphReporterTitle.Append("Reporter ", boldFormat);
                     paragraphReporterTitle.IndentationFirstLine = 230.0f; // Thụt đầu dòng 230 điểm ảnh
                     paragraphReporterTitle.Alignment = Alignment.center;
@@ -375,13 +377,13 @@ namespace Super_Tour.ViewModel
                     documentCore.Save(saveFileDialog.FileName);
                     File.Delete("myDocx.docx");
                     #endregion
+                    MyMessageBox.ShowDialog("Export file successfully!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
                 }
             }   
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MyMessageBox.ShowDialog(ex.Message, "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
             }
-
         }
         public Bitmap ConvertChartToBitmap(CartesianChart chart)
         {

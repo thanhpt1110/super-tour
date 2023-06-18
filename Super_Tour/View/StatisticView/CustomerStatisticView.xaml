@@ -60,8 +60,22 @@
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                     </StackPanel>
                 </StackPanel>
+                <Button Margin="545, 10, 0, 0"
+                        Width="150" 
+                        Height="50"
+                        Content="Export PDF" 
+                        FontSize="18"
+                        FontWeight="Medium"
+                        FontFamily="Segoe UI"
+                        BorderThickness="0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Background="#FFCD00" 
+                        Foreground="Black"
+                        Command="{Binding PrintToImageCommand}" 
+                        CommandParameter="{Binding ElementName=CustomerChart}"
+                        >
+                </Button>
             </StackPanel>
-            <Button Width="100px" Content="Print" Command="{Binding PrintToImageCommand}" CommandParameter="{Binding ElementName=CustomerChart}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Border CornerRadius="10"
