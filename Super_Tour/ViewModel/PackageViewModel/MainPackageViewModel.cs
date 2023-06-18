@@ -302,6 +302,11 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                if (SelectedItem.TOUR_DETAILs.Count > 0)
+                {
+                    MyMessageBox.ShowDialog("You couldn't delete this packages.", "Warning", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
+                    return;
+                }
                 MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {

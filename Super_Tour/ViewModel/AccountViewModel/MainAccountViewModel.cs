@@ -266,6 +266,11 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                if(SelectedItem.Service=="Admin")
+                {
+                        MyMessageBox.ShowDialog("You couldn't delete the same priority with your account.", "Warning", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
+                        return;                   
+                }    
                 MyMessageBox.ShowDialog("Are you sure you want to delete this item?", "Question", MyMessageBox.MessageBoxButton.YesNo, MyMessageBox.MessageBoxImage.Warning);
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {

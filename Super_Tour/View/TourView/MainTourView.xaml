@@ -138,12 +138,12 @@
                         <DataGridTextColumn Header="Price"
                                                 IsReadOnly="True" 
                                                 CanUserResize="False" 
-                                                Width="*"
+                                                Width="0.6*"
                                                 Binding="{Binding PriceTour, Converter={StaticResource DecimalToStringConverter}}"/>
                         <DataGridTemplateColumn Header="Operations"
                                                 HeaderStyle="{StaticResource DataGridColumnHeaderStyle2}"
                                                 IsReadOnly="True" 
-                                                Width="0.5*">
+                                                Width="0.6*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

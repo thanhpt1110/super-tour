@@ -280,6 +280,11 @@ namespace Super_Tour.ViewModel
                 if (MyMessageBox.buttonResultClicked == MyMessageBox.ButtonResult.YES)
                 {
                     // Save data on database
+                    if(SelectedItem.BOOKINGs.Count>0)
+                    {
+                        MyMessageBox.ShowDialog("You couldn't delete this customer.", "Warning", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Warning);
+                        return;
+                    }
                     db.CUSTOMERs.Remove(SelectedItem);
                     db.SaveChanges();
 

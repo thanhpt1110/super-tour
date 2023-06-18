@@ -72,7 +72,13 @@
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor1}"
                                     CornerRadius="0,0,20,20"
-                                    Background="{StaticResource DashboardBackgroundColor1}"></Border>
+                                    Background="{StaticResource DashboardBackgroundColor1}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding GoToCustomerStatisticCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
@@ -123,7 +129,13 @@
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor2}"
                                     CornerRadius="0,0,20,20"
-                                    Background="{StaticResource DashboardBackgroundColor2}"></Border>
+                                    Background="{StaticResource DashboardBackgroundColor2}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding GoToRevenueStatisticCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"
@@ -174,7 +186,13 @@
                             <Border BorderThickness="2"
                                     BorderBrush="{StaticResource DashboardBorderColor3}"
                                     CornerRadius="0,0,20,20"
-                                    Background="{StaticResource DashboardBackgroundColor3}"></Border>
+                                    Background="{StaticResource DashboardBackgroundColor3}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding GoToTravelStatisticCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
                             <TextBlock Text="View Detailed Report >>"
                                        FontSize="12"
                                        VerticalAlignment="Center"

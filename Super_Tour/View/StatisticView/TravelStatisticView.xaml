@@ -60,6 +60,8 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <Button Width="100px" Content="Print" Command="{Binding PrintToImageCommand}" CommandParameter="{Binding ElementName=TravelChart}"/>
+
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -83,7 +85,7 @@
                                        FontSize="22"/>
                         </Grid>
                         <Grid Grid.Row="1" Margin="10">
-                            <lvc:CartesianChart>
+                            <lvc:CartesianChart x:Name="TravelChart">
                                 <lvc:CartesianChart.Series>
                                     <lvc:ColumnSeries Title="Number of Booking" Values="{Binding BookingSeries[0].Values}"/>
                                 </lvc:CartesianChart.Series>
