@@ -83,7 +83,7 @@
                                             </StackPanel>
                                             <TextBlock 
                                                     Text="{Binding TravelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    FontSize="40"
+                                                    FontSize="30"
                                                     TextWrapping="Wrap"
                                                     TextAlignment="Center"
                                                     FontWeight="SemiBold"

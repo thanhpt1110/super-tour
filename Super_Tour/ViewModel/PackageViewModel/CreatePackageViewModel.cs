@@ -314,6 +314,7 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                _selectedItem = new PACKAGE();
                 // Save data to DB
                 _selectedItem.Id_Package = db.PACKAGEs.Max(p => p.Id_Package)+1;
                 _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
