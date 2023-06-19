@@ -414,7 +414,7 @@ namespace Super_Tour.ViewModel
             {
                 if (_selectedItem.Status == "Unpaid")
                 {
-                    MyMessageBox.ShowDialog("Can not export ticket for unpaid booking!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Information);
+                    MyMessageBox.ShowDialog("Can not export ticket for unpaid booking!", "Notification", MyMessageBox.MessageBoxButton.OK, MyMessageBox.MessageBoxImage.Error);
                     return;
                 }
 

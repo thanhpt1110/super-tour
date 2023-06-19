@@ -314,18 +314,18 @@ namespace Super_Tour.ViewModel
         {
             try
             {
+                _selectedItem = new PACKAGE();
                 // Save data to DB
+                _selectedItem.Id_Package = db.PACKAGEs.Max(p => p.Id_Package)+1;
                 _selectedItem.Id_Type_Package = _selectedTypePackage.Id_Type_Package;
                 _selectedItem.Name_Package = _packageName;
                 _selectedItem.Id_Province = _selectedProvince.codename;
                 _selectedItem.Id_District = _selectedDistrict.codename;
                 _selectedItem.Description_Package = _description;
-                _selectedItem.Price = decimal.Parse(_price);
                 _selectedItem.Image_Package = await UploadImg();
+                _selectedItem.Price = decimal.Parse(_price);
                 db.PACKAGEs.Add(_selectedItem);
                  db.SaveChanges();
-                _selectedItem.Id_Package = db.PACKAGEs.Max(p => p.Id_Package);
-
                 // Synchronize data to real time DB
                 MainPackageViewModel.TimePackage = DateTime.Now;
                 UPDATE_CHECK.NotifyChange(table, MainPackageViewModel.TimePackage);

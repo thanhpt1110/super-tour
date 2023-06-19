@@ -34,6 +34,7 @@ namespace Super_Tour.ViewModel
         private ObservableCollection<PACKAGE> _observableListSelectedPackage;
         private TOUR _tour;
         private ObservableCollection<GridActivity> _listTourDetail;
+        private PACKAGE _package = null;
         private bool _isDataModified = false;
         private int _noRowInSelectedDatagrid = 0;
         #endregion
@@ -314,11 +315,9 @@ namespace Super_Tour.ViewModel
         private void ExecuteCreatePackgeCommand(object obj)
         {
             CreatePackageView view = new CreatePackageView();
-            if (package == null)
-            {
-                package = new PACKAGE();
-            }
-            view.DataContext = new CreatePackageViewModel(package);
+            if (_package == null)
+                _package = new PACKAGE();
+            view.DataContext = new CreatePackageViewModel(_package);
             view.ShowDialog();
             ReloadPackage(); 
         }
