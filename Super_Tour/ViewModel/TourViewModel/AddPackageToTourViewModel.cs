@@ -21,6 +21,7 @@ namespace Super_Tour.ViewModel
     internal class AddPackageToTourViewModel: ObservableObject
     {
         #region Declare variable
+        private PACKAGE package;
         private SUPER_TOUR db = null;
         private TYPE_PACKAGE _selectedTypePackage;
         private PACKAGE _selectedItem = null;
@@ -313,6 +314,11 @@ namespace Super_Tour.ViewModel
         private void ExecuteCreatePackgeCommand(object obj)
         {
             CreatePackageView view = new CreatePackageView();
+            if (package == null)
+            {
+                package = new PACKAGE();
+            }
+            view.DataContext = new CreatePackageViewModel(package);
             view.ShowDialog();
             ReloadPackage(); 
         }
