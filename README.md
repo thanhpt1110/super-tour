@@ -1,8 +1,8 @@
-# Super Tour 
+# Super Tour
 
 An E-Tour Management System using WPF application implemented based on MVVM pattern and synchronize real-time data for multi devices with modern UI.
 
-# Business
+## Business
 
 - Modern visual dashboard.
 - Tour management.
@@ -18,7 +18,7 @@ An E-Tour Management System using WPF application implemented based on MVVM patt
 - Decentralize account service.
 - Send report/feedback to developer team.
 
-# Requirement
+## Technology Stack
 
 - Runtime environment:
 
@@ -28,14 +28,23 @@ An E-Tour Management System using WPF application implemented based on MVVM patt
 
     - Visual Studio 2018+.
     - MySQL Workbench 8.0 CE and Aiven cloud. 
-# Installation
+
+## Installation
 
 First, open solution in Visual Studio.
- 
-Next, you proceed to rebuild solution. Done! Now you can run the application. 
+
+Next, you proceed to rebuild solution. Done! Now you can run the application.
 
 > If you want to get account and use our application, please contact us!
-# Authors
+
+## User Interface
+![Dashboad](/Demo%20UI/Dashboard.PNG)
+![Booking Information](/Demo%20UI/Booking%20Information.PNG)
+![Tour Information](/Demo%20UI/Tour%20Info.PNG)
+![Package Information](/Demo%20UI/Package%20Info.PNG)
+![Statistic](/Demo%20UI/Statistic.PNG)
+
+## Authors
 
 [Nguyễn Phúc Bình](https://github.com/leesoonduck3009)
 
