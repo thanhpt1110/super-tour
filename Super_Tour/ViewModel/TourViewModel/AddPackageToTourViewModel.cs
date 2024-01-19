@@ -21,6 +21,7 @@ namespace Super_Tour.ViewModel
     internal class AddPackageToTourViewModel: ObservableObject
     {
         #region Declare variable
+        private PACKAGE package;
         private SUPER_TOUR db = null;
         private TYPE_PACKAGE _selectedTypePackage;
         private PACKAGE _selectedItem = null;
