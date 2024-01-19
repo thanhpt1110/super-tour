@@ -39,7 +39,7 @@ Next, you proceed to rebuild solution. Done! Now you can run the application.
 
 ## User Interface
 ![Dashboad](/Demo%20UI/Dashboard.PNG)
-![Booking Information](/Demo%20UI/Booking%20Information.PNG)
+![Booking Information](/Demo%20UI/Booking%20Info.PNG)
 ![Tour Information](/Demo%20UI/Tour%20Info.PNG)
 ![Package Information](/Demo%20UI/Package%20Info.PNG)
 ![Statistic](/Demo%20UI/Statistic.PNG)
